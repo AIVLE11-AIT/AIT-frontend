@@ -6,6 +6,11 @@ function Header() {
 
     const navigate = useNavigate();
 
+    // 로고 클릭 시
+    const onClickLogoBtn = () => {
+        navigate('/');
+    }
+
     // 로그인 버튼 클릭 시
     const onClickLoginBtn = () => {
         navigate('/login');
@@ -13,7 +18,7 @@ function Header() {
 	return (
 		<>
 			<H.HeaderDiv>
-                <H.LogoDiv>
+                <H.LogoDiv onClick={onClickLogoBtn}>
                     <img src={process.env.PUBLIC_URL + '/images/Logo.svg'}></img>
                 </H.LogoDiv>
                 <H.HeaderWrap>

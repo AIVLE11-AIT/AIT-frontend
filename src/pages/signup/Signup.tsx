@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+// components
+import SignupForm from '../../components/signup/SignUpForm'
 
 function Signup() {
   return (
-    <div>Signup</div>
+    <div>
+      <SignupForm/>
+    </div>
   )
 }
 

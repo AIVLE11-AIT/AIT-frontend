@@ -11,6 +11,7 @@ export const HeaderDiv = styled.div`
 export const LogoDiv = styled.div`
     padding: 24px 0px;
     margin-left: 93px;
+    cursor: pointer;
 `;
 
 // 헤더 wrap
