@@ -1,9 +1,13 @@
-import React from 'react'
-
+import React, { useRef, useState } from "react";
+// components
+import LoginForm from '../../components/login/Login'
+ 
 function Login() {
   return (
-    <div>Login</div>
+    <div>
+      <LoginForm/>
+    </div>
   )
 }
-
-export default Login
+ 
+export default Login;
