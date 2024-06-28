@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 // 헤더
 export const HeaderDiv = styled.div`
@@ -67,12 +67,32 @@ export const LabelIcon = styled.div`
     margin: auto 10px auto 0px;
 `;
 
-// 버튼 컨테이너
-export const BtnContainer = styled.div`
+// 아래 화살표 아이콘 컨테이너
+export const DownContainer = styled.div`
+    margin-top: 30px;
+`;
+
+// 아래 화살표 box
+export const DownIconBox = styled.div`
     display: flex;
-    border: 1px solid black;
-    margin-top: 50px;
     justify-content: center;
     align-items: center;
 `;
 
+const blinkAnimation = keyframes`
+  0% {
+    filter: brightness(1); // 연한 회색
+  }
+  50% {
+    filter: brightness(0.5); // 진한 회색
+  }
+  100% {
+    filter: brightness(1); // 연한 회색
+  }
+`;
+
+export const DownIcon = styled.img`
+    display: block;
+    margin: 0 auto;
+    animation: ${blinkAnimation} 2s infinite;
+`;

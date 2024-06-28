@@ -16,10 +16,11 @@ function PreTestMain() {
             <P.DateContainer>
                 <Timer/>
             </P.DateContainer>
-            <P.BtnContainer>
-                
-            </P.BtnContainer>
         </P.PreTestMainContainer>
+        <P.DownContainer>
+            <P.DownIconBox><P.DownIcon src={process.env.PUBLIC_URL + '/images/DownArrow.svg'}/></P.DownIconBox>
+            <P.DownIconBox><P.DownIcon src={process.env.PUBLIC_URL + '/images/DownArrow.svg'}/></P.DownIconBox>
+        </P.DownContainer>
     </div>
   )
 }
