@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 // 메인 박스
 export const InterviewComponent = styled.div`
-    width: 1160px;
+    width: 1000px;
     height: 490px;
     flex-shrink: 0;
-    border-radius: 35px;
+    border-radius: 20px;
     border: 1px solid #D0D2D7;
     background: #FFF;
     margin: 30px auto 0 auto;

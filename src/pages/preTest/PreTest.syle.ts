@@ -32,6 +32,7 @@ export const HeaderText3 = styled.div`
     line-height: 1.3;
 `;
 
+// 면접실 입장 버튼
 export const StartBtn = styled.div`
     display: flex;
     width: 352px;

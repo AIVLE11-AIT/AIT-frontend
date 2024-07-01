@@ -25,16 +25,6 @@ export const NumIcon = styled.div<NumIconProps>`
     font-weight: 600;
 `;
 
-// 애니메이션 정의
-const fillAnimation = keyframes`
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-`;
-
 // 바 아이콘
 export const BarIcon = styled.div<NumIconProps>`
     width: 100px;
