@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import PreTestMain from '../../components/preTest/preTestMain/PreTestMain'
 import Usage from '../../components/preTest/usage/Usage';
 import * as U from './PreTest.syle';
+import { useNavigate } from 'react-router-dom';
 
 function PreTest() {
 
@@ -27,6 +28,12 @@ function PreTest() {
       x: { duration: 1 },
     }
   };
+
+  // 면접실 버튼 클릭 시
+  const navigate = useNavigate();
+  const onClickStartBtn = () => {
+    navigate('/interview-setting');
+  }
 
   return (
     <div>
@@ -55,7 +62,7 @@ function PreTest() {
           number="3"
           title="면접 종료하기"/>
       </motion.div>
-      <U.StartBtn>면접실 입장</U.StartBtn>
+      <U.StartBtn onClick={onClickStartBtn}>면접실 입장</U.StartBtn>
     </div>
   )
 }
