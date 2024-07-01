@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 // 헤더
 export const HeaderDiv = styled.div`
     display: flex;
-    margin-top: 20px;
+    margin-top: 40px;
 `;
 
 // 로고
@@ -14,7 +14,7 @@ export const Logo = styled.img`
 `;
 
 export const PreTestMainContainer = styled.div`
-    margin-top: 30px;
+    margin-top: 20px;
 `;
 
 // 면접 이름
@@ -69,7 +69,7 @@ export const LabelIcon = styled.div`
 
 // 아래 화살표 아이콘 컨테이너
 export const DownContainer = styled.div`
-    margin-top: 30px;
+    margin-top: 25px;
 `;
 
 // 아래 화살표 box

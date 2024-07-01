@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import * as T from './Timer.style'
 
 function Timer() {
-    const targetDate = new Date('2024-06-30 18:00:00').getTime() // 면접 날짜
+    const targetDate = new Date('2024-07-31 18:00:00').getTime() // 면접 날짜
     
     const [countDown, setCountDown] = useState(targetDate - new Date().getTime())
 
