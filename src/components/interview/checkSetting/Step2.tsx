@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import * as S from './Step2.style';
 // recoil
-import { AgreeAtom } from '../../../recoil/settingAtomes';
+import { Agree1Atom, Agree2Atom, Agree3Atom } from '../../../recoil/settingAtomes';
 import { useRecoilState } from 'recoil';
 
 function Step2() {
 
-  const [check1, setCheck1] = useRecoilState(AgreeAtom);
-  const [check2, setCheck2] = useState(false);
-  const [check3, setCheck3] = useState(false);
+  const [check1, setCheck1] = useRecoilState(Agree1Atom);
+  const [check2, setCheck2] = useRecoilState(Agree2Atom);
+  const [check3, setCheck3] = useRecoilState(Agree3Atom);
 
   // 전체 동의 버튼 클릭 시
   const onClickCheck1 = () => {

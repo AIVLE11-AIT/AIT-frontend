@@ -7,8 +7,8 @@ import Step2 from '../../../components/interview/checkSetting/Step2';
 import Step3 from '../../../components/interview/checkSetting/Step3';
 import Step4 from '../../../components/interview/checkSetting/Step4';
 // recoil
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { AgreeAtom, StepAtom } from '../../../recoil/settingAtomes';
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
+import { Agree1Atom, StepAtom } from '../../../recoil/settingAtomes';
 
 function CheckSetting() {
 
@@ -24,7 +24,7 @@ function CheckSetting() {
   };
 
   // 약관 동의 (step2)페이지에서 다음 버튼 클릭 시
-  const agree = useRecoilValue(AgreeAtom);
+  const agree = useRecoilValue(Agree1Atom);
   // 다음 버튼 클릭 시
   const onClickAgreeNextBtn = () => {
     if(agree){
