@@ -1,5 +1,5 @@
 import React from 'react'
-import * as S from './Step.style';
+import * as S from './Step1.style';
 
 function Step1() {
   return (

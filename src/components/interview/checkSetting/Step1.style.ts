@@ -29,7 +29,7 @@ interface NoticeTextProps {
     position: string;
 }
 
-// Step1 주의사항 text
+// Step1 주의사항, 안내사항 text
 export const NoticeText = styled.div<NoticeTextProps >`
     color: #35393e;
     font-weight: 600;

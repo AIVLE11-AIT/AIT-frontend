@@ -9,6 +9,7 @@ export const InterviewComponent = styled.div`
     border: 1px solid #D0D2D7;
     background: #FFF;
     margin: 30px auto 0 auto;
+    overflow-y: auto; /* 수직 스크롤 활성화 */
 `;
 
 // 다음 버튼
