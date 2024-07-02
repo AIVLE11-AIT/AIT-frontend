@@ -1,14 +1,57 @@
-import React from 'react'
+import React, { useState } from 'react'
 import * as S from './Step2.style';
+// recoil
+import { AgreeAtom } from '../../../recoil/settingAtomes';
+import { useRecoilState } from 'recoil';
 
 function Step2() {
+
+  const [check1, setCheck1] = useRecoilState(AgreeAtom);
+  const [check2, setCheck2] = useState(false);
+  const [check3, setCheck3] = useState(false);
+
+  // 전체 동의 버튼 클릭 시
+  const onClickCheck1 = () => {
+    if(check1 === false){
+      setCheck1(true);
+      setCheck2(true);
+      setCheck3(true);
+    }
+    else{
+      setCheck1(false);
+      setCheck2(false);
+      setCheck3(false);
+    }
+  }
+
+  const onClickCheck2 = () => {
+
+    setCheck2(!check2);
+    if(check3 === true && check2 === false){
+      setCheck1(true);
+    }
+    else{
+      setCheck1(false);
+    }
+  }
+
+  const onClickCheck3 = () => {
+    setCheck3(!check3);
+
+    if(check3 === false && check2 === true){
+      setCheck1(true);
+    }
+    else{
+      setCheck1(false);
+    }
+  }
   return (
     <div>
       <S.StepHeader>이용 동의</S.StepHeader>
       <S.StepMain>
 
         <S.AgreeBox>
-          <S.CheckBox/>필수 약관에 모두 동의합니다.
+          <S.CheckBox checked={check1} onClick={onClickCheck1}/>필수 약관에 모두 동의합니다.
         </S.AgreeBox>
 
         <S.Step2Info>응시자 서약</S.Step2Info>
@@ -27,7 +70,7 @@ function Step2() {
           </S.Content>
         </S.AgreeContentBox>
         <S.AgreeBox>
-          <S.CheckBox/>동의합니다.
+          <S.CheckBox checked={check2} onClick={onClickCheck2}/>동의합니다.
         </S.AgreeBox>
 
         <S.Step2Info>개인정보 수집 및 이용 동의</S.Step2Info>
@@ -39,7 +82,7 @@ function Step2() {
           </S.Content>
         </S.AgreeContentBox>
         <S.AgreeBox>
-          <S.CheckBox/>동의합니다.
+          <S.CheckBox checked={check3} onClick={onClickCheck3}/>동의합니다.
         </S.AgreeBox>
       </S.StepMain>
     </div>

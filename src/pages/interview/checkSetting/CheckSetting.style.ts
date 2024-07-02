@@ -10,6 +10,25 @@ export const InterviewComponent = styled.div`
     background: #FFF;
     margin: 30px auto 0 auto;
     overflow-y: auto; /* 수직 스크롤 활성화 */
+
+    /* 스크롤바 스타일 */
+    &::-webkit-scrollbar {
+        width: 8px; /* 스크롤바 너비 */
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1; /* 스크롤바 트랙(배경) 색상 */
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #888; /* 스크롤바 손잡이 색상 */
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555; /* 스크롤바 손잡이 호버 색상 */
+    }
 `;
 
 // 다음 버튼
