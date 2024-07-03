@@ -59,8 +59,12 @@ function CheckSetting() {
         </C.InterviewComponent>
         
         <C.BtnDiv>
-          {step >= 1 &&
+          {step >= 1 && step !== 2 &&
             <C.BtnComponent onClick={onClickNextBtn} border="3px solid #D0D2D7">
+              <C.NextArrow src={process.env.PUBLIC_URL + '/images/NextArrow.svg'}/>
+            </C.BtnComponent>}
+          {step === 2 &&
+            <C.BtnComponent onClick={onClickAgreeNextBtn} border="3px solid #D0D2D7">
               <C.NextArrow src={process.env.PUBLIC_URL + '/images/NextArrow.svg'}/>
             </C.BtnComponent>}
         </C.BtnDiv>
