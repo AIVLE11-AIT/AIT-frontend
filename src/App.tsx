@@ -10,6 +10,8 @@ import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import PreTest from './pages/preTest/PreTest';
 import Interview from './pages/interview/checkSetting/CheckSetting';
+import GroupProfile from './pages/groupprofile/GroupProfile';
+import Result from './components/groupprofile/result/Result';
 // components
 import Header from './components/header/Header';
 import Step1 from './components/interview/checkSetting/Step1';
@@ -37,6 +39,21 @@ function App() {
           </Routes>
         </BrowserRouter>
       </RecoilRoot>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Routes>
+              {/*헤더가 필요한 페이지 */}
+              <Route element={<Header />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/groupprofile" element={<GroupProfile />} />
+                <Route path="/result" element={<Result />} />
+              </Route>
+              {/*헤더가 필요 없는 페이지*/}
+              <Route path="/pretest" element={<PreTest />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
