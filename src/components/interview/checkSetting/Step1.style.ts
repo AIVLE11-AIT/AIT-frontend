@@ -40,7 +40,7 @@ export const NoticeText = styled.div<NoticeTextProps >`
 // 면접 시간, 면접 문항 수 container
 export const WrapContainer = styled.div`
     display: flex;
-    margin: 20px 0px;
+    margin: 30px 0px;
 `;
 
 // 면접 시간, 면접 문항 수 wrap

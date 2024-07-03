@@ -39,21 +39,6 @@ function App() {
           </Routes>
         </BrowserRouter>
       </RecoilRoot>
-      <GlobalStyle />
-      <BrowserRouter>
-        <Routes>
-              {/*헤더가 필요한 페이지 */}
-              <Route element={<Header />}>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/groupprofile" element={<GroupProfile />} />
-                <Route path="/result" element={<Result />} />
-              </Route>
-              {/*헤더가 필요 없는 페이지*/}
-              <Route path="/pretest" element={<PreTest />} />
-        </Routes>
-      </BrowserRouter>
     </>
   );
 }

@@ -5,7 +5,7 @@ export const HeaderComponent = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 45px;
 `;
 
 interface NumIconProps {
@@ -13,8 +13,8 @@ interface NumIconProps {
 }
 // 숫자 아이콘
 export const NumIcon = styled.div<NumIconProps>`
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background-color: ${(props) => props.bg};
     border-radius: 50px;
     display: flex;

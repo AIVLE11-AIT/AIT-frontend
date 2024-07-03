@@ -38,25 +38,33 @@ function CheckSetting() {
   return (
     <>
       <InterviewHeader/>
-      <C.InterviewComponent>
-        {step === 1 && <Step1 />}
-        {step === 2 && <Step2 />}
-        {step === 3 && <Step3 />}
-        {step === 4 && <Step4 />}
-      </C.InterviewComponent>
-      {step === 1 && <C.NextBtn onClick={onClickNextBtn}>다음</C.NextBtn>}
-      {step === 2 && 
-        <C.BtnComponent>
-          <C.SettingBtn onClick={onClickBackBtn} color="#696CEA" bg="white">이전</C.SettingBtn>
-          <C.SettingBtn onClick={onClickAgreeNextBtn} color="white" bg="#696CEA">다음</C.SettingBtn>
-        </C.BtnComponent>
-      }
-      {step > 2 && 
-        <C.BtnComponent>
-          <C.SettingBtn onClick={onClickBackBtn} color="#696CEA" bg="white">이전</C.SettingBtn>
-          <C.SettingBtn onClick={onClickNextBtn} color="white" bg="#696CEA">다음</C.SettingBtn>
-        </C.BtnComponent>
-      }
+      <C.ComponentDiv>
+
+        <C.BtnDiv>
+          {step === 1 && 
+            <C.BtnComponent onClick={onClickBackBtn} border="none">
+              <C.BackArrow src={process.env.PUBLIC_URL + '/images/NextArrow.svg'} display="none"/>
+            </C.BtnComponent>}
+          {step > 1 && 
+            <C.BtnComponent onClick={onClickBackBtn} border="3px solid #D0D2D7">
+              <C.BackArrow src={process.env.PUBLIC_URL + '/images/NextArrow.svg'} display="flex"/>
+            </C.BtnComponent>}
+        </C.BtnDiv>
+
+        <C.InterviewComponent>
+          {step === 1 && <Step1 />}
+          {step === 2 && <Step2 />}
+          {step === 3 && <Step3 />}
+          {step === 4 && <Step4 />}
+        </C.InterviewComponent>
+        
+        <C.BtnDiv>
+          {step >= 1 &&
+            <C.BtnComponent onClick={onClickNextBtn} border="3px solid #D0D2D7">
+              <C.NextArrow src={process.env.PUBLIC_URL + '/images/NextArrow.svg'}/>
+            </C.BtnComponent>}
+        </C.BtnDiv>
+      </C.ComponentDiv>
     </>
   )
 }
