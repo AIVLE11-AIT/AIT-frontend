@@ -49,14 +49,34 @@ function Step3() {
     }, [getMediaPermission]);
 
     // 녹화 중지 시 URL 설정 및 미리보기 준비
-    const handleRecordingStop = () => {
-        const videoBlob = new Blob(videoChunks.current, { type: 'video/webm' });
-        const videoUrl = URL.createObjectURL(videoBlob);
-        setRecordedMediaUrl(videoUrl); // 녹화된 비디오 URL 설정
+    const handleRecordingStop = async () => {
+        if (mediaRecorder.current) {
+            mediaRecorder.current.stop();
 
-        if (previewRef.current) {
-            previewRef.current.src = videoUrl; // 미리보기 영상의 src 설정
-            previewRef.current.play(); // 미리보기 영상 재생 시도
+            await new Promise<void>((resolve) => {
+                if (mediaRecorder.current) { // 다시 한 번 null 체크
+                    mediaRecorder.current.onstop = () => {
+                        resolve();
+                    };
+                }
+            });
+
+            if (videoChunks.current.length > 0) {
+                const videoBlob = new Blob(videoChunks.current, { type: 'video/webm' });
+                const videoUrl = URL.createObjectURL(videoBlob);
+                setRecordedMediaUrl(videoUrl);
+
+                console.log("preview: ", previewRef.current);
+                
+                if (previewRef.current) {
+                    previewRef.current.src = videoUrl;
+                    previewRef.current.play();
+                }
+            } else {
+                console.error("비디오 청크가 비어 있습니다.");
+            }
+
+            videoChunks.current = [];
         }
     };
 
@@ -75,7 +95,7 @@ function Step3() {
                         <S.RecordBtnBox>
                             <S.RecordBtn
                                 btnState={recordBtn}
-                                onClick={() => {
+                                onClick={async () => {
                                     if (mediaRecorder.current && recordBtn === false) {
                                         setRecordBtn(true); // 녹화 버튼 상태를 true로 변경
                                         setRecordState(true); // 녹화 상태를 true로 변경
@@ -83,8 +103,9 @@ function Step3() {
                                     } else if (mediaRecorder.current && recordBtn === true) {
                                         setRecordBtn(false); // 녹화 버튼 상태를 false로 변경
                                         setRecordState(false); // 녹화 상태를 false로 변경
-                                        mediaRecorder.current.stop(); // 녹화 중지
-                                        handleRecordingStop(); // 녹화 중지 후 미리보기 설정
+                                        await handleRecordingStop(); // 녹화 중지 후 미리보기 설정
+
+                                        // 새 MediaRecorder 객체를 생성하지 않음
                                     }
                                 }}
                             >
