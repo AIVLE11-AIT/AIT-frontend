@@ -13,7 +13,6 @@ function Login() {
     register,
     handleSubmit,
     watch,
-    setError,
     formState: { errors },
   } = useForm<FormValue>({ mode: 'onBlur', criteriaMode: 'all' });
 
@@ -39,7 +38,7 @@ function Login() {
       console.log('로그인 성공:', result);
 
       // 로그인 성공 후 이동할 페이지로 이동
-      navigate('/');
+      navigate('/groupprofile');
     } catch (error) {
       console.error('로그인 오류:', error);
       // 로그인 실패 시 사용자에게 오류 메시지 표시 로직 추가 가능
