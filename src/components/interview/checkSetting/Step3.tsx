@@ -83,15 +83,20 @@ function Step3() {
     return (
         <div>
             <S.StepHeader>카메라, 마이크 점검</S.StepHeader>
-            <S.Step3Text>
-                권한 요청 창에서 Google Chrome의 카메라, 마이크 접근 버튼을 클릭한 후, <br />
-                "넓은 하늘로의 비상을 꿈꾸며"를 소리내어 읽어주세요.
-            </S.Step3Text>
+            {!recordedMediaUrl && (
+                <S.Step3Text>
+                    권한 요청 창에서 Google Chrome의 카메라, 마이크 접근 버튼을 클릭한 후, <br />
+                    "넓은 하늘로의 비상을 꿈꾸며"를 소리내어 읽어주세요.
+                </S.Step3Text> )}
+            {recordedMediaUrl && (
+                <S.Step3Text>
+                    재생 버튼을 클릭해 영상이 잘 재생되는지 확인해 주세요. <br />
+                </S.Step3Text> )}
             <S.StepMain>
                 {!recordedMediaUrl && (
                     <S.CameraComponent>
                         <S.Record recordState={recordState}>☉ 녹화 중</S.Record>
-                        <S.Camera ref={videoRef} autoPlay border={recordBtn ? 'green' : '#D0D2D7'} />
+                        <S.Camera ref={videoRef} autoPlay border={recordBtn ? '#3CB371' : '#D0D2D7'} />
                         <S.RecordBtnBox>
                             <S.RecordBtn
                                 btnState={recordBtn}
@@ -104,8 +109,6 @@ function Step3() {
                                         setRecordBtn(false); // 녹화 버튼 상태를 false로 변경
                                         setRecordState(false); // 녹화 상태를 false로 변경
                                         await handleRecordingStop(); // 녹화 중지 후 미리보기 설정
-
-                                        // 새 MediaRecorder 객체를 생성하지 않음
                                     }
                                 }}
                             >
@@ -115,9 +118,9 @@ function Step3() {
                     </S.CameraComponent>
                 )}
                 {recordedMediaUrl && (
-                    <S.CameraComponent>
-                        <video ref={previewRef} src={recordedMediaUrl} controls width="640" />
-                    </S.CameraComponent>
+                    <S.ViewContainer>
+                        <S.Camera ref={previewRef} src={recordedMediaUrl} controls border="#D0D2D7"/>
+                    </S.ViewContainer>
                 )}
             </S.StepMain>
         </div>

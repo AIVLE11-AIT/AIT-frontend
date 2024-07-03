@@ -22,3 +22,9 @@ export const Agree3Atom = atom<boolean>({
   key: 'Agree3Atom',
   default: false,
 });
+
+// 카메라 테스트 상태
+export const CameraAtom = atom<boolean>({
+  key: 'CameraAtom',
+  default: false,
+})

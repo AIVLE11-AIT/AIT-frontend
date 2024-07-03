@@ -30,7 +30,7 @@ export const StepMain = styled.div`
 // 녹화 중 표시
 export const Record = styled.div<{recordState:boolean}>`
     font-weight: 600;
-    color: ${props => (props.recordState ? 'green' : '#868f9d')};
+    color: ${props => (props.recordState ? '#3CB371' : '#868f9d')};
     margin-bottom: 10px;
 `;
 
@@ -51,6 +51,7 @@ export const Camera = styled.video<{border:string}>`
     border-radius: 5px;
 `;
 
+// 녹화 시작.중지 버튼 BOX
 export const RecordBtnBox = styled.div`
     margin: 0px auto;
     display: flex;
@@ -68,4 +69,11 @@ export const RecordBtn = styled.button<{btnState:boolean}>`
     font-weight: 600;
     font-size: 15px;
     cursor: pointer;
+`;
+
+// 미리보기 비디오
+export const ViewContainer = styled.div`
+    width: 630px;
+    height: 350px;
+    margin: 20px auto;
 `;
