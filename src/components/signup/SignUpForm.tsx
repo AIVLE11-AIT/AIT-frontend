@@ -56,7 +56,7 @@ function SignUpForm() {
       if(!isCheckNumActive)
         alert("이메일 인증을 진행해 주세요.");
       else
-        alert("인증번호를 확인해 주세요.");
+        alert("인증번호를 확인해 주세요."); // 추가로 메일 인증 시간 카운트 기능 구현 하기
     }
     else{
       navigate('/login');
