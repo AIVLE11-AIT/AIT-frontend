@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as S from './Step3.style';
-import dayjs from 'dayjs';
+import { useRecoilState } from 'recoil';
+import { CameraAtom } from '../../../recoil/settingAtomes';
 
 function Step3() {
     const [recordState, setRecordState] = useState(false); // 녹화 상태(녹화중/중지)
@@ -10,6 +11,9 @@ function Step3() {
     const previewRef = useRef<HTMLVideoElement>(null);
     const mediaRecorder = useRef<MediaRecorder | null>(null);
     const videoChunks = useRef<Blob[]>([]);
+
+    // 카메라 테스트 유무 상태
+    const [cameraState, setCameraState] = useRecoilState(CameraAtom);
 
     // 카메라, 마이크 접근 허용
     const getMediaPermission = useCallback(async () => {
@@ -80,6 +84,30 @@ function Step3() {
         }
     };
 
+    // 녹화 시작/중지 핸들러
+    const handleRecordButtonClick = async () => {
+        if (mediaRecorder.current && recordBtn === false) { // 녹화 시작
+            setRecordBtn(true); // 녹화 버튼 상태를 true로 변경
+            setRecordState(true); // 녹화 상태를 true로 변경
+            mediaRecorder.current.start(); // 녹화 시작
+
+        } else if (mediaRecorder.current && recordBtn === true) { // 녹화 중지
+            setRecordBtn(false); // 녹화 버튼 상태를 false로 변경
+            setRecordState(false); // 녹화 상태를 false로 변경
+            setCameraState(true); // 테스트 유무 true
+            await handleRecordingStop(); // 녹화 중지 후 미리보기 설정
+        }
+    };
+
+    // 다시 녹화 핸들러
+    const handleRetryButtonClick = () => {
+        setCameraState(false); // 테스트 유무 초기화
+        setRecordedMediaUrl(null); // 녹화된 URL 초기화
+        setRecordBtn(false); // 녹화 버튼 상태 초기화
+        setRecordState(false); // 녹화 상태 초기화
+        getMediaPermission(); // 카메라, 마이크 다시 활성화
+    };
+
     return (
         <div>
             <S.StepHeader>카메라, 마이크 점검</S.StepHeader>
@@ -100,26 +128,26 @@ function Step3() {
                         <S.RecordBtnBox>
                             <S.RecordBtn
                                 btnState={recordBtn}
-                                onClick={async () => {
-                                    if (mediaRecorder.current && recordBtn === false) {
-                                        setRecordBtn(true); // 녹화 버튼 상태를 true로 변경
-                                        setRecordState(true); // 녹화 상태를 true로 변경
-                                        mediaRecorder.current.start(); // 녹화 시작
-                                    } else if (mediaRecorder.current && recordBtn === true) {
-                                        setRecordBtn(false); // 녹화 버튼 상태를 false로 변경
-                                        setRecordState(false); // 녹화 상태를 false로 변경
-                                        await handleRecordingStop(); // 녹화 중지 후 미리보기 설정
-                                    }
-                                }}
+                                onClick={handleRecordButtonClick}
                             >
                                 {recordBtn ? "녹화 중지" : "녹화 시작"}
                             </S.RecordBtn>
                         </S.RecordBtnBox>
                     </S.CameraComponent>
                 )}
+
+                {/* 미리보기 화면 */}
                 {recordedMediaUrl && (
                     <S.ViewContainer>
                         <S.Camera ref={previewRef} src={recordedMediaUrl} controls border="#D0D2D7"/>
+                        <S.RecordBtnBox>
+                            <S.RecordBtn
+                                btnState={recordBtn}
+                                onClick={handleRetryButtonClick}
+                            >
+                                다시 녹화
+                            </S.RecordBtn>
+                        </S.RecordBtnBox>
                     </S.ViewContainer>
                 )}
             </S.StepMain>

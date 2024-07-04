@@ -69,6 +69,7 @@ export const BackArrow = styled.img<{display:string}>`
     display: ${(props) => props.display};
     width: 30px;
     height: 30px;
+    margin-right: 5px;
 `;
 
 // 다음 버튼
@@ -76,4 +77,5 @@ export const NextArrow = styled.img`
     transform: rotate(180deg); /* 이미지를 180도 회전시킴 */
     width: 30px;
     height: 30px;
+    margin-left: 5px;
 `;

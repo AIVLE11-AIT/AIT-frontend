@@ -61,7 +61,7 @@ export const RecordBtnBox = styled.div`
 // 녹화 시작.중지 버튼
 export const RecordBtn = styled.button<{btnState:boolean}>`
     padding: 10px 30px;
-    margin-top: 20px;
+    margin-top: 15px;
     border-radius: 5px;
     border: none;
     background-color: ${props => (props.btnState ? "#ff4f09" : "#696CEA")};
@@ -74,6 +74,6 @@ export const RecordBtn = styled.button<{btnState:boolean}>`
 // 미리보기 비디오
 export const ViewContainer = styled.div`
     width: 630px;
-    height: 350px;
-    margin: 20px auto;
+    height: 340px;
+    margin: 10px auto;
 `;

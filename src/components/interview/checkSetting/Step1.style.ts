@@ -11,7 +11,7 @@ export const StepHeader = styled.div`
 
 // 메인
 export const StepMain = styled.div`
-    margin-top: 30px;
+    margin-top: 40px;
     padding: 0px 60px;
 `;
 
