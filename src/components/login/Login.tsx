@@ -62,9 +62,8 @@ function Login() {
   };
 
   // 비밀번호 찾기 버튼 클릭 시
-  const onClickForgotPasswordBtn = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    navigate('/forgot-password');
+  const onClickForgotPasswordBtn = () => {
+      navigate('/forgot-password');
   };
 
   // 로그인 버튼 활성화
@@ -111,8 +110,8 @@ function Login() {
                   },
                 })}
               />
-              <L.Error>{errors.email && <span>{errors.email.message}</span>}</L.Error>
             </L.InputWrap>
+            <L.Error>{errors.email && <span>{errors.email.message}</span>}</L.Error>
           </L.LoginWrap>
 
           <L.LoginWrap>
@@ -133,17 +132,21 @@ function Login() {
                   },
                 })}
               />
-              <L.Error>{errors.password && <span>{errors.password.message}</span>}</L.Error>
             </L.InputWrap>
+            <L.Error>{errors.password && <span>{errors.password.message}</span>}</L.Error>
           </L.LoginWrap>
 
-          <L.Button type='submit' disabled={!isActive}>로그인</L.Button>
-          <L.Button type='button' secondary onClick={onClickSignupBtn}>
-            회원가입
-          </L.Button>
-          <L.Link href='#' onClick={onClickForgotPasswordBtn}>
-            비밀번호 찾기 →
-          </L.Link>
+          <L.BtnContainer>
+            <L.Button type='submit' disabled={!isActive}>로그인</L.Button>
+            <L.Button type='button' secondary onClick={onClickSignupBtn}>
+              회원가입
+            </L.Button>
+          </L.BtnContainer>
+
+          <L.FindPwContainer onClick={onClickForgotPasswordBtn}>
+            <L.Link>비밀번호 찾기</L.Link>
+            <L.FindPwIcon src={process.env.PUBLIC_URL + '/images/FindPwArrow.svg'}/>
+          </L.FindPwContainer>
         </L.LoginInputForm>
       </L.FormWrapper>
     </L.Container>

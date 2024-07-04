@@ -49,13 +49,13 @@ export const SignUpTitle = styled.div`
     margin-top: 40px;
     margin-left: 60px;
     color: #404146;
-    font-size: 30px;
+    font-size: 35px;
     font-weight: 600;
 `;
 
 // 회원가입 form
 export const SignUpInputForm = styled.form`
-    margin-top: 37px;
+    margin-top: 40px;
 `;
 
 // Sign Up wrap
