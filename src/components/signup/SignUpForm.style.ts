@@ -3,7 +3,7 @@ import styled from "styled-components";
 // 회원가입 div
 export const SignUpForm = styled.div`
     width: 530px;
-    height: 780px;
+    height: 850px;
     flex-shrink: 0;
     border-radius: 30px;
     border: 1px solid #D0D2D7;
@@ -53,15 +53,15 @@ export const SignUpTitle = styled.div`
     font-weight: 600;
 `;
 
-// 회원가입 form
+// 회원가입 input form
 export const SignUpInputForm = styled.form`
-    margin-top: 40px;
+    margin-top: 50px;
 `;
 
 // Sign Up wrap
 export const SignUpWrap = styled.div`
-    margin-bottom: 24px;
     margin-left: 60px;
+    margin-top: 22px;
 `;
 
 // 회원가입 label
@@ -101,7 +101,7 @@ export const InputBox = styled.input`
     font-size: 14px;
     font-weight: 500;
     padding: 15px 18px;
-    margin-top: 9px;
+    margin-top: 12px;
     color: #0D0D0D;
 
     &::placeholder {
@@ -124,6 +124,10 @@ export const CheckNumBtn = styled.div<{ toggle: boolean }>`
     align-items: center;
     background: ${(props) => (props.toggle ? `#696CEA` : `#D0D2D7`)};
     cursor: pointer;
+
+    &:hover{
+        background: ${(props) => (props.toggle ? `#696CEA` : `gray`)};
+    }
 `;
 
 // 에러 메시지
@@ -131,14 +135,15 @@ export const Error = styled.div`
     color: #FF4A4A;
     font-size: 12px;
     margin-top: 10px;
+    height: 5px;
 `;
 
 // 버튼 wrap
 export const SubmitWrap = styled.div`
     display: flex;
-    margin-top: 60px;
     justify-content: center;
     align-items: center;
+    margin-top: 40px;
 `;
 
 // 이전 버튼

@@ -45,7 +45,7 @@ export const LoginLabel = styled.div`
     display: flex;
     align-items: center;
     margin-left: 25px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     margin-top: 25px;
 `;
 
@@ -113,6 +113,7 @@ export const Button = styled.button<{ secondary?: boolean, disabled?: boolean}>`
     font-size: 16px;
     font-weight: 600;
     color: white;
+    
     background: ${({ secondary, disabled }) => 
       disabled ? '#ccc' : (secondary ? '#404146' : '#696CEA')};
     cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
@@ -125,7 +126,7 @@ export const Button = styled.button<{ secondary?: boolean, disabled?: boolean}>`
 
 // 비밀번호 찾기 컨테이너
 export const FindPwContainer = styled.div`
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -141,6 +142,7 @@ export const Link = styled.div`
     font-weight: 600;
 `;
 
+// 비밀번호 찾기 화살표 아이콘
 export const FindPwIcon = styled.img`
     margin-left: 5px;
     width: 16px;
