@@ -5,14 +5,14 @@ export const StepHeader = styled.div`
     color: black;
     font-weight: 600;
     font-size: 35px;
-    margin-top: 45px;
+    margin-top: 60px;
     margin-left: 60px;
 `;
 
 // 메인
 export const StepMain = styled.div`
-    margin: 30px 0px;
-    padding: 0px 60px;
+    margin: 10px 0px;
+    padding: 40px 60px;
 `;
 
 // 전체 약관 동의 박스

@@ -5,7 +5,7 @@ export const StepHeader = styled.div`
     color: black;
     font-weight: 600;
     font-size: 35px;
-    margin-top: 45px;
+    margin-top: 60px;
     margin-left: 60px;
 `;
 
@@ -14,11 +14,17 @@ export const Step3Text = styled.div`
     color: #35393e;
     font-weight: 600;
     font-size: 14px;
-    margin-left: 60px;
+    //margin-left: 60px;
     margin-top: 20px;
-    border-left: 3px solid #696CEA;
+    //border-left: 3px solid #696CEA;
     padding: 5px 20px;
     line-height: 1.5;
+    text-align: center;
+`;
+
+// text(넓은 하늘로의 비상을 꿈꾸며)
+export const Step3Txt = styled.text`
+    color: #696CEA;
 `;
 
 // 메인
@@ -27,11 +33,22 @@ export const StepMain = styled.div`
     padding: 0px 60px;
 `;
 
-// 녹화 중 표시
-export const Record = styled.div<{recordState:boolean}>`
-    font-weight: 600;
-    color: ${props => (props.recordState ? '#3CB371' : '#868f9d')};
-    margin-bottom: 10px;
+// 녹화 중 표시(text)
+export const Record = styled.div`
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.50);
+    padding: 8px 13px;
+    font-size: 13px;
+    border-radius: 20px;
+    color: white;
+`;
+
+// 녹화 중 아이콘
+export const RecordTxt = styled.text<{recordState:boolean}>`
+    margin-right: 10px;
+    color: ${props => (props.recordState ? '#75A812' : '#FF4A4A')};
 `;
 
 // 카메라 컴포넌트
@@ -39,6 +56,7 @@ export const CameraComponent = styled.div`
     width: 630px;
     height: 300px;
     margin: 0px auto;
+    position: relative;
 `;
 
 // 카메라
@@ -53,22 +71,51 @@ export const Camera = styled.video<{border:string}>`
 
 // 녹화 시작.중지 버튼 BOX
 export const RecordBtnBox = styled.div`
-    margin: 0px auto;
+    margin: 10px auto;
     display: flex;
     justify-content: center;
 `;
 
 // 녹화 시작.중지 버튼
-export const RecordBtn = styled.button<{btnState:boolean}>`
+export const RecordBtn = styled.div<{btnState:boolean}>`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    border: 2px solid ${props => (props.btnState ? "#FF4A4A" : "#D0D2D7")};
+    color: #FF4A4A;
+    background-color: white;
+    cursor: pointer;
+    width: 65px;
+    height: 65px;
+`;
+
+// 녹화 시작.중지 버튼 아이콘
+export const RecordBtnIcon = styled.div`
+    border-radius: 50px;
+    border: none;
+    width: 50px;
+    height: 50px;
+    color: #FF4A4A;
+    background-color: #FF4A4A;
+    cursor: pointer;
+`;
+
+// 다시 녹화 버튼
+export const ReRecordBtn = styled.button<{btnState:boolean}>`
     padding: 10px 30px;
-    margin-top: 15px;
+    margin-top: 10px;
     border-radius: 5px;
     border: none;
     background-color: ${props => (props.btnState ? "#ff4f09" : "#696CEA")};
     color: #fff;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 14px;
     cursor: pointer;
+
+    &:hover {
+        background-color: #8285f2;
+    }
 `;
 
 // 미리보기 비디오

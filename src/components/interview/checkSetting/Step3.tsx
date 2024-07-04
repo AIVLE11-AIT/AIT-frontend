@@ -114,23 +114,24 @@ function Step3() {
             {!recordedMediaUrl && (
                 <S.Step3Text>
                     권한 요청 창에서 Google Chrome의 카메라, 마이크 접근 버튼을 클릭한 후, <br />
-                    "넓은 하늘로의 비상을 꿈꾸며"를 소리내어 읽어주세요.
+                    <S.Step3Txt>"넓은 하늘로의 비상을 꿈꾸며"</S.Step3Txt>를 소리내어 읽어주세요.
                 </S.Step3Text> )}
             {recordedMediaUrl && (
                 <S.Step3Text>
-                    재생 버튼을 클릭해 영상이 잘 재생되는지 확인해 주세요. <br />
+                    카메라와 마이크가 잘 연결되었습니다. <br />
+                    재생 버튼을 클릭해 영상이 잘 재생되는지 확인해 주세요. 
                 </S.Step3Text> )}
             <S.StepMain>
                 {!recordedMediaUrl && (
                     <S.CameraComponent>
-                        <S.Record recordState={recordState}>☉ 녹화 중</S.Record>
-                        <S.Camera ref={videoRef} autoPlay border={recordBtn ? '#3CB371' : '#D0D2D7'} />
+                        <S.Record><S.RecordTxt recordState={recordState}>●</S.RecordTxt>녹화 중</S.Record>
+                        <S.Camera ref={videoRef} autoPlay border={recordBtn ? '#75A812' : '#D0D2D7'} />
                         <S.RecordBtnBox>
                             <S.RecordBtn
                                 btnState={recordBtn}
                                 onClick={handleRecordButtonClick}
                             >
-                                {recordBtn ? "녹화 중지" : "녹화 시작"}
+                                <S.RecordBtnIcon/>
                             </S.RecordBtn>
                         </S.RecordBtnBox>
                     </S.CameraComponent>
@@ -138,17 +139,17 @@ function Step3() {
 
                 {/* 미리보기 화면 */}
                 {recordedMediaUrl && (
-                    <S.ViewContainer>
+                    <S.CameraComponent>
                         <S.Camera ref={previewRef} src={recordedMediaUrl} controls border="#D0D2D7"/>
                         <S.RecordBtnBox>
-                            <S.RecordBtn
+                            <S.ReRecordBtn
                                 btnState={recordBtn}
                                 onClick={handleRetryButtonClick}
                             >
-                                다시 녹화
-                            </S.RecordBtn>
+                                다시 녹화하기
+                            </S.ReRecordBtn>
                         </S.RecordBtnBox>
-                    </S.ViewContainer>
+                    </S.CameraComponent>
                 )}
             </S.StepMain>
         </div>

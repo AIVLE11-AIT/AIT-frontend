@@ -13,13 +13,13 @@ export const StepHeader = styled.div`
 // 헤더 문구
 export const HeaderText = styled.div`
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px;
     font-size: 16px;
     color: gray;
 `;
 // 메인
 export const StepMain = styled.div`
-    margin-top: 40px;
+    margin-top: 30px;
     padding: 0px 60px;
 `;
 
