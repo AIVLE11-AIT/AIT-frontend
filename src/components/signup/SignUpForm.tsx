@@ -97,7 +97,7 @@ function SignUpForm() {
           alert(`입력하신 이메일로 인증번호가 전송되었습니다. \n5분 이내에 인증번호를 입력해 주세요.`);
           setIsCheckNumActive(true); // 버튼 활성화
           console.log(email);
-          setCountdown(3); // 5분 = 300초
+          setCountdown(300); // 5분 = 300초
 
           // 이메일 전송 api
           axios({
@@ -148,7 +148,7 @@ function SignUpForm() {
         }, 1000);
       } else if (countdown === 0) {
         setCountdown(null);
-        setIsCheckNumActive(false); // 인증번호 전송 버튼 비활성화
+        //setIsCheckNumActive(false); // 인증번호 전송 버튼 비활성화
       }
   
       return () => clearInterval(timer);

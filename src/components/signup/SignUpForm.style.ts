@@ -61,7 +61,7 @@ export const SignUpInputForm = styled.form`
 // Sign Up wrap
 export const SignUpWrap = styled.div`
     margin-left: 60px;
-    margin-top: 22px;
+    margin-top: 20px;
 `;
 
 // 회원가입 label
@@ -134,8 +134,8 @@ export const CheckNumBtn = styled.div<{ toggle: boolean }>`
 export const Error = styled.div`
     color: #FF4A4A;
     font-size: 12px;
-    margin-top: 10px;
-    height: 5px;
+    margin-top: 8px;
+    height: 10px;
 `;
 
 // 버튼 wrap
