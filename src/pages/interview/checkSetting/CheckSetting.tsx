@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import * as C from './CheckSetting.style';
 // 컴포넌트
 import InterviewHeader from '../../../components/interview/checkSetting/CheckSettingHeader';
@@ -7,7 +7,7 @@ import Step2 from '../../../components/interview/checkSetting/Step2';
 import Step3 from '../../../components/interview/checkSetting/Step3';
 import Step4 from '../../../components/interview/checkSetting/Step4';
 // recoil
-import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { Agree1Atom, CameraAtom, StepAtom } from '../../../recoil/settingAtomes';
 
 function CheckSetting() {
@@ -54,10 +54,6 @@ function CheckSetting() {
 
         {/* 이전 버튼 */}
         <C.BtnDiv>
-          {step === 1 && 
-            <C.BtnComponent onClick={onClickBackBtn} border="none">
-              <C.BackArrow src={process.env.PUBLIC_URL + '/images/NextArrow.svg'} display="none"/>
-            </C.BtnComponent>}
           {step > 1 && 
             <C.BtnComponent onClick={onClickBackBtn} border="3px solid #D0D2D7">
               <C.BackArrow src={process.env.PUBLIC_URL + '/images/NextArrow.svg'} display="flex"/>
