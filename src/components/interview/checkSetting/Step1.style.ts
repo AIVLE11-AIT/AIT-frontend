@@ -5,13 +5,13 @@ export const StepHeader = styled.div`
     color: black;
     font-weight: 600;
     font-size: 35px;
-    margin-top: 45px;
+    margin-top: 60px;
     margin-left: 60px;
 `;
 
 // 메인
 export const StepMain = styled.div`
-    margin-top: 30px;
+    margin-top: 50px;
     padding: 0px 60px;
 `;
 

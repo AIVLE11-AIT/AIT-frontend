@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import * as S from './SignUpForm.style'
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function SignUpForm() {
 
@@ -69,17 +70,33 @@ function SignUpForm() {
 
   };
 
-  const [isCheckNumActive, setIsCheckNumActive] = useState(false);
-  const onClickCheckBtn = () => {
-    alert(`입력하신 이메일로 인증번호가 전송되었습니다. \n이메일을 확인해 주세요.`);
-    setIsCheckNumActive(true);
-  }
+    // 인증번호 전송 버튼 클릭 시
+    const [isCheckNumActive, setIsCheckNumActive] = useState(false);
+    const onClickCheckBtn = (email: string) => {
+      alert(`입력하신 이메일로 인증번호가 전송되었습니다. \n이메일을 확인해 주세요.`);
+      setIsCheckNumActive(true);
+      console.log(email);
 
-  const [isConfirmNumActive, setIsConfirmNumActive] = useState(false);
-  const onClickConfirmBtn = () => {
-    alert(`인증번호가 확인되었습니다.`);
-    setIsConfirmNumActive(true);
-  }
+        // 이메일 전송 api
+        axios({
+          url: `/signup/send/${email}`,
+          method: 'get',
+        })
+        .then((response) => {
+          console.log(response.data);
+          }) .catch((error) => {
+          console.log('실패');
+          console.error('AxiosError:', error);
+        });
+    }
+
+    // 인증번호 확인 버튼 클릭 시
+    const [isConfirmNumActive, setIsConfirmNumActive] = useState(false);
+    const onClickConfirmBtn = () => {
+      alert(`인증번호가 확인되었습니다.`);
+      setIsConfirmNumActive(true);
+    }
+  
 
   return (
     <S.SignUpForm>
@@ -114,7 +131,7 @@ function SignUpForm() {
                 },
               })}
             />
-            <S.CheckNumBtn onClick={onClickCheckBtn} toggle={isCheckNumActive}>인증번호 전송</S.CheckNumBtn>
+            <S.CheckNumBtn onClick={() => onClickCheckBtn(getValues('email'))} toggle={isCheckNumActive}>인증번호 전송</S.CheckNumBtn>
           </S.InputWrap>
           <S.Error>{errors.email && <small role="alert">{errors.email.message}</small>}</S.Error>
         </S.SignUpWrap>
