@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as L from './Login.style';
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 type FormValue = {
   email: string;
@@ -22,19 +23,16 @@ function Login() {
   const login = async (data: FormValue) => {
     try {
       // 실제 로그인 API 호출 로직을 여기에 추가
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+      const response = await axios.post('/login', {
+        username: data.email,
+        password: data.password,
       });
 
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error('로그인에 실패했습니다.');
       }
 
-      const result = await response.json();
+      const result = response.data;
       console.log('로그인 성공:', result);
 
       // 로그인 성공 후 이동할 페이지로 이동
@@ -42,6 +40,7 @@ function Login() {
     } catch (error) {
       console.error('로그인 오류:', error);
       // 로그인 실패 시 사용자에게 오류 메시지 표시 로직 추가 가능
+      alert('로그인에 실패했습니다. 다시 시도해 주세요.');
     }
   };
 

@@ -96,6 +96,7 @@ export const Error = styled.div`
     font-size: 12px;
     margin-top: 10px;
     margin-left: 25px;
+    height: 5px;
 `;
 
 // 버튼 컨테이너
@@ -113,7 +114,7 @@ export const Button = styled.button<{ secondary?: boolean, disabled?: boolean}>`
     font-size: 16px;
     font-weight: 600;
     color: white;
-    
+
     background: ${({ secondary, disabled }) => 
       disabled ? '#ccc' : (secondary ? '#404146' : '#696CEA')};
     cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
