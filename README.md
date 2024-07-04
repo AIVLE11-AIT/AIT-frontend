@@ -15,3 +15,6 @@
 
 # 졸려2
 ![스크린샷 2024-06-25 164654](https://github.com/AIVLE11-AIT/AIT-frontend/assets/87623609/cd92ce17-c26d-41cc-afc5-8f8668aa22ed)
+
+# 듬직한 jpeg
+![33333](https://github.com/AIVLE11-AIT/AIT-frontend/assets/172003139/d31f877c-4952-4eb0-a587-77eec0acd3e6)
