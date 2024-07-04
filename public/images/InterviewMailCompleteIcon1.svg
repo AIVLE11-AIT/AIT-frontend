@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="115" height="110" viewBox="0 0 115 110" fill="none">
+  <path d="M67.6826 12.1062L64.2003 25.9849" stroke="black" stroke-width="2.74239" stroke-linecap="round"/>
+  <path d="M54.5244 10.6497L58.4363 24.3693" stroke="black" stroke-width="2.74239" stroke-linecap="round"/>
+  <path d="M79.9697 17.0319L70.0442 27.2795" stroke="black" stroke-width="2.74239" stroke-linecap="round"/>
+  <circle cx="55.7116" cy="58.5801" r="40.2439" transform="rotate(14.0853 55.7116 58.5801)" fill="url(#paint0_linear_121_1366)"/>
+  <circle cx="33.483" cy="40.2337" r="19.4129" transform="rotate(14.0853 33.483 40.2337)" stroke="black" stroke-width="3.80447"/>
+  <path d="M103.947 57.5654C101.39 67.7555 90.903 73.9582 80.4759 71.342C70.0489 68.7257 63.732 58.3066 66.2888 48.1165C68.8456 37.9263 79.3331 31.7236 89.7601 34.3399C100.187 36.9561 106.504 47.3752 103.947 57.5654Z" stroke="black" stroke-width="3.80447"/>
+  <path d="M66.0275 46.72C66.2039 46.017 63.4975 44.7322 59.9825 43.8502C56.4676 42.9683 53.4752 42.8232 53.2988 43.5262" stroke="black" stroke-width="3.80447" stroke-linecap="round"/>
+  <circle cx="44.369" cy="46.2058" r="2.98103" transform="rotate(14.0853 44.369 46.2058)" fill="black"/>
+  <circle cx="72.1269" cy="53.1715" r="2.98103" transform="rotate(14.0853 72.1269 53.1715)" fill="black"/>
+  <circle cx="57.3787" cy="53.1571" r="1.78862" transform="rotate(14.0853 57.3787 53.1571)" fill="white"/>
+  <defs>
+    <linearGradient id="paint0_linear_121_1366" x1="55.7116" y1="18.3363" x2="55.7116" y2="98.824" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#696CEA"/>
+      <stop offset="0.721348" stop-color="#696CEA"/>
+      <stop offset="0.943725" stop-color="#696CEA"/>
+    </linearGradient>
+  </defs>
+</svg>
