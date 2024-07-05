@@ -81,6 +81,7 @@ export const PeriodLine = styled.div`
 	background-color: #D0D2D7;
 	width:2px;
 	height: 20px;
+    margin-top: 15px;
 `;
 
 // 면접 기간 입력 박스
@@ -98,11 +99,20 @@ export const InputMaskBox = styled(InputMask)`
 	color: #D0D2D7;
 `;
 
+// 면접 기간 에러메시지 박스
+export const PeriodError = styled.div`
+    margin-left: -155px;
+    color: #FF4A4A;
+    font-size: 12px;
+    margin-top: 10px;
+    height: 10px;
+`;
+
 // 에러 메시지
 export const Error = styled.div`
     color: #FF4A4A;
     font-size: 12px;
-    margin-top: 8px;
+    margin-top: 9px;
     height: 10px;
 	margin-left: 20px;
 `;
@@ -184,6 +194,16 @@ export const FileName = styled.div`
     cursor: pointer;
 	margin-left: 10px;
     font-size: 14px;
+`;
+
+// csv파일 다운로드, 면접 비율 정보 text
+export const ConfirmText = styled.div`
+	text-align: right;
+	padding: 0px 20px 0px 0px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #696CEA;
+	cursor: pointer;
 `;
 
 // 버튼 wrap

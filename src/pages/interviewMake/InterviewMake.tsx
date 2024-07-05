@@ -1,5 +1,5 @@
 import React from 'react'
-import InterviewMakeForm from '../../components/groupProfile/interviewMake/InterviewMakeForm';
+import InterviewMakeForm from '../../components/interviewMake/InterviewMakeForm';
 import * as I from './InterviewMake.style';
 
 function InterviewMake() {

@@ -18,7 +18,7 @@ import InterviewMail from './components/interviewmail/InterviewMail';
 // components
 import Header from './components/header/Header';
 import Step1 from './components/interview/checkSetting/Step1';
-import InterviewMake from './pages/groupProfile/InterviewMake';
+import InterviewMake from './pages/interviewMake/InterviewMake';
 //import Step2 from './components/interview/checkSetting/Step2';
 
 function App() {
