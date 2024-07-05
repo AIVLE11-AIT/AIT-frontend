@@ -63,9 +63,10 @@ function InterviewMakeForm() {
 		if(total !== 100 && voice > 0 && action > 0){
 			return "평가 비율의 합이 100이어야 합니다.";
 		}
-	  };	  
+	};
+	
+	const [interviewTitleColor, setInterviewTitleColor] = useState('#D0D2D7');
 	  
-
 	return (
 		<I.MakeInputForm onSubmit={handleSubmit(onValid, onError)}>
 			<I.MakeInputWrap>
@@ -81,10 +82,15 @@ function InterviewMakeForm() {
 					{...register("interviewTitle", {
 						required: "면접 이름은 필수 입력입니다.",
 						pattern: {
-							value: /^(?=.*[가-힣])(?=.*\d)|(?=.*[a-zA-Z])(?=.*\d){1,20}$/i,
+							value: /^(?=.*[가-힣])|(?=.*[a-zA-Z])(?=.*\d)|(?=.*[가-힣])(?=.*\d).{1,20}$/i,
 							message: "면접 이름 형식에 맞지 않습니다.",
 						},
 					})}
+					inputColor={interviewTitleColor === '#D0D2D7' ? '#0D0D0D' : interviewTitleColor}
+					borderColor={interviewTitleColor === '#D0D2D7' ? '#D0D2D7' : '#404146'}
+					onChange={(e) => {
+						setInterviewTitleColor(e.target.value ? '#0D0D0D' : '#D0D2D7');
+					}}
 				/>
 				<I.Error>{errors.interviewTitle && <small role="alert">{errors.interviewTitle.message}</small>}</I.Error>
 			</I.MakeInputWrap>
@@ -105,14 +111,19 @@ function InterviewMakeForm() {
 						render={({ field }) => (
 							<I.InputMaskBox
 								id="start"
-								mask="9999 년  99 월  99 일  99 HH  99 MM  99 SS"
+								mask="9999 년  99 월  99 일  99 h:  99 m:  99 s"
 								alwaysShowMask={true}
 								{...field}
+								onChange={(e) => {
+									field.onChange(e);
+								  }}
+								inputColor={field.value ? '#404146' : '#D0D2D7'}
+								borderColor={field.value ? '#404146' : '#D0D2D7'}
 							/>
 						)}
 					/>
-                    <I.PeriodLine/>
-                    <Controller
+					<I.PeriodLine />
+					<Controller
 						name="end"
 						control={control}
 						rules={{
@@ -121,9 +132,14 @@ function InterviewMakeForm() {
 						render={({ field }) => (
 							<I.InputMaskBox
 								id="end"
-								mask="9999 년  99 월  99 일  99 HH  99 MM  99 SS"
+								mask="9999 년  99 월  99 일  99 h:  99 m:  99 s"
 								alwaysShowMask={true}
 								{...field}
+								onChange={(e) => {
+									field.onChange(e);
+								  }}
+								inputColor={field.value ? '#404146' : '#D0D2D7'}
+								borderColor={field.value ? '#404146' : '#D0D2D7'}
 							/>
 						)}
 					/>
@@ -134,7 +150,7 @@ function InterviewMakeForm() {
 							</small>
 						)}
 					</I.PeriodError>
-                </I.MaskBoxContainer>
+				</I.MaskBoxContainer>
 			</I.MakeInputWrap>
 
 			<I.MakeInputWrap>
@@ -144,22 +160,24 @@ function InterviewMakeForm() {
 				</I.LabelContainer>
 				<I.FileText>csv파일을 다운받아 작성 후 업로드 해주세요.</I.FileText>
 				<I.FileUploadContainer>
-					<I.FileUploadLabel htmlFor="fileUpload">파일 선택</I.FileUploadLabel>
+					<I.FileUploadLabel htmlFor="fileUpload" hasFile={fileName}>파일 선택</I.FileUploadLabel>
 					<I.HiddenInput
 						id="fileUpload"
 						type="file"
 						{...register("fileUpload", {
 							required: "파일을 선택하세요.",
-							validate: {
-								fileSizeCheck: (value) => value[0]?.size < 10485760 || "10MB 이하의 파일을 선택하세요.",
-							}
 						})}
 						onChange={handleChange}
+						accept=".csv"
 					/>
-					<I.FileName>{fileName || "선택된 파일 없음"}</I.FileName>
+					<I.FileName hasFile={fileName}>
+						{fileName || "선택된 파일 없음"}
+					</I.FileName>
 				</I.FileUploadContainer>
 				<I.Error>{errors.fileUpload && <small role="alert">{errors.fileUpload.message}</small>}</I.Error>
-				<I.ConfirmText>csv파일 양식 다운로드↓</I.ConfirmText>
+				<I.ConfirmText>
+					<a href="/AIT지원자 정보 csv파일 양식.csv" download="AIT지원자 정보 csv파일 양식.csv">csv파일 양식 다운로드↓</a>
+				</I.ConfirmText>
 			</I.MakeInputWrap>
 
 			<I.MakeInputWrap>
@@ -185,6 +203,11 @@ function InterviewMakeForm() {
 									mask="99 / 100"
 									alwaysShowMask={true}
 									{...field}
+									onChange={(e) => {
+										field.onChange(e);
+									  }}
+									inputColor={field.value ? '#404146' : '#D0D2D7'}
+									borderColor={field.value ? '#404146' : '#D0D2D7'}
 								/>
 							)}
 						/>
@@ -204,6 +227,11 @@ function InterviewMakeForm() {
 									mask="99 / 100"
 									alwaysShowMask={true}
 									{...field}
+									onChange={(e) => {
+										field.onChange(e);
+									  }}
+									inputColor={field.value ? '#404146' : '#D0D2D7'}
+									borderColor={field.value ? '#404146' : '#D0D2D7'}
 								/>
 							)}
 						/>
@@ -223,6 +251,11 @@ function InterviewMakeForm() {
 									mask="99 / 100"
 									alwaysShowMask={true}
 									{...field}
+									onChange={(e) => {
+										field.onChange(e);
+									  }}
+									inputColor={field.value ? '#404146' : '#D0D2D7'}
+									borderColor={field.value ? '#404146' : '#D0D2D7'}
 								/>
 							)}
 						/>

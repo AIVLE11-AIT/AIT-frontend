@@ -51,22 +51,26 @@ export const FileText = styled.div`
 	font-weight: 600;
 `;
 
+interface InputProps {
+    inputColor?: string;
+    borderColor?: string;
+}
 // 입력 박스
-export const InputBox = styled.input`
-	margin-left: 15px;
+export const InputBox = styled.input<InputProps>`
+    margin-left: 15px;
     width: 350px;
     height: 45px;
     border-radius: 11px;
-    border: 2px solid #D0D2D7;
+    border: 2px solid ${({ borderColor }) => borderColor || '#D0D2D7'};
     background: #FFF;
     font-size: 14px;
     font-weight: 500;
     padding: 15px 18px;
     margin-top: 15px;
-    color: #0D0D0D;
+    color: ${({ inputColor }) => inputColor || '#0D0D0D'};
 
     &::placeholder {
-        color: #D0D2D7;/* placeholder 색상 설정 */
+        color: #D0D2D7; /* placeholder 색상 설정 */
     }
 `;
 
@@ -84,19 +88,24 @@ export const PeriodLine = styled.div`
     margin-top: 15px;
 `;
 
+interface InputMaskProps {
+    inputColor?: string;
+    borderColor?:string;
+}
+
 // 면접 기간 입력 박스
-export const InputMaskBox = styled(InputMask)`
-	margin-left: 7px;
-	width: 350px;
-	height: 45px;
-	border-radius: 11px;
-	border: 2px solid #D0D2D7;
-	background: #FFF;
-	font-size: 14px;
-	font-weight: 500;
-	padding: 15px 18px;
-	margin-top: 15px;
-	color: #D0D2D7;
+export const InputMaskBox = styled(InputMask)<InputMaskProps>`
+    margin-left: 7px;
+    width: 350px;
+    height: 45px;
+    border-radius: 11px;
+    border: 2px solid ${({ borderColor }) => borderColor || '#D0D2D7'};
+    background: #FFF;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 15px 18px;
+    margin-top: 15px;
+    color: ${({ inputColor }) => inputColor || '#D0D2D7'};
 `;
 
 // 면접 기간 에러메시지 박스
@@ -133,17 +142,17 @@ export const RatioTitle = styled.div`
 `;
 
 // 비율 입력 input box
-export const RatioInputBox = styled(InputMask)`
+export const RatioInputBox = styled(InputMask)<InputMaskProps>`
     width: 100px;
     height: 45px;
     border-radius: 11px;
-    border: 2px solid #D0D2D7;
+    border: 2px solid ${({ borderColor }) => borderColor || '#D0D2D7'};
     background: #FFF;
     font-size: 15px;
     font-weight: 500;
 	text-align: center;
     margin: 15px 12px 0px 12px;
-    color: #D0D2D7;
+    color: ${({ inputColor }) => inputColor || '#D0D2D7'};
 `;
 
 // 파일 업로드 컨테이너 스타일 정의
@@ -154,11 +163,11 @@ export const FileUploadContainer = styled.div`
 `;
 
 // 파일 선택 버튼
-export const FileUploadLabel = styled.label`
+export const FileUploadLabel = styled.label<{hasFile:string}>`
     width: 90px;
     height: 45px;
     border-radius: 11px;
-    border: 2px solid #D0D2D7;
+    border: 2px solid ${({ hasFile }) => hasFile === "" ? '#D0D2D7':'#404146'};
     background: #FFF;
     font-size: 14px;
     font-weight: 500;
@@ -169,10 +178,6 @@ export const FileUploadLabel = styled.label`
     justify-content: center;
     cursor: pointer;
     position: relative;
-
-    &::placeholder {
-        color: #D0D2D7;
-    }
 `;
 
 // 파일 선택 기본 설정
@@ -181,11 +186,11 @@ export const HiddenInput = styled.input`
 `;
 
 // 파일 이름 박스
-export const FileName = styled.div`
+export const FileName = styled.div<{hasFile:string}>`
 	width: 252px;
     height: 45px;
     border-radius: 11px;
-    border: 2px solid #D0D2D7;
+    border: 2px solid ${({ hasFile }) => hasFile === "" ? '#D0D2D7':'#404146'};
     background: #FFF;
     padding: 15px;
     color: #0D0D0D;
