@@ -74,6 +74,25 @@ export const InputBox = styled.input<InputProps>`
     }
 `;
 
+// 면접 유형 선택 박스 컨테이너
+export const InputRadioGroup = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+`;
+
+// 면접 유형 label
+export const RadioButtonLabel = styled.div`
+    font-weight: 600;
+    font-size: 14px;
+    color: #404146;
+    margin:
+`;
+
+export const InputRadio = styled.input`
+
+`;
+
 // 면접 기간 입력 박스 컨테이너
 export const MaskBoxContainer = styled.div`
 	display: flex;

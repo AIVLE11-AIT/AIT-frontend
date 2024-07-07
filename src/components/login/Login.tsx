@@ -20,28 +20,25 @@ function Login() {
   const navigate = useNavigate();
 
   // 로그인 함수
-  const login = async (data: FormValue) => {
-    try {
-      // 실제 로그인 API 호출 로직을 여기에 추가
-      const response = await axios.post('/login', {
-        username: data.email,
-        password: data.password,
+  const login = (data: FormValue) => {
+      const formData = new FormData();
+      formData.append('username', data.email);
+      formData.append('password', data.password);
+
+      // 로그인 api
+      axios({
+        url: `/login`,
+        method: 'post',
+        data: formData,
+      })
+      
+      .then((response) => {
+        //console.log(response.headers.authorization);
+        sessionStorage.setItem('isLogin', response.headers.authorization);
+        }) .catch((error) => {
+        console.log('실패');
+        console.error('AxiosError:', error);
       });
-
-      if (response.status !== 200) {
-        throw new Error('로그인에 실패했습니다.');
-      }
-
-      const result = response.data;
-      console.log('로그인 성공:', result);
-
-      // 로그인 성공 후 이동할 페이지로 이동
-      navigate('/group-profile');
-    } catch (error) {
-      console.error('로그인 오류:', error);
-      // 로그인 실패 시 사용자에게 오류 메시지 표시 로직 추가 가능
-      alert('로그인에 실패했습니다. 다시 시도해 주세요.');
-    }
   };
 
   // 폼 유효성 검사 성공 시 호출되는 함수

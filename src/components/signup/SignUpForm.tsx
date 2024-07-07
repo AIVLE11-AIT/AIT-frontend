@@ -65,7 +65,13 @@ function SignUpForm() {
         axios({
           url: `/signup/register`,
           method: 'post',
+          data: {
+            "name": data.companyName,
+            "password": data.password,
+            "email": data.email
+          }
         })
+        
         .then((response) => {
           console.log(response.data);
           navigate('/login');

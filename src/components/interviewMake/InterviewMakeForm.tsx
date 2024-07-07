@@ -7,6 +7,7 @@ import axios from 'axios';
 function InterviewMakeForm() {
 	type FormValue = {
 		interviewTitle: string;
+		interviewType: string;
 		start: string;
 		end: string;
 		fileUpload: FileList;
@@ -35,22 +36,62 @@ function InterviewMakeForm() {
 		setIsActive(allValuesFilled);
 	}, [watchAll]);
 
-	const onValid = (data: FormValue) => {
-        if (!data.start) {
-            setError("start", { type: "manual", message: "면접 기간은 필수 입력입니다." });
-            return;
-        }
-	};
+	const onValid = async (data: FormValue) => {
+        try {
+			if (!data.fileUpload || !data.fileUpload[0]) {
+				setError("fileUpload", { type: "manual", message: "파일을 선택하세요." });
+				return;
+			}
+	
+			console.log("업로드할 파일:", data.fileUpload[0].name);
 
-	const onError = (error: any) => {
-		console.log('onError called with error:', error);
-	};
+            const formData = new FormData();
+            if (data.fileUpload) {
+                formData.append('file', data.fileUpload[0]);
+            }
+
+            // Prepare JSON data
+            const value = {
+                name: data.interviewTitle,
+                start_date: "2024-07-02T00:00:00",
+                end_date: "2024-07-10T23:59:59",
+                context_per: 33,
+                voice_per: 33,
+                action_per: 34,
+                languag: "eng",
+                companyQnas: [
+                    { question: "지원동기", answer: "" },
+                    { question: "입사 포부", answer: "뼈를 묻겠습니다" }
+                ],
+                interviewers: []
+            };
+
+            // Convert JSON to Blob
+            const jsonBlob = new Blob([JSON.stringify(value)], { type: "application/json" });
+            formData.append("InterviewGroupDTO", jsonBlob);
+
+            // Send POST request with Axios
+            const response = await axios.post(`/interviewGroup/create`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: sessionStorage.getItem('isLogin') || '',
+                },
+            });
+
+            console.log('Success:', response.data);
+            // Handle success response
+        } catch (error) {
+            console.error('Failed:', error);
+            // Handle error
+        }
+    };
 
 	// 파일 이름 출력 함수(완성)
 	const [fileName, setFileName] = useState("");
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0];
 		setFileName(file ? file.name : "");
+		console.log(file);
 	};
 
 	// 평가 비율 유효성 검사 함수(완성)
@@ -68,7 +109,7 @@ function InterviewMakeForm() {
 	const [interviewTitleColor, setInterviewTitleColor] = useState('#D0D2D7');
 	  
 	return (
-		<I.MakeInputForm onSubmit={handleSubmit(onValid, onError)}>
+		<I.MakeInputForm onSubmit={handleSubmit(onValid)}>
 			<I.MakeInputWrap>
 				<I.LabelContainer>
 					<I.LabelIcon/>
@@ -93,6 +134,30 @@ function InterviewMakeForm() {
 					}}
 				/>
 				<I.Error>{errors.interviewTitle && <small role="alert">{errors.interviewTitle.message}</small>}</I.Error>
+			</I.MakeInputWrap>
+
+			<I.MakeInputWrap>
+				<I.LabelContainer>
+					<I.LabelIcon/>
+					<I.Label>면접 유형*</I.Label>
+					<I.LabelText>면접 유형을 선택해 주세요.</I.LabelText>
+				</I.LabelContainer>
+				<I.InputRadioGroup>
+                    <I.RadioButtonLabel>내국인 채용</I.RadioButtonLabel>
+                    <I.InputRadio
+                        id="interviewType-domestic"
+                        type="radio"
+                        value="domestic"
+                        {...register("interviewType", { required: true })}
+                    />
+                    <I.RadioButtonLabel>외국인 채용</I.RadioButtonLabel>
+                    <I.InputRadio
+                        id="interviewType-foreign"
+                        type="radio"
+                        value="foreign"
+                        {...register("interviewType", { required: true })}
+                    />
+                </I.InputRadioGroup>
 			</I.MakeInputWrap>
 
 			<I.MakeInputWrap>
@@ -168,7 +233,6 @@ function InterviewMakeForm() {
 							required: "파일을 선택하세요.",
 						})}
 						onChange={handleChange}
-						accept=".csv"
 					/>
 					<I.FileName hasFile={fileName}>
 						{fileName || "선택된 파일 없음"}
