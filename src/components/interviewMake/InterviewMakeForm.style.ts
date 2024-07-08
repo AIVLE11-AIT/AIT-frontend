@@ -301,29 +301,20 @@ export const SubmitWrap = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 40px;
-`;
-
-// 질문 입력 필드 스타일
-export const QuestionInput = styled.input`
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 300px;
+    margin: 100px auto;
 `;
 
 // 완료 버튼
 export const SignUpBtn = styled.button<{ toggle: boolean }>`
     display: flex;
     width: 380px;
-    height: 40px;
+    height: 50px;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
     background: ${(props) => (props.toggle ? `#696CEA` : `#D0D2D7`)};
     border: none;
     color: white;
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 600;
 `;

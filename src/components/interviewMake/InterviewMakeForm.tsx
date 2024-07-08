@@ -47,10 +47,8 @@ function InterviewMakeForm() {
 		question1: string;
 		question2: string;
 		question3: string;
+		jobGroup: string;
 	};
-
-	// select 변수 타입 정의
-	type ValueType = { value: string; label: string };
 
 	const {
 		register,
@@ -63,48 +61,65 @@ function InterviewMakeForm() {
 		formState: { errors },
 	} = useForm<FormValue>({ mode: 'onBlur' });
 
+	// 파일 이름 출력 함수(완성)
+	const [fileName, setFileName] = useState<string>("");
+	const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const file = event.target.files?.[0];
+		if (file) {
+			setSelectedFile(file);
+			setFileName(file.name);
+		} else {
+			setSelectedFile(null);
+			setFileName("");
+			setValue("fileUpload", null as any);
+		}
+	};
+
 	// 빈칸 유효성 검사(버튼 활성화)
 	const watchAll = watch();
 	const [isActive, setIsActive] = useState(false); // 버튼 활성화 변수
 	useEffect(() => {
 		const allValuesFilled = Object.values(watchAll).every(value => value);
 
-		console.log(allValuesFilled);
 		if(fileName !== "" && allValuesFilled)
 			setIsActive(allValuesFilled);
-	}, [watchAll]);
+	}, [watchAll, fileName]);
 
-	// 다음 버튼 클릭 시
+	// 완료 버튼 클릭 시
 	const navigate = useNavigate(); // 페이지 이동 변수
 	const onValid = async (data: FormValue) => {
+		console.log("완료");
+
         try {
-			if (!selectedFile || !selectedFile[0]) {
+			if (!selectedFile) {
 				setError("fileUpload", { type: "manual", message: "파일을 선택하세요." });
 				return;
 			}
 
-			console.log("업로드할 파일:", data.fileUpload[0].name);
-
             const formData = new FormData();
-            if (data.fileUpload) {
-                formData.append('file', data.fileUpload[0]);
-            }
+            formData.append('file', selectedFile);
 
             // Prepare JSON data
             const value = {
                 name: data.interviewTitle,
-                start_date: "2024-07-02T00:00:00",
-                end_date: "2024-07-10T23:59:59",
+                start_date: data.start,
+                end_date: data.end,
                 context_per: 33,
                 voice_per: 33,
                 action_per: 34,
-                languag: "eng",
+                language: data.interviewType,
+				occupation: selectedOption ? selectedOption.label : '',
                 companyQnas: [
-                    { question: "지원동기", answer: "" },
-                    { question: "입사 포부", answer: "뼈를 묻겠습니다" }
+                    { question: data.question1},
+                    { question: data.question2},
+					{ question: data.question3}
                 ],
                 interviewers: []
             };
+
+			console.log(value);
 
             // Convert JSON to Blob
             const jsonBlob = new Blob([JSON.stringify(value)], { type: "application/json" });
@@ -114,8 +129,9 @@ function InterviewMakeForm() {
             const response = await axios.post(`/interviewGroup/create`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    Authorization: sessionStorage.getItem('isLogin') || '',
+                    Authorization: sessionStorage.getItem('isLogin'),
                 },
+
             });
 
             console.log('Success:', response.data);
@@ -123,22 +139,6 @@ function InterviewMakeForm() {
         } catch (error) {
             console.error('Failed:', error);
 
-        }
-    };
-
-	// 파일 이름 출력 함수(완성)
-	const [fileName, setFileName] = useState("");
-    const [selectedFile, setSelectedFile] = useState<File[]>([]);
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (file) {
-            setSelectedFile([file]);
-            setFileName(file.name);
-
-        } else {
-            setFileName("");
-            setSelectedFile([]);
-            setValue("fileUpload", null as any);
         }
     };
 
@@ -169,11 +169,18 @@ function InterviewMakeForm() {
 		{ value: "ICT", label: "IT/통신" },
 		{ value: "Design", label: "디자인" },
 		{ value: "ProductionManufacturing", label: "생산제조" }
-	]
+	];
 
-	const [selectedOption, setSelectedOption] = useState<ValueType | null>(jobGroup[0]);
-	const handleSelectChange = (newValue: ValueType | null, actionMeta: any) => {
-        setSelectedOption(newValue);
+	// select 변수 타입 정의
+	type OptionType = {
+		value: string;
+		label: string;
+	};
+	// select선택 함수
+    const [selectedOption, setSelectedOption] = useState<OptionType | null>(jobGroup[0]);
+
+    const handleSelectChange = (newValue: OptionType | null) => {
+        setSelectedOption(newValue); // 선택된 옵션 업데이트
     };
 	  
 	return (
@@ -221,7 +228,7 @@ function InterviewMakeForm() {
 							<I.InputRadio
 								id="interviewType-domestic"
 								type="radio"
-								value="domestic"
+								value="kor"
 								{...register("interviewType", { required: true })}
 							/>
 						</I.InputRadioBox>
@@ -230,7 +237,7 @@ function InterviewMakeForm() {
 							<I.InputRadio
 								id="interviewType-foreign"
 								type="radio"
-								value="foreign"
+								value="eng"
 								{...register("interviewType", { required: true })}
 							/>
 						</I.InputRadioBox>
@@ -300,7 +307,7 @@ function InterviewMakeForm() {
 							render={({ field }) => (
 								<I.InputMaskBox
 									id="start"
-									mask="9999 년  99 월  99 일  99 h:  99 m:  99 s"
+									mask="9999-99-99T99:99:99"
 									alwaysShowMask={true}
 									{...field}
 									onChange={(e) => {
@@ -321,7 +328,7 @@ function InterviewMakeForm() {
 							render={({ field }) => (
 								<I.InputMaskBox
 									id="end"
-									mask="9999 년  99 월  99 일  99 h:  99 m:  99 s"
+									mask="9999-99-99T99:99:99"
 									alwaysShowMask={true}
 									{...field}
 									onChange={(e) => {
@@ -509,7 +516,7 @@ function InterviewMakeForm() {
 			</I.MakeInputWrap>
 
 			<I.SubmitWrap>
-				<I.SignUpBtn type="submit" toggle={isActive}>다음</I.SignUpBtn>
+				<I.SignUpBtn type="submit" toggle={isActive}>완료</I.SignUpBtn>
 			</I.SubmitWrap>
 		</I.MakeInputForm>
 		</div>
