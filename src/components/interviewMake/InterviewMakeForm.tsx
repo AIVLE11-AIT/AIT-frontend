@@ -28,17 +28,20 @@ function InterviewMakeForm() {
 	} = useForm<FormValue>({ mode: 'onBlur' });
 
 	const [isActive, setIsActive] = useState(false);
-	const watchAll = watch();
 	const navigate = useNavigate();
 
+	// 빈칸 유효성 검사(버튼 활성화)
+	const watchAll = watch();
 	useEffect(() => {
 		const allValuesFilled = Object.values(watchAll).every(value => value);
-		setIsActive(allValuesFilled);
+
+		if(fileName !== "")
+			setIsActive(allValuesFilled);
 	}, [watchAll]);
 
 	const onValid = async (data: FormValue) => {
         try {
-			if (!data.fileUpload || !data.fileUpload[0]) {
+			if (!selectedFile || !selectedFile[0]) {
 				setError("fileUpload", { type: "manual", message: "파일을 선택하세요." });
 				return;
 			}
@@ -79,20 +82,28 @@ function InterviewMakeForm() {
             });
 
             console.log('Success:', response.data);
-            // Handle success response
+
         } catch (error) {
             console.error('Failed:', error);
-            // Handle error
+
         }
     };
 
 	// 파일 이름 출력 함수(완성)
 	const [fileName, setFileName] = useState("");
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const file = event.target.files?.[0];
-		setFileName(file ? file.name : "");
-		console.log(file);
-	};
+    const [selectedFile, setSelectedFile] = useState<File[]>([]);
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            setSelectedFile([file]);
+            setFileName(file.name);
+
+        } else {
+            setFileName("");
+            setSelectedFile([]);
+            setValue("fileUpload", null as any);
+        }
+    };
 
 	// 평가 비율 유효성 검사 함수(완성)
 	const validateTotalPercentage = () => {

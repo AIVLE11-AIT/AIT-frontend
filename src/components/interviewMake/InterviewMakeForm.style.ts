@@ -79,18 +79,22 @@ export const InputRadioGroup = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    border: 1px solid black;
 `;
 
 // 면접 유형 label
 export const RadioButtonLabel = styled.div`
     font-weight: 600;
-    font-size: 14px;
+    font-size: 15px;
     color: #404146;
-    margin:
+    margin: 0px 3px 0px 30px;;
+    border: 1px solid black;
 `;
 
-export const InputRadio = styled.input`
-
+export const InputRadio = styled.input` 
+    margin-bottom: 10px;
+    width: 15px;
+    height: 15px;
 `;
 
 // 면접 기간 입력 박스 컨테이너

@@ -1,7 +1,6 @@
 import { atom } from 'recoil';
 
 export type InterviewMake = {
-	//interview-make-1에 대한 정보
 	interviewName: string;
 	startDate: string;
 	endDate: string;
