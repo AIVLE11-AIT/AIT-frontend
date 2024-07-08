@@ -14,7 +14,7 @@ function GroupProfileHeader() {
   }
 
   return (
-    <>
+    <div className="scroll__container">
       <G.Header>
         <G.LeftContainer>
           <G.KTTitle>KT 면접 페이지</G.KTTitle>
@@ -29,8 +29,8 @@ function GroupProfileHeader() {
           <img src={process.env.PUBLIC_URL + '/images/GroupProfileIcon1.svg'} alt="Icon" />
         </G.Icon>
       </G.LineContainer>
-      <G.FloatingButton onClick={scrollToTop}>↑</G.FloatingButton>
-    </>
+      <G.FloatingButton id="top" onClick={scrollToTop} type="button">↑</G.FloatingButton>
+    </div>
   );
 }
 

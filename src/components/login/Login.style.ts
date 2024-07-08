@@ -20,6 +20,7 @@ export const FormWrapper = styled.div`
     text-align: center;
 `;
 
+
 // 제목
 export const Title = styled.div`
     color: #404146;
