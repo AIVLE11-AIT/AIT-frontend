@@ -98,17 +98,14 @@ function InterviewMakeForm() {
 				return;
 			}
 
-            const formData = new FormData();
-            formData.append('file', selectedFile);
-
             // Prepare JSON data
             const value = {
                 name: data.interviewTitle,
                 start_date: data.start,
                 end_date: data.end,
-                context_per: 33,
-                voice_per: 33,
-                action_per: 34,
+                context_per: parseInt(data.answer),
+                voice_per: parseInt(data.voice),
+                action_per: parseInt(data.action),
                 language: data.interviewType,
 				occupation: selectedOption ? selectedOption.label : '',
                 companyQnas: [
@@ -118,19 +115,20 @@ function InterviewMakeForm() {
                 ],
                 interviewers: []
             };
+			
+            const formData = new FormData();
+            formData.append('file', selectedFile);
 
-			console.log(value);
-
-            // Convert JSON to Blob
             const jsonBlob = new Blob([JSON.stringify(value)], { type: "application/json" });
             formData.append("InterviewGroupDTO", jsonBlob);
 
-            // Send POST request with Axios
+            // Axios 백엔드 전송
             const response = await axios.post(`/interviewGroup/create`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: sessionStorage.getItem('isLogin'),
                 },
+				
 
             });
 
@@ -154,7 +152,7 @@ function InterviewMakeForm() {
 		}
 	};
 	
-	// 입력 시 색 변환 변수
+	// 입력 시 색 변환 변수(완료)
 	const [interviewTitleColor, setInterviewTitleColor] = useState('#D0D2D7');
 	const [question1, setQuestion1] = useState('#D0D2D7');
 	const [question2, setQuestion2] = useState('#D0D2D7');
@@ -171,14 +169,14 @@ function InterviewMakeForm() {
 		{ value: "ProductionManufacturing", label: "생산제조" }
 	];
 
-	// select 변수 타입 정의
+	// 직군 선택 select 변수 타입(완료)
 	type OptionType = {
 		value: string;
 		label: string;
 	};
-	// select선택 함수
+	// 직군 선택 select 변수 값(완료)
     const [selectedOption, setSelectedOption] = useState<OptionType | null>(jobGroup[0]);
-
+	// 직군 선택 select 함수(완료)
     const handleSelectChange = (newValue: OptionType | null) => {
         setSelectedOption(newValue); // 선택된 옵션 업데이트
     };
@@ -373,7 +371,9 @@ function InterviewMakeForm() {
 										alwaysShowMask={true}
 										{...field}
 										onChange={(e) => {
-											field.onChange(e);
+											const value = e.target.value;
+											const numericValue = value.split(' ')[0]; // '99 / 100'에서 '99'만 추출
+											field.onChange(numericValue);
 										}}
 										inputColor={field.value ? '#404146' : '#D0D2D7'}
 										borderColor={field.value ? '#404146' : '#D0D2D7'}
@@ -397,7 +397,9 @@ function InterviewMakeForm() {
 										alwaysShowMask={true}
 										{...field}
 										onChange={(e) => {
-											field.onChange(e);
+											const value = e.target.value;
+											const numericValue = value.split(' ')[0]; // '99 / 100'에서 '99'만 추출
+											field.onChange(numericValue);
 										}}
 										inputColor={field.value ? '#404146' : '#D0D2D7'}
 										borderColor={field.value ? '#404146' : '#D0D2D7'}
@@ -421,7 +423,9 @@ function InterviewMakeForm() {
 										alwaysShowMask={true}
 										{...field}
 										onChange={(e) => {
-											field.onChange(e);
+											const value = e.target.value;
+											const numericValue = value.split(' ')[0]; // '99 / 100'에서 '99'만 추출
+											field.onChange(numericValue);
 										}}
 										inputColor={field.value ? '#404146' : '#D0D2D7'}
 										borderColor={field.value ? '#404146' : '#D0D2D7'}
