@@ -24,8 +24,8 @@ function Header() {
                 <H.HeaderWrap>
                     <H.HeaderContent>서비스 소개</H.HeaderContent>
                     <H.HeaderContent>문의하기</H.HeaderContent>
-                    <H.LoginBtn>
-                        <H.LoginBtnText onClick={onClickLoginBtn}>Login</H.LoginBtnText>
+                    <H.LoginBtn onClick={onClickLoginBtn}>
+                        <H.LoginBtnText>Login</H.LoginBtnText>
                     </H.LoginBtn>
                 </H.HeaderWrap>
             </H.HeaderDiv>

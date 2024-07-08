@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import React from "react";
+
 // components
 import SignupForm from '../../components/signup/SignUpForm'
 

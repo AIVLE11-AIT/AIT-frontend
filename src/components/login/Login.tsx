@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as L from './Login.style';
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 type FormValue = {
   email: string;
@@ -19,30 +20,25 @@ function Login() {
   const navigate = useNavigate();
 
   // 로그인 함수
-  const login = async (data: FormValue) => {
-    try {
-      // 실제 로그인 API 호출 로직을 여기에 추가
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+  const login = (data: FormValue) => {
+      const formData = new FormData();
+      formData.append('username', data.email);
+      formData.append('password', data.password);
+
+      // 로그인 api
+      axios({
+        url: `/login`,
+        method: 'post',
+        data: formData,
+      })
+      
+      .then((response) => {
+        //console.log(response.headers.authorization);
+        sessionStorage.setItem('isLogin', response.headers.authorization);
+        }) .catch((error) => {
+        console.log('실패');
+        console.error('AxiosError:', error);
       });
-
-      if (!response.ok) {
-        throw new Error('로그인에 실패했습니다.');
-      }
-
-      const result = await response.json();
-      console.log('로그인 성공:', result);
-
-      // 로그인 성공 후 이동할 페이지로 이동
-      navigate('/groupprofile');
-    } catch (error) {
-      console.error('로그인 오류:', error);
-      // 로그인 실패 시 사용자에게 오류 메시지 표시 로직 추가 가능
-    }
   };
 
   // 폼 유효성 검사 성공 시 호출되는 함수
@@ -62,9 +58,8 @@ function Login() {
   };
 
   // 비밀번호 찾기 버튼 클릭 시
-  const onClickForgotPasswordBtn = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    navigate('/forgot-password');
+  const onClickForgotPasswordBtn = () => {
+      navigate('/forgot-password');
   };
 
   // 로그인 버튼 활성화
@@ -111,8 +106,8 @@ function Login() {
                   },
                 })}
               />
-              <L.Error>{errors.email && <span>{errors.email.message}</span>}</L.Error>
             </L.InputWrap>
+            <L.Error>{errors.email && <span>{errors.email.message}</span>}</L.Error>
           </L.LoginWrap>
 
           <L.LoginWrap>
@@ -133,17 +128,21 @@ function Login() {
                   },
                 })}
               />
-              <L.Error>{errors.password && <span>{errors.password.message}</span>}</L.Error>
             </L.InputWrap>
+            <L.Error>{errors.password && <span>{errors.password.message}</span>}</L.Error>
           </L.LoginWrap>
 
-          <L.Button type='submit' disabled={!isActive}>로그인</L.Button>
-          <L.Button type='button' secondary onClick={onClickSignupBtn}>
-            회원가입
-          </L.Button>
-          <L.Link href='#' onClick={onClickForgotPasswordBtn}>
-            비밀번호 찾기 →
-          </L.Link>
+          <L.BtnContainer>
+            <L.Button type='submit' disabled={!isActive}>로그인</L.Button>
+            <L.Button type='button' secondary onClick={onClickSignupBtn}>
+              회원가입
+            </L.Button>
+          </L.BtnContainer>
+
+          <L.FindPwContainer onClick={onClickForgotPasswordBtn}>
+            <L.Link>비밀번호 찾기</L.Link>
+            <L.FindPwIcon src={process.env.PUBLIC_URL + '/images/FindPwArrow.svg'}/>
+          </L.FindPwContainer>
         </L.LoginInputForm>
       </L.FormWrapper>
     </L.Container>

@@ -1,6 +1,6 @@
 import React from 'react';
 import * as G from './GroupProfile.style';
-import GroupProfileHeader from '../../components/groupprofile/GroupProfileHeader';
+import GroupProfileHeader from '../../components/groupProfile/header/GroupProfileHeader';
 
 function GroupProfile() {
 

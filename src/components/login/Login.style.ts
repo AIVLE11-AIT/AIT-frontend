@@ -1,53 +1,56 @@
 import styled from 'styled-components';
 
+// 전체 컨테이너
 export const Container = styled.div`
-  width: 530px;
-  height: 780px;
-  flex-shrink: 0;
-  margin: 49px auto;
+    display: flex;
+    justify-content: center;
+    margin: 35px auto;
 `;
 
+// 로그인 box
 export const FormWrapper = styled.div`
-  width: 541px;
-  height: 651px;
-  flex-shrink: 0;
-  padding: 40px;
-  border: 1px solid #D0D2D7;
-  background: #FFF;
-  border-radius: 30px;
-  text-align: center;
+    width: 490px;
+    height: 570px;
+    flex-shrink: 0;
+    padding: 40px;
+    border: 1px solid #D0D2D7;
+    background: #FFF;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
 `;
 
+
+// 제목
 export const Title = styled.div`
-  color: #404146;
-  font-family: Spartan;
-  font-size: 30px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  text-align: left;
-  margin: 20px 0;
-  margin-left: 30px;
-  margin-top: 40px;
+    color: #404146;
+    font-size: 35px;
+    font-weight: 600;
+    text-align: left;
+    margin: 30px 0px 0px 20px;
 `;  
 
+// 로그인 폼
 export const LoginInputForm = styled.form`
-  width: 100%;
+    width: 100%;
+    margin-top: 40px;
 `;
 
+// 로그인 폼 입력 container
 export const LoginWrap = styled.div`
-  margin-bottom: 20px;
-  width: 100%;
+    width: 100%;
 `;
 
+// 입력 내용 제목 박스
 export const LoginLabel = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
-  margin-left: 30px;
-  margin-top: 40px;
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+    margin-bottom: 15px;
+    margin-top: 25px;
 `;
 
+// 입력 내용 제목 아이콘
 export const LoginLabelIcon = styled.div`
   width: 9px;
   height: 9px;
@@ -56,6 +59,7 @@ export const LoginLabelIcon = styled.div`
   margin: auto 0;
 `;
 
+// 입력 내용 제목 text
 export const Label = styled.div`
   color: #404146;
   font-size: 16px;
@@ -64,70 +68,85 @@ export const Label = styled.div`
 `;
 
 export const InputWrap = styled.div`
-  width: 100%;
+    width: 100%;
+    display: flex;
+    margin-left: 22px;
 `;
 
 // 입력 박스
 export const InputBox = styled.input`
-  width: 400px;
-  height: 45px;
-  border-radius: 11px;
-  border: 1px solid #D0D2D7;
-  background: #FFF;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 15px 18px;
-  margin-top: 9px;
-  color: #0D0D0D;
+    width: 360px;
+    height: 45px;
+    border-radius: 11px;
+    border: 1px solid #D0D2D7;
+    background: #FFF;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 15px 18px;
+    color: #0D0D0D;
 
-  &::placeholder {
-    color: #D0D2D7; /* placeholder 색상 설정 */
-  }
+    &::placeholder {
+      color: #D0D2D7; /* placeholder 색상 설정 */
+    }
 `;
 
 // 에러 메시지
 export const Error = styled.div`
-  display: flex;
-  color: #FF4A4A;
-  font-size: 12px;
-  margin-top: 10px;
-  margin-left: 40px;
+    display: flex;
+    color: #FF4A4A;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-left: 25px;
+    height: 5px;
+`;
+
+// 버튼 컨테이너
+export const BtnContainer = styled.div`
+    margin-top: 20px;
 `;
 
 export const Button = styled.button<{ secondary?: boolean, disabled?: boolean}>`
-  width: 400px;
-  height: 45px;
-  padding: 10px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: 600;
-  color: white;
-  background: ${({ secondary, disabled }) => 
-    disabled ? '#ccc' : (secondary ? '#333' : '#696CEA')};
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+    width: 360px;
+    height: 45px;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
 
-  &:hover {
     background: ${({ secondary, disabled }) => 
-      disabled ? '#ccc' : (secondary ? '#555' : '#5757CE')};
-  }
+      disabled ? '#ccc' : (secondary ? '#404146' : '#696CEA')};
+    cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+
+    &:hover {
+      background: ${({ secondary, disabled }) => 
+        disabled ? '#ccc' : (secondary ? '#555' : '#5757CE')};
+    }
 `;
 
-export const Link = styled.a`
-  display: block;
-  margin-top: 20px;
-  color: #007bff;
-  text-decoration: none;
-  color: #404146;
-  font-family: Spartan;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  text-align: right;
-
-  &:hover {
-    text-decoration: underline;
-  }
+// 비밀번호 찾기 컨테이너
+export const FindPwContainer = styled.div`
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 270px;
 `;
+
+// 비밀번호 찾기
+export const Link = styled.div`
+    display: flex;
+    align-items: center;
+    color: #404146;
+    font-size: 14px;
+    font-weight: 600;
+`;
+
+// 비밀번호 찾기 화살표 아이콘
+export const FindPwIcon = styled.img`
+    margin-left: 5px;
+    width: 16px;
+    height: 16px;
+`;  

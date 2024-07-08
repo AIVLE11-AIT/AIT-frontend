@@ -6,96 +6,165 @@ import axios from 'axios';
 
 function SignUpForm() {
 
-  type FormValue = {
-    email: string;
-    checkNum: string,
-    password: string;
-    checkPassword: string;
-    companyName: string;
-  }
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setError,
-    resetField,
-    clearErrors,
-    getValues,
-    formState: { errors },
-  } = useForm<FormValue>({ mode: 'onBlur' })
-
-  //비밀번호 일치 확인
-  useEffect(() => {
-
-    if (watch('password') !== watch('checkPassword') && watch('checkPassword')) {
-          setError('checkPassword', {
-              type: 'password-mismatch',
-              message: '비밀번호가 일치하지 않습니다'
-          })
-      } else { // 비밀번호 일치시 오류 제거
-          clearErrors('checkPassword');
-      }
-  }, [watch('password'), watch('checkPassword')])
-
-  //회원가입 버튼 활성화    
-  const [isActive, setIsActive] = useState(false);
-  const watchAll = Object.values(watch());
-  const navigate = useNavigate();
-
-  useEffect(() => {
-      if (watchAll.every((el) => el) && isCheckNumActive == true && isConfirmNumActive == true) {
-          setIsActive(true);
-      } else {
-          setIsActive(false);
-      }
-  }, [watchAll]);
-
-  const onValid = (data: FormValue) => {
-
-    if (!isCheckNumActive || !isConfirmNumActive) {
-      if(!isCheckNumActive)
-        alert("이메일 인증을 진행해 주세요.");
-      else
-        alert("인증번호를 확인해 주세요."); // 추가로 메일 인증 시간 카운트 기능 구현 하기
+    type FormValue = {
+      email: string;
+      checkNum: string,
+      password: string;
+      checkPassword: string;
+      companyName: string;
     }
-    else{
-      navigate('/login');
-    }
-  };
 
-  //값이 비정상적으로 입력되었을 때 실행되는 함수
-  const onError = (error: any) => {
-    console.log('onError called with error:', error);
+    const {
+      register,
+      handleSubmit,
+      watch,
+      setError,
+      resetField,
+      clearErrors,
+      getValues,
+      formState: { errors },
+    } = useForm<FormValue>({ mode: 'onBlur' })
 
-  };
+    //비밀번호 일치 확인(완료)
+    useEffect(() => {
 
-    // 인증번호 전송 버튼 클릭 시
-    const [isCheckNumActive, setIsCheckNumActive] = useState(false);
-    const onClickCheckBtn = (email: string) => {
-      alert(`입력하신 이메일로 인증번호가 전송되었습니다. \n이메일을 확인해 주세요.`);
-      setIsCheckNumActive(true);
-      console.log(email);
+      if (watch('password') !== watch('checkPassword') && watch('checkPassword')) {
+            setError('checkPassword', {
+                type: 'password-mismatch',
+                message: '비밀번호가 일치하지 않습니다'
+            })
+        } else { // 비밀번호 일치시 오류 제거
+            clearErrors('checkPassword');
+        }
+    }, [watch('password'), watch('checkPassword')])
 
-        // 이메일 전송 api
+    //회원가입 버튼 활성화    
+    const [isActive, setIsActive] = useState(false);
+    const watchAll = Object.values(watch());
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (watchAll.every((el) => el) && isCheckNumActive == true && isConfirmNumActive == true) {
+            setIsActive(true);
+        } else {
+            setIsActive(false);
+        }
+    }, [watchAll]);
+
+    // 회원가입
+    const onValid = (data: FormValue) => {
+
+      if (!isCheckNumActive || !isConfirmNumActive) {
+        if(!isCheckNumActive)
+          alert("이메일 인증을 진행해 주세요.");
+        else
+          alert("인증번호를 확인해 주세요.");
+      }
+      else{
+        // 회원가입 api
         axios({
-          url: `/signup/send/${email}`,
-          method: 'get',
+          url: `/signup/register`,
+          method: 'post',
+          data: {
+            "name": data.companyName,
+            "password": data.password,
+            "email": data.email
+          }
         })
+        
         .then((response) => {
           console.log(response.data);
+          navigate('/login');
           }) .catch((error) => {
           console.log('실패');
           console.error('AxiosError:', error);
         });
+      }
+    };
+
+    //값이 비정상적으로 입력되었을 때 실행되는 함수(완료)
+    const onError = (error: any) => {
+      console.log('onError called with error:', error);
+    };
+
+    // 인증번호 전송 버튼 클릭 시(완료)
+    const [isCheckNumActive, setIsCheckNumActive] = useState(false);
+    const onClickCheckBtn = (email: string) => {
+
+      if(email === ""){ // 이메일 입력 없을 시
+          alert("이메일을 입력해 주세요.");
+      }
+
+      else if(countdown != null){
+          alert("5분 뒤에 다시 인증번호 전송이 가능합니다.")
+      }
+
+      else{
+          alert(`입력하신 이메일로 인증번호가 전송되었습니다. \n5분 이내에 인증번호를 입력해 주세요.`);
+          setIsCheckNumActive(true); // 버튼 활성화
+          console.log(email);
+          setCountdown(300); // 5분 = 300초
+
+          // 이메일 전송 api
+          axios({
+            url: `/signup/send/${email}`,
+            method: 'get',
+          })
+          .then((response) => {
+            console.log(response.data);
+            }) .catch((error) => {
+            console.log('실패');
+            console.error('AxiosError:', error);
+          });
+      }
     }
 
     // 인증번호 확인 버튼 클릭 시
     const [isConfirmNumActive, setIsConfirmNumActive] = useState(false);
-    const onClickConfirmBtn = () => {
-      alert(`인증번호가 확인되었습니다.`);
-      setIsConfirmNumActive(true);
+    const onClickConfirmBtn = (email: string, code:string) => {
+
+        if(code === ""){
+          alert("인증번호를 입력해 주세요.");
+        }
+        else{
+          alert(`인증번호가 확인되었습니다.`);
+          setIsConfirmNumActive(true);
+
+          // 인증번호 확인 api
+          axios({
+            url: `/signup/verify/${email}?code=${code}`,
+            method: 'post',
+          })
+          .then((response) => {
+            console.log(response.data);
+            }) .catch((error) => {
+            console.log('실패');
+            console.error('AxiosError:', error);
+          });
+        }
     }
+
+    // 인증번호 5분 카운트다운(완성)
+    const [countdown, setCountdown] = useState<number | null>(null);
+    useEffect(() => {
+      let timer: NodeJS.Timeout;
+      if (countdown !== null && countdown > 0) {
+        timer = setInterval(() => {
+          setCountdown((prevCountdown) => (prevCountdown as number) - 1);
+        }, 1000);
+      } else if (countdown === 0) {
+        setCountdown(null);
+        //setIsCheckNumActive(false); // 인증번호 전송 버튼 비활성화
+      }
+  
+      return () => clearInterval(timer);
+    }, [countdown]);
+  
+    const formatTime = (time: number) => {
+      const minutes = Math.floor(time / 60);
+      const seconds = time % 60;
+      return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+    };
   
 
   return (
@@ -121,7 +190,6 @@ function SignUpForm() {
               id="email"
               type="text"
               placeholder="기업 이메일을 입력해 주세요"
-              // input의 기본 config를 작성
               {...register("email", {
                 required: "이메일은 필수 입력입니다.",
                 pattern: {
@@ -131,7 +199,9 @@ function SignUpForm() {
                 },
               })}
             />
-            <S.CheckNumBtn onClick={() => onClickCheckBtn(getValues('email'))} toggle={isCheckNumActive}>인증번호 전송</S.CheckNumBtn>
+            <S.CheckNumBtn onClick={() => onClickCheckBtn(getValues('email'))} toggle={isCheckNumActive}>
+              {countdown !== null ? formatTime(countdown) : '인증번호 전송'}
+            </S.CheckNumBtn>
           </S.InputWrap>
           <S.Error>{errors.email && <small role="alert">{errors.email.message}</small>}</S.Error>
         </S.SignUpWrap>
@@ -146,17 +216,11 @@ function SignUpForm() {
               id="checkNum"
               type="text"
               placeholder="인증번호를 입력해 주세요"
-              // input의 기본 config를 작성
               {...register("checkNum", {
                 required: "인증번호 입력은 필수 입력입니다.",
-                pattern: {
-                  value:
-                    /^[0-9]{6}$/i,
-                  message: "인증번호가 일치하지 않습니다.",
-                },
               })}
             />
-            <S.CheckNumBtn onClick={onClickConfirmBtn} toggle={isConfirmNumActive}>인증번호 확인</S.CheckNumBtn>
+            <S.CheckNumBtn onClick={() => onClickConfirmBtn(getValues('email'), getValues('checkNum'))} toggle={isConfirmNumActive}>인증번호 확인</S.CheckNumBtn>
           </S.InputWrap>
           <S.Error>{errors.checkNum && <small role="alert">{errors.checkNum.message}</small>}</S.Error>
         </S.SignUpWrap>

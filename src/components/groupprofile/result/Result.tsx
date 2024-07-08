@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import GroupProfileHeader from '../GroupProfileHeader';
+import GroupProfileHeader from '../header/GroupProfileHeader';
 import { useNavigate } from 'react-router-dom';
 import * as S from './Result.style';
 import Modal from './Modal'; // Modal 컴포넌트 임포트

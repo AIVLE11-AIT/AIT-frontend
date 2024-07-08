@@ -6,8 +6,7 @@ function GroupProfileHeader() {
   const navigate = useNavigate();
 
   function handleCreateButtonClick() {
-    console.log("Create button clicked");
-    navigate('/interviewpagemake');
+    navigate('/interview-make1');
   }
 
   function scrollToTop() {
