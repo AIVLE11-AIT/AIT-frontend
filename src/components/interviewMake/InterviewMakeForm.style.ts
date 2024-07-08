@@ -1,5 +1,5 @@
-import InputMask from "react-input-mask";
 import styled from "styled-components";
+import InputMask from "react-input-mask";
 
 // input form
 export const MakeInputForm = styled.form`
@@ -79,7 +79,6 @@ export const InputRadioGroup = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 20px;
-    border: 1px solid black;
 `;
 
 // 면접 유형 label
@@ -87,14 +86,42 @@ export const RadioButtonLabel = styled.div`
     font-weight: 600;
     font-size: 15px;
     color: #404146;
-    margin: 0px 3px 0px 30px;;
-    border: 1px solid black;
+    margin: 0px 3px 0px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0px 8px 0px;
 `;
 
+// radio 클릭 box
+export const InputRadioBox = styled.div` 
+    padding: 5px;
+`;
+
+// radio 클릭 btn
 export const InputRadio = styled.input` 
-    margin-bottom: 10px;
-    width: 15px;
-    height: 15px;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+
+    &:checked::before {
+        content: '';
+        display: block;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background-color: #0D0D0D;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 `;
 
 // 면접 기간 입력 박스 컨테이너

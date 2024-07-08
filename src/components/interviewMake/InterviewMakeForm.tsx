@@ -1,10 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import * as I from './InterviewMakeForm.style';
+import Select from "react-select";
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import axios from 'axios';
 
+const customStyles = {
+	control: (provided: any) => ({// 닫혀 있을 때 select box
+	  ...provided,
+	  margin: '15px auto 0px auto',
+	  width: '90%',
+	  height: '45px',
+	  border: '2px solid #D0D2D7',
+	  borderRadius: '11px',
+	  padding: '0px 0px 0px 5px',
+	  boxShadow: 'none',
+	  '&:hover': {
+		borderColor: '#0D0D0D',
+		cursor: 'pointer'
+	  },
+	}),
+	option: (provided: any, state: any) => ({// 열려 있을 때 select box
+	  ...provided,
+	  backgroundColor: state.isSelected ? '#696CEA' : 'white',
+	  color: state.isSelected ? 'white' : '#D0D2D7',
+	  '&:hover': {
+		backgroundColor: '#696CEA',
+		color: 'white',
+		cursor: 'pointer'
+	  },
+	}),
+};
+  
+ 
 function InterviewMakeForm() {
+	// 백엔드 연결 시 사용할 변수명 및 타입 정의
 	type FormValue = {
 		interviewTitle: string;
 		interviewType: string;
@@ -15,6 +46,9 @@ function InterviewMakeForm() {
 		voice: string;
 		action: string;
 	};
+
+	// select 변수 타입 정의
+	type ValueType = { value: string; label: string };
 
 	const {
 		register,
@@ -27,11 +61,11 @@ function InterviewMakeForm() {
 		formState: { errors },
 	} = useForm<FormValue>({ mode: 'onBlur' });
 
-	const [isActive, setIsActive] = useState(false);
-	const navigate = useNavigate();
+	const navigate = useNavigate(); // 페이지 이동 변수
 
 	// 빈칸 유효성 검사(버튼 활성화)
 	const watchAll = watch();
+	const [isActive, setIsActive] = useState(false); // 버튼 활성화 변수
 	useEffect(() => {
 		const allValuesFilled = Object.values(watchAll).every(value => value);
 
@@ -117,10 +151,29 @@ function InterviewMakeForm() {
 		}
 	};
 	
+	// 입력 시 색 변환 변수
 	const [interviewTitleColor, setInterviewTitleColor] = useState('#D0D2D7');
+
+	// select
+	const jobGroup = [
+		{ value: "Management", label: "관리" },
+		{ value: "SalesMarketing", label: "영업마케팅" },
+		{ value: "PublicService", label: "공공서비스" },
+		{ value: "R&D", label: "연구 개발(R&D)" },
+		{ value: "ICT", label: "IT/통신" },
+		{ value: "Design", label: "디자인" },
+		{ value: "ProductionManufacturing", label: "생산제조" }
+	]
+
+	const [selectedOption, setSelectedOption] = useState<ValueType | null>(jobGroup[0]);
+	const handleSelectChange = (newValue: ValueType | null, actionMeta: any) => {
+        setSelectedOption(newValue);
+    };
+
 	  
 	return (
 		<I.MakeInputForm onSubmit={handleSubmit(onValid)}>
+			{/*면접 이름 입력*/}
 			<I.MakeInputWrap>
 				<I.LabelContainer>
 					<I.LabelIcon/>
@@ -146,7 +199,8 @@ function InterviewMakeForm() {
 				/>
 				<I.Error>{errors.interviewTitle && <small role="alert">{errors.interviewTitle.message}</small>}</I.Error>
 			</I.MakeInputWrap>
-
+			
+			{/*면접 유형 선택(내국인, 외국인)*/}
 			<I.MakeInputWrap>
 				<I.LabelContainer>
 					<I.LabelIcon/>
@@ -155,22 +209,41 @@ function InterviewMakeForm() {
 				</I.LabelContainer>
 				<I.InputRadioGroup>
                     <I.RadioButtonLabel>내국인 채용</I.RadioButtonLabel>
-                    <I.InputRadio
-                        id="interviewType-domestic"
-                        type="radio"
-                        value="domestic"
-                        {...register("interviewType", { required: true })}
-                    />
+					<I.InputRadioBox>
+						<I.InputRadio
+							id="interviewType-domestic"
+							type="radio"
+							value="domestic"
+							{...register("interviewType", { required: true })}
+						/>
+					</I.InputRadioBox>
                     <I.RadioButtonLabel>외국인 채용</I.RadioButtonLabel>
-                    <I.InputRadio
-                        id="interviewType-foreign"
-                        type="radio"
-                        value="foreign"
-                        {...register("interviewType", { required: true })}
-                    />
+					<I.InputRadioBox>
+						<I.InputRadio
+							id="interviewType-foreign"
+							type="radio"
+							value="foreign"
+							{...register("interviewType", { required: true })}
+						/>
+					</I.InputRadioBox>
                 </I.InputRadioGroup>
 			</I.MakeInputWrap>
+			
+			{/*면접 직군 선택*/}
+			<I.MakeInputWrap>
+				<I.LabelContainer>
+					<I.LabelIcon/>
+					<I.Label>면접 직군*</I.Label>
+					<I.LabelText>면접 직군을 선택해 주세요.</I.LabelText>
+				</I.LabelContainer>
+				<Select options={jobGroup} //위에서 만든 배열을 select로 넣기
+					value={selectedOption}
+					onChange={handleSelectChange}
+					styles={customStyles}
+					/> 
+			</I.MakeInputWrap>
 
+			{/*면접 기간 입력*/}
 			<I.MakeInputWrap>
 				<I.LabelContainer>
 					<I.LabelIcon/>
@@ -244,6 +317,7 @@ function InterviewMakeForm() {
 							required: "파일을 선택하세요.",
 						})}
 						onChange={handleChange}
+						accept='.csv'
 					/>
 					<I.FileName hasFile={fileName}>
 						{fileName || "선택된 파일 없음"}

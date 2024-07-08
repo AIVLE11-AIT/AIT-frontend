@@ -39,6 +39,7 @@ function App() {
                   <Route path="/interview-mail-yet" element={<InterviewMailYet />} />
                   <Route path="/interview-mail" element={<InterviewMail />} />
                   <Route path="/interview-input-info" element={<InterviewMake />} />
+                  <Route path="/interview-input-question" element={<InterviewMake />} />
                 </Route>
                 {/*헤더가 필요 없는 페이지*/}
                 <Route path="/pretest" element={<PreTest />} />
