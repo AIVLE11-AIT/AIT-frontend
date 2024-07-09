@@ -5,10 +5,15 @@ import { lighten } from 'polished';
 // 메인 컨테이너
 export const MainContainer = styled.div`
     text-align:center;
-    margin-top: 60px;
+    margin: 60px auto 0px auto;
     font-weight: 600;
     font-size: 20px;
     line-height: 2.2;
+    border-radius: 30px;
+    border: 1px solid #D0D2D7;
+    background: #FFF;
+    width: 550px;
+    height: 434px;
 `;
 
 // 아이콘
@@ -24,14 +29,14 @@ export const BtnContainer = styled.div`
 // 버튼
 export const CompleteBtn = styled.div<{bg:string}>`
     display: flex;
-    width: 350px;
-    height: 48px;
+    width: 380px;
+    height: 45px;
     padding: 10px;
     justify-content: center;
     align-items: center;
     background-color: ${(props) => props.bg};
     color: white;
-    margin: 15px auto;
+    margin: 20px auto;
     border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
