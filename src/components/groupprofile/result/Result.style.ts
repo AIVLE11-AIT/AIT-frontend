@@ -5,16 +5,15 @@ export const Container = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  padding: 20px;
-  gap: 20px;
+  padding: 20px 30px;
 `;
 
 export const Box = styled.div`
   width: 400px;
-  height: 200px;
+  height: 205px;
   flex-shrink: 0;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 25px 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: left;
   border-radius: 26px;
   border: 2px solid var(--gray-08, #F1F1F2);
@@ -34,7 +33,6 @@ export const Title = styled.h2`
 export const Details = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
 `;
 
 export const DetailItem = styled.div`
@@ -58,40 +56,40 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  height: 30px;
 `;
 
 export const Button = styled.button`
-  padding: 5px 10px;
-  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 9px;
   border: none;
 `;
 
+// 삭제 버튼
 export const DeleteButton = styled(Button)`
-  background: #ccc;
-  color: black;
-  font-family: "Abhaya Libre SemiBold";
-  font-size: 14px;
-  font-style: normal;
+  background: #C8C8C8;
+  color: white;
+  font-size: 13px;
   font-weight: 600;
-  line-height: normal;
+  padding: 5px 12px 7px 13px;
+  border: 2px solid #C8C8C8;
 `;
 
+// 수정 버튼
 export const EditButton = styled(Button)`
-  background: #696cea;
-  color: white;
-  font-family: "Abhaya Libre SemiBold";
-  font-size: 14px;
-  font-style: normal;
+  background: white;
+  color: #404146;
+  border: 2px solid #404146;
+  font-size: 13px;
   font-weight: 600;
-  line-height: normal;
+  padding: 5px 12px 7px 13px;
 `;
 
 export const Icon = styled.div<{ size: number }>`
   width: ${({ size }) => size || 20}px;
   height: ${({ size }) => size || 20}px;
-  margin-right: 10px;
+  margin-right: 15px;
 
   img {
     width: 100%;

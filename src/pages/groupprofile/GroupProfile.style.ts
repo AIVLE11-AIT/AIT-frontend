@@ -4,7 +4,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  height: 100vh;
 `;
 
 export const Main = styled.main`
@@ -19,7 +18,7 @@ export const Main = styled.main`
 export const MessageWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 `;
 
 export const Icon = styled.div<{ size: number }>`
@@ -29,13 +28,12 @@ export const Icon = styled.div<{ size: number }>`
   }
 `;
 
+// 진행 중인 면접이 없습니다.
 export const Message = styled.div`
-  color: var(--gray-03, #757575);
-  font-family: "Abhaya Libre SemiBold";
-  font-size: 23px;
-  font-style: normal;
+  color: #404146;
+  font-size: 20px;
   font-weight: 600;
-  line-height: normal;
+  padding: 200px 10px;
 `;
 
 export const LineContainer = styled.div`
@@ -55,4 +53,10 @@ export const Line = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
   align-self: flex-start;
+`;
+
+export const ResultMain = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 20px 0px 40px;
 `;

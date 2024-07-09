@@ -118,8 +118,7 @@ function InterviewMakeForm() {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: sessionStorage.getItem('isLogin'),
-                },
-				
+                },				
 
             });
 
