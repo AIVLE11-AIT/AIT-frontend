@@ -32,7 +32,7 @@ function Home() {
                     >
                         <H.Title>
                             <H.TitlePart1>스마트한 </H.TitlePart1>
-                            <H.TitlePart2>AI 면접</H.TitlePart2>
+                            <H.TitlePart2>AI면접</H.TitlePart2>
                             <H.TitlePart1>의 시작</H.TitlePart1>
                         </H.Title>
                     </motion.div>
@@ -192,14 +192,14 @@ function Home() {
                     <H.FooterSectionsWrapper>
                         <H.FooterSection>
                             <H.FooterSubTitle>도입 문의</H.FooterSubTitle>
-                            <H.FooterText>Lead 이미지</H.FooterText>
-                            <H.FooterText>Tel. 010-1234-5678</H.FooterText>
-                            <H.FooterText>E-mail jpg@naver.com</H.FooterText>
+                            <H.FooterText>Lead | &nbsp;&nbsp;이미지</H.FooterText>
+                            <H.FooterText>Tel | &nbsp;&nbsp;010-1234-5678</H.FooterText>
+                            <H.FooterText>E-mail | &nbsp;&nbsp;jpg@naver.com</H.FooterText>
                         </H.FooterSection>
                         <H.FooterSection>
                             <H.FooterSubTitle>공식 계정</H.FooterSubTitle>
-                            <H.FooterText>Instagram @AIT.official</H.FooterText>
-                            <H.FooterText>E-mail AIT.operation@gmail.com</H.FooterText>
+                            <H.FooterText>Instagram | &nbsp;&nbsp;@AIT.official</H.FooterText>
+                            <H.FooterText>E-mai | &nbsp;&nbsp;AIT.operation@gmail.com</H.FooterText>
                         </H.FooterSection>
                     </H.FooterSectionsWrapper>
                 </H.Footer>

@@ -169,6 +169,7 @@ function SignUpForm() {
 
   return (
     <S.SignUpForm>
+      {/*
       <S.PageNumberBox>
         <img src={process.env.PUBLIC_URL + '/images/PageNumberIcon1.svg'}></img>
         <S.PageNumberText position="44.3%" color="#606060">1</S.PageNumberText>
@@ -176,7 +177,7 @@ function SignUpForm() {
         <img src={process.env.PUBLIC_URL + '/images/PageNumberIcon2.svg'}></img>
         <S.PageNumberText position="55.6%" color="white">2</S.PageNumberText>
       </S.PageNumberBox>
-
+      */}
       <S.SignUpTitle>Sign Up</S.SignUpTitle>
 
       <S.SignUpInputForm onSubmit={handleSubmit(onValid, onError)}>
