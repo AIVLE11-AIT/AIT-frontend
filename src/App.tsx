@@ -9,7 +9,7 @@ import Home from './pages/home/Home'
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import PreTest from './pages/preTest/PreTest';
-import Interview from './pages/interview/checkSetting/CheckSetting';
+import Interview from './pages/interview/interview/Intervew';
 import GroupProfile from './pages/groupProfile/GroupProfile';
 import Result from './components/groupProfile/result/Result';
 import InterviewMailComplete from './pages/interviewmail/InterviewMailComplete';
@@ -44,6 +44,7 @@ function App() {
                 </Route>
                 {/*헤더가 필요 없는 페이지*/}
                 <Route path="/pretest" element={<PreTest />} />
+                <Route path="/interview" element={<Interview />} />
                 {/*면접 페이지*/}
                 <Route element={<Interview />}>
                   <Route path="/interview-setting" element={<Step1/>}/>
