@@ -193,13 +193,13 @@ function Home() {
                         <H.FooterSection>
                             <H.FooterSubTitle>도입 문의</H.FooterSubTitle>
                             <H.FooterText>Lead 이미지</H.FooterText>
-                            <H.FooterText>Tel. 010-4567-1234</H.FooterText>
+                            <H.FooterText>Tel. 010-1234-5678</H.FooterText>
                             <H.FooterText>E-mail jpg@naver.com</H.FooterText>
                         </H.FooterSection>
                         <H.FooterSection>
                             <H.FooterSubTitle>공식 계정</H.FooterSubTitle>
-                            <H.FooterText>Instagram @ondot.official</H.FooterText>
-                            <H.FooterText>E-mail ondot.operation@gmail.com</H.FooterText>
+                            <H.FooterText>Instagram @AIT.official</H.FooterText>
+                            <H.FooterText>E-mail AIT.operation@gmail.com</H.FooterText>
                         </H.FooterSection>
                     </H.FooterSectionsWrapper>
                 </H.Footer>

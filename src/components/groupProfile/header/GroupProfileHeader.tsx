@@ -6,7 +6,7 @@ function GroupProfileHeader() {
   const navigate = useNavigate();
 
   function handleCreateButtonClick() {
-    navigate('/interview-make1');
+    navigate('/interview-make');
   }
 
   function scrollToTop() {
