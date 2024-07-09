@@ -18,6 +18,8 @@ import InterviewMail from './components/interviewmail/InterviewMail';
 import InterviewMake from './pages/interviewMake/InterviewMake';
 import InterviewMakeComplete from './pages/interviewMake/InterviewMakeComplete';
 import InterviewExit from './pages/interview/interview/InterviewExit';
+import CheckSetting from './pages/interview/checkSetting/CheckSetting';
+
 // components
 import Header from './components/header/Header';
 import Step1 from './components/interview/checkSetting/Step1';
@@ -48,7 +50,7 @@ function App() {
                 <Route path="/interview" element={<Interview />} />
                 <Route path="/interview-exit" element={<InterviewExit />} />
                 {/*면접 페이지*/}
-                <Route element={<Interview />}>
+                <Route element={<CheckSetting />}>
                   <Route path="/interview-setting" element={<Step1/>}/>
                 </Route>
           </Routes>
