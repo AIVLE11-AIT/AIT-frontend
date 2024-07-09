@@ -16,10 +16,11 @@ import InterviewMailComplete from './pages/interviewmail/InterviewMailComplete';
 import InterviewMailYet from './components/interviewmail/InterviewMailYet';
 import InterviewMail from './components/interviewmail/InterviewMail';
 import InterviewMake from './pages/interviewMake/InterviewMake';
+import InterviewMakeComplete from './pages/interviewMake/InterviewMakeComplete';
+import InterviewExit from './pages/interview/interview/InterviewExit';
 // components
 import Header from './components/header/Header';
 import Step1 from './components/interview/checkSetting/Step1';
-import InterviewMakeComplete from './pages/interviewMake/InterviewMakeComplete';
 //import Step2 from './components/interview/checkSetting/Step2';
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
                 {/*헤더가 필요 없는 페이지*/}
                 <Route path="/pretest" element={<PreTest />} />
                 <Route path="/interview" element={<Interview />} />
+                <Route path="/interview-exit" element={<InterviewExit />} />
                 {/*면접 페이지*/}
                 <Route element={<Interview />}>
                   <Route path="/interview-setting" element={<Step1/>}/>

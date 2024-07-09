@@ -48,7 +48,7 @@ export const TimerBar = styled.div`
     color: white;
 `;
 
-export const Timer30Bar = styled.div`
+export const Timer20Bar = styled.div`
     position: absolute;
     bottom: 0;
     left: 0;
@@ -57,7 +57,7 @@ export const Timer30Bar = styled.div`
     border-radius: 30px;
     
     background: linear-gradient(272deg, #696CEA 10%, rgba(160, 119, 255, 0.85) 100%);
-    animation: ${timerAnimation} 30s linear forwards; /* 60초 동안 애니메이션 실행 */
+    animation: ${timerAnimation} 20s linear forwards; /* 60초 동안 애니메이션 실행 */
 `;
 
 export const Timer60Bar = styled.div`
