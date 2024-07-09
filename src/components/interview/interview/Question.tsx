@@ -28,7 +28,7 @@ function Question() {
                 setTimeLeft(30); // 30초 타이머
                 setTimerStage('thinking');
             }, 3000);
-        } else if (currentQuestionIndex >= 1 && currentQuestionIndex < questions.length - 1) {
+        } else if (currentQuestionIndex >= 1 && currentQuestionIndex < questions.length) {
             if (timerStage === 'thinking') {
                 // 생각 시간 30초 타이머
                 timeout = setTimeout(() => {
@@ -40,7 +40,7 @@ function Question() {
                 // 답변 시간 60초 타이머
                 timeout = setTimeout(() => {
                     setCurrentQuestionIndex(currentQuestionIndex + 1);
-                    setTimerLabel('생각 시간');
+                    setTimerLabel('준비 시간');
                     setTimeLeft(30); // 다음 질문에 대한 초기 타이머 설정 (30초)
                     setTimerStage('thinking');
                 }, 60000);
@@ -62,6 +62,12 @@ function Question() {
 
     }, [currentQuestionIndex, timerStage, questions.length]);
 
+    // Format the timeLeft for display as "00"
+    const formattedTimeLeft = timeLeft.toLocaleString('en-US', {
+        minimumIntegerDigits: 2,
+        useGrouping: false
+    });
+
     return (
         <div>
             <Q.QContainer>
@@ -71,16 +77,16 @@ function Question() {
                 <Camera />
 
                 {/* 타이머 박스와 타이머 바 */}
-                <Q.TimerTitle>준비 시간</Q.TimerTitle>
-                <Q.Timer>{timeLeft}</Q.Timer>
-                <Q.TimerBox>
+                <Q.TimerTitle>{timerLabel}</Q.TimerTitle>
+                <Q.Timer>{formattedTimeLeft}</Q.Timer>
+                <Q.TimerBar>
                     {timerLabel === '준비 시간' && (
                         <Q.Timer30Bar style={{ animationDuration: '30s' }} />
                     )}
                     {timerLabel === '답변 시간' && (
                         <Q.Timer60Bar style={{ animationDuration: '60s' }} />
                     )}
-                </Q.TimerBox>
+                </Q.TimerBar>
             </Q.QContainer>
         </div>
     );

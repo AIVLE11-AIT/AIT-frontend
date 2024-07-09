@@ -43,8 +43,8 @@ const timerAnimation = keyframes`
   }
 `;
 
-
-export const TimerBox = styled.div`
+// 타이머 바
+export const TimerBar = styled.div`
     text-align: center;
     position: relative; /* 상대적 위치 설정 */
     margin: 20px auto 30px auto;
@@ -61,6 +61,7 @@ export const Timer30Bar = styled.div`
     left: 0;
     width: 0%;
     height: 5px; /* 타이머 바의 높이 설정 */
+    border-radius: 30px;
     
     background-color: #ffffff; /* 타이머 바의 색상 설정 */
     animation: ${timerAnimation} 30s linear forwards; /* 60초 동안 애니메이션 실행 */
@@ -72,6 +73,7 @@ export const Timer60Bar = styled.div`
     left: 0;
     width: 0%;
     height: 5px; /* 타이머 바의 높이 설정 */
+    border-radius: 30px;
     
     background-color: #ffffff; /* 타이머 바의 색상 설정 */
     animation: ${timerAnimation} 60s linear forwards; /* 60초 동안 애니메이션 실행 */
