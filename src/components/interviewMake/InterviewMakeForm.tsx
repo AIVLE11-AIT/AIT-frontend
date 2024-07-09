@@ -59,7 +59,7 @@ function InterviewMakeForm() {
 		getValues,
 		control,
 		formState: { errors },
-	} = useForm<FormValue>({ mode: 'onBlur' });
+	} = useForm<FormValue>({ mode: 'onSubmit' });
 
 	// 파일 이름 출력 함수(완성)
 	const [fileName, setFileName] = useState<string>("");
@@ -76,16 +76,6 @@ function InterviewMakeForm() {
 			setValue("fileUpload", null as any);
 		}
 	};
-
-	// 빈칸 유효성 검사(버튼 활성화)
-	const watchAll = watch();
-	const [isActive, setIsActive] = useState(false); // 버튼 활성화 변수
-	useEffect(() => {
-		const allValuesFilled = Object.values(watchAll).every(value => value);
-
-		if(fileName !== "" && allValuesFilled)
-			setIsActive(allValuesFilled);
-	}, [watchAll, fileName]);
 
 	// 완료 버튼 클릭 시
 	const navigate = useNavigate(); // 페이지 이동 변수
@@ -227,6 +217,7 @@ function InterviewMakeForm() {
 								id="interviewType-domestic"
 								type="radio"
 								value="kor"
+								checked
 								{...register("interviewType", { required: true })}
 							/>
 						</I.InputRadioBox>
@@ -520,7 +511,7 @@ function InterviewMakeForm() {
 			</I.MakeInputWrap>
 
 			<I.SubmitWrap>
-				<I.SignUpBtn type="submit" toggle={isActive}>완료</I.SignUpBtn>
+				<I.SignUpBtn type="submit">완료</I.SignUpBtn>
 			</I.SubmitWrap>
 		</I.MakeInputForm>
 		</div>

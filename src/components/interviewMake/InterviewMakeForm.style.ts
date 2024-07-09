@@ -305,16 +305,20 @@ export const SubmitWrap = styled.div`
 `;
 
 // 완료 버튼
-export const SignUpBtn = styled.button<{ toggle: boolean }>`
+export const SignUpBtn = styled.button`
     display: flex;
     width: 380px;
     height: 50px;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    background: ${(props) => (props.toggle ? `#696CEA` : `#D0D2D7`)};
+    background: #696CEA;
     border: none;
     color: white;
     font-size: 17px;
     font-weight: 600;
+
+    &:hover {
+        background: #8A8DEB; /* 연한 색으로 변경 */
+    }
 `;
