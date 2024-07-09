@@ -4,6 +4,7 @@ import Select from "react-select";
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import ExplainRatio from './ExplainRatio'; // ExplainRatio 컴포넌트 임포트
 
 const customStyles = {
 	control: (provided: any) => ({// 닫혀 있을 때 select box
@@ -171,7 +172,9 @@ function InterviewMakeForm() {
     const handleSelectChange = (newValue: OptionType | null) => {
         setSelectedOption(newValue); // 선택된 옵션 업데이트
     };
-	  
+
+	const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 변수
+
 	return (
 		<div>
 		<I.MakeInputForm onSubmit={handleSubmit(onValid)}>
@@ -430,7 +433,7 @@ function InterviewMakeForm() {
 						{(errors.answer || errors.voice || errors.action) && 
 						(<small role="alert">{errors.answer?.message || errors.voice?.message || errors.action?.message}</small>)}
 					</I.Error>
-					<I.ConfirmText>평가 비율에 대해 궁금해요!</I.ConfirmText>
+					<I.ConfirmText onClick={() => setIsModalOpen(true)}>평가 비율에 대해 궁금해요!</I.ConfirmText>
 				</I.MakeInputWrap>
 			</I.MakeWrapBox>
 
@@ -515,6 +518,7 @@ function InterviewMakeForm() {
 				<I.SignUpBtn type="submit">완료</I.SignUpBtn>
 			</I.SubmitWrap>
 		</I.MakeInputForm>
+		{isModalOpen && <ExplainRatio closeModal={() => setIsModalOpen(false)} />}
 		</div>
 	);
 }
