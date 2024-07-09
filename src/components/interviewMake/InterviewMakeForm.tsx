@@ -123,6 +123,7 @@ function InterviewMakeForm() {
             });
 
             console.log('Success:', response.data);
+			navigate('/interview-make-complete');
 
         } catch (error) {
             console.error('Failed:', error);

@@ -19,6 +19,7 @@ import InterviewMake from './pages/interviewMake/InterviewMake';
 // components
 import Header from './components/header/Header';
 import Step1 from './components/interview/checkSetting/Step1';
+import InterviewMakeComplete from './pages/interviewMake/InterviewMakeComplete';
 //import Step2 from './components/interview/checkSetting/Step2';
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
                   <Route path="/interview-mail-yet" element={<InterviewMailYet />} />
                   <Route path="/interview-mail" element={<InterviewMail />} />
                   <Route path="/interview-make" element={<InterviewMake />} />
+                  <Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
                 </Route>
                 {/*헤더가 필요 없는 페이지*/}
                 <Route path="/pretest" element={<PreTest />} />
