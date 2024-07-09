@@ -11,14 +11,20 @@ function Result() {
   const closeModal = () => setIsModalOpen(false);
   const navigate = useNavigate();
 
+  // 수정 버튼 클릭 시
   function handleCreateButtonClick() {
-    navigate('/interviewpagemake');
+    navigate('/interview-make');
+  }
+
+  // 면접 상세 페이지 이동
+  function onClickBox() {
+    navigate('/interview-mail-yet');
   }
 
   return (
     <>
       <S.Container>
-        <S.Box>
+        <S.Box onClick={onClickBox}>
           <S.Title>케이티 24년 하반기 공채 1차 AI면접</S.Title>
           <S.Details>
             <S.DetailItem>

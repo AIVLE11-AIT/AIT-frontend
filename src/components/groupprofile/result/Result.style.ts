@@ -18,6 +18,7 @@ export const Box = styled.div`
   border-radius: 26px;
   border: 2px solid var(--gray-08, #F1F1F2);
   background: var(--white, #FFF);
+  cursor: pointer;
 `;
 
 export const Title = styled.h2`
@@ -68,12 +69,12 @@ export const Button = styled.button`
 
 // 삭제 버튼
 export const DeleteButton = styled(Button)`
-  background: #C8C8C8;
+  background: #D0D2D7;
   color: white;
   font-size: 13px;
   font-weight: 600;
   padding: 5px 12px 7px 13px;
-  border: 2px solid #C8C8C8;
+  border: 2px solid #D0D2D7;
 `;
 
 // 수정 버튼
