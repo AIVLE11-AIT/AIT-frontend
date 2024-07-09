@@ -1,14 +1,31 @@
-import InputMask from "react-input-mask";
 import styled from "styled-components";
+import InputMask from "react-input-mask";
 
 // input form
 export const MakeInputForm = styled.form`
-    margin-top: 50px;
+    margin-top: 70px;
+    padding: 0px 100px;
+`;
+
+// 제목
+export const Title = styled.div`
+    font-weight: 600;
+    font-size: 30px;
+    margin-bottom: 50px;
+    margin-left: 70px;
+    margin-top: 30px;
+    padding-top: 40px;
+    border-top: 1px solid #D0D2D7;
+`;
+
+export const MakeWrapBox = styled.div`
+    display: flex;
 `;
 
 // Sign Up wrap
 export const MakeInputWrap = styled.div`
     margin-top: 20px;
+    padding: 5px 70px;
 `;
 
 // label box
@@ -74,12 +91,30 @@ export const InputBox = styled.input<InputProps>`
     }
 `;
 
+// 질문 입력 박스
+export const QInputBox = styled.textarea<InputProps>`
+    margin-left: 15px;
+    width: 1000px;
+    height: 70px;
+    border-radius: 11px;
+    border: 2px solid ${({ borderColor }) => borderColor || '#D0D2D7'};
+    background: #FFF;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 15px 18px;
+    margin-top: 15px;
+    color: ${({ inputColor }) => inputColor || '#0D0D0D'};
+
+    &::placeholder {
+        color: #D0D2D7; /* placeholder 색상 설정 */
+    }
+`;
+
 // 면접 유형 선택 박스 컨테이너
 export const InputRadioGroup = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 20px;
-    border: 1px solid black;
 `;
 
 // 면접 유형 label
@@ -87,14 +122,42 @@ export const RadioButtonLabel = styled.div`
     font-weight: 600;
     font-size: 15px;
     color: #404146;
-    margin: 0px 3px 0px 30px;;
-    border: 1px solid black;
+    margin: 0px 3px 0px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0px 8px 0px;
 `;
 
+// radio 클릭 box
+export const InputRadioBox = styled.div` 
+    padding: 5px;
+`;
+
+// radio 클릭 btn
 export const InputRadio = styled.input` 
-    margin-bottom: 10px;
-    width: 15px;
-    height: 15px;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+
+    &:checked::before {
+        content: '';
+        display: block;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background-color: #0D0D0D;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 `;
 
 // 면접 기간 입력 박스 컨테이너
@@ -118,7 +181,7 @@ interface InputMaskProps {
 
 // 면접 기간 입력 박스
 export const InputMaskBox = styled(InputMask)<InputMaskProps>`
-    margin-left: 7px;
+    margin-left: 15px;
     width: 350px;
     height: 45px;
     border-radius: 11px;
@@ -227,7 +290,6 @@ export const FileName = styled.div<{hasFile:string}>`
 // csv파일 다운로드, 면접 비율 정보 text
 export const ConfirmText = styled.div`
 	text-align: right;
-	padding: 0px 20px 0px 0px;
 	font-size: 12px;
 	font-weight: 600;
 	color: #696CEA;
@@ -239,20 +301,24 @@ export const SubmitWrap = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 40px;
+    margin: 100px auto;
 `;
 
 // 완료 버튼
-export const SignUpBtn = styled.button<{ toggle: boolean }>`
+export const SignUpBtn = styled.button`
     display: flex;
     width: 380px;
-    height: 40px;
+    height: 50px;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    background: ${(props) => (props.toggle ? `#696CEA` : `#D0D2D7`)};
+    background: #696CEA;
     border: none;
     color: white;
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 600;
+
+    &:hover {
+        background: #8A8DEB; /* 연한 색으로 변경 */
+    }
 `;
