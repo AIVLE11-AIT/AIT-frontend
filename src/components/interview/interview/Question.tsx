@@ -14,7 +14,7 @@ function Question() {
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [timeLeft, setTimeLeft] = useState(0); // 타이머 시간
-    const [timerLabel, setTimerLabel] = useState(''); // 타이머 레이블
+    const [timerLabel, setTimerLabel] = useState('대기 중'); // 타이머 레이블
     const [timerStage, setTimerStage] = useState(''); // 타이머 단계
 
     useEffect(() => {
@@ -27,7 +27,7 @@ function Question() {
                 setTimerLabel('준비 시간');
                 setTimeLeft(30); // 30초 타이머
                 setTimerStage('thinking');
-            }, 3000);
+            }, 4000);
         } else if (currentQuestionIndex >= 1 && currentQuestionIndex < questions.length) {
             if (timerStage === 'thinking') {
                 // 생각 시간 30초 타이머
@@ -46,7 +46,7 @@ function Question() {
                 }, 60000);
             }
         } else{ // 질문 끝나면 타이머 작동 x
-            setTimerLabel('');
+            setTimerLabel('대기 중');
         }
 
         // Countdown timer 설정
@@ -71,14 +71,9 @@ function Question() {
     return (
         <div>
             <Q.QContainer>
-                <Q.QBox>{questions[currentQuestionIndex]}</Q.QBox>
-
-                {/* 카메라 컴포넌트 */}
-                <Camera />
-
                 {/* 타이머 박스와 타이머 바 */}
                 <Q.TimerTitle>{timerLabel}</Q.TimerTitle>
-                <Q.Timer>{formattedTimeLeft}</Q.Timer>
+                <Q.Timer>00 : {formattedTimeLeft}</Q.Timer>
                 <Q.TimerBar>
                     {timerLabel === '준비 시간' && (
                         <Q.Timer30Bar style={{ animationDuration: '30s' }} />
@@ -87,6 +82,11 @@ function Question() {
                         <Q.Timer60Bar style={{ animationDuration: '60s' }} />
                     )}
                 </Q.TimerBar>
+
+                {/* 카메라 컴포넌트 */}
+                <Camera />
+
+                <Q.QBox>{questions[currentQuestionIndex]}</Q.QBox>
             </Q.QContainer>
         </div>
     );
