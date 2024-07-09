@@ -4,19 +4,18 @@ import styled from 'styled-components';
 export const Container = styled.div`
     display: flex;
     justify-content: center;
-    margin: 35px auto;
+    margin: 49px auto;
 `;
 
 // 로그인 box
 export const FormWrapper = styled.div`
-    width: 490px;
+    width: 530px;
     height: 570px;
     flex-shrink: 0;
     padding: 40px;
     border: 1px solid #D0D2D7;
     background: #FFF;
     border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 `;
 
@@ -75,7 +74,7 @@ export const InputWrap = styled.div`
 
 // 입력 박스
 export const InputBox = styled.input`
-    width: 360px;
+    width: 405px;
     height: 45px;
     border-radius: 11px;
     border: 1px solid #D0D2D7;
@@ -106,7 +105,7 @@ export const BtnContainer = styled.div`
 `;
 
 export const Button = styled.button<{ secondary?: boolean, disabled?: boolean}>`
-    width: 360px;
+    width: 405px;
     height: 45px;
     padding: 10px;
     margin: 10px 0;
@@ -132,7 +131,7 @@ export const FindPwContainer = styled.div`
     display: flex;
     align-items: center;
     cursor: pointer;
-    margin-left: 270px;
+    margin-left: 320px;
 `;
 
 // 비밀번호 찾기
