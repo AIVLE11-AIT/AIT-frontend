@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import GroupProfileHeader from '../header/GroupProfileHeader';
 import { useNavigate } from 'react-router-dom';
 import * as S from './Result.style';
 import Modal from './Modal';
+import axios from 'axios';
 
-function Result() {
+type ResultProps = {
+  index: number;
+};
+
+function Result({ index }: ResultProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [title, setTitle] = useState<string>('');
+  const [startDate, setStartDate] = useState<string>('');
+  const [endDate, setEndDate] = useState<string>('');
+  const [people, setPeople] = useState<number>(0);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -16,34 +25,65 @@ function Result() {
     navigate('/interview-make');
   }
 
-  // // 면접 상세 페이지 이동
-  // function onClickBox() {
-  //   navigate('/interview-mail-yet');
-  // }
+  useEffect(() => {
+    axios({
+      url: `/interviewGroup/${index + 1}`,
+      method: 'get',
+      headers: {
+        Authorization: sessionStorage.getItem('isLogin'),
+      },
+    })
+      .then((response) => {
+        setTitle(response.data.name);
+        // Format start date and end date here
+        setStartDate(formatDate(response.data.start_date));
+        setEndDate(formatDate(response.data.end_date));
+        setPeople(response.data.interviewers.length);
+      })
+      .catch((error) => {
+        console.log('실패');
+        console.error('AxiosError:', error);
+      });
+  }, [index]);
+
+  // Function to format date from 'YYYY-MM-DDTHH:mm:ss' to 'YYYY-MM-DD HH:mm:ss'
+  const formatDate = (dateString: string) => {
+    const [datePart, timePart] = dateString.split('T');
+    return `${datePart} ${timePart}`;
+  };
 
   return (
     <>
       <S.Container>
         <S.Box>
-          <S.Title>케이티 24년 하반기 공채 1차 AI면접</S.Title>
+          <S.Title>{title}</S.Title>
           <S.Details>
             <S.DetailItem>
               <S.Icon size={16}>
-                <img src={process.env.PUBLIC_URL + '/images/ResultIcon1.svg'} alt="Icon 1" />
+                <img
+                  src={process.env.PUBLIC_URL + '/images/ResultIcon1.svg'}
+                  alt="Icon 1"
+                />
               </S.Icon>
-              2024년 1월 1일 - 2024년 1월 3일
+              {startDate} - {endDate}
             </S.DetailItem>
             <S.DetailItem>
               <S.Icon size={16}>
-                <img src={process.env.PUBLIC_URL + '/images/ResultIcon2.svg'} alt="Icon 2" />
+                <img
+                  src={process.env.PUBLIC_URL + '/images/ResultIcon2.svg'}
+                  alt="Icon 2"
+                />
               </S.Icon>
-              30분
+              15분
             </S.DetailItem>
             <S.DetailItem>
               <S.Icon size={16}>
-                <img src={process.env.PUBLIC_URL + '/images/ResultIcon3.svg'} alt="Icon 3" />
+                <img
+                  src={process.env.PUBLIC_URL + '/images/ResultIcon3.svg'}
+                  alt="Icon 3"
+                />
               </S.Icon>
-              50명
+              {people}명
             </S.DetailItem>
           </S.Details>
           <S.ButtonWrapper>

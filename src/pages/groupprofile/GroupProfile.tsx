@@ -6,11 +6,10 @@ import Result from '../../components/groupProfile/result/Result';
 
 function GroupProfile() {
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([]); // 면접 리스트
 
   useEffect(() => {
 
-    const fetchData = () => {
       axios({
         url: '/interviewGroup/readAll',
         method: 'get',
@@ -19,15 +18,12 @@ function GroupProfile() {
         },				
       })
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         setData(response.data);
         }) .catch((error) => {
         console.log('실패');
         console.error('AxiosError:', error);
       }); 
-    };
-
-    fetchData(); // 함수 호출
   }, []);
 
   return (
@@ -57,9 +53,10 @@ function GroupProfile() {
           </G.Icon>
         </G.MessageWrapper>
       </G.Main>):(
+
         <G.ResultMain>
           {data.map((item, index) => (
-            <Result key={index} />
+            <Result index={index} />
           ))}
         </G.ResultMain>
       )}
