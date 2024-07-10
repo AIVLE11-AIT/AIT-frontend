@@ -25,11 +25,13 @@ function GroupProfileHeader() {
       </G.Header>
       <G.LineContainer>
         <G.Line />
-        <G.Icon size={15}>
+        <G.Icon size={7}>
           <img src={process.env.PUBLIC_URL + '/images/GroupProfileIcon1.svg'} alt="Icon" />
         </G.Icon>
       </G.LineContainer>
-      <G.FloatingButton id="top" onClick={scrollToTop} type="button">↑</G.FloatingButton>
+      <G.FloatingButton id="top" onClick={scrollToTop} type="button">
+        <G.TopIcon src={process.env.PUBLIC_URL + '/images/TopIcon.svg'}></G.TopIcon>
+      </G.FloatingButton>
     </div>
   );
 }

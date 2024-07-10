@@ -48,20 +48,16 @@ export const Title = styled.h1`
   margin-top: 70px;
   margin-bottom: 30px;
   color: #0D0D0D;
-  font-family: "Abhaya Libre SemiBold";
-  font-size: 70px;
-  font-style: normal;
+  font-size: 65px;
   font-weight: 600;
-  line-height: normal;
 `;
 
-export const SubTitle = styled.h1`
+export const SubTitle = styled.div`
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   color: #404146;
   text-align: center;
-  font-family: ABeeZee;
-  font-size: 24px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: normal; 
@@ -69,24 +65,19 @@ export const SubTitle = styled.h1`
 
 export const TitlePart1 = styled.span`
   color: #0D0D0D;
-  font-family: "Abhaya Libre SemiBold";
-  font-weight: 600;
+  font-weight: 700;
 `;
 
 export const TitlePart2 = styled.span`
   color: #696CEA;
-  font-family: "Abhaya Libre SemiBold";
-  font-weight: 400;
+  font-weight: 700;
 `;
 
 export const SectionSubTitle2Part1 = styled.span`
   color: #606060;
   text-align: center;
-  font-family: "Abhaya Libre SemiBold";
   font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+  font-weight: 700;
   color: #606060;
 `;
 
@@ -101,7 +92,6 @@ export const SectionSubTitle2Part2 = styled.span`
 
 export const SectionTitle1 = styled.h2`
   margin-bottom: 60px;
-  font-family: "Abhaya Libre SemiBold";
   font-size: 45px;
   font-style: normal;
   font-weight: 600;
@@ -112,20 +102,16 @@ export const SectionTitle1 = styled.h2`
 `;
 
 export const SectionTitlePart1 = styled.span`
-  font-family: "Abhaya Libre SemiBold";
   font-size: 45px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+  font-weight: 700;
   display: inline;
 `;
 
 export const SectionTitlePart2 = styled.span`
   color: #333;
-  font-family: "Abhaya Libre SemiBold";
   font-size: 45px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
   line-height: normal;
   background: linear-gradient(91deg, #C794E7 -16.62%, #696CEA 26.43%, #A077FF 68.84%, #484CF8 111.88%);
   background-clip: text;
@@ -134,11 +120,10 @@ export const SectionTitlePart2 = styled.span`
   display: inline;
 `;
 
-export const SectionTitle2 = styled.h2`
+export const SectionTitle2 = styled.div`
   margin-bottom: 50px;
   color: #333;
   text-align: center;
-  font-family: "Abhaya Libre SemiBold";
   font-size: 45px;
   font-style: normal;
   font-weight: 600;
@@ -152,7 +137,6 @@ export const SectionTitle2 = styled.h2`
 export const SectionSubTitle2 = styled.h2`
   color: #606060;
   text-align: center;
-  font-family: "Abhaya Libre SemiBold";
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
@@ -185,17 +169,15 @@ export const Button1 = styled.button`
   border: none;
   cursor: pointer;
   margin: 10px;
-  border-radius: 15px;
+  border-radius: 10px;
   background: #696CEA;
   width: 200px;
-  height: 60px;
+  height: 50px;
   padding: 10px;
   justify-content: center;
   align-items: center;
-  flex-shrink: 0;
   color: #FFF;
-  font-family: Spartan;
-  font-size: 22px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -203,7 +185,7 @@ export const Button1 = styled.button`
 
 export const Button2 = styled.button`
   width: 200px;
-  height: 60px;
+  height: 50px;
   padding: 10px;
   border: none;
   cursor: pointer;
@@ -212,8 +194,7 @@ export const Button2 = styled.button`
   border: 1px solid #D0D2D7;
   background: #FFF;
   color: #000;
-  font-family: Spartan;
-  font-size: 22px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -230,28 +211,27 @@ export const ResultContainer = styled.div`
 
 export const Features = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   padding: 40px 0;
+  margin-top: 40px;
 `;
 
 export const Feature = styled.div`
   width: 360px;
   height: 400px;
-  flex-shrink: 0;
-  padding: 20px;
+  padding: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: left;
-  margin: 10px;
-  border-radius: 35px;
+  margin: 10px 30px;
+  border-radius: 30px;
   border: 1px solid #D0D2D7;
   background: #FFF;
 `;
 
 export const FeatureTitle = styled.h3`
   margin-bottom: 20px;
-  color: #404146;
-  font-family: "Abhaya Libre SemiBold";
-  font-size: 38px;
+  color: black;
+  font-size: 35px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -259,17 +239,16 @@ export const FeatureTitle = styled.h3`
 
 export const FeatureDescription = styled.p`
   color: #5C5C5C;
-  font-family: "Abhaya Libre SemiBold";
-  font-size: 26px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  margin-left: 5px;
 `;
 
 export const MiniTitle = styled.footer`
   color: #696CEA;
   text-align: center;
-  font-family: "Abhaya Libre SemiBold";
   font-size: 22px;
   font-style: normal;
   font-weight: 600;
@@ -278,16 +257,14 @@ export const MiniTitle = styled.footer`
 `;
 
 export const Footer = styled.footer`
-  background-color: #333;
-  padding: 20px;
+  background-color: #272727;
+  padding: 10px 20px;
 `;
 
 export const FooterTitle = styled.h4`
-  margin-bottom: 80px;
-  margin-top: 80px;
+  margin: 50px auto;
   text-align: center;
-  font-family: "Abhaya Libre SemiBold";
-  font-size: 48px;
+  font-size: 40px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -312,35 +289,27 @@ export const FooterSectionsWrapper = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   margin: 0 auto; 
-  gap: 60px;
+  gap: 20px;
 `;
 
-export const FooterSubTitle = styled.h4`
+export const FooterSubTitle = styled.div`
   color: #FFF;
-  font-family: "Abhaya Libre SemiBold";
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  margin-bottom: 40px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
 `;
 
 export const FeatureImage = styled.div`
   text-align: right;
   margin-right: 0px;
-  margin-top: 160px;
-  font-size: 88px;
-  padding: 5px;
+  margin-top: 150px;
+  font-size: 70px;
 `;
 
 export const FooterText = styled.p`
-  margin: 5px 0;
+  margin: 7px 0;
   color: #FFF;
-  font-family: "Abhaya Libre SemiBold";
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+  font-size: 15px;
 `;
 
 export const Container = styled.div`
@@ -421,11 +390,10 @@ export const BoxHighlighted = styled.span`
 export const Description = styled.p`
   margin-top: 60px;
   color: #6D6D6D;
-  font-family: "Abhaya Libre SemiBold";
-  font-size: 24px;
+  font-size: 22px;
   font-style: normal;
   font-weight: 600;
-  line-height: 2.1;
+  line-height: 2;
   text-align: left;
 `;
 
@@ -435,13 +403,11 @@ export const CommentIcon = styled.div`
 `;
 
 export const CommentText = styled.p`
-  margin: 0;
   color: #404146;
-  font-family: "Abhaya Libre SemiBold";
   font-size: 22px;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.5;
+  margin-left: 10px;
 `;
 
 export const FeatureBox = styled.div`

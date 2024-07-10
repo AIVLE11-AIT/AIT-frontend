@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './Modal.style';
+import axios from 'axios';
 
 interface ModalProps {
   closeModal: () => void;
@@ -8,10 +9,20 @@ interface ModalProps {
 
 function Modal({ closeModal }: ModalProps) {
 
-  const navigate = useNavigate();
-
+  // 삭제 버튼 클릭 시
   function handleCreateButtonClick() {
-    navigate('/');
+    axios({
+      url: '/interviewGroup/${interviewGroup_id}/delete',
+      method: 'delete',
+      headers: {
+        Authorization: sessionStorage.getItem('isLogin'),
+      },
+    }).then((response) => {
+      console.log(response);
+        window.location.reload();
+    }).catch((error) => {
+      console.error('AxiosError:', error);
+    });
   }
 
   return (

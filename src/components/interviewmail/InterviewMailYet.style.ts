@@ -3,17 +3,21 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  height: 100vh;
-  background-color: #f9f9f9;
 `;
 
 export const Content = styled.div`
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #D0D2D7;
+  background: #FFF;
+  width: 1000px;
+  height: 580px;
+  margin-top: 30px;
+  margin-left: 30px;
 `;
 
 export const MessageContainer = styled.div`
@@ -22,34 +26,34 @@ export const MessageContainer = styled.div`
   align-items: center;
   text-align: center;
   max-width: 600px;
+  margin-top: -50px;
 `;
 
-export const Message = styled.h1`
-  margin-bottom: 10px;
-  color: var(--gray-01, #303030);
+// 메일 전송을 완료해 주세요
+export const Message = styled.div`
+  margin-bottom: 20px;
+  color: #404146;
   text-align: center;
-  font-family: "Abhaya Libre SemiBold";
-  font-size: 20px;
-  font-style: normal;
+  font-size: 25px;
   font-weight: 600;
-  line-height: normal;
 `;
 
 export const SubMessage = styled.p`
   margin-bottom: 20px;
   color: var(--gray-03, #757575);
   text-align: center;
-  font-family: "Abhaya Libre SemiBold";
   font-size: 15px;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.5;
 `;
 
+// 메일 아이콘
 export const ImageWrapper = styled.div`
-  margin-bottom: 30px;
+  margin-bottom: 50px;
+  font-size: 100px;
 `;
 
+// 메일 전송하기 버튼
 export const Button = styled.button`
   color: white;
   font-size: 16px;
@@ -63,7 +67,8 @@ export const Button = styled.button`
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
-  border-radius: 30px;
+  border-radius: 10px;
   background: #696CEA;
   margin-top: 30px;
+  font-weight: 600;
 `;
