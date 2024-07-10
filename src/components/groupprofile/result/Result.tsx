@@ -16,15 +16,15 @@ function Result() {
     navigate('/interview-make');
   }
 
-  // 면접 상세 페이지 이동
-  function onClickBox() {
-    navigate('/interview-mail-yet');
-  }
+  // // 면접 상세 페이지 이동
+  // function onClickBox() {
+  //   navigate('/interview-mail-yet');
+  // }
 
   return (
     <>
       <S.Container>
-        <S.Box onClick={onClickBox}>
+        <S.Box>
           <S.Title>케이티 24년 하반기 공채 1차 AI면접</S.Title>
           <S.Details>
             <S.DetailItem>

@@ -77,7 +77,7 @@ function Step2() {
         <S.AgreeContentBox>
           <S.Content size="15px" weight="600">[공정한 면접 진행을 위한 응시자 감독]</S.Content>
           <S.Content size="14px" weight="500">
-            공정한 면접 진행과 면접자의 AI분석을 위한 응시자 감동을 위해 컴퓨터 화면 기록, 웹캠으로 촬영된 영상을<br/>
+            공정한 면접 진행과 면접자의 AI분석을 위한 응시자 감독을 위해 컴퓨터 화면 기록, 웹캠으로 촬영된 영상을<br/>
             면접 종료 후 30일동안 보유 및 이용할 수 있습니다.
           </S.Content>
         </S.AgreeContentBox>

@@ -10,8 +10,8 @@ function InterviewMail() {
   // 전송하기 버튼 클릭 시
   const handleSendMail = () => {
       axios({
-        url: '/interviewGroup/${interviewGroup_id}/interviewer/sendEmail',
-        method: 'post',
+        url: `/interviewGroup/${3}/interviewer/sendEmail`,
+        method: 'get',
         headers:{
           Authorization: sessionStorage.getItem('isLogin'),
         }

@@ -6,7 +6,7 @@ import Result from '../../components/groupProfile/result/Result';
 
 function GroupProfile() {
 
-  const [data, setData] = useState([1, 2, 3, 4, 5]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
 
@@ -14,6 +14,9 @@ function GroupProfile() {
       axios({
         url: '/interviewGroup/readAll',
         method: 'get',
+        headers: {
+          Authorization: sessionStorage.getItem('isLogin'),
+        },				
       })
       .then((response) => {
         console.log(response);

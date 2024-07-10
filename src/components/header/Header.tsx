@@ -14,6 +14,7 @@ function Header() {
     // 로그인 버튼 클릭 시
     const onClickLoginBtn = () => {
         navigate('/login');
+        
     }
 	return (
 		<>
