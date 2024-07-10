@@ -12,12 +12,12 @@ export const Overlay = styled.div`
   align-items: center;
 `;
 
+// 박스
 export const Container = styled.div`
-  padding: 20px;
-  width: 951px;
-  height: 619px;
-  flex-shrink: 0;
-  border-radius: 15px;
+  padding: 50px 30px;
+  width: 950px;
+  height: 590px;
+  border-radius: 10px;
   border: 2px solid var(--gray-08, #F1F1F2);
   background: var(--gray-09, #FBFBFB);
 `;
@@ -26,84 +26,76 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 30px;
+  margin: 20px;
 `;
 
 export const Title = styled.div`
   margin: 0;
   color: var(--black, #000);
-  font-family: "Abhaya Libre SemiBold";
   font-size: 30px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
 `;
 
+// 설명 container
 export const Description = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 30px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 `;
 
+// 설명1 (에잇은~)
 export const DescriptionPart1 = styled.div`
   color: #272727;
-  font-family: "Abhaya Libre Medium";
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 `;
 
+// 설명 강조 부분(직접 평가 비율을 선택)
 export const DescriptionHighlight = styled.span`
-  color: #FF4A4A;
-  font-family: "Abhaya Libre Medium";
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  color: #696CEA;
+  font-size: 16px;
+  font-weight: 600;
 `;
 
+// 닫기 버튼
 export const CloseButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
-  color: #272727;
+  color: gray;
   text-align: right;
-  font-family: "Abhaya Libre Medium";
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  font-size: 15px;
+  font-weight: 600;
 `;
 
+// 개별 설명 박스 container
 export const FeaturesWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
-  text-align: left;
-  border-radius: 15px;
-  border: 2px solid var(--gray-08, #F1F1F2);
+  width: 835px;
+  margin: 10px auto 0px auto;
 `;
 
+// 개별 설명 박스
 export const Feature = styled.div`
   display: flex;
   flex-direction: column;
   align-items: left;
-  background: #FFE2E4;
-  border-radius: 10px;
+  background: #EDEDFB;
+  border-radius: 25px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 284px;
+  width: 270px;
   height: 328px;
-  flex-shrink: 0;
-  opacity: 0.7;
 `;
 
 export const FeatureTitle = styled.div`
   margin: 10px 0 20px;
-  color: #F22A36;
-  font-family: "Abhaya Libre SemiBold";
+  color: #404146;
   font-size: 25px;
   font-style: normal;
   font-weight: 600;
@@ -111,11 +103,7 @@ export const FeatureTitle = styled.div`
 `;
 
 export const FeatureDescription = styled.div`
-  margin: 0;
-  color: #FF7C84;
-  font-family: "Abhaya Libre SemiBold";
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+  color: #606060;
+  font-size: 15px;
+  font-weight: 500;
 `;

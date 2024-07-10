@@ -2,31 +2,10 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
 @font-face {
-    font-family: 'Spartan';
-    src: url('https://fonts.cdnfonts.com/css/spartan');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Spartan';
-    src: url('https://fonts.cdnfonts.com/css/spartan');
-    font-weight: 500;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Spartan';
-    src: url('https://fonts.cdnfonts.com/css/spartan');
-    font-weight: 600;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Spartan';
-    src: url('https://fonts.cdnfonts.com/css/spartan');
-    font-weight: 700;
-    font-style: normal;
+     font-family: 'S-CoreDream-3Light';
+     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
 }
 
   html, body, div, span, applet, object, iframe,
@@ -48,6 +27,7 @@ time, mark, audio, video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  font-family: 'S-CoreDream-3Light';
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -63,7 +43,7 @@ html,body {
   max-width: 100%;
   height: 100%;
   overflow-x: hidden;
-  font-family: 'Pretendard-Regular';
+  font-family: 'S-CoreDream-3Light';
   position: relative;
 }
 
@@ -97,10 +77,12 @@ a {
 
 button {
   cursor: pointer;
+  font-family: 'S-CoreDream-3Light';
 }
 
 input {
   outline: none;
+  font-family: 'S-CoreDream-3Light';
 }
 
 `;

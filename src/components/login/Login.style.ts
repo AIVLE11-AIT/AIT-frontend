@@ -4,13 +4,13 @@ import styled from 'styled-components';
 export const Container = styled.div`
     display: flex;
     justify-content: center;
-    margin: 49px auto;
+    margin: 45px auto;
 `;
 
 // 로그인 box
 export const FormWrapper = styled.div`
-    width: 530px;
-    height: 570px;
+    width: 490px;
+    height: 550px;
     flex-shrink: 0;
     padding: 40px;
     border: 1px solid #D0D2D7;
@@ -26,7 +26,7 @@ export const Title = styled.div`
     font-size: 35px;
     font-weight: 600;
     text-align: left;
-    margin: 30px 0px 0px 20px;
+    margin: 20px 0px 0px 20px;
 `;  
 
 // 로그인 폼
@@ -74,7 +74,7 @@ export const InputWrap = styled.div`
 
 // 입력 박스
 export const InputBox = styled.input`
-    width: 405px;
+    width: 370px;
     height: 45px;
     border-radius: 11px;
     border: 1px solid #D0D2D7;
@@ -101,11 +101,11 @@ export const Error = styled.div`
 
 // 버튼 컨테이너
 export const BtnContainer = styled.div`
-    margin-top: 20px;
+    margin-top: 15px;
 `;
 
 export const Button = styled.button<{ secondary?: boolean, disabled?: boolean}>`
-    width: 405px;
+    width: 370px;
     height: 45px;
     padding: 10px;
     margin: 10px 0;
@@ -127,11 +127,11 @@ export const Button = styled.button<{ secondary?: boolean, disabled?: boolean}>`
 
 // 비밀번호 찾기 컨테이너
 export const FindPwContainer = styled.div`
-    margin-top: 10px;
+    margin-top: 12px;
     display: flex;
     align-items: center;
     cursor: pointer;
-    margin-left: 320px;
+    margin-right: 18px;
 `;
 
 // 비밀번호 찾기
@@ -141,6 +141,7 @@ export const Link = styled.div`
     color: #404146;
     font-size: 14px;
     font-weight: 600;
+    margin-left: auto;
 `;
 
 // 비밀번호 찾기 화살표 아이콘

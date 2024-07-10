@@ -17,7 +17,7 @@ export const ModalContainer = styled.div`
   position: relative;
   background: white;
   border-radius: 10px;
-  padding: 20px;
+  padding: 40px;
   max-width: 600px;
   width: 100%;
   border-radius: 10px;
@@ -30,62 +30,52 @@ export const ModalContainer = styled.div`
 export const ModalTitle = styled.h2`
   margin-bottom: 10px;
   color: var(--black, #000);
-  text-align: center;
-  font-family: "Abhaya Libre SemiBold";
+  text-align: left;
   font-size: 22px;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
-  white-space: pre-line;
+  line-height: 1.4;
 `;
 
 export const ModalContent = styled.p`
-  margin-top: 40px;
-  margin-bottom: 20px;
-  white-space: pre-line;
-  color: var(--gray-02, #606060);
-  font-family: "Abhaya Libre SemiBold";
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: gray;
   font-size: 16px;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
-  text-align: center;
+  text-align: left;
+  line-height: 1.4;
 `;
 
 export const ButtonWrapper = styled.div`
   position: absolute;
-  bottom: 20px;
-  right: 20px; 
+  bottom: 25px;
+  right: 30px; 
   display: flex;
-  gap: 10px;
+  gap: 15px;
 `;
 
 export const CancelButton = styled.button`
-  padding: 5px 10px;
+  background: #D0D2D7;
+  color: white;
   font-size: 14px;
-  cursor: pointer;
-  border: none;
-  border-radius: 9px;
-  background: #ccc;
-  color: black;
-  font-family: "Abhaya Libre SemiBold";
-  font-size: 14px;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
-  }
+  padding: 6px 20px 8px 20px;
+  border: 2px solid #D0D2D7;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const DeleteButton = styled.button`
-  padding: 5px 10px;
-  cursor: pointer;
-  border: none;
-  border-radius: 9px;
-  background: #696cea;
+  background: #404146;
   color: white;
-  font-family: "Abhaya Libre SemiBold";
   font-size: 14px;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  padding: 6px 20px 8px 20px;
+  border: 2px solid #404146;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

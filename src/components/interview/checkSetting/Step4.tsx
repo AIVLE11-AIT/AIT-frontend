@@ -1,7 +1,13 @@
 import React from 'react'
 import * as S from  './Step4.style';
+import { useNavigate } from 'react-router-dom';
 
 function Step4() {
+
+  const navigate = useNavigate();
+  const onClickStartBtn = () => {
+    navigate('/interview');
+  }
   return (
     <div>
         <S.StepHeader>이미지님!<br/>면접을 위한 환경 설정이 완료되었습니다.</S.StepHeader>
@@ -20,7 +26,7 @@ function Step4() {
           </S.ContentContainer>
 
           <S.MainText>면접을 시작하지 않으려면 지금 창을 종료해 주세요!</S.MainText>
-          <S.StartBtn>시작</S.StartBtn>
+          <S.StartBtn onClick={onClickStartBtn}>시작</S.StartBtn>
         </S.StepMain>
     </div>
   )

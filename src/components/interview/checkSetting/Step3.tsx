@@ -33,7 +33,7 @@ function Step3() {
             }
 
             const recorder = new MediaRecorder(stream, {
-                mimeType: 'video/webm',
+                mimeType: 'video/webm;codecs=vp9,opus', // 오디오 포함하는 MIME 타입 설정
             });
 
             recorder.ondataavailable = (e) => {

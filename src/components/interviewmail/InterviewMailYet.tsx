@@ -15,9 +15,7 @@ function InterviewMailYet() {
       <InterviewMailHeader />
       <I.Content>
         <I.MessageContainer>
-          <I.ImageWrapper>
-            <img src="/images/InterviewMailCompleteIcon1.svg" />
-          </I.ImageWrapper>
+          <I.ImageWrapper>📨</I.ImageWrapper>
           <I.Message>메일 전송을 완료해 주세요!</I.Message>
           <I.SubMessage>
             지원자들의 면접 결과를 보려면 지원자들이 면접을 완료해야 합니다.<br />

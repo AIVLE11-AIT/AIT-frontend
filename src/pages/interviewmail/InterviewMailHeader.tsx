@@ -4,15 +4,7 @@ import * as I from './InterviewMailHeader.style';
 function InterviewMailHeader() {
   return (
     <I.HeaderContainer>
-      <I.ButtonContainer>
-        <I.HeaderButton>삭제</I.HeaderButton>
-        <I.HeaderButton>수정</I.HeaderButton>
-      </I.ButtonContainer>
-      <I.Title>
-        KT 24년 하반기 공채 
-        <br/>
-        1차 AI면접</I.Title>
-      <I.Subtitle>공지사항</I.Subtitle>
+      <I.Title>KT 24년 하반기 공채 1차 AI면접</I.Title>
       <I.DetailsContainer>
         <I.DetailItem>
           <I.Icon size={16}>
