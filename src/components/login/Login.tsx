@@ -36,10 +36,11 @@ function Login() {
       })
       
       .then((response) => {
-        console.log(response);
         setEmail(data.email);
         sessionStorage.setItem('isLogin', response.headers.authorization);
-        }) .catch((error) => {
+        navigate('/group-profile');
+        
+      }) .catch((error) => {
         console.log('실패');
         console.error('AxiosError:', error);
       });
