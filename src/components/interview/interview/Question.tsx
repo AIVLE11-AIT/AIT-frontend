@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import * as Q from './Question.style';
 import Camera from './Camera';
 import { useNavigate } from 'react-router-dom';
@@ -15,12 +15,13 @@ function Question() {
     const [timerLabel, setTimerLabel] = useState('대기 중'); // 타이머 레이블
     const [timerStage, setTimerStage] = useState(''); // 타이머 단계
     const navigate = useNavigate();
+    const cameraRef = useRef<{ startRecording: () => void; stopRecording: () => void } | null>(null); // 카메라 ref 추가
 
     useEffect(() => {
         let timeout: NodeJS.Timeout;
 
         if (currentQuestionIndex === 0) {
-            // 첫 번째 질문에서 4초 후에 다음 질문으로 넘어감 (adjusted to 4000ms)
+            // 첫 번째 질문에서 4초 후에 다음 질문으로 넘어감
             timeout = setTimeout(() => {
                 setCurrentQuestionIndex(1);
                 setTimerLabel('준비 시간');
@@ -32,12 +33,20 @@ function Question() {
                 // 생각 시간 20초 타이머
                 timeout = setTimeout(() => {
                     setTimerLabel('답변 시간');
-                    setTimeLeft(60); // 60초 타이머
+                    setTimeLeft(61); // 60초 타이머
                     setTimerStage('answering');
+                    // 녹화 시작
+                    if (cameraRef.current) {
+                        cameraRef.current.startRecording();
+                    }
                 }, 20000);
             } else if (timerStage === 'answering') {
                 // 답변 시간 60초 타이머
                 timeout = setTimeout(() => {
+                    // 녹화 중단
+                    if (cameraRef.current) {
+                        cameraRef.current.stopRecording();
+                    }
                     setCurrentQuestionIndex(currentQuestionIndex + 1);
                     if (currentQuestionIndex === questions.length - 1) {
                         setTimerLabel('대기 중');
@@ -50,7 +59,7 @@ function Question() {
                         setTimeLeft(20); // 다음 질문에 대한 초기 타이머 설정 (20초)
                         setTimerStage('thinking');
                     }
-                }, 60000);
+                }, 61000);
             }
         }
 
@@ -84,12 +93,12 @@ function Question() {
                         <Q.Timer20Bar style={{ animationDuration: '20s' }} />
                     )}
                     {timerLabel === '답변 시간' && (
-                        <Q.Timer60Bar style={{ animationDuration: '60s' }} />
+                        <Q.Timer60Bar style={{ animationDuration: '61s' }} />
                     )}
                 </Q.TimerBar>
 
                 {/* 카메라 컴포넌트 */}
-                <Camera />
+                <Camera ref={cameraRef} />
 
                 <Q.QBox>{questions[currentQuestionIndex]}</Q.QBox>
             </Q.QContainer>
