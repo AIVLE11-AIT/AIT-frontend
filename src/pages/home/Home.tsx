@@ -63,7 +63,7 @@ function Home() {
                             <H.SectionTitle1>
                                 <H.SectionTitlePart1>이런 고민을 하고 있다면,<br /></H.SectionTitlePart1>
                                 <H.SectionTitlePart2>AIT</H.SectionTitlePart2>
-                                <H.SectionTitlePart1>을 시작하세요!</H.SectionTitlePart1>
+                                <H.SectionTitlePart1>를 시작하세요!</H.SectionTitlePart1>
                             </H.SectionTitle1>
                             <H.Description>
                                 우리 회사 맞춤형 인재를 뽑고 싶다.

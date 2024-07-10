@@ -16,6 +16,9 @@ import InterviewMailComplete from './pages/interviewmail/InterviewMailComplete';
 import InterviewMailYet from './components/interviewmail/InterviewMailYet';
 import InterviewMail from './components/interviewmail/InterviewMail';
 import InterviewMake from './pages/interviewMake/InterviewMake';
+import ForgotPassword from './components/forgotpassword/ForgotPassword';
+import ForgotPasswordSent from './components/forgotpassword/ForgotPasswordSent';
+
 // components
 import Header from './components/header/Header';
 import Step1 from './components/interview/checkSetting/Step1';
@@ -41,6 +44,8 @@ function App() {
                   <Route path="/interview-mail" element={<InterviewMail />} />
                   <Route path="/interview-make" element={<InterviewMake />} />
                   <Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
+                  <Route path="/forgot-password" element={<ForgotPassword />} />
+                  <Route path="/forgot-password-sent" element={<ForgotPasswordSent />} />
                 </Route>
                 {/*헤더가 필요 없는 페이지*/}
                 <Route path="/pretest" element={<PreTest />} />
