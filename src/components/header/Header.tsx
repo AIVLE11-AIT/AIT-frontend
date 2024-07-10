@@ -11,10 +11,15 @@ function Header() {
         navigate('/');
     }
 
+    // 로그아웃 버튼 클릭 시
+    const onClickLogoutBtn = () => {
+        sessionStorage.removeItem('isLogin');
+        navigate('/');
+    }
+
     // 로그인 버튼 클릭 시
     const onClickLoginBtn = () => {
         navigate('/login');
-        
     }
 	return (
 		<>
@@ -25,9 +30,12 @@ function Header() {
                 <H.HeaderWrap>
                     <H.HeaderContent>서비스 소개</H.HeaderContent>
                     <H.HeaderContent>문의하기</H.HeaderContent>
+                    {sessionStorage.getItem('isLogin') === null ? (
                     <H.LoginBtn onClick={onClickLoginBtn}>
                         <H.LoginBtnText>Login</H.LoginBtnText>
-                    </H.LoginBtn>
+                    </H.LoginBtn>):(<H.LoginBtn onClick={onClickLogoutBtn}>
+                        <H.LoginBtnText>Logout</H.LoginBtnText>
+                    </H.LoginBtn>)}
                 </H.HeaderWrap>
             </H.HeaderDiv>
 

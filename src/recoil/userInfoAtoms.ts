@@ -5,9 +5,3 @@ export const EmailAtom = atom<string>({
     key: 'EmailAtom',
     default: '',
   });
-
-  // 토큰
-export const TokenAtom = atom<string>({
-    key: 'TokenAtom',
-    default: '',
-  });
