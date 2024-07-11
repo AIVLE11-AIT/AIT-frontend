@@ -54,7 +54,8 @@ function Result({ index }: ResultProps) {
 
     // 메일 전송했는지 유무 api연결 해야 함
     function onClickBox() {
-      navigate(`/interview-mail-yet/${index+1}`);
+      //navigate(`/interview-mail-yet/${index+1}`);
+      navigate(`/interviewer-list/${index+1}`);
     }
 
     // 클릭 이벤트 버블링 막기

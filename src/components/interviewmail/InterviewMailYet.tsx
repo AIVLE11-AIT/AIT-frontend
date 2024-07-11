@@ -1,7 +1,7 @@
 import React from 'react';
 import * as I from './InterviewMailYet.style';
 import { useNavigate, useParams } from 'react-router-dom';
-import InterviewMailHeader from '../../pages/interviewmail/InterviewMailHeader';
+import InterviewMailHeader from '../side/InterviewMailHeader';
 
 function InterviewMailYet() {
   

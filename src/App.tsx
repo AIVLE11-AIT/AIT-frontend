@@ -25,6 +25,7 @@ import ForgotPasswordSent from './components/forgotpassword/ForgotPasswordSent';
 import InterviewMakeComplete from './pages/interviewMake/InterviewMakeComplete';
 import ForgotPassword from './components/forgotpassword/ForgotPassword';
 import ChangePw from './pages/changePw/ChangePw';
+import InterviewerList from './pages/interviewerList/InterviewerList';
 //import Step2 from './components/interview/checkSetting/Step2';
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
                   <Route path="/interview-mail-complete" element={<InterviewMailComplete />} />
                   <Route path="/interview-mail-yet/:index" element={<InterviewMailYet />} />
                   <Route path="/interview-mail/:index" element={<InterviewMail />} />
+                  <Route path="/interviewer-list/:index" element={<InterviewerList />} />
                   <Route path="/interview-make" element={<InterviewMake />} />
                   <Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
                   <Route path="/forgot-password" element={<ForgotPassword />} />

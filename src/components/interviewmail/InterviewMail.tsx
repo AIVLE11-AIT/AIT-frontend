@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as I from './InterviewMail.style';
-import InterviewMailHeader from '../../pages/interviewmail/InterviewMailHeader';
+import InterviewMailHeader from '../side/InterviewMailHeader';
 import axios from 'axios';
 
 function InterviewMail() {
