@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as I from './InterviewMailHeader.style';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 function InterviewMailHeader() {
 
@@ -14,26 +15,29 @@ function InterviewMailHeader() {
       const [datePart, timePart] = dateString.split('T');
       return `${datePart} ${timePart}`;
     };
+    
+    // useParams 훅을 사용하여 URL 경로 매개변수(index)를 가져옴
+    let { index } = useParams();
 
-  useEffect(() => {
-    axios({
-      url: `/interviewGroup/${1}`,
-      method: 'get',
-      headers: {
-        Authorization: sessionStorage.getItem('isLogin'),
-      },
-    })
-      .then((response) => {
-        setTitle(response.data.name);
-        setStartDate(formatDate(response.data.start_date));
-        setEndDate(formatDate(response.data.end_date));
-        setPeople(response.data.interviewers.length);
+    useEffect(() => {
+      axios({
+        url: `/interviewGroup/${index}`,
+        method: 'get',
+        headers: {
+          Authorization: sessionStorage.getItem('isLogin'),
+        },
       })
-      .catch((error) => {
-        console.log('실패');
-        console.error('AxiosError:', error);
-      });
-  }, [1]);
+        .then((response) => {
+          setTitle(response.data.name);
+          setStartDate(formatDate(response.data.start_date));
+          setEndDate(formatDate(response.data.end_date));
+          setPeople(response.data.interviewers.length);
+        })
+        .catch((error) => {
+          console.log('실패');
+          console.error('AxiosError:', error);
+        });
+    }, [index]);
 
   return (
     <I.HeaderContainer>

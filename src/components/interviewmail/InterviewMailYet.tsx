@@ -1,13 +1,17 @@
 import React from 'react';
 import * as I from './InterviewMailYet.style';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import InterviewMailHeader from '../../pages/interviewmail/InterviewMailHeader';
 
 function InterviewMailYet() {
   
   const navigate = useNavigate();
+
+  // useParams 훅을 사용하여 URL 경로 매개변수(index)를 가져옴
+  let { index } = useParams();
+  
   function handleButtonClick() {
-    navigate('/interview-mail');
+    navigate(`/interview-mail/${index}`);
   };
 
   return (

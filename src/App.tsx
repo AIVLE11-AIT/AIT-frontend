@@ -42,7 +42,7 @@ function App() {
                   <Route path="/group-profile" element={<GroupProfile />} />
                   <Route path="/interview-mail-complete" element={<InterviewMailComplete />} />
                   <Route path="/interview-mail-yet/:index" element={<InterviewMailYet />} />
-                  <Route path="/interview-mail" element={<InterviewMail />} />
+                  <Route path="/interview-mail/:index" element={<InterviewMail />} />
                   <Route path="/interview-make" element={<InterviewMake />} />
                   <Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
                   <Route path="/forgot-password" element={<ForgotPassword />} />

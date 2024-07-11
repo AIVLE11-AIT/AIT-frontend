@@ -1,16 +1,18 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as I from './InterviewMail.style';
 import InterviewMailHeader from '../../pages/interviewmail/InterviewMailHeader';
 import axios from 'axios';
 
 function InterviewMail() {
   const navigate = useNavigate();
+  // useParams 훅을 사용하여 URL 경로 매개변수(index)를 가져옴
+  let { index } = useParams();
 
   // 전송하기 버튼 클릭 시
   const handleSendMail = () => {
       axios({
-        url: `/interviewGroup/${3}/interviewer/sendEmail`,
+        url: `/interviewGroup/${index}/interviewer/sendEmail`,
         method: 'get',
         headers:{
           Authorization: sessionStorage.getItem('isLogin'),

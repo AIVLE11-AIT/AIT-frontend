@@ -28,6 +28,7 @@ export const HeaderContainer = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: 20px;
+  margin-left: 12px;
   background-color: transparent;
 `;
 
