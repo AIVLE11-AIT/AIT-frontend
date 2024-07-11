@@ -18,7 +18,7 @@ function GroupProfile() {
         },				
       })
       .then((response) => {
-        //console.log(response);
+        console.log(response);
         setData(response.data);
         }) .catch((error) => {
         console.log('실패');

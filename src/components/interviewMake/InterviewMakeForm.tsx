@@ -78,6 +78,7 @@ function InterviewMakeForm() {
 
 	const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0];
+		console.log(file);
 		if (file) {
 		  try {
 			const jsonData = await parseCSVToJSON(file);
@@ -109,15 +110,11 @@ function InterviewMakeForm() {
 					const isValidData = results.data.every((row: any) => {
 						const isValidEmail = emailRegex.test(row.email); // 이메일 유효성 검사
 						return (
-							typeof row.id === 'string' &&
 							typeof row.name === 'string' &&
 							typeof row.email === 'string' &&
 							isValidEmail &&  // 이메일 형식 유효성 검사
 							typeof row.birth === 'string' &&
-							typeof row.image_path === 'string' &&
-							typeof row.cover_letter === 'string' &&
-							typeof row.interview_group_id === 'string' &&
-							typeof row.interview_group === 'string'
+							typeof row.cover_letter === 'string'
 						);
 					});
 
@@ -142,10 +139,11 @@ function InterviewMakeForm() {
 		});
 	};
 
+
 	// 완료 버튼 클릭 시
 	const navigate = useNavigate(); // 페이지 이동 변수
 	const onValid = async (data: FormValue) => {
-		console.log("완료");
+		console.log(jsonFile);
 
         try {
 			if (!jsonFile) {
