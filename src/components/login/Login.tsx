@@ -36,11 +36,13 @@ function Login() {
       })
       
       .then((response) => {
+        console.log(response.data);
         setEmail(data.email);
         sessionStorage.setItem('isLogin', response.headers.authorization);
         navigate('/group-profile');
         
       }) .catch((error) => {
+        alert("이메일 또는 비밀번호를 확인해 주세요.");
         console.log('실패');
         console.error('AxiosError:', error);
       });
@@ -78,8 +80,7 @@ function Login() {
       emailValue.length > 0 &&
       passwordValue.length >= 8 &&
       !errors.email &&
-      !errors.password &&
-      /[!@#$%^&*(),.?":{}|<>]/.test(passwordValue)
+      !errors.password
     ) {
       setIsActive(true);
     } else {
@@ -128,8 +129,8 @@ function Login() {
                 {...register('password', {
                   required: '비밀번호는 필수 입력입니다.',
                   pattern: {
-                    value: /^(?=.*[!@#$%^&*(),.?":{}|<>])[a-zA-Z0-9_@?!]{8,20}$/i,
-                    message: '비밀번호는 8~20자 영문, 숫자, 특수기호를 포함해야 합니다.',
+                    value: /^[a-zA-Z0-9]{8,20}$/i,
+                    message: '비밀번호는 8~20자 영문, 숫자를 포함해야 합니다.',
                   },
                 })}
               />

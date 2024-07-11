@@ -11,7 +11,6 @@ import Signup from './pages/signup/Signup';
 import PreTest from './pages/preTest/PreTest';
 import Interview from './pages/interview/interview/Intervew';
 import GroupProfile from './pages/groupProfile/GroupProfile';
-import Result from './components/groupProfile/result/Result';
 import InterviewMailComplete from './pages/interviewmail/InterviewMailComplete';
 import InterviewMailYet from './components/interviewmail/InterviewMailYet';
 import InterviewMail from './components/interviewmail/InterviewMail';
@@ -24,6 +23,9 @@ import InterviewExit from './pages/interview/interview/InterviewExit';
 import ForgotPasswordSent from './components/forgotpassword/ForgotPasswordSent';
 import InterviewMakeComplete from './pages/interviewMake/InterviewMakeComplete';
 import ForgotPassword from './components/forgotpassword/ForgotPassword';
+import ChangePw from './pages/changePw/ChangePw';
+import InterviewerList from './pages/interviewerList/InterviewerList';
+import AiResult from './pages/aiResult/AiResult';
 //import Step2 from './components/interview/checkSetting/Step2';
 
 function App() {
@@ -40,12 +42,15 @@ function App() {
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/group-profile" element={<GroupProfile />} />
                   <Route path="/interview-mail-complete" element={<InterviewMailComplete />} />
-                  <Route path="/interview-mail-yet" element={<InterviewMailYet />} />
-                  <Route path="/interview-mail" element={<InterviewMail />} />
+                  <Route path="/interview-mail-yet/:index" element={<InterviewMailYet />} />
+                  <Route path="/interview-mail/:index" element={<InterviewMail />} />
+                  <Route path="/interviewer-list/:index" element={<InterviewerList />} />
                   <Route path="/interview-make" element={<InterviewMake />} />
                   <Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
                   <Route path="/forgot-password" element={<ForgotPassword />} />
                   <Route path="/forgot-password-sent" element={<ForgotPasswordSent />} />
+                  <Route path="/change-password" element={<ChangePw />} />
+                  <Route path="/interviewer-result/:id" element={<AiResult />} />
                 </Route>
                 {/*헤더가 필요 없는 페이지*/}
                 <Route path="/pretest" element={<PreTest />} />

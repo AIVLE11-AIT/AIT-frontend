@@ -1,16 +1,18 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as I from './InterviewMail.style';
-import InterviewMailHeader from '../../pages/interviewmail/InterviewMailHeader';
+import InterviewMailHeader from '../side/InterviewMailHeader';
 import axios from 'axios';
 
 function InterviewMail() {
   const navigate = useNavigate();
+  // useParams 훅을 사용하여 URL 경로 매개변수(index)를 가져옴
+  let { index } = useParams();
 
   // 전송하기 버튼 클릭 시
   const handleSendMail = () => {
       axios({
-        url: `/interviewGroup/${3}/interviewer/sendEmail`,
+        url: `/interviewGroup/${index}/interviewer/sendEmail`,
         method: 'get',
         headers:{
           Authorization: sessionStorage.getItem('isLogin'),
@@ -25,6 +27,38 @@ function InterviewMail() {
         console.error('AxiosError:', error);
       });
   };
+
+  
+  const [title, setTitle] = useState<string>('');
+  const [startDate, setStartDate] = useState<string>('');
+  const [endDate, setEndDate] = useState<string>('');
+  const [people, setPeople] = useState<number>(0);
+
+  // Function to format date from 'YYYY-MM-DDTHH:mm:ss' to 'YYYY-MM-DD HH:mm:ss'
+  const formatDate = (dateString: string) => {
+    const [datePart, timePart] = dateString.split('T');
+    return `${datePart} ${timePart}`;
+  };
+
+  useEffect(() => {
+    axios({
+      url: `/interviewGroup/${index}`,
+      method: 'get',
+      headers: {
+        Authorization: sessionStorage.getItem('isLogin'),
+      },
+    })
+      .then((response) => {
+        setTitle(response.data.name);
+        setStartDate(formatDate(response.data.start_date));
+        setEndDate(formatDate(response.data.end_date));
+        setPeople(response.data.interviewers.length);
+      })
+      .catch((error) => {
+        console.log('실패');
+        console.error('AxiosError:', error);
+      });
+  }, [index]);
 
 
   return (
@@ -43,9 +77,9 @@ function InterviewMail() {
 
         <I.ContentContainer>
           <I.Section>
-            <I.SectionTitle>KT 24년 하반기 공채 1차 AI면접</I.SectionTitle>
-            <p>이미지님 안녕하세요.</p>
-            <p>AI 면접은 2024년 1월 1일 - 2024년 1월 3일 기간 내에 진행 가능합니다.</p>
+            <I.SectionTitle>{title} AI면접</I.SectionTitle>
+            <p>홍길동님 안녕하세요.</p>
+            <p>AI 면접은 {startDate} - {endDate} 기간 내에 진행 가능합니다.</p>
             <p>AI 면접은 pretest.co.kr 에서 온라인으로 진행됩니다.</p>
           </I.Section>
           <I.NoticeBox>

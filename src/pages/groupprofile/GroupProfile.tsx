@@ -3,6 +3,8 @@ import * as G from './GroupProfile.style';
 import GroupProfileHeader from '../../components/groupProfile/header/GroupProfileHeader';
 import axios from 'axios';
 import Result from '../../components/groupProfile/result/Result';
+import { useRecoilState } from 'recoil';
+import { CompanyAtom } from '../../recoil/userInfoAtoms';
 
 function GroupProfile() {
 
@@ -18,7 +20,6 @@ function GroupProfile() {
         },				
       })
       .then((response) => {
-        console.log(response);
         setData(response.data);
         }) .catch((error) => {
         console.log('실패');

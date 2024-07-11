@@ -70,3 +70,24 @@ export const Icon = styled.div<{ size: number }>`
     height: 100%;
   }
 `;
+
+// 뒤로가기 버튼
+export const BackBtn = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  border: 2px solid #696CEA;
+  box-shadow: 0px 0px 3.13px 0px #696CEA;
+  display: flex;
+  justify-content: center;
+  align-item: center;
+  padding: 6px 0px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-bottom: 10px;
+`;
+
+export const BackBtnArrow = styled.img`
+  width: 15px;
+  height: 15px;
+`;

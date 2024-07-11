@@ -3,12 +3,12 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   justify-content: center;
-  margin: 90px auto;
+  margin: 60px auto;
 `;
 
 export const FormWrapper = styled.div`
   width: 590px;
-  height: 410px;
+  height: 510px;
   border: 1px solid #d0d2d7;
   background: #fff;
   border-radius: 30px;
@@ -26,7 +26,7 @@ export const Title = styled.div`
 
 export const SubTitle = styled.div`
   text-align: center;
-  margin: 30px 0px;
+  margin: 30px 0px 10px 0px;
   color: var(--black, #000);
   font-size: 15px;
   font-weight: 400;

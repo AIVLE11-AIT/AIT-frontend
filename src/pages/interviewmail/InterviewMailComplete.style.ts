@@ -5,16 +5,14 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f9f9f9;
+  margin-top: 150px;
 `;
 
 export const Message = styled.h1`
   color: #000;
   margin-bottom: 10px;
   text-align: center;
-  font-family: "Abhaya Libre SemiBold";
-  font-size: 22px;
+  font-size: 25px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -25,7 +23,6 @@ export const SubMessage = styled.p`
   text-align: center;
   color: var(--black, #000);
   text-align: center;
-  font-family: "Abhaya Libre SemiBold";
   font-size: 15px;
   font-style: normal;
   font-weight: 600;
@@ -54,11 +51,14 @@ export const Button = styled.button`
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
-  border-radius: 30px;
+  border-radius: 10px;
   background: #696CEA;
-  font-family: "Abhaya Libre SemiBold";
   font-size: 17px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+`;
+
+export const Icon = styled.div`
+    font-size: 90px;
 `;
