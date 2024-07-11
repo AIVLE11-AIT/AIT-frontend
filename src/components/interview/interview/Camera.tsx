@@ -104,9 +104,7 @@ const Camera = forwardRef((props, ref) => {
     useImperativeHandle(ref, () => ({
         startRecording: () => {
             if (mediaRecorder.current && mediaRecorder.current.state === 'inactive') {
-                mediaRecorder.current.start();
-                
-                
+                mediaRecorder.current.start();                
             }
         },
         stopRecording: () => {
