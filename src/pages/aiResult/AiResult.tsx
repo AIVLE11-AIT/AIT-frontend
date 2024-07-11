@@ -21,10 +21,16 @@ function AiResult() {
                     Authorization: sessionStorage.getItem('isLogin'),
                   },
                 }),
+                // 최종 레포트 조회
+                /*axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}/result/visualize`, {
+                  headers: {
+                    Authorization: sessionStorage.getItem('isLogin'),
+                  },
+                }),*/
                 
               ]);
 
-              console.log(introduceResponse);
+              //console.log(introduceResponse);
               //console.log(interviewerResponse.data);
 
           } catch (error) {
