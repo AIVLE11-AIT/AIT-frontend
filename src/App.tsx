@@ -24,6 +24,7 @@ import InterviewExit from './pages/interview/interview/InterviewExit';
 import ForgotPasswordSent from './components/forgotpassword/ForgotPasswordSent';
 import InterviewMakeComplete from './pages/interviewMake/InterviewMakeComplete';
 import ForgotPassword from './components/forgotpassword/ForgotPassword';
+import ChangePw from './pages/changePw/ChangePw';
 //import Step2 from './components/interview/checkSetting/Step2';
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
                   <Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
                   <Route path="/forgot-password" element={<ForgotPassword />} />
                   <Route path="/forgot-password-sent" element={<ForgotPasswordSent />} />
+                  <Route path="/change-password" element={<ChangePw />} />
                 </Route>
                 {/*헤더가 필요 없는 페이지*/}
                 <Route path="/pretest" element={<PreTest />} />

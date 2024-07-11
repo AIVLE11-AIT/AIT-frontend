@@ -10,7 +10,7 @@ function ForgotPasswordSent() {
   // 전송한 이메일 변수 가져오기
   const sendEmail = useRecoilValue(SendEmailAtom);
 
-  // 이메일 전송 버튼 클릭 시
+  // 로그인 버튼
   const onClickBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     navigate('/login');

@@ -9,15 +9,15 @@ function GroupProfileHeader() {
     navigate('/interview-make');
   }
 
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  function onClickSetting() {
+    navigate('/change-password');
   }
 
   return (
     <div className="scroll__container">
       <G.Header>
         <G.LeftContainer>
-          <G.KTTitle>KT 면접 페이지</G.KTTitle>
+          <G.KTTitle>면접 페이지</G.KTTitle>
         </G.LeftContainer>
         <G.RightContainer>
           <G.CreateButton onClick={handleCreateButtonClick}>+ 만들기</G.CreateButton>
@@ -29,7 +29,7 @@ function GroupProfileHeader() {
           <img src={process.env.PUBLIC_URL + '/images/GroupProfileIcon1.svg'} alt="Icon" />
         </G.Icon>
       </G.LineContainer>
-      <G.FloatingButton id="top" onClick={scrollToTop} type="button">
+      <G.FloatingButton id="top" onClick={onClickSetting} type="button">
         <G.TopIcon src={process.env.PUBLIC_URL + '/images/TopIcon.svg'}></G.TopIcon>
       </G.FloatingButton>
     </div>

@@ -52,10 +52,14 @@ function Result({ index }: ResultProps) {
     return `${datePart} ${timePart}`;
   };
 
+  function onClickBox() {
+    navigate('/');
+  }
+
   return (
     <>
       <S.Container>
-        <S.Box>
+        <S.Box onClick={onClickBox}>
           <S.Title>{title}</S.Title>
           <S.Details>
             <S.DetailItem>

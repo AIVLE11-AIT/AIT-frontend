@@ -36,6 +36,7 @@ function Login() {
       })
       
       .then((response) => {
+        console.log(response.data);
         setEmail(data.email);
         sessionStorage.setItem('isLogin', response.headers.authorization);
         navigate('/group-profile');
