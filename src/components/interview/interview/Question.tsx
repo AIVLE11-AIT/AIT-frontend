@@ -3,6 +3,8 @@ import * as Q from './Question.style';
 import Camera from './Camera';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { CompanyQuestionAtom, IntroduceAtom, QnaIdAtom } from '../../../recoil/interviewAtoms';
 
 function Question() {
     const [questions, setQuestions] = useState<string[]>([
@@ -44,6 +46,8 @@ function Question() {
         fetchQuestions();
     }, [1]);
 
+    const [qnaId, setQnaId] = useRecoilState(QnaIdAtom); // 질문 인덱스
+    const [introduceState, setIntroduceState] = useRecoilState(IntroduceAtom); // 질문 인덱스
 
     useEffect(() => {
         let timeout: NodeJS.Timeout;
@@ -57,6 +61,7 @@ function Question() {
                 setTimerStage('thinking');
             }, 4000);
         } else if (currentQuestionIndex >= 1 && currentQuestionIndex < questions.length) {
+
             if (timerStage === 'thinking') {
                 // 생각 시간 20초 타이머
                 timeout = setTimeout(() => {
@@ -67,7 +72,7 @@ function Question() {
                     if (cameraRef.current) {
                         cameraRef.current.startRecording();
                     }
-                }, 20000);
+                }, 4000);
             } else if (timerStage === 'answering') {
                 // 답변 시간 60초 타이머
                 timeout = setTimeout(() => {
@@ -75,7 +80,19 @@ function Question() {
                     if (cameraRef.current) {
                         cameraRef.current.stopRecording();
                     }
-                    setCurrentQuestionIndex(currentQuestionIndex + 1);
+                    setCurrentQuestionIndex(currentQuestionIndex + 1);                    
+                    if(currentQuestionIndex === 1){ // 자기 소개 영상이 끝나면 상태 변경
+                        setIntroduceState(false);
+                        console.log(introduceState);
+                    }
+
+                    if(currentQuestionIndex === 4){ // 공통 질문이 끝난 경우
+                        setQnaId(1);
+                    }
+                    else{
+                        setQnaId(qnaId + 1);
+                    }
+                    //console.log(qnaId);
                     if (currentQuestionIndex === questions.length - 1) {
                         console.log("면접 종료");
                         setTimerLabel('대기 중');
@@ -88,7 +105,7 @@ function Question() {
                         setTimeLeft(20); // 다음 질문에 대한 초기 타이머 설정 (20초)
                         setTimerStage('thinking');
                     }
-                }, 60000);
+                }, 4000);
             }
         }
 
