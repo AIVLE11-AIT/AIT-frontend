@@ -5,6 +5,8 @@ import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ExplainRatio from './ExplainRatio'; // ExplainRatio 컴포넌트 임포트
+import Papa from 'papaparse';
+import moment from 'moment';
 
 const customStyles = {
 	control: (provided: any) => ({// 닫혀 있을 때 select box
@@ -51,6 +53,13 @@ function InterviewMakeForm() {
 		jobGroup: string;
 	};
 
+	type InterviewerDTO = {
+		name: string;
+		email: string;
+		birth: string;
+		cover_letter: string;
+	};
+	
 	const {
 		register,
 		handleSubmit,
@@ -64,18 +73,73 @@ function InterviewMakeForm() {
 
 	// 파일 이름 출력 함수(완성)
 	const [fileName, setFileName] = useState<string>("");
-	const [selectedFile, setSelectedFile] = useState<File | null>(null);
+	// const [selectedFile, setSelectedFile] = useState<File | null>(null);
+	const [jsonFile, setJsonFile] = useState<any[]>([]);
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0];
 		if (file) {
-			setSelectedFile(file);
+		  try {
+			const jsonData = await parseCSVToJSON(file);
+			setJsonFile(jsonData);
+	  
+			// setSelectedFile(file);
 			setFileName(file.name);
+		  } catch (error) {
+			console.error('Error parsing CSV file:', error);
+		  }
 		} else {
-			setSelectedFile(null);
-			setFileName("");
-			setValue("fileUpload", null as any);
+		//   setSelectedFile(null);
+		  setFileName("");
+		  setValue("fileUpload", null as any);
 		}
+	  };
+	// 이메일 형식 검사를 위한 정규 표현식
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+	// csv -> json 변환
+	const parseCSVToJSON = (file: File): Promise<any> => {
+		return new Promise((resolve, reject) => {
+			Papa.parse(file, {
+				header: true,
+				encoding: "UTF-8",
+				skipEmptyLines: true,
+				complete: (results) => {
+					// CSV 데이터 유효성 검사 및 InterviewerDTO 형식으로 변환
+					const isValidData = results.data.every((row: any) => {
+						const isValidEmail = emailRegex.test(row.email); // 이메일 유효성 검사
+						return (
+							typeof row.id === 'string' &&
+							typeof row.name === 'string' &&
+							typeof row.email === 'string' &&
+							isValidEmail &&  // 이메일 형식 유효성 검사
+							typeof row.birth === 'string' &&
+							typeof row.image_path === 'string' &&
+							typeof row.cover_letter === 'string' &&
+							typeof row.interview_group_id === 'string' &&
+							typeof row.interview_group === 'string'
+						);
+					});
+
+					if (!isValidData) {
+						alert('CSV 파일의 형식이 유효하지 않거나 이메일 형식이 올바르지 않습니다.');
+						reject(new Error('CSV 유효성 에러'));
+						return;
+					}
+
+					const data: InterviewerDTO[] = results.data.map((row: any) => ({
+						name: row.name,
+						email: row.email,
+						birth: moment(row.birth).format('YYYY-MM-DDTHH:mm:ss'),
+						cover_letter: row.cover_letter
+					}));
+					resolve(data);
+				},
+				error: (error) => {
+					reject(error);
+				}
+			});
+		});
 	};
 
 	// 완료 버튼 클릭 시
@@ -84,11 +148,11 @@ function InterviewMakeForm() {
 		console.log("완료");
 
         try {
-			if (!selectedFile) {
+			if (!jsonFile) {
 				setError("fileUpload", { type: "manual", message: "파일을 선택하세요." });
 				return;
 			}
-
+			
             // Prepare JSON data
             const value = {
                 name: data.interviewTitle,
@@ -107,8 +171,10 @@ function InterviewMakeForm() {
                 interviewers: []
             };
 			
-            const formData = new FormData();
-            formData.append('file', selectedFile);
+			const formData = new FormData();
+            const interviewersBlob = new Blob([JSON.stringify(jsonFile)], { type: "application/json" });
+            formData.append("InterviewerDTO", interviewersBlob);
+			
 
             const jsonBlob = new Blob([JSON.stringify(value)], { type: "application/json" });
             formData.append("InterviewGroupDTO", jsonBlob);
