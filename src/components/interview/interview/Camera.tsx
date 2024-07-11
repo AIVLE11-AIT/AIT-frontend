@@ -47,6 +47,8 @@ const Camera = forwardRef((props, ref) => {
                 
                 const formData = new FormData();
                 formData.append('file',a.download)
+
+                
                 
                 // Axios 백엔드 전송
                 const response = await axios.post(`/interviewGroup/create`, formData, {

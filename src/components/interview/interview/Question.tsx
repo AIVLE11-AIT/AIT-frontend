@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
 import * as Q from './Question.style';
 import Camera from './Camera';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function Question() {
-    const questions = [
+
+    const [questions, setQuestions] = useState([
         '안녕하세요? 만나서 만갑습니다.',
-        '먼저, 자기소개를 말해주세요.',
-        // 추가 질문들
-    ];
+        '먼저, 자기소개를 말해주세요.'
+    ]); // 면접 리스트
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [timeLeft, setTimeLeft] = useState(0); // 타이머 시간
@@ -16,8 +17,23 @@ function Question() {
     const [timerStage, setTimerStage] = useState(''); // 타이머 단계
     const navigate = useNavigate();
     const cameraRef = useRef<{ startRecording: () => void; stopRecording: () => void } | null>(null); // 카메라 ref 추가
-
+    
+    let { id } = useParams(); // 주소에서 면접 id가져오는 변수
     useEffect(() => {
+        // 질문 가져오는 api
+        axios({
+            url: `/interviewGroup/${1}/companyQna/readAll`,
+            method: 'get',
+        })
+        
+        .then((response) => {
+            console.log(response.data);
+            setQuestions(response.data);
+            
+        }) .catch((error) => {
+            console.log('실패');
+            console.error('AxiosError:', error);
+        });
         let timeout: NodeJS.Timeout;
 
         if (currentQuestionIndex === 0) {
