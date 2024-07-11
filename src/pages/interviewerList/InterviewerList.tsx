@@ -35,7 +35,7 @@ function InterviewerList() {
 
     const navigate = useNavigate();
     function onClickList(id: number) {
-        navigate(`/interviewer-result/${id}`);
+        navigate(`/interviewer-result/${index}/${id}`);
     }
 
     return (

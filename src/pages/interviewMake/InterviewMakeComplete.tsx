@@ -1,13 +1,14 @@
 import React from 'react'
 import * as I from './InterviewMakeComplete.style'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function InterviewMakeComplete() {
 
     const navigate = useNavigate();
-
+    let { index } = useParams();
     const onClickMailBtn = () => {
-        navigate('/interview-mail');
+        //console.log(index);
+        navigate(`/interview-mail-yet/${index}`); // 면접 페이지 경로로 이동
     }
 
     const onClickGroupPateBtn = () => {

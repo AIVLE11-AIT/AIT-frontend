@@ -186,8 +186,8 @@ function InterviewMakeForm() {
 
             });
 
-            console.log('Success:', response.data);
-			navigate('/interview-make-complete');
+            //console.log('Success:', response.data.id);
+			navigate(`/interview-make-complete/${response.data.id}`);
 
         } catch (error) {
             console.error('Failed:', error);

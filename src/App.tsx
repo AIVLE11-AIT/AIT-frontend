@@ -46,11 +46,11 @@ function App() {
                   <Route path="/interview-mail/:index" element={<InterviewMail />} />
                   <Route path="/interviewer-list/:index" element={<InterviewerList />} />
                   <Route path="/interview-make" element={<InterviewMake />} />
-                  <Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
+                  <Route path="/interview-make-complete/:index" element={<InterviewMakeComplete />} />
                   <Route path="/forgot-password" element={<ForgotPassword />} />
                   <Route path="/forgot-password-sent" element={<ForgotPasswordSent />} />
                   <Route path="/change-password" element={<ChangePw />} />
-                  <Route path="/interviewer-result/:id" element={<AiResult />} />
+                  <Route path="/interviewer-result/:groupId/:interviewerId" element={<AiResult />} />
                 </Route>
                 {/*헤더가 필요 없는 페이지*/}
                 <Route path="/pretest" element={<PreTest />} />

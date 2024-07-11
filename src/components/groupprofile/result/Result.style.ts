@@ -23,7 +23,6 @@ export const Box = styled.div`
 
 export const Title = styled.h2`
   color: var(--gray-01, #303030);
-  font-family: "Abhaya Libre SemiBold";
   font-size: 17px;
   font-style: normal;
   font-weight: 600;
@@ -40,7 +39,6 @@ export const DetailItem = styled.div`
   display: flex;
   align-items: center;
   color: #404146;
-  font-family: ABeeZee;
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
@@ -72,8 +70,8 @@ export const DeleteButton = styled(Button)`
   background: #D0D2D7;
   color: white;
   font-size: 13px;
-  font-weight: 600;
-  padding: 5px 12px 7px 13px;
+  font-weight: 500;
+  padding: 5px 12px 6px 13px;
   border: 2px solid #D0D2D7;
 `;
 
@@ -83,8 +81,8 @@ export const EditButton = styled(Button)`
   color: #404146;
   border: 2px solid #404146;
   font-size: 13px;
-  font-weight: 600;
-  padding: 5px 12px 7px 13px;
+  font-weight: 500;
+  padding: 5px 12px 6px 13px;
 `;
 
 export const Icon = styled.div<{ size: number }>`

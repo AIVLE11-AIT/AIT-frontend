@@ -19,14 +19,16 @@ export const Title = styled.div`
   text-align: center;
   margin: 40px 0px 0px 0px;
   color: var(--black, #000);
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 600;
   line-height: normal;
+  display: flex;
+  padding: 0px 40px;
 `;
 
 export const SubTitle = styled.div`
   text-align: center;
-  margin: 30px 0px 10px 0px;
+  margin: 10px 0px 10px 0px;
   color: var(--black, #000);
   font-size: 15px;
   font-weight: 400;
@@ -80,7 +82,7 @@ export const InputBox = styled.input`
   border: 2px solid #d0d2d7;
   background: #fff;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   padding: 15px 18px;
   color: #0d0d0d;
 
@@ -121,4 +123,26 @@ export const Error = styled.div`
   margin-top: 10px;
   margin-left: 90px;
   height: 5px;
+`;
+
+// 뒤로가기 버튼
+export const BackBtn = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  border: 2px solid #696CEA;
+  box-shadow: 0px 0px 3.13px 0px #696CEA;
+  display: flex;
+  justify-content: center;
+  align-item: center;
+  padding: 6px 0px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  margin-right: 140px;
+`;
+
+export const BackBtnArrow = styled.img`
+  width: 15px;
+  height: 15px;
 `;
