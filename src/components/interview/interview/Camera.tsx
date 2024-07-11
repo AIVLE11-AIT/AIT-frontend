@@ -17,67 +17,57 @@ const Camera = forwardRef((props, ref) => {
             const stream = await navigator.mediaDevices.getUserMedia(constraints);
 
             if (videoRef.current) {
-                videoRef.current.srcObject = stream; // 비디오 요소에 스트림 설정
+                videoRef.current.srcObject = stream;
                 console.log("비디오 스트림 설정됨");
             } else {
                 console.error("videoRef.current가 null입니다.");
             }
 
             const recorder = new MediaRecorder(stream, {
-                mimeType: 'video/webm;codecs=vp9,opus', // 오디오 포함하는 MIME 타입 설정
+                mimeType: 'video/webm;codecs=vp9,opus',
             });
 
             recorder.ondataavailable = (e) => {
                 if (e.data.size > 0) {
-                    videoChunks.current.push(e.data); // 데이터가 유효한 경우, Blob 배열에 추가
+                    videoChunks.current.push(e.data);
                 }
             };
 
             recorder.onstop = async () => {
                 const blob = new Blob(videoChunks.current, { type: 'video/webm' });
-                const url = URL.createObjectURL(blob);
-                videoChunks.current = [];
 
-                // 비디오 다운로드 폴더에 저장
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                a.download = 'recorded-video.webm';
-                console.log(a.download);
-                
                 const formData = new FormData();
-                formData.append('file',a.download)
+                formData.append('file', blob, 'recorded-video.webm'); // Blob을 직접 FormData에 추가
 
-                
-                
-                // Axios 백엔드 전송
-                const response = await axios.post(`/interviewGroup/create`, formData, {
+                //console.log(formData);
+
+                // 백엔드로 전송
+                axios({
+                    url: `/interviewGroup/${1}/interviewer/${1}/file/companyQna/${1}`,
+                    method: 'post',  // 파일 업로드는 post로 해야 합니다.
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: sessionStorage.getItem('isLogin'),
-                    },   
-                });
-
-                console.log('Success:', response.data);    
-                
-                axios({
-                    url:`/interviewGroup/{interviewGroup_id}/interviewer/${3}/introduce/create`
+                    },
+                    data: formData,
                 })
-
-                // 비디오 다운로드
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch((error) => {
+                    console.log('실패');
+                    console.error('AxiosError:', error);
+                });
             };
 
-            mediaRecorder.current = recorder; // 미디어 레코더 설정
+            mediaRecorder.current = recorder;
         } catch (err) {
             console.error("미디어 장치 접근 중 오류 발생:", err);
         }
     }, []);
 
     useEffect(() => {
-        getMediaPermission(); // 컴포넌트가 마운트될 때 미디어 접근 권한 요청
+        getMediaPermission();
     }, [getMediaPermission]);
 
     useImperativeHandle(ref, () => ({

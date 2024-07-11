@@ -5,12 +5,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 function Question() {
-
-    const [questions, setQuestions] = useState([
-        '안녕하세요? 만나서 만갑습니다.',
+    const [questions, setQuestions] = useState<string[]>([
+        '안녕하세요? 만나서 반갑습니다.',
         '먼저, 자기소개를 말해주세요.'
-    ]); // 면접 리스트
-
+    ]); // 면접 질문 리스트
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [timeLeft, setTimeLeft] = useState(0); // 타이머 시간
     const [timerLabel, setTimerLabel] = useState('대기 중'); // 타이머 레이블
@@ -19,21 +17,35 @@ function Question() {
     const cameraRef = useRef<{ startRecording: () => void; stopRecording: () => void } | null>(null); // 카메라 ref 추가
     
     let { id } = useParams(); // 주소에서 면접 id가져오는 변수
+
+    // 공통질문 가져오는 API
     useEffect(() => {
-        // 질문 가져오는 api
-        axios({
-            url: `/interviewGroup/${1}/companyQna/readAll`,
-            method: 'get',
-        })
-        
-        .then((response) => {
-            console.log(response.data);
-            setQuestions(response.data);
-            
-        }) .catch((error) => {
-            console.log('실패');
-            console.error('AxiosError:', error);
-        });
+        const fetchQuestions = async () => {
+            try {
+                const [companyQnaResponse, interviewerQnaResponse] = await Promise.all([
+                    axios.get(`/interviewGroup/${1}/companyQna/readAll`),
+                    axios.get(`/interviewGroup/${1}/${1}/interviewerQna/readAll`),
+                ]);
+
+                const companyQnaQuestions = companyQnaResponse.data.map((item: any) => item.question);
+                const interviewerQnaQuestions = interviewerQnaResponse.data.map((item: any) => item.question);
+
+                setQuestions(prevQuestions => [
+                    ...prevQuestions,
+                    ...companyQnaQuestions,
+                    ...interviewerQnaQuestions,
+                ]);
+            } catch (error) {
+                console.error('AxiosError:', error);
+                console.log('실패');
+            }
+        };
+
+        fetchQuestions();
+    }, [1]);
+
+
+    useEffect(() => {
         let timeout: NodeJS.Timeout;
 
         if (currentQuestionIndex === 0) {
@@ -49,7 +61,7 @@ function Question() {
                 // 생각 시간 20초 타이머
                 timeout = setTimeout(() => {
                     setTimerLabel('답변 시간');
-                    setTimeLeft(61); // 60초 타이머
+                    setTimeLeft(60); // 60초 타이머
                     setTimerStage('answering');
                     // 녹화 시작
                     if (cameraRef.current) {
@@ -65,17 +77,18 @@ function Question() {
                     }
                     setCurrentQuestionIndex(currentQuestionIndex + 1);
                     if (currentQuestionIndex === questions.length - 1) {
+                        console.log("면접 종료");
                         setTimerLabel('대기 중');
                         setTimerStage('');
                         setTimeout(() => {
                             navigate('/interview-exit'); // Navigate after 2 seconds
-                        }, 2000);
+                        }, 1000);
                     } else {
                         setTimerLabel('준비 시간');
                         setTimeLeft(20); // 다음 질문에 대한 초기 타이머 설정 (20초)
                         setTimerStage('thinking');
                     }
-                }, 61000);
+                }, 60000);
             }
         }
 
@@ -109,7 +122,7 @@ function Question() {
                         <Q.Timer20Bar style={{ animationDuration: '20s' }} />
                     )}
                     {timerLabel === '답변 시간' && (
-                        <Q.Timer60Bar style={{ animationDuration: '61s' }} />
+                        <Q.Timer60Bar style={{ animationDuration: '60s' }} />
                     )}
                 </Q.TimerBar>
 
