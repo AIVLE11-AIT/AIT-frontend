@@ -3,12 +3,12 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   justify-content: center;
-  margin: 49px auto;
+  margin: 90px auto;
 `;
 
 export const FormWrapper = styled.div`
-  width: 625px;
-  height: 434px;
+  width: 590px;
+  height: 410px;
   flex-shrink: 0;
   padding: 20px;
   border: 1px solid #d0d2d7;

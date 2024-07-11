@@ -3,14 +3,12 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   justify-content: center;
-  margin: 49px auto;
+  margin: 90px auto;
 `;
 
 export const FormWrapper = styled.div`
-  width: 625px;
-  height: 434px;
-  flex-shrink: 0;
-  padding: 20px;
+  width: 590px;
+  height: 410px;
   border: 1px solid #d0d2d7;
   background: #fff;
   border-radius: 30px;
@@ -19,9 +17,8 @@ export const FormWrapper = styled.div`
 
 export const Title = styled.div`
   text-align: center;
-  margin: 30px 0px 0px 20px;
+  margin: 40px 0px 0px 0px;
   color: var(--black, #000);
-  font-family: ABeeZee;
   font-size: 22px;
   font-weight: 600;
   line-height: normal;
@@ -29,9 +26,8 @@ export const Title = styled.div`
 
 export const SubTitle = styled.div`
   text-align: center;
-  margin: 30px 0px 0px 20px;
+  margin: 30px 0px;
   color: var(--black, #000);
-  font-family: ABeeZee;
   font-size: 15px;
   font-weight: 400;
   line-height: normal;
@@ -67,7 +63,7 @@ export const Label = styled.div`
   font-weight: 400;
   line-height: normal;
   color: var(--black, #000);
-  font-family: ABeeZee;
+
   font-size: 16px;
 `;
 
@@ -81,7 +77,7 @@ export const InputBox = styled.input`
   width: 400px;
   height: 46px;
   border-radius: 11px;
-  border: 1px solid #d0d2d7;
+  border: 2px solid #d0d2d7;
   background: #fff;
   font-size: 14px;
   font-weight: 500;

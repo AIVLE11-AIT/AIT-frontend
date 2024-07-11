@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import * as F from './ForgotPassword.style';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { SendEmailAtom } from '../../recoil/findPwAtoms';
 
 type FormValue = {
   email: string;
@@ -12,19 +15,36 @@ function ForgotPassword() {
     register,
     watch,
     formState: { errors },
-  } = useForm<FormValue>({ mode: 'onBlur', criteriaMode: 'all' });
+    handleSubmit,
+  } = useForm<FormValue>({ mode: 'onSubmit', criteriaMode: 'all' });
 
   const navigate = useNavigate();
+  const [sendEmail, setSendEmail] = useRecoilState(SendEmailAtom);
 
   // 이메일 버튼 활성화
   const [isActive, setIsActive] = useState(false);
   const emailValue = watch('email') || '';
 
   // 이메일 전송 버튼 클릭 시
-  const onClickBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    navigate('/forgot-password-sent');
-  };  
+  const onClickBtn = (data: FormValue) => {
+    const email = data.email;
+    console.log(email);
+
+    // 로그인 api
+    axios({
+      url: `/sendTempPassword/${email}`,
+      method: 'post',
+    })
+    
+    .then((response) => {
+      setSendEmail(email);
+      navigate('/forgot-password-sent');
+      
+    }) .catch((error) => {
+      console.log('실패');
+      console.error('AxiosError:', error);
+    });
+  };
 
   useEffect(() => {
     if (
@@ -45,7 +65,7 @@ function ForgotPassword() {
         <F.SubTitle>
           가입한 이메일로 임시 비밀번호가 포함된 메일은 전송해 드립니다.
         </F.SubTitle>
-        <F.InputForm>
+        <F.InputForm onSubmit={handleSubmit(onClickBtn)}>
           <F.EmailWrap>
             <F.LabelWrap>
               <F.LabelIcon />
@@ -68,8 +88,8 @@ function ForgotPassword() {
             {errors.email && <F.Error>{errors.email.message}</F.Error>}
           </F.EmailWrap>
           <F.BtnContainer>
-            <F.Button type="submit" disabled={!isActive} onClick={onClickBtn}>
-            메일 보내기
+            <F.Button type="submit" disabled={!isActive}>
+              메일 보내기
             </F.Button>
           </F.BtnContainer>
         </F.InputForm>
