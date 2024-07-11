@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as I from './InterviewMailHeader.style';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function InterviewMailHeader() {
 
@@ -39,8 +39,14 @@ function InterviewMailHeader() {
         });
     }, [index]);
 
+    const navigate = useNavigate();
+    function onClickBack(){
+      navigate('/group-profile');
+    }
+
   return (
     <I.HeaderContainer>
+      <I.BackBtn onClick={onClickBack}><I.BackBtnArrow src={process.env.PUBLIC_URL + '/images/BackBtn.svg'}/></I.BackBtn>
       <I.Title>{title}</I.Title>
       <I.DetailsContainer>
         <I.DetailItem>
