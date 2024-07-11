@@ -7,7 +7,10 @@ function Home() {
     const navigate = useNavigate();
 
     const handleButtonClick = () => {
-        navigate('/login');
+        if(sessionStorage.getItem('isLogin') !== null)
+            navigate('/group-profile');
+        else
+            navigate('./login');
     };
 
     const animationProps = {
@@ -41,7 +44,7 @@ function Home() {
                         <br />
                         맞춤형으로 지원자의 면접 평가 결과를 제공합니다.
                     </H.SubTitle>
-                    <H.Button1 onClick={handleButtonClick}>Get Start</H.Button1>
+                    <H.Button1 onClick={handleButtonClick}>Go Profile</H.Button1>
                     <H.Button2>Contact Us</H.Button2>
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}

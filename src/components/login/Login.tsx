@@ -3,6 +3,8 @@ import * as L from './Login.style';
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { EmailAtom } from '../../recoil/userInfoAtoms';
 
 type FormValue = {
   email: string;
@@ -18,6 +20,7 @@ function Login() {
   } = useForm<FormValue>({ mode: 'onBlur', criteriaMode: 'all' });
 
   const navigate = useNavigate();
+  const [email, setEmail] = useRecoilState(EmailAtom);
 
   // 로그인 함수
   const login = (data: FormValue) => {
@@ -33,9 +36,11 @@ function Login() {
       })
       
       .then((response) => {
-        //console.log(response.headers.authorization);
+        setEmail(data.email);
         sessionStorage.setItem('isLogin', response.headers.authorization);
-        }) .catch((error) => {
+        navigate('/group-profile');
+        
+      }) .catch((error) => {
         console.log('실패');
         console.error('AxiosError:', error);
       });

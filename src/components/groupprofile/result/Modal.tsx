@@ -12,7 +12,7 @@ function Modal({ closeModal }: ModalProps) {
   // 삭제 버튼 클릭 시
   function handleCreateButtonClick() {
     axios({
-      url: '/interviewGroup/${interviewGroup_id}/delete',
+      url: `/interviewGroup/${2}/delete`,
       method: 'delete',
       headers: {
         Authorization: sessionStorage.getItem('isLogin'),

@@ -39,7 +39,6 @@ function App() {
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/group-profile" element={<GroupProfile />} />
-                  <Route path="/result" element={<Result />} />
                   <Route path="/interview-mail-complete" element={<InterviewMailComplete />} />
                   <Route path="/interview-mail-yet" element={<InterviewMailYet />} />
                   <Route path="/interview-mail" element={<InterviewMail />} />
