@@ -13,6 +13,8 @@ export const Container = styled.div`
     border: 1px solid #D0D2D7;
     background: #FFF;
     margin-left: 30px;
+    position: sticky;
+    top: 20px; /* Adjust the distance from the top as needed */
 `;
 
 // 지원자 사진
@@ -54,12 +56,13 @@ export const InterviewVideo = styled.div`
 
 // 질문 리스트 박스
 export const QuestionList = styled.div`
-    width: 570px;
+    width: 580px;
     height: 300px;
     border-radius: 10px;
     border: 1px solid #D0D2D7;
     background: #FFF;
     margin-left: 10px;
+    margin-top: 5px;
 `;
 
 export const QuestionTypeBox = styled.div`
@@ -85,12 +88,24 @@ export const QuestionListBox = styled.div`
     max-height: 200px; /* 스크롤을 적용할 최대 높이 설정 */
     overflow-y: auto; /* 세로 스크롤 활성화 */
     width: 100%;
-    margin-top: 10px;
 `;
 
 // 질문 리스트
 export const QuestionDiv = styled.div`
-    border: 1px solid black;
+    border-top: 1px solid #D0D2D7;
     padding: 20px 30px;
     cursor: pointer;
+    line-height: 1.5;
+`;
+
+// 답변 텍스트 박스
+export const AnswerBox = styled.div`
+    width: 1130px;
+    padding: 30px 35px;
+    border-radius: 10px;
+    border: 1px solid #D0D2D7;
+    background: #FFF;
+    margin-right: 10px;
+    margin-top: 20px;
+    line-height: 1.7;
 `;
