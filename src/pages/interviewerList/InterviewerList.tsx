@@ -47,9 +47,9 @@ function InterviewerList() {
                     <I.Subtitle>면접을 진행한 지원자 리스트입니다.</I.Subtitle>
                     <I.ListBox>
                         <I.ListHeaderBar />
-                        {data.map((item) => (
+                        {data.map((item, index) => (
                             <I.ListWrap key={item.id} onClick={() => onClickList(item.id)}>
-                                <I.IdBox>{item.id}</I.IdBox>
+                                <I.IdBox>{index + 1}</I.IdBox>
                                 <I.ContentBox>{item.name} &nbsp; ({item.email})</I.ContentBox>
                             </I.ListWrap>
                         ))}

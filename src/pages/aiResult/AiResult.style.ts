@@ -92,4 +92,5 @@ export const QuestionListBox = styled.div`
 export const QuestionDiv = styled.div`
     border: 1px solid black;
     padding: 20px 30px;
+    cursor: pointer;
 `;

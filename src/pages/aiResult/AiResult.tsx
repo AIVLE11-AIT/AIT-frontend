@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as A from './AiResult.style';
 
@@ -8,46 +8,86 @@ interface InterviewerInfo {
   email: string;
 }
 
+interface File {
+  id: number;
+  video_path: string;
+}
+
 interface Question {
   id: number;
   question: string;
-  // 다른 필요한 필드를 여기에 추가합니다.
+  videoUrl: string | null; // 질문에 해당하는 영상 URL을 저장할 필드 추가
 }
 
 function AiResult() {
   let { groupId, interviewerId } = useParams();
-  const [interviewerInfo, setInterviewerInfo] = useState<InterviewerInfo | null>(null); // 지원자 정보 저장 변수
-  const [videoUrl, setVideoUrl] = useState<string | null>(null); // 자기소개 영상 저장 변수
-  const [companyQna, setCompanyQna] = useState<Question[]>([]); // 질문 저장 변수
+  const [interviewerInfo, setInterviewerInfo] = useState<InterviewerInfo | null>(null);
+  const [videoUrl, setVideoUrl] = useState<string | undefined>(undefined); // 영상 URL 저장 변수
+  const [introVideoUrl, setIntroVideoUrl] = useState<string | null>(null); // 자기소개 영상 URL 저장 변수
+  const [companyQna, setCompanyQna] = useState<Question[]>([]); // 공통 질문과 영상 URL 저장 변수
+  const [interviewerQna, setInterviewerQna] = useState<Question[]>([]); // 공통 질문과 영상 URL 저장 변수
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const videoRef = useRef<HTMLVideoElement>(null); // 비디오 참조 변수
 
   const fetchVideoData = async () => {
     try {
       const token = sessionStorage.getItem('isLogin') || '';
 
-      const [introduceResponse, interviewerInfoResponse, companyQnaResponse] = await Promise.all([
+      const [introduceResponse, interviewerInfoResponse, companyQnaResponse, interviewerQnaResponse] = await Promise.all([
+        // 자기소개 영상
         axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}/introduce/read`, {
           headers: { Authorization: token },
           responseType: 'blob',
         }),
+        // 지원자 정보
         axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}`, {
           headers: { Authorization: token },
         }),
+        // 공통 질문
         axios.get(`/interviewGroup/${groupId}/companyQna/readAll`, {
+          headers: { Authorization: token },
+        }),
+        // 자소서 질문
+        axios.get(`/interviewGroup/${groupId}/${interviewerId}/interviewerQna/readAll`, {
           headers: { Authorization: token },
         }),
       ]);
 
+      // 자기소개 영상 URL 저장
       const videoBlob = new Blob([introduceResponse.data], { type: 'video/mp4' });
-      const videoUrl = URL.createObjectURL(videoBlob);
-      setVideoUrl(videoUrl); // 자기소개 영상 저장
+      const introVideoUrl = URL.createObjectURL(videoBlob);
+      setIntroVideoUrl(introVideoUrl);
+
       setInterviewerInfo(interviewerInfoResponse.data); // 지원자 정보 저장
-      setCompanyQna(companyQnaResponse.data); // 공통질문 저장
-      
+      setCompanyQna(companyQnaResponse.data); // 공통 질문 저장
+      setInterviewerQna(interviewerQnaResponse.data); // 자소서 기반 질문 저장
 
     } catch (error) {
       console.error('AxiosError:', error);
+      setError('Failed to fetch data');
+    }
+  };
+
+  const fetchVideoUrl = async (questionId: number, type: 'companyQna' | 'interviewerQna') => {
+    try {
+      const token = sessionStorage.getItem('isLogin') || '';
+      const videoResponse = await axios.get(
+        `/interviewGroup/${groupId}/interviewer/${interviewerId}/file/${type}/${questionId}/read`,
+        {
+          headers: { Authorization: token },
+          responseType: 'blob',
+        }
+      );
+
+      const videoBlob = new Blob([videoResponse.data], { type: 'video/mp4' });
+      const videoUrl = URL.createObjectURL(videoBlob);
+      setVideoUrl(videoUrl);
+      console.log(`Video URL for ${type} ${questionId}:`, videoUrl);
+
+    } catch (error) {
+      console.error('AxiosError:', error);
+      setError('Failed to fetch video');
     }
   };
 
@@ -61,15 +101,29 @@ function AiResult() {
     };
   }, [groupId, interviewerId]);
 
+  useEffect(() => {
+    if (videoRef.current && videoUrl) {
+      videoRef.current.src = videoUrl || ''; // 비디오 URL 변경 시 비디오 태그 업데이트
+      videoRef.current.load();
+      videoRef.current.play(); // 비디오 자동 재생
+    }
+  }, [videoUrl]);
+
+  // 목록 이동 클릭한 경우
   function onClickBackBtn() {
-    navigate(`/interviewer-list/${groupId}`)
+    navigate(`/interviewer-list/${groupId}`);
+  }
+
+  // 질문을 클릭한 경우
+  function handleQuestionClick(questionId: number, type: 'companyQna' | 'interviewerQna') {
+    fetchVideoUrl(questionId, type);
   }
 
   return (
     <A.MainContainer>
       <A.Container>
         <A.InterviewerImage>
-          <img src={process.env.PUBLIC_URL + '/images/Image.svg'} />
+          <img src={process.env.PUBLIC_URL + '/images/Image.svg'} alt="Interviewer" />
         </A.InterviewerImage>
         {interviewerInfo ? (
           <A.InterviewerInfo>
@@ -87,13 +141,11 @@ function AiResult() {
           <div>
             {error ? (
               <div>{error}</div>
-            ) : videoUrl ? (
-              <video controls style={{ width: '500px', height: '300px' }}>
-                <source src={videoUrl} type="video/mp4" />
+            ) : (
+              <video ref={videoRef} controls style={{ width: '500px', height: '300px' }}>
+                <source src={videoUrl || ''} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
-            ) : (
-              <div>Loading...</div>
             )}
           </div>
           <A.QuestionList>
@@ -105,13 +157,24 @@ function AiResult() {
             </A.QuestionTypeBox>
 
             <A.QuestionListBox>
-              <A.QuestionDiv>자기소개</A.QuestionDiv>
+              <A.QuestionDiv onClick={() => setVideoUrl(introVideoUrl || '')}>자기소개</A.QuestionDiv>
               {companyQna.length > 0 ? (
-                  companyQna.map((question) => (
-                    <A.QuestionDiv key={question.id}>{question.question}</A.QuestionDiv>
-                  ))
-                ) : (
-                  <div>Loading questions...</div>
+                companyQna.map((question) => (
+                  <A.QuestionDiv key={question.id} onClick={() => handleQuestionClick(question.id, 'companyQna')}>
+                    {question.question}
+                  </A.QuestionDiv>
+                ))
+              ) : (
+                <div>Loading questions...</div>
+              )}
+              {interviewerQna.length > 0 ? (
+                interviewerQna.map((question) => (
+                  <A.QuestionDiv key={question.id} onClick={() => handleQuestionClick(question.id, 'interviewerQna')}>
+                    {question.question}
+                  </A.QuestionDiv>
+                ))
+              ) : (
+                <div>Loading questions...</div>
               )}
             </A.QuestionListBox>
           </A.QuestionList>
