@@ -48,6 +48,7 @@ function Question() {
 
     const [qnaId, setQnaId] = useRecoilState(QnaIdAtom); // 질문 인덱스
     const [introduceState, setIntroduceState] = useRecoilState(IntroduceAtom); // 질문 인덱스
+    const [qnaState, setQnaState] = useRecoilState(CompanyQuestionAtom);
 
     useEffect(() => {
         let timeout: NodeJS.Timeout;
@@ -88,6 +89,7 @@ function Question() {
 
                     if(currentQuestionIndex === 4){ // 공통 질문이 끝난 경우
                         setQnaId(1);
+                        setQnaState(false);
                     }
                     else{
                         setQnaId(qnaId + 1);

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, forwardRef, useImperativeHandle 
 import * as S from './Camera.style';
 import axios from 'axios';
 import { useRecoilValue } from 'recoil';
-import { IntroduceAtom, QnaIdAtom } from '../../../recoil/interviewAtoms';
+import { CompanyQuestionAtom, IntroduceAtom, QnaIdAtom } from '../../../recoil/interviewAtoms';
 
 const Camera = forwardRef((props, ref) => {
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -11,6 +11,7 @@ const Camera = forwardRef((props, ref) => {
 
     const introduceState = useRecoilValue(IntroduceAtom); // 자기소개 영상 상태
     const qnaId = useRecoilValue(QnaIdAtom);
+    const qnaState = useRecoilValue(CompanyQuestionAtom);
 
     useEffect(() => {
         const initializeMedia = async () => {
@@ -82,26 +83,51 @@ const Camera = forwardRef((props, ref) => {
                       });
                 } else { // 질문 영상인 경우(완성)
 
-                    try {
-                        const response = await axios.post(
-                            `/interviewGroup/${1}/interviewer/${1}/file/companyQna/${qnaId}`,
-                            formData,
-                            {
-                                headers: {
-                                    'Content-Type': 'multipart/form-data',
-                                    Authorization: sessionStorage.getItem('isLogin'),
-                                },
-                            }
-                        );
-                        console.log(response.data);
-                        console.log("면접 영상 전송 완료");
-                    } catch (error) {
-                        console.error('AxiosError:', error);
-                    }
+                    // 기업 질문인 경우
+                    if(qnaState){
+                        axios({
+                            url: `/interviewGroup/${1}/interviewer/${1}/file/companyQna/${qnaId}`,
+                            method: 'post',
+                            data: formData,
+                            headers: {
+                                'Content-Type': 'multipart/form-data',
+                                Authorization: sessionStorage.getItem('isLogin'),
+                            },
+                          })
+                          
+                          .then((response) => {
+                            console.log(response.data);
+                            console.log("기업 질문 영상 전송 성공");
+                            
+                          }) .catch((error) => {
+                            console.log('실패');
+                            console.error('AxiosError:', error);
+                        });
+                    } else{
+                        axios({
+                            url: `/interviewGroup/${1}/interviewer/${1}/file/interviewerQna/${qnaId}`,
+                            method: 'post',
+                            data: formData,
+                            headers: {
+                                'Content-Type': 'multipart/form-data',
+                                Authorization: sessionStorage.getItem('isLogin'),
+                            },
+                          })
+                          
+                          .then((response) => {
+                            console.log(response.data);
+                            console.log("자소서 질문 영상 전송 성공");
+                            
+                          }) .catch((error) => {
+                            console.log('실패');
+                            console.error('AxiosError:', error);
+                        });
+                    } 
+                    
                 }
             };
         }
-    }, [introduceState, qnaId]);
+    }, [introduceState, qnaId, qnaState]);
 
     useImperativeHandle(ref, () => ({
         startRecording,

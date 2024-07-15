@@ -1,49 +1,56 @@
 import axios from 'axios';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 function AiResult() {
-    let { groupId, interviewerId} = useParams();
-    useEffect(() => {
-      const fetchQuestions = async () => {
-        //console.log(groupId);
-          try {
-              const [introduceResponse, interviewerResponse] = await Promise.all([
-                // 자기소개 영상 조회
-                axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}/introduce/read`, {
-                  headers: {
-                    Authorization: sessionStorage.getItem('isLogin'),
-                  },
-                }),
-                // 지원자 정보 조회
-                axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}`, {
-                  headers: {
-                    Authorization: sessionStorage.getItem('isLogin'),
-                  },
-                }),
-                // 최종 레포트 조회
-                /*axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}/result/visualize`, {
-                  headers: {
-                    Authorization: sessionStorage.getItem('isLogin'),
-                  },
-                }),*/
-                
-              ]);
+  let { groupId, interviewerId } = useParams();
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-              //console.log(introduceResponse);
-              //console.log(interviewerResponse.data);
+  useEffect(() => {
+    const fetchVideoData = async () => {
+      try {
+        const response = await axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}/introduce/read`, {
+          headers: {
+            Authorization: sessionStorage.getItem('isLogin') || '',
+          },
+          responseType: 'blob', // 응답 데이터를 blob으로 설정
+        });
 
-          } catch (error) {
-              console.error('AxiosError:', error);
-              console.log('실패');
-          }
-      };
+        const videoBlob = new Blob([response.data], { type: 'video/mp4' });
+        const videoUrl = URL.createObjectURL(videoBlob);
+        setVideoUrl(videoUrl);
 
-      fetchQuestions();
-    }, []);
+      } catch (error) {
+        console.error('AxiosError:', error);
+        setError('Failed to fetch video data');
+      }
+    };
+
+    fetchVideoData();
+
+    // 클린업 함수: 컴포넌트가 언마운트될 때 URL 객체를 해제
+    return () => {
+      if (videoUrl) {
+        URL.revokeObjectURL(videoUrl);
+      }
+    };
+  }, [groupId, interviewerId, videoUrl]);
+
   return (
-    <div>asdl;fkjadf</div>
-  )
+    <div>
+      {error ? (
+        <div>{error}</div>
+      ) : videoUrl ? (
+        <video controls>
+          <source src={videoUrl} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      ) : (
+        <div>Loading...</div>
+      )}
+    </div>
+  );
 }
 
 export default AiResult;
