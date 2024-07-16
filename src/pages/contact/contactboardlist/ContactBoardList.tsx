@@ -1,34 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as C from './ContactBoardList.style';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import dayjs from 'dayjs';
+
+// 데이터 타입 정의
+interface BoardData {
+  id: number;
+  title: string;
+  created_at: string;
+}
 
 function ContactBoardList() {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 5;
+  const [boardData, setBoardData] = useState<BoardData[]>([]);
+  const [totalPosts, setTotalPosts] = useState(0);
 
-  const boardData = [
-    { no: 1, title: '공지사항입니다', date: '2024.07.11' },
-    { no: 2, title: '두 번째 공지사항입니다', date: '2024.07.12' },
-    { no: 3, title: '세 번째 공지사항입니다', date: '2024.07.13' },
-    { no: 4, title: '네 번째 공지사항입니다', date: '2024.07.14' },
-    { no: 5, title: '다섯 번째 공지사항입니다', date: '2024.07.15' },
-    { no: 6, title: '여섯 번째 공지사항입니다', date: '2024.07.16' },
-    // 추가적인 데이터를 여기에 추가할 수 있습니다.
-  ];
+  useEffect(() => {
+    // 데이터 불러오기
+    const fetchData = async () => {
+      try {
+        const token = sessionStorage.getItem('isLogin');
+        if (!token) {
+          console.error('No token found');
+          return;
+        }
+
+        console.log('Fetching data from /question/readMyquestion');
+        console.log('Authorization token:', token);
+
+        const response = await axios.get('/question/readMyQuestion', {
+          headers: {
+            Authorization: sessionStorage.getItem('isLogin')
+          }
+        });
+
+        console.log('Response data:', response.data);
+
+        setBoardData(response.data);
+        setTotalPosts(response.data.length);
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = boardData.slice(indexOfFirstPost, indexOfLastPost);
-  const totalPages = Math.ceil(boardData.length / postsPerPage);
+  const totalPages = Math.ceil(totalPosts / postsPerPage);
 
   const handleClick = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
 
-  const handleRowClick = (no: number) => {
-    navigate(`/contact-board-detail/${no}`);
+  const handleRowClick = (id: number) => {
+    navigate(`/contact-board-detail/${id}`);
   };
 
   const handleCreateClick = () => {
@@ -46,7 +77,7 @@ function ContactBoardList() {
             + 문의 생성하기
           </C.CreateButton>
         </C.SearchInputWrapper>
-        <C.TotalPost>Total post : {boardData.length}개</C.TotalPost>
+        <C.TotalPost>Total post : {totalPosts}개</C.TotalPost>
         <C.Table>
           <C.ColGroup>
             <col width="15%" />
@@ -62,10 +93,10 @@ function ContactBoardList() {
           </C.TableHead>
           <C.TableBody>
             {currentPosts.map((board) => (
-              <C.TableRow key={board.no} onClick={() => handleRowClick(board.no)}>
-                <C.TableCell>{board.no}</C.TableCell>
+              <C.TableRow key={board.id} onClick={() => handleRowClick(board.id)}>
+                <C.TableCell>{board.id}</C.TableCell>
                 <C.TableCell>{board.title}</C.TableCell>
-                <C.TableCell>{dayjs(board.date).format('YYYY.MM.DD')}</C.TableCell>
+                <C.TableCell>{dayjs(board.created_at).format('YYYY.MM.DD')}</C.TableCell>
               </C.TableRow>
             ))}
           </C.TableBody>

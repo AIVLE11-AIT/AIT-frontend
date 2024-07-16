@@ -9,21 +9,40 @@ function ContactBoardModify() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
-  // useEffect(() => {
-  //   // API를 호출하여 기존 데이터를 가져옵니다.
-  //   axios.get(`/api/contact-board/${id}`).then((response) => {
-  //     const data = response.data;
-  //     setTitle(data.title);
-  //     setContent(data.content);
-  //   });
-  // }, [id]);
+  useEffect(() => {
+    // API를 호출하여 기존 데이터를 가져옵니다.
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/question/${id}`, {
+          headers: {
+            Authorization: sessionStorage.getItem('isLogin')
+          }
+        });
+        const data = response.data;
+        setTitle(data.title);
+        setContent(data.content);
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      }
+    };
 
-  const handleSave = () => {
+    fetchData();
+  }, [id]);
+
+  const handleSave = async () => {
     // 수정된 데이터를 저장하는 로직을 여기에 추가합니다.
-    axios.put(`/api/contact-board/${id}`, { title, content }).then(() => {
+    try {
+      await axios.put(`/question/${id}/update`, { title, content }, {
+        headers: {
+          Authorization: sessionStorage.getItem('isLogin')
+        }
+      });
       alert('수정되었습니다.');
       navigate('/contact-board-list');
-    });
+    } catch (error) {
+      console.error('Failed to save data:', error);
+      alert('저장에 실패했습니다. 다시 시도해 주세요.');
+    }
   };
 
   return (

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import dayjs from 'dayjs';
 import * as C from './ContactBoardDetail.style'; // 기존 스타일을 유지하기 위해 임포트합니다.
 
@@ -8,19 +9,46 @@ function ContactBoardDetail() {
   const navigate = useNavigate();
   const [detailBoardData, setDetailBoardData] = useState<any>({
     no: id,
-    title: '공지사항 제목입니다.',
-    date: '2023-04-03T19:33:00',
-    name: '도형',
+    title: '',
+    date: '',
     views: 0,
-    content: '공지사항 내용입니다.'
+    content: ''
   });
   const [answer, setAnswer] = useState('');
 
-  const handleDelete = () => {
+  useEffect(() => {
+    // 데이터 불러오기
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/question/${id}`, {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('isLogin')}`
+          }
+        });
+        setDetailBoardData(response.data);
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  const handleDelete = async () => {
     if (window.confirm('삭제하겠습니까?')) {
-      // 삭제 로직을 여기에 추가
-      alert('삭제되었습니다.');
-      navigate('/contact-board-list');
+      try {
+        // 삭제 로직을 여기에 추가
+        await axios.delete(`/question/${id}/delete`, {
+          headers: {
+            Authorization: sessionStorage.getItem('isLogin')
+          }
+        });
+        alert('삭제되었습니다.');
+        navigate('/contact-board-list');
+      } catch (error) {
+        console.error('Failed to delete:', error);
+        alert('삭제에 실패했습니다. 다시 시도해 주세요.');
+      }
     }
   };
 
@@ -28,14 +56,24 @@ function ContactBoardDetail() {
     setAnswer(e.target.value);
   };
 
-  const handleAnswerSubmit = () => {
+  const handleAnswerSubmit = async () => {
     if (answer.trim() === '') {
       alert('답변을 입력해주세요.');
       return;
     }
-    // 답변 제출 로직을 여기에 추가
-    alert('답변이 제출되었습니다.');
-    setAnswer('');
+    try {
+      // 답변 제출 로직을 여기에 추가
+      await axios.post(`/answer/${id}`, { answer }, {
+        headers: {
+          Authorization: sessionStorage.getItem('isLogin')
+        }
+      });
+      alert('답변이 제출되었습니다.');
+      setAnswer('');
+    } catch (error) {
+      console.error('Failed to submit answer:', error);
+      alert('답변 제출에 실패했습니다. 다시 시도해 주세요.');
+    }
   };
 
   return (
