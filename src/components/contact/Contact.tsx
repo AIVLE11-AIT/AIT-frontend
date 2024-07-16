@@ -3,13 +3,17 @@ import * as C from './Contact.style';
 import { useNavigate } from 'react-router-dom';
 
 function Contact() {
-
   const navigate = useNavigate();
-  
+
   // InputBox 버튼 클릭 시
   const onClickInputBoxBtn = () => {
-    navigate('/contact-board-list');
-};
+    const isLogin = sessionStorage.getItem('isLogin');
+    if (isLogin) {
+      navigate('/contact-board-list');
+    } else {
+      navigate('/login');
+    }
+  };
 
   return (
     <C.PageContainer>

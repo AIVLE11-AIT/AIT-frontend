@@ -37,12 +37,10 @@ export const SearchInputWrapper = styled.div`
   align-items: center;
   width: 100%;
   margin-top: 20px;
-  justify-content: space-between;
-  gap: 20px;
 `;
 
 export const SearchInput = styled.input`
-  width: 75%;
+  flex: 1;
   height: 46px;
   padding: 0 20px 0 40px;
   font-size: 1rem;
@@ -50,9 +48,27 @@ export const SearchInput = styled.input`
   border-radius: 25px;
   outline: none;
   box-sizing: border-box;
-  margin: 0 auto;
-  align-self: flex-start;
-  margin-left: 10px;
+  margin-right: 10px;
+`;
+
+export const SearchButton = styled.button`
+  position: absolute;
+  right: 200px;
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Center vertically */
+  width: 90px; /* Adjust width */
+  height: 40px; /* Adjust height */
+  padding: 10px 20px;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  color: #0056b3;
+  font-size: 13px;
+  font-weight: 500;
+
+  &:hover {
+    background-color: #fff;
+  }
 `;
 
 export const CreateButton = styled.button`
@@ -70,7 +86,7 @@ export const CreateButton = styled.button`
 
 export const SearchInputIcon = styled.img`
   position: absolute;
-  left: 20px;
+  left: 10px;
   width: 22px;
   height: 22px;
 `;
@@ -160,4 +176,31 @@ export const PageNumber = styled.div<{ active?: boolean }>`
     background-color: #5757d1;
     color: #fff;
   }
+`;
+
+export const NoDataWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+export const Icon = styled.div<{ size: number }>`
+  img {
+    width: ${props => props.size}px;
+    height: ${props => props.size}px;
+  }
+`;
+
+export const NoDataText = styled.div`
+  color: #404146;
+  font-size: 20px;
+  font-weight: 600;
 `;

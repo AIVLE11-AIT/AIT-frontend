@@ -82,29 +82,17 @@ export const DetailTable = styled.table`
   }
 `;
 
-export const TableRow = styled.tr`
-  height: 30px; // 일정 높이를 유지하도록 설정
-`;
-
-export const ContentTableRow = styled.tr`
-  height: 400px;
-`;
-
-export const AnswerTableRow = styled.tr`
-  height: 100px;
-`;
-
 export const TableHeader = styled.th`
   padding: 10px;
   border: 1px solid #ddd;
   background-color: #f5f5f5;
   &:first-child {
-  // width: 70%;
-  // }
-  // &:last-child {
-  //   width: 30%;
-  // }
-  text-align: center; /* 가운데 정렬 */
+    text-align: center; /* 가운데 정렬 */
+  }
+`;
+
+export const TableRow = styled.tr`
+  height: 30px;
 `;
 
 export const TableCell = styled.td`
@@ -112,19 +100,46 @@ export const TableCell = styled.td`
   border: 1px solid #ddd;
   background-color: white;
   &:first-child {
-  width: 70%;
+    width: 70%;
   }
   &:last-child {
     width: 30%;
   }
 `;
 
+export const ContentTableRow = styled.tr`
+  height: 250px;
+`;
+
+export const AnswerTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+`;
+
+export const AnswerTitle = styled.th`
+  padding: 10px;
+  border: none;
+  color: #0d0d0d;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: left;
+  align-self: flex-start;
+`;
+
+export const AnswerTableCell = styled.td`
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: white;
+  height: 150px;
+`;
+
 export const CenterTableCell = styled(TableCell)`
-  text-align: center; /* 가운데 정렬 */
+  text-align: center;
 `;
 
 export const AnswerTextArea = styled.textarea`
-  width: 100%;
+  width: 80%;
   height: 80px;
   padding: 10px;
   border-radius: 10px;
@@ -135,7 +150,7 @@ export const AnswerTextArea = styled.textarea`
 
 export const SubmitButton = styled.button`
   padding: 10px 20px;
-  margin-top: 10px;
+  margin-left: 20px;
   background-color: #696cea;
   border: none;
   border-radius: 10px;
@@ -147,4 +162,11 @@ export const SubmitButton = styled.button`
   &:hover {
     background-color: #0056b3;
   }
+`;
+
+export const NoAnswerText = styled.div`
+  color: #404146;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 0;
 `;

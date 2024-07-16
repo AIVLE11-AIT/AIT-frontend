@@ -11,9 +11,11 @@ function ContactBoardDetail() {
     no: id,
     title: '',
     date: '',
-    content: ''
+    content: '',
+    answer: ''
   });
   const [answer, setAnswer] = useState('');
+  const isAdmin = sessionStorage.getItem('isLogin') === 'tkroh1997@naver.com';
 
   useEffect(() => {
     // 데이터 불러오기
@@ -25,6 +27,7 @@ function ContactBoardDetail() {
           }
         });
         setDetailBoardData(response.data);
+        setAnswer(response.data.answer || '');
       } catch (error) {
         console.error('Failed to fetch data:', error);
       }
@@ -68,6 +71,7 @@ function ContactBoardDetail() {
         }
       });
       alert('답변이 제출되었습니다.');
+      setDetailBoardData((prevData: any) => ({ ...prevData, answer }));
       setAnswer('');
     } catch (error) {
       console.error('Failed to submit answer:', error);
@@ -98,15 +102,29 @@ function ContactBoardDetail() {
               <C.TableHeader>내용</C.TableHeader>
               <C.TableCell colSpan={3}>{detailBoardData.content}</C.TableCell>
             </C.ContentTableRow>
-            <C.AnswerTableRow>
-              <C.TableHeader>답변</C.TableHeader>
-              <C.TableCell colSpan={3}>
-                <C.AnswerTextArea value={answer} onChange={handleAnswerChange} placeholder="답변을 입력해주세요." />
-                <C.SubmitButton onClick={handleAnswerSubmit}>제출</C.SubmitButton>
-              </C.TableCell>
-            </C.AnswerTableRow>
           </tbody>
         </C.DetailTable>
+        <C.AnswerTable>
+          <tbody>
+            <C.TableRow>
+              <C.AnswerTitle colSpan={2}>AIT<br/>답변</C.AnswerTitle>
+            </C.TableRow>
+            <C.TableRow>
+              <C.AnswerTableCell colSpan={2}>
+                {isAdmin ? (
+                  <>
+                    <C.AnswerTextArea value={answer} onChange={handleAnswerChange} placeholder="답변을 입력해주세요." />
+                    <C.SubmitButton onClick={handleAnswerSubmit}>제출</C.SubmitButton>
+                  </>
+                ) : detailBoardData.answer ? (
+                  detailBoardData.answer
+                ) : (
+                  <C.NoAnswerText>답변을 달고 있는 중이에요</C.NoAnswerText>
+                )}
+              </C.AnswerTableCell>
+            </C.TableRow>
+          </tbody>
+        </C.AnswerTable>
       </C.SearchContainer>
     </C.PageContainer>
   );
