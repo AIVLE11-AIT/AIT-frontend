@@ -47,9 +47,9 @@ function App() {
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/contact-board-create" element={<ContactBoardCreate />} />
-                  <Route path="/contact-board-detail/{id}" element={<ContactBoardDetail />} />
+                  <Route path="/contact-board-detail/:id" element={<ContactBoardDetail />} />
                   <Route path="/contact-board-list" element={<ContactBoardList />} />
-                  <Route path="/contact-board-modify" element={<ContactBoardModify />} />
+                  <Route path="/contact-board-modify/:id" element={<ContactBoardModify />} />
                   <Route path="/group-profile" element={<GroupProfile />} />
                   <Route path="/interview-mail-complete" element={<InterviewMailComplete />} />
                   <Route path="/interview-mail-yet/:index" element={<InterviewMailYet />} />

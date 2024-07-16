@@ -25,6 +25,7 @@ export const HeaderContent = styled.div`
     padding: 30px 32px;
     color: #0D0D0D;
     font-weight: 500;
+    cursor: pointer;
 `;
 
 // 로그인 버튼

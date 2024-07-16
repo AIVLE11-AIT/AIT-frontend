@@ -9,14 +9,14 @@ function ContactBoardModify() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
-  useEffect(() => {
-    // API를 호출하여 기존 데이터를 가져옵니다.
-    axios.get(`/api/contact-board/${id}`).then((response) => {
-      const data = response.data;
-      setTitle(data.title);
-      setContent(data.content);
-    });
-  }, [id]);
+  // useEffect(() => {
+  //   // API를 호출하여 기존 데이터를 가져옵니다.
+  //   axios.get(`/api/contact-board/${id}`).then((response) => {
+  //     const data = response.data;
+  //     setTitle(data.title);
+  //     setContent(data.content);
+  //   });
+  // }, [id]);
 
   const handleSave = () => {
     // 수정된 데이터를 저장하는 로직을 여기에 추가합니다.
