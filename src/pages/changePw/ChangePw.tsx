@@ -73,17 +73,10 @@ function ChangePw() {
       });
     }
 
-    function onClickBack(){
-      navigate('/group-profile');
-    }
-
   return (
     <F.Container>
       <F.FormWrapper>
-        <F.Title>
-          <F.BackBtn onClick={onClickBack}><F.BackBtnArrow src={process.env.PUBLIC_URL + '/images/BackBtn.svg'}/></F.BackBtn>
-          비밀번호 찾기
-        </F.Title>
+        <F.Title> 비밀번호 찾기</F.Title>
         <F.SubTitle>
           변경할 비밀번호를 입력해 주세요.
         </F.SubTitle>
@@ -133,7 +126,7 @@ function ChangePw() {
                 })}
               />
             </F.InputWrap>
-            {errors.checkPassword && <F.Error>{errors.checkPassword.message}</F.Error>}
+            {errors.checkPassword && <F.Error><small role="alert">{errors.checkPassword.message}</small></F.Error>}
           </F.EmailWrap>
           <F.BtnContainer>
             <F.Button type="submit" disabled={!isActive}>

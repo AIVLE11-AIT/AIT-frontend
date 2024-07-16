@@ -35,7 +35,7 @@ function InterviewerList() {
 
     const navigate = useNavigate();
     function onClickList(id: number) {
-        navigate(`/interviewer-result/${index}/${id}`);
+        navigate(`/interviewer-result/${id}`);
     }
 
     return (
@@ -47,9 +47,9 @@ function InterviewerList() {
                     <I.Subtitle>면접을 진행한 지원자 리스트입니다.</I.Subtitle>
                     <I.ListBox>
                         <I.ListHeaderBar />
-                        {data.map((item, index) => (
+                        {data.map((item) => (
                             <I.ListWrap key={item.id} onClick={() => onClickList(item.id)}>
-                                <I.IdBox>{index + 1}</I.IdBox>
+                                <I.IdBox>{item.id}</I.IdBox>
                                 <I.ContentBox>{item.name} &nbsp; ({item.email})</I.ContentBox>
                             </I.ListWrap>
                         ))}

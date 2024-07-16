@@ -54,26 +54,8 @@ function Result({ index }: ResultProps) {
 
     // 메일 전송했는지 유무 api연결 해야 함
     function onClickBox() {
-      axios({
-        url: `/interviewGroup/${index+1}/checkEmail`,
-        method: 'get',
-        headers: {
-          Authorization: sessionStorage.getItem('isLogin'),
-        },
-      })
-        .then((response) => {
-          console.log(response.data);
-          if(response.data === true){ // 메일전송 완료 했으면
-            navigate(`/interviewer-list/${index+1}`);
-          }
-          else{
-            navigate(`/interview-mail-yet/${index+1}`);
-          }
-        })
-        .catch((error) => {
-          console.log('실패');
-          console.error('AxiosError:', error);
-        });
+      //navigate(`/interview-mail-yet/${index+1}`);
+      navigate(`/interviewer-list/${index+1}`);
     }
 
     // 클릭 이벤트 버블링 막기
