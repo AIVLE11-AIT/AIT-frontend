@@ -4,13 +4,14 @@ import Camera from './Camera';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
-import { CompanyQuestionAtom, IntroduceAtom, QnaIdAtom } from '../../../recoil/interviewAtoms';
+import { CompanyQuestionAtom, IntroduceAtom, QnaIdAtom, QnaIndexAtom } from '../../../recoil/interviewAtoms';
 
 function Question() {
     const [questions, setQuestions] = useState<string[]>([
         '안녕하세요? 만나서 반갑습니다.',
         '먼저, 자기소개를 말해주세요.'
     ]); // 면접 질문 리스트
+    const [questionsId, setQuestionsId] = useState<number[]>([]); // 질문 id 리스트
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [timeLeft, setTimeLeft] = useState(0); // 타이머 시간
     const [timerLabel, setTimerLabel] = useState('대기 중'); // 타이머 레이블
@@ -25,18 +26,28 @@ function Question() {
         const fetchQuestions = async () => {
             try {
                 const [companyQnaResponse, interviewerQnaResponse] = await Promise.all([
-                    axios.get(`/interviewGroup/${1}/companyQna/readAll`),
-                    axios.get(`/interviewGroup/${1}/${1}/interviewerQna/readAll`),
+                    axios.get(`/interviewGroup/${groupId}/companyQna/readAll`),
+                    axios.get(`/interviewGroup/${groupId}/${interviewerId}/interviewerQna/readAll`),
                 ]);
 
                 const companyQnaQuestions = companyQnaResponse.data.map((item: any) => item.question);
                 const interviewerQnaQuestions = interviewerQnaResponse.data.map((item: any) => item.question);
+                const companyQnaQuestionsId = companyQnaResponse.data.map((item: any) => item.id);
+                const interviewerQnaQuestionsId = interviewerQnaResponse.data.map((item: any) => item.id);
+                //console.log(companyQnaResponse);
 
                 setQuestions(prevQuestions => [
                     ...prevQuestions,
                     ...companyQnaQuestions,
                     ...interviewerQnaQuestions,
                 ]);
+
+                setQuestionsId(preQuestionsId => [
+                    ...preQuestionsId,
+                    ...companyQnaQuestionsId,
+                    ...interviewerQnaQuestionsId,
+                ]);
+
             } catch (error) {
                 console.error('AxiosError:', error);
                 console.log('실패');
@@ -44,11 +55,12 @@ function Question() {
         };
 
         fetchQuestions();
-    }, [1]);
+    }, []);
 
-    const [qnaId, setQnaId] = useRecoilState(QnaIdAtom); // 질문 인덱스
+    const [qnaIndex, setQnaIndex] = useRecoilState(QnaIndexAtom); // 질문 인덱스
     const [introduceState, setIntroduceState] = useRecoilState(IntroduceAtom); // 질문 인덱스
     const [qnaState, setQnaState] = useRecoilState(CompanyQuestionAtom);
+    const [qnaId, setQnaId] = useRecoilState(QnaIdAtom); // 질문id
 
     useEffect(() => {
         let timeout: NodeJS.Timeout;
@@ -84,15 +96,18 @@ function Question() {
                     setCurrentQuestionIndex(currentQuestionIndex + 1);                    
                     if(currentQuestionIndex === 1){ // 자기 소개 영상이 끝나면 상태 변경
                         setIntroduceState(false);
-                        console.log(introduceState);
+                        setQnaId(questionsId[currentQuestionIndex-1]);
+                        //console.log(introduceState);
                     }
 
                     if(currentQuestionIndex === 4){ // 공통 질문이 끝난 경우
-                        setQnaId(1);
+                        setQnaIndex(1);
                         setQnaState(false);
+                        setQnaId(questionsId[currentQuestionIndex-1]);
                     }
                     else{
-                        setQnaId(qnaId + 1);
+                        setQnaIndex(qnaIndex + 1);
+                        setQnaId(questionsId[currentQuestionIndex-1]);
                     }
                     //console.log(qnaId);
                     if (currentQuestionIndex === questions.length - 1) {

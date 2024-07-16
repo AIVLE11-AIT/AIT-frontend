@@ -6,9 +6,9 @@ export const CompanyQuestionAtom = atom<boolean>({
     default: true,
 });
 
-// 질문 id
-export const QnaIdAtom = atom<number>({
-    key: 'QnaIdAtom',
+// 질문 인덱스
+export const QnaIndexAtom = atom<number>({
+    key: 'QnaIndexAtom',
     default: 0,
 });
 
@@ -16,4 +16,10 @@ export const QnaIdAtom = atom<number>({
 export const IntroduceAtom = atom<boolean>({
     key: 'IntroduceAtom',
     default: true,
+});
+
+// 질문 id
+export const QnaIdAtom = atom<number>({
+    key: 'QnaIdAtom',
+    default: 0,
 });
