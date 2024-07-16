@@ -23,7 +23,7 @@ function SignUpForm() {
       clearErrors,
       getValues,
       formState: { errors },
-    } = useForm<FormValue>({ mode: 'onBlur' })
+    } = useForm<FormValue>({ mode: 'onSubmit' })
 
     //비밀번호 일치 확인(완료)
     useEffect(() => {
@@ -240,8 +240,8 @@ function SignUpForm() {
               required: "비밀번호 입력은 필수 입력입니다.",
               pattern: {
                 value:
-                  /^[a-zA-Z0-9_@?!]{8,20}$/i,
-                message: "8~20자 영문, 숫자, 특수기호(_ @ ? !)",
+                  /^[a-zA-Z0-9]{8,20}$/i,
+                message: "8~20자 영문, 숫자 조합",
               },
             })}
           />

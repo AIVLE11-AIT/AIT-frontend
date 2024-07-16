@@ -54,7 +54,7 @@ function App() {
                 </Route>
                 {/*헤더가 필요 없는 페이지*/}
                 <Route path="/pretest" element={<PreTest />} />
-                <Route path="/interview" element={<Interview />} />
+                <Route path="/interview/:groupId/:interviwerId" element={<Interview />} />
                 <Route path="/interview-exit" element={<InterviewExit />} />
                 {/*면접 페이지*/}
                 <Route element={<CheckSetting />}>

@@ -55,11 +55,11 @@ function AiResult() {
 
       const videoBlob = new Blob([introduceResponse.data], { type: 'video/mp4' });
       const introVideoUrl = URL.createObjectURL(videoBlob);
-      setIntroVideoUrl(introVideoUrl);
-
-      setInterviewerInfo(interviewerInfoResponse.data);
-      setCompanyQna(companyQnaResponse.data);
-      setInterviewerQna(interviewerQnaResponse.data);
+      setIntroVideoUrl(introVideoUrl); // 자기소개 영상 저장
+      setInterviewerInfo(interviewerInfoResponse.data); // 지원자 정보 저장
+      setCompanyQna(companyQnaResponse.data); // 공통 질문 저장
+      console.log(companyQnaResponse);
+      setInterviewerQna(interviewerQnaResponse.data); // 자소서 기반 질문 저장
 
     } catch (error) {
       console.error('AxiosError:', error);
@@ -107,6 +107,7 @@ function AiResult() {
     }
   }, [videoUrl]);
 
+  // 목록 이동 버튼 클릭 시
   function onClickBackBtn() {
     navigate(`/interviewer-list/${groupId}`);
   }
@@ -196,8 +197,11 @@ function AiResult() {
             </A.QuestionListBox>
           </A.QuestionList>
         </A.InterviewVideo>
-        
-        <A.AnswerBox></A.AnswerBox>
+
+        {/* 답변 텍스트 변환 출력 */}
+        <A.AnswerBox>
+              
+        </A.AnswerBox>
 
         <Report/>
       </A.InterviewResultContainer>
