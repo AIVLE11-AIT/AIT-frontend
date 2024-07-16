@@ -1,44 +1,86 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as C from './ContactBoardCreate.style'; // 스타일 파일을 새로 만듭니다.
+import * as C from './ContactBoardCreate.style';
+import axios from 'axios';
+import { useForm, Controller } from 'react-hook-form';
 
 function ContactBoardCreate() {
   const navigate = useNavigate();
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const { control, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
+      title: '',
+      content: ''
+    }
+  });
 
-  const handleSave = () => {
-    // 저장 로직을 여기에 추가합니다.
-    // 예를 들어, 서버로 데이터를 전송합니다.
-    alert('저장되었습니다.');
-    navigate('/contact-board-list');
+  // 폼 데이터 타입 정의
+  type FormValue = {
+    title: string;
+    content: string;
+  };
+
+  const onValid = async (data: FormValue) => {
+    try {
+      // JSON 데이터 준비
+      const value = {
+        title: data.title,
+        content: data.content
+      };
+
+      // Axios를 통해 백엔드로 전송
+      const response = await axios.post('/question/create', value, {
+        headers: {
+          Authorization: sessionStorage.getItem('isLogin')
+        }
+      });
+
+      // 서버 응답이 성공적이면 상세 페이지로 이동
+      navigate(`/contact-board-detail/${response.data.id}`);
+    } catch (error) {
+      console.error('Failed:', error);
+      alert('저장에 실패했습니다. 다시 시도해 주세요.');
+    }
   };
 
   return (
     <C.PageContainer>
       <C.FormContainer>
         <C.Title>문의하기 생성</C.Title>
-        <C.Form>
+        <C.Form onSubmit={handleSubmit(onValid)}>
           <C.FormRow>
             <C.Label>제목</C.Label>
-            <C.Input
-              type="text"
-              placeholder="제목을 입력해주세요."
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+            <Controller
+              name="title"
+              control={control}
+              rules={{ required: '제목을 입력해주세요.' }}
+              render={({ field }) => (
+                <C.Input
+                  type="text"
+                  placeholder="제목을 입력해주세요."
+                  {...field}
+                />
+              )}
             />
+            {errors.title && <C.ErrorMessage>{errors.title.message}</C.ErrorMessage>}
           </C.FormRow>
           <C.FormRow>
             <C.Label>내용</C.Label>
-            <C.TextArea
-              placeholder="내용을 입력해주세요."
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
+            <Controller
+              name="content"
+              control={control}
+              rules={{ required: '내용을 입력해주세요.' }}
+              render={({ field }) => (
+                <C.TextArea
+                  placeholder="내용을 입력해주세요."
+                  {...field}
+                />
+              )}
             />
+            {errors.content && <C.ErrorMessage>{errors.content.message}</C.ErrorMessage>}
           </C.FormRow>
           <C.ButtonWrapper>
-            <C.ActionButton onClick={handleSave}>저장</C.ActionButton>
-            <C.ActionButton onClick={() => navigate('/contact-board-list')}>
+            <C.ActionButton type="submit">저장</C.ActionButton>
+            <C.ActionButton type="button" onClick={() => navigate('/contact-board-list')}>
               취소
             </C.ActionButton>
           </C.ButtonWrapper>

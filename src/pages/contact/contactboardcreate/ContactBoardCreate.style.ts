@@ -31,7 +31,7 @@ export const Title = styled.h1`
   margin-left: 20px;
 `;
 
-export const Form = styled.div`
+export const Form = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -97,4 +97,10 @@ export const ActionButton = styled.button`
   &:hover {
     background-color: #0056b3;
   }
+`;
+
+export const ErrorMessage = styled.div`
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
 `;
