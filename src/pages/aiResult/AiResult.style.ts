@@ -48,13 +48,13 @@ export const PassIcon = styled.div<{ isPass: boolean }>`
     border-radius: 50px;
     width: 9px;
     height: 9px;
-    background-color: ${({ isPass }) => (isPass ? 'green' : 'red')};
+    background-color: ${({ isPass }) => (isPass ? '#84C507' : '#FF4A4A')};
     margin-right: 10px;
 `;
 
 export const PassText = styled.div<{ isPass: boolean }>`
     font-size: 17px;
-    color: ${({ isPass }) => (isPass ? 'green' : 'red')};
+    color: ${({ isPass }) => (isPass ? '#84C507' : '#FF4A4A')};
 `;
 
 // 목록 이동 버튼

@@ -81,7 +81,7 @@ function AiResult() {
       const videoBlob = new Blob([videoResponse.data], { type: 'video/mp4' });
       const videoUrl = URL.createObjectURL(videoBlob);
       setVideoUrl(videoUrl);
-      console.log(`Video URL for ${type} ${questionId}:`, videoUrl);
+      //console.log(`Video URL for ${type} ${questionId}:`, videoUrl);
 
     } catch (error) {
       console.error('AxiosError:', error);
