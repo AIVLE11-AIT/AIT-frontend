@@ -92,9 +92,9 @@ function ContactBoardList() {
             </C.TableRow>
           </C.TableHead>
           <C.TableBody>
-            {currentPosts.map((board) => (
+            {currentPosts.map((board, index) => (
               <C.TableRow key={board.id} onClick={() => handleRowClick(board.id)}>
-                <C.TableCell>{board.id}</C.TableCell>
+                <C.TableCell>{index+1}</C.TableCell>
                 <C.TableCell>{board.title}</C.TableCell>
                 <C.TableCell>{dayjs(board.created_at).format('YYYY.MM.DD')}</C.TableCell>
               </C.TableRow>

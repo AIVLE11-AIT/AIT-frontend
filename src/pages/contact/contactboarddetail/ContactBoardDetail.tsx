@@ -11,7 +11,6 @@ function ContactBoardDetail() {
     no: id,
     title: '',
     date: '',
-    views: 0,
     content: ''
   });
   const [answer, setAnswer] = useState('');
@@ -22,7 +21,7 @@ function ContactBoardDetail() {
       try {
         const response = await axios.get(`/question/${id}`, {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem('isLogin')}`
+            Authorization: sessionStorage.getItem('isLogin')
           }
         });
         setDetailBoardData(response.data);
@@ -90,14 +89,10 @@ function ContactBoardDetail() {
         <C.DetailTable>
           <tbody>
             <C.TableRow>
-              <C.TableHeader>조회</C.TableHeader>
-              <C.CenterTableCell>{detailBoardData.views}</C.CenterTableCell>
+              <C.TableHeader>제목</C.TableHeader>
+              <C.TableCell>{detailBoardData.title}</C.TableCell>
               <C.TableHeader>등록일</C.TableHeader>
               <C.CenterTableCell>{dayjs(detailBoardData.date).format('YYYY-MM-DD HH:mm')}</C.CenterTableCell>
-            </C.TableRow>
-            <C.TableRow>
-              <C.TableHeader>제목</C.TableHeader>
-              <C.TableCell colSpan={3}>{detailBoardData.title}</C.TableCell>
             </C.TableRow>
             <C.ContentTableRow>
               <C.TableHeader>내용</C.TableHeader>

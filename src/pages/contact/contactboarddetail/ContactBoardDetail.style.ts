@@ -98,12 +98,25 @@ export const TableHeader = styled.th`
   padding: 10px;
   border: 1px solid #ddd;
   background-color: #f5f5f5;
+  &:first-child {
+  // width: 70%;
+  // }
+  // &:last-child {
+  //   width: 30%;
+  // }
   text-align: center; /* 가운데 정렬 */
 `;
 
 export const TableCell = styled.td`
   padding: 10px;
   border: 1px solid #ddd;
+  background-color: white;
+  &:first-child {
+  width: 70%;
+  }
+  &:last-child {
+    width: 30%;
+  }
 `;
 
 export const CenterTableCell = styled(TableCell)`
