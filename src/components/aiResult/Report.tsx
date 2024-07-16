@@ -23,6 +23,7 @@ interface ReportData {
     total_emotion_score: string;
 
     total_report: string;
+    total_score: number;
   }
   
   function Report() {
@@ -148,7 +149,13 @@ interface ReportData {
                 )}
             </R.Container>
         </R.Main>
-        {report && <R.ReportBox><R.ReportTitle>최종 레포트</R.ReportTitle>{report.total_report}</R.ReportBox>}
+        {report && <R.ReportBox>
+            <R.ReportTitle>
+                최종 레포트
+                <R.ReportText>{report.total_score}점</R.ReportText>
+            </R.ReportTitle>
+            {report.total_report}
+        </R.ReportBox>}
     </div>
   )
 }

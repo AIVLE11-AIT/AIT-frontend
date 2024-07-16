@@ -85,10 +85,14 @@ export const ReportBox = styled.div`
     line-height: 1.7;
 `;
 
-// 최종레포트 제목
+// 최종레포트 제목 박스
 export const ReportTitle = styled.div`
     margin-bottom: 15px;
-    font-size: 30px;
-    font-weight: 700;
+    font-size: 17px;
     color: #292D42;
+`;
+
+export const ReportText = styled.div`
+    font-size: 50px;
+    font-weight: 700;
 `;
