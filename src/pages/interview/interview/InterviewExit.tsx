@@ -1,7 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import * as I from  './InterviewExit.sytle';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function InterviewExit() {
+  let { groupId, interviewerId } = useParams(); // 주소에서 면접 id가져오는 변수
+
+  useEffect(() => {
+      axios({
+          url: `/interviewGroup/${groupId}/interviewer/${interviewerId}/result/finish`,
+          method: 'get',
+      })
+      .then((response) => {
+          console.log(response.data);
+      })
+      .catch((error) => {
+          console.log('실패');
+          console.error('AxiosError:', error);
+      });
+  }, []);
+
   return (
     <div>
         <I.MainContainer>

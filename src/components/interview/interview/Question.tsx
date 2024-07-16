@@ -18,7 +18,7 @@ function Question() {
     const navigate = useNavigate();
     const cameraRef = useRef<{ startRecording: () => void; stopRecording: () => void } | null>(null); // 카메라 ref 추가
     
-    let { id } = useParams(); // 주소에서 면접 id가져오는 변수
+    let { groupId, interviewerId } = useParams(); // 주소에서 면접 id가져오는 변수
 
     // 공통질문 가져오는 API
     useEffect(() => {
@@ -73,7 +73,7 @@ function Question() {
                     if (cameraRef.current) {
                         cameraRef.current.startRecording();
                     }
-                }, 4000);
+                }, 20000);
             } else if (timerStage === 'answering') {
                 // 답변 시간 60초 타이머
                 timeout = setTimeout(() => {
@@ -100,14 +100,14 @@ function Question() {
                         setTimerLabel('대기 중');
                         setTimerStage('');
                         setTimeout(() => {
-                            navigate('/interview-exit'); // Navigate after 2 seconds
+                            navigate(`/interview-exit/${groupId}/${interviewerId}`); // 면접 종료시 종료 페이지로 이동
                         }, 1000);
                     } else {
                         setTimerLabel('준비 시간');
                         setTimeLeft(20); // 다음 질문에 대한 초기 타이머 설정 (20초)
                         setTimerStage('thinking');
                     }
-                }, 4000);
+                }, 60000);
             }
         }
 

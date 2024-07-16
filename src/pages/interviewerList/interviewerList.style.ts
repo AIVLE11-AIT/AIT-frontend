@@ -85,8 +85,8 @@ export const ContentBox= styled.div`
 // 합불 여부 아이콘
 export const PassIcon = styled.div<{ isPass: boolean }>`
     border-radius: 50px;
-    width: 9px;
-    height: 9px;
+    width: 10px;
+    height: 10px;
     background-color: ${({ isPass }) => (isPass ? '#84C507' : '#FF4A4A')};
     margin: auto 50px auto auto;
 `;
