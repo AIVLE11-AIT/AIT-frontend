@@ -24,7 +24,6 @@ export const HeaderButton = styled.button`
   border: none;
   cursor: pointer;
   color: #6D6D6D;
-  font-family: "Abhaya Libre SemiBold";
   font-size: 15px;
   font-style: normal;
   font-weight: 600;
@@ -53,7 +52,6 @@ export const DetailItem = styled.div`
   align-items: center;
   padding: 7px 0px;
   color: var(--gray-02, #606060);
-  font-family: "Abhaya Libre SemiBold";
   font-size: 13px;
   font-style: normal;
   font-weight: 600;

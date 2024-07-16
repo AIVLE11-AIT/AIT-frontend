@@ -57,7 +57,7 @@ export const Timer20Bar = styled.div`
     border-radius: 30px;
     
     background: linear-gradient(272deg, #696CEA 10%, rgba(160, 119, 255, 0.85) 100%);
-    animation: ${timerAnimation} 20s linear forwards; /* 60초 동안 애니메이션 실행 */
+    animation: ${timerAnimation} 20s linear forwards; /* 20초 동안 애니메이션 실행 */
 `;
 
 export const Timer60Bar = styled.div`
@@ -69,7 +69,7 @@ export const Timer60Bar = styled.div`
     border-radius: 30px;
     
     background: linear-gradient(272deg, #696CEA 10%, rgba(160, 119, 255, 0.85) 100%);
-    animation: ${timerAnimation} 61s linear forwards; /* 60초 동안 애니메이션 실행 */
+    animation: ${timerAnimation} 60s linear forwards; /* 60초 동안 애니메이션 실행 */
 `;
 
 // 질문 box

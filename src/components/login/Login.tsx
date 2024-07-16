@@ -17,7 +17,7 @@ function Login() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FormValue>({ mode: 'onBlur', criteriaMode: 'all' });
+  } = useForm<FormValue>({ mode: 'onSubmit', criteriaMode: 'all' });
 
   const navigate = useNavigate();
   const [email, setEmail] = useRecoilState(EmailAtom);
