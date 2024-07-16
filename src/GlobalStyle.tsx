@@ -1,59 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-@font-face { 
-	font-family: 'S-CoreDream'; 
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-1Thin.woff') format('woff'); 
-	font-weight: 100; 
-	font-style: normal; 
-}
-@font-face { 
-	font-family: 'S-CoreDream'; 
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-2ExtraLight.woff') format('woff'); 
-	font-weight: 200; 
-	font-style: normal; 
-}
-@font-face { 
-	font-family: 'S-CoreDream'; 
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff'); 
-	font-weight: 300; 
-	font-style: normal; 
-}
-@font-face { 
-	font-family: 'S-CoreDream'; 
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff'); 
-	font-weight: 400; 
-	font-style: normal; 
-}
-@font-face { 
-	font-family: 'S-CoreDream'; 
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff'); 
-	font-weight: 500; 
-	font-style: normal; 
-}
-@font-face { 
-	font-family: 'S-CoreDream'; 
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff'); 
-	font-weight: 600; 
-	font-style: normal; 
-}
-@font-face { 
-	font-family: 'S-CoreDream'; 
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-7ExtraBold.woff') format('woff'); 
-	font-weight: 700; 
-	font-style: normal; 
-}
-@font-face { 
-	font-family: 'S-CoreDream'; 
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff') format('woff'); 
-	font-weight: 800; 
-	font-style: normal; 
-}
-@font-face { 
-	font-family: 'S-CoreDream'; 
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-9Black.woff') format('woff'); 
-	font-weight: 900; 
-	font-style: normal; 
+@font-face {
+     font-family: 'S-CoreDream-3Light';
+     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
 }
 
   html, body, div, span, applet, object, iframe,
@@ -75,6 +27,7 @@ time, mark, audio, video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  font-family: 'S-CoreDream-3Light';
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -85,12 +38,12 @@ footer, header, hgroup, main, menu, nav, section {
 *[hidden] {
     display: none;
 }
-html,body, input, button {
+html,body {
   line-height: 1;
   max-width: 100%;
   height: 100%;
   overflow-x: hidden;
-  font-family: 'S-CoreDream';
+  font-family: 'S-CoreDream-3Light';
   position: relative;
 }
 
@@ -124,10 +77,12 @@ a {
 
 button {
   cursor: pointer;
+  font-family: 'S-CoreDream-3Light';
 }
 
 input {
   outline: none;
+  font-family: 'S-CoreDream-3Light';
 }
 
 `;

@@ -117,7 +117,7 @@ export const Button = styled.button<{ secondary?: boolean, disabled?: boolean}>`
 
     background: ${({ secondary, disabled }) => 
       disabled ? '#ccc' : (secondary ? '#404146' : '#696CEA')};
-    cursor: pointer;
+    cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
 
     &:hover {
       background: ${({ secondary, disabled }) => 
