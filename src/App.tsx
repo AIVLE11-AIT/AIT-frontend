@@ -3,6 +3,7 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { GlobalStyle } from './GlobalStyle';
 import { RecoilRoot } from 'recoil';
 import './App.css';
+// import Auth from '/auth';
 
 // pages
 import Home from './pages/home/Home'
@@ -15,6 +16,11 @@ import InterviewMailComplete from './pages/interviewmail/InterviewMailComplete';
 import InterviewMailYet from './components/interviewmail/InterviewMailYet';
 import InterviewMail from './components/interviewmail/InterviewMail';
 import InterviewMake from './pages/interviewMake/InterviewMake';
+import Contact from './components/contact/Contact';
+import ContactBoardCreate from './pages/contact/contactboardcreate/ContactBoardCreate';
+import ContactBoardDetail from './pages/contact/contactboarddetail/ContactBoardDetail';
+import ContactBoardList from './pages/contact/contactboardlist/ContactBoardList';
+import ContactBoardModify from './pages/contact/contactboardmodify/ContactBoardModify';
 // components
 import Header from './components/header/Header';
 import Step1 from './components/interview/checkSetting/Step1';
@@ -29,6 +35,9 @@ import AiResult from './pages/aiResult/AiResult';
 //import Step2 from './components/interview/checkSetting/Step2';
 
 function App() {
+  // const AuthHome = Auth(Home, null);
+
+
   return (
     <>
       <RecoilRoot>
@@ -40,6 +49,11 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<Signup />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/contact-board-create" element={<ContactBoardCreate />} />
+                  <Route path="/contact-board-detail/:id" element={<ContactBoardDetail />} />
+                  <Route path="/contact-board-list" element={<ContactBoardList />} />
+                  <Route path="/contact-board-modify/:id" element={<ContactBoardModify />} />
                   <Route path="/group-profile" element={<GroupProfile />} />
                   <Route path="/interview-mail-complete" element={<InterviewMailComplete />} />
                   <Route path="/interview-mail-yet/:index" element={<InterviewMailYet />} />

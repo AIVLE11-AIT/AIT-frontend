@@ -21,6 +21,11 @@ function Header() {
     const onClickLoginBtn = () => {
         navigate('/login');
     }
+    
+    const handleContactButtonClick = () => {
+        navigate('/contact');
+    };
+
 	return (
 		<>
 			<H.HeaderDiv>
@@ -29,7 +34,7 @@ function Header() {
                 </H.LogoDiv>
                 <H.HeaderWrap>
                     <H.HeaderContent>서비스 소개</H.HeaderContent>
-                    <H.HeaderContent>문의하기</H.HeaderContent>
+                    <H.HeaderContent onClick={handleContactButtonClick}>문의하기</H.HeaderContent>
                     {sessionStorage.getItem('isLogin') === null ? (
                     <H.LoginBtn onClick={onClickLoginBtn}>
                         <H.LoginBtnText>Login</H.LoginBtnText>

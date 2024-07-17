@@ -39,7 +39,7 @@ function Login() {
         console.log(response.data);
         setEmail(data.email);
         sessionStorage.setItem('isLogin', response.headers.authorization);
-        navigate('/group-profile');
+        navigate('/');
         
       }) .catch((error) => {
         alert("이메일 또는 비밀번호를 확인해 주세요.");
