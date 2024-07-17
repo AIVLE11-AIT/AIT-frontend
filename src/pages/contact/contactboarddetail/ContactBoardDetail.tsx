@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import dayjs from 'dayjs';
-import * as C from './ContactBoardDetail.style'; // 기존 스타일을 유지하기 위해 임포트합니다.
+import * as C from './ContactBoardDetail.style';
 
 function ContactBoardDetail() {
   const { id } = useParams<{ id: string }>();
@@ -15,9 +15,25 @@ function ContactBoardDetail() {
     answer: ''
   });
   const [answer, setAnswer] = useState('');
-  const isAdmin = sessionStorage.getItem('isLogin') === 'tkroh1997@naver.com';
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
+    // 관리자 여부 확인
+    const checkAdmin = async () => {
+      try {
+        const response = await axios.get('/check', {
+          headers: {
+            Authorization: sessionStorage.getItem('isLogin')
+          }
+        });
+        setIsAdmin(response.data.isAdmin);
+      } catch (error) {
+        console.error('Failed to check admin status:', error);
+      }
+    };
+
+    checkAdmin();
+
     // 데이터 불러오기
     const fetchData = async () => {
       try {
@@ -39,7 +55,6 @@ function ContactBoardDetail() {
   const handleDelete = async () => {
     if (window.confirm('삭제하겠습니까?')) {
       try {
-        // 삭제 로직을 여기에 추가
         await axios.delete(`/question/${id}/delete`, {
           headers: {
             Authorization: sessionStorage.getItem('isLogin')
@@ -64,7 +79,6 @@ function ContactBoardDetail() {
       return;
     }
     try {
-      // 답변 제출 로직을 여기에 추가
       await axios.post(`/answer/${id}`, { answer }, {
         headers: {
           Authorization: sessionStorage.getItem('isLogin')
@@ -107,10 +121,8 @@ function ContactBoardDetail() {
         <C.AnswerTable>
           <tbody>
             <C.TableRow>
-              <C.AnswerTitle colSpan={2}>AIT<br/>답변</C.AnswerTitle>
-            </C.TableRow>
-            <C.TableRow>
-              <C.AnswerTableCell colSpan={2}>
+              <C.AnswerTitle>AIT 답변</C.AnswerTitle>
+              <C.AnswerTableCell colSpan={1}>
                 {isAdmin ? (
                   <>
                     <C.AnswerTextArea value={answer} onChange={handleAnswerChange} placeholder="답변을 입력해주세요." />

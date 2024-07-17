@@ -123,15 +123,16 @@ export const AnswerTitle = styled.th`
   color: #0d0d0d;
   font-size: 20px;
   font-weight: 600;
-  text-align: left;
-  align-self: flex-start;
+  text-align: center;
+  align-self: center;
 `;
 
 export const AnswerTableCell = styled.td`
   padding: 10px;
-  border: 1px solid #ddd;
+  border: none;
   background-color: white;
   height: 150px;
+  display: flex;
 `;
 
 export const CenterTableCell = styled(TableCell)`
@@ -169,4 +170,7 @@ export const NoAnswerText = styled.div`
   font-size: 16px;
   font-weight: 600;
   padding: 10px 0;
+  text-align: center;
+  align-items: center;
+  width: 100%; /* 텍스트를 가운데로 정렬하기 위해 추가 */
 `;
