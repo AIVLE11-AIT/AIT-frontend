@@ -27,6 +27,7 @@ function AiResult() {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [interviewerImage, setInterviewerImage] = useState<string | null>(null); // Interviewer 이미지 상태 추가
 
   // 질문 리스트별 선택 상태
   const [selectedCompanyQnaId, setSelectedCompanyQnaId] = useState<number | undefined>(undefined);
@@ -37,7 +38,11 @@ function AiResult() {
     try {
       const token = sessionStorage.getItem('isLogin') || '';
 
-      const [introduceResponse, interviewerInfoResponse, companyQnaResponse, interviewerQnaResponse] = await Promise.all([
+      const [imageResponse, introduceResponse, interviewerInfoResponse, companyQnaResponse, interviewerQnaResponse] = await Promise.all([
+        axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}/image/read`, {
+          headers: { Authorization: token },
+          responseType: 'blob',
+        }),
         axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}/introduce/read`, {
           headers: { Authorization: token },
           responseType: 'blob',
@@ -53,10 +58,15 @@ function AiResult() {
         }),
       ]);
 
+      // Interviewer 이미지 처리
+      const imageURL = URL.createObjectURL(imageResponse.data);
+      setInterviewerImage(imageURL);
+      
+      // 자기소개 영상 저장
       const videoBlob = new Blob([introduceResponse.data], { type: 'video/mp4' });
       const introVideoUrl = URL.createObjectURL(videoBlob);
-      setIntroVideoUrl(introVideoUrl); // 자기소개 영상 저장
-      console.log(interviewerInfoResponse.data);
+      setIntroVideoUrl(introVideoUrl);
+      
       setInterviewerInfo(interviewerInfoResponse.data); // 지원자 정보 저장
       setCompanyQna(companyQnaResponse.data); // 공통 질문 저장
       setInterviewerQna(interviewerQnaResponse.data); // 자소서 기반 질문 저장
@@ -143,7 +153,9 @@ function AiResult() {
     <A.MainContainer>
       <A.Container>
         <A.InterviewerImage>
-          <img src={process.env.PUBLIC_URL + '/images/Image.svg'} alt="Interviewer" />
+          {interviewerImage && (
+            <A.Image src={interviewerImage} alt="Interviewer" />
+          )}
         </A.InterviewerImage>
         {interviewerInfo ? (
           <A.InterviewerInfo>

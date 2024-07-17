@@ -131,3 +131,10 @@ export const AnswerBox = styled.div`
     margin-top: 20px;
     line-height: 1.7;
 `;
+
+// 지원자 사진
+export const Image = styled.img`
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+`;

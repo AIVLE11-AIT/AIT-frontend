@@ -18,6 +18,9 @@ function CheckSetting() {
         <C.BarIcon bg={step >= 4 ? '#696CEA' : '#D0D2D7'}/>
 
         <C.NumIcon bg={step >= 4 ? '#696CEA' : '#D0D2D7'}>4</C.NumIcon>
+        <C.BarIcon bg={step >= 5 ? '#696CEA' : '#D0D2D7'}/>
+
+        <C.NumIcon bg={step >= 5 ? '#696CEA' : '#D0D2D7'}>5</C.NumIcon>
     </C.HeaderComponent>
   )
 }
