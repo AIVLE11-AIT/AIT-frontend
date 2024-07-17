@@ -23,7 +23,7 @@ function ContactBoardDetail() {
         const token = sessionStorage.getItem('isLogin');
         //console.log('Token:', token); // 토큰이 올바르게 저장되었는지 확인
 
-        // 관리자 여부 확인D
+        // 관리자 여부 확인
         const checkResponse = await axios.get('/check', {
           headers: {
             Authorization: token // 토큰이 없을 때를 대비해 기본값 설정
