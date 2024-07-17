@@ -28,6 +28,15 @@ function Home() {
         }
     };
 
+    // 서비스 이용약관 클릭 시
+    function onClickTermsOfService(){
+        navigate('/terms-of-service');
+    }
+    // 서비스 이용약관 클릭 시
+    function onClickPrivacyPolicy(){
+        navigate('/privacy-policy');
+    }
+
     return (
         <H.MainDiv>
             <H.Container>
@@ -37,17 +46,18 @@ function Home() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ ease: 'easeInOut', duration: 2 }}
                     >
+                        <H.SubTitle1>기업 맞춤형 인재를 뽑기 위한 단 하나의 솔루션</H.SubTitle1>
                         <H.Title>
                             <H.TitlePart1>스마트한 </H.TitlePart1>
                             <H.TitlePart2>AI면접</H.TitlePart2>
                             <H.TitlePart1>의 시작</H.TitlePart1>
                         </H.Title>
                     </motion.div>
-                    <H.SubTitle>
+                    <H.SubTitle2>
                         각 기업이 원하는 평가 비율을 직접 선택하여
                         <br />
                         맞춤형으로 지원자의 면접 평가 결과를 제공합니다.
-                    </H.SubTitle>
+                    </H.SubTitle2>
                     <H.Button1 onClick={handleButtonClick}>Go Profile</H.Button1>
                     <H.Button2 onClick={handleContactButtonClick}>Contact Us</H.Button2>
                     <motion.div
@@ -56,7 +66,7 @@ function Home() {
                         transition={{ ease: 'easeInOut', duration: 2 }}
                     >
                         <H.ResultContainer>
-                            면접 결과 시각화 화면
+                            <img src={process.env.PUBLIC_URL + '/images/MainImage.svg'}></img>
                         </H.ResultContainer>
                     </motion.div>
                 </H.Header>
@@ -85,15 +95,15 @@ function Home() {
                             <H.Box>
                                 <H.BoxComment1>
                                     <H.CommentIcon>😕</H.CommentIcon>
-                                    <H.CommentText>인공지능 면접 도입에 대해 신뢰도가<br/> 부족해 도입이 망설여져요.</H.CommentText>
+                                    <H.CommentText>인공지능 면접 도입에 대해 신뢰도가 부족해 도입이 망설여져요.</H.CommentText>
                                 </H.BoxComment1>
                                 <H.BoxComment2>
                                     <H.CommentIcon>😟</H.CommentIcon>
-                                    <H.CommentText>면접 과정에서 발생하는 시간, 비용이<br/> 너무 많이 소모돼요.</H.CommentText>
+                                    <H.CommentText>면접 과정에서 발생하는 시간, 비용이 너무 많이 소모돼요.</H.CommentText>
                                 </H.BoxComment2>
                                 <H.BoxComment3>
                                     <H.CommentIcon>😊</H.CommentIcon>
-                                    <H.CommentText>우리 회사 맞춤형 인재를 채용하고<br/> 싶어요.</H.CommentText>
+                                    <H.CommentText>우리 회사 맞춤형 인재를 채용하고 싶어요.</H.CommentText>
                                 </H.BoxComment3>
                             </H.Box>
                         </motion.div>
@@ -111,21 +121,21 @@ function Home() {
                         <motion.div {...animationProps}>
                             <H.Feature>
                                 <H.FeatureTitle>답변 분석</H.FeatureTitle>
-                                <H.FeatureDescription>설명</H.FeatureDescription>
+                                <H.FeatureDescription>감정 상태, 우수 답변과의 유사성, 답변의 적합성을 평가합니다. 감정 상태는 진정성과 태도를, 우수 답변과의 유사성은 답변의 질을, 답변의 적합성은 타당성과 관련성을 판단합니다.</H.FeatureDescription>
                                 <H.FeatureImage>📄</H.FeatureImage>
                             </H.Feature>
                         </motion.div>
                         <motion.div {...animationProps}>
                             <H.Feature>
                                 <H.FeatureTitle>음성 분석</H.FeatureTitle>
-                                <H.FeatureDescription>설명</H.FeatureDescription>
+                                <H.FeatureDescription>목소리 크기, 발화 속도, 습관어 사용을 평가합니다. 목소리 크기는 자신감과 명료성을, 발화 속도는 긴장도와 의사소통 능력을, 습관어 사용은 신뢰성과 준비도를 판단합니다.</H.FeatureDescription>
                                 <H.FeatureImage>🗣️</H.FeatureImage>
                             </H.Feature>
                         </motion.div>
                         <motion.div {...animationProps}>
                             <H.Feature>
                                 <H.FeatureTitle>행동 분석</H.FeatureTitle>
-                                <H.FeatureDescription>설명</H.FeatureDescription>
+                                <H.FeatureDescription>시선 처리, 얼굴 위치, 감정 분석, 몸 위치, 손 위치를 평가합니다. 시선 처리는 주의력과 집중도를, 얼굴 위치는 자신감과 태도를, 감정 분석은 감정 상태를, 몸 위치와 손 위치는 자세와 표현력을 판단합니다.</H.FeatureDescription>
                                 <H.FeatureImage>👋🏻</H.FeatureImage>
                             </H.Feature>
                         </motion.div>
@@ -207,6 +217,12 @@ function Home() {
                             <H.FooterSubTitle>공식 계정</H.FooterSubTitle>
                             <H.FooterText>Instagram | &nbsp;&nbsp;@AIT.official</H.FooterText>
                             <H.FooterText>E-mai | &nbsp;&nbsp;AIT.operation@gmail.com</H.FooterText>
+                        </H.FooterSection>
+                        <H.FooterSection>
+                            <H.FooterSubTitle onClick={onClickTermsOfService}>서비스 이용 약관</H.FooterSubTitle>
+                        </H.FooterSection>
+                        <H.FooterSection>
+                            <H.FooterSubTitle onClick={onClickPrivacyPolicy}>개인정보처리방침</H.FooterSubTitle>
                         </H.FooterSection>
                     </H.FooterSectionsWrapper>
                 </H.Footer>

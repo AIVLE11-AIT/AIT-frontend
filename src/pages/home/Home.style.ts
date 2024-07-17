@@ -9,10 +9,9 @@ export const Section1 = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin: 20px 0;
   flex-direction: row;
-  margin-top: 80px;
-  margin-bottom: 150px;
+  margin-top: 70px;
+  margin-bottom: 100px;
 `;
 
 export const InnerContainer = styled.div`
@@ -44,23 +43,37 @@ export const Header = styled.header`
   padding: 20px 0;
 `;
 
+
+// 각 기업이 원하는 평가 비율을 직접 선택하여 맞춤형으로 지원자의 면접 평가 결과를 제공합니다.
+export const SubTitle1 = styled.div`
+  margin-top: 20px;
+  color: #404146;
+  text-align: center;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal; 
+`;
+
+// 스마트한 AI면접의 시작
 export const Title = styled.h1`
-  margin-top: 70px;
+  margin-top: 20px;
   margin-bottom: 30px;
   color: #0D0D0D;
   font-size: 65px;
   font-weight: 600;
 `;
 
-export const SubTitle = styled.div`
+// 각 기업이 원하는 평가 비율을 직접 선택하여 맞춤형으로 지원자의 면접 평가 결과를 제공합니다.
+export const SubTitle2 = styled.div`
   margin-top: 30px;
-  margin-bottom: 50px;
-  color: #404146;
+  margin-bottom: 30px;
+  color: black;
   text-align: center;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal; 
+  line-height: 1.7; 
 `;
 
 export const TitlePart1 = styled.span`
@@ -165,12 +178,13 @@ export const SectionSubTitle3 = styled.h2`
   line-height: normal;
 `;
 
+// go profile 버튼
 export const Button1 = styled.button`
   border: none;
   cursor: pointer;
   margin: 10px;
   border-radius: 10px;
-  background: #696CEA;
+  background: black;
   width: 200px;
   height: 50px;
   padding: 10px;
@@ -179,10 +193,11 @@ export const Button1 = styled.button`
   color: #FFF;
   font-size: 18px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   line-height: normal;
 `;
 
+// contact 버튼
 export const Button2 = styled.button`
   width: 200px;
   height: 50px;
@@ -196,17 +211,13 @@ export const Button2 = styled.button`
   color: #000;
   font-size: 18px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   line-height: normal;
 `;
 
+// 분석 결과 사진
 export const ResultContainer = styled.div`
-  padding: 70px;
-  background: #D9D9D9;
-  width: 100%;
-  height: 500px;
-  flex-shrink: 0;
-  margin-top: 100px;
+  margin-top: 50px;
 `;
 
 export const Features = styled.div`
@@ -227,7 +238,6 @@ export const Feature = styled.div`
   border: 1px solid #D0D2D7;
   background: #FFF;
 `;
-
 export const FeatureTitle = styled.h3`
   margin-bottom: 20px;
   color: black;
@@ -237,13 +247,23 @@ export const FeatureTitle = styled.h3`
   line-height: normal;
 `;
 
+// 음성, 행동, 답변 분석 설명
 export const FeatureDescription = styled.p`
   color: #5C5C5C;
   font-size: 18px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+  font-weight: 500;
+  line-height: 1.7;
   margin-left: 5px;
+  height: 180px;
+`;
+
+// 음성, 행동, 답변 분석 아이콘
+export const FeatureImage = styled.div`
+  text-align: right;
+  margin-right: 0px;
+  margin-top: auto;
+  margin-bottom: 0px;
+  font-size: 70px;
 `;
 
 export const MiniTitle = styled.footer`
@@ -258,11 +278,11 @@ export const MiniTitle = styled.footer`
 
 export const Footer = styled.footer`
   background-color: #272727;
-  padding: 10px 20px;
+  padding: 10px 20px 100px 20px;
 `;
 
 export const FooterTitle = styled.h4`
-  margin: 50px auto;
+  margin: 50px auto 70px auto;
   text-align: center;
   font-size: 40px;
   font-style: normal;
@@ -294,22 +314,16 @@ export const FooterSectionsWrapper = styled.div`
 
 export const FooterSubTitle = styled.div`
   color: #FFF;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 600;
   margin-bottom: 20px;
-`;
-
-export const FeatureImage = styled.div`
-  text-align: right;
-  margin-right: 0px;
-  margin-top: 150px;
-  font-size: 70px;
+  cursor: pointer;
 `;
 
 export const FooterText = styled.p`
   margin: 7px 0;
   color: #FFF;
-  font-size: 15px;
+  font-size: 13px;
 `;
 
 export const Container = styled.div`
@@ -334,7 +348,7 @@ export const Box = styled.div`
 `;
 
 export const BoxComment1 = styled.div`
-  padding: 15px;
+  padding: 15px 40px;
   margin: 10px 0;
   display: flex;
   align-items: center;
@@ -349,7 +363,7 @@ export const BoxComment1 = styled.div`
 `;
 
 export const BoxComment2 = styled.div`
-  padding: 15px;
+  padding: 15px 40px;
   margin: 10px 0;
   display: flex;
   align-items: center;
@@ -363,7 +377,7 @@ export const BoxComment2 = styled.div`
 `;
 
 export const BoxComment3 = styled.div`
-  padding: 15px;
+  padding: 15px 40px;
   margin: 10px 0;
   display: flex;
   align-items: center;
@@ -392,7 +406,7 @@ export const Description = styled.p`
   color: #6D6D6D;
   font-size: 22px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 2;
   text-align: left;
 `;

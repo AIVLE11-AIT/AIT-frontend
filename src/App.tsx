@@ -21,18 +21,19 @@ import ContactBoardCreate from './pages/contact/contactboardcreate/ContactBoardC
 import ContactBoardDetail from './pages/contact/contactboarddetail/ContactBoardDetail';
 import ContactBoardList from './pages/contact/contactboardlist/ContactBoardList';
 import ContactBoardModify from './pages/contact/contactboardmodify/ContactBoardModify';
-// components
-import Header from './components/header/Header';
-import Step1 from './components/interview/checkSetting/Step1';
-import CheckSetting from './pages/interview/checkSetting/CheckSetting';
-import InterviewExit from './pages/interview/interview/InterviewExit';
-import ForgotPasswordSent from './components/forgotpassword/ForgotPasswordSent';
-import InterviewMakeComplete from './pages/interviewMake/InterviewMakeComplete';
-import ForgotPassword from './components/forgotpassword/ForgotPassword';
 import ChangePw from './pages/changePw/ChangePw';
 import InterviewerList from './pages/interviewerList/InterviewerList';
 import AiResult from './pages/aiResult/AiResult';
-//import Step2 from './components/interview/checkSetting/Step2';
+import InterviewMakeComplete from './pages/interviewMake/InterviewMakeComplete';
+import CheckSetting from './pages/interview/checkSetting/CheckSetting';
+import InterviewExit from './pages/interview/interview/InterviewExit';
+import TermsOfService from './pages/terms/TermsOfService'; // 서비스 이용약관
+import PrivacyPolicy from './pages/terms/PrivacyPolicy'; // 개인정보 처리 방침
+// components
+import Header from './components/header/Header';
+import Step1 from './components/interview/checkSetting/Step1';
+import ForgotPasswordSent from './components/forgotpassword/ForgotPasswordSent';
+import ForgotPassword from './components/forgotpassword/ForgotPassword';
 
 function App() {
   // const AuthHome = Auth(Home, null);
@@ -65,6 +66,8 @@ function App() {
                   <Route path="/forgot-password-sent" element={<ForgotPasswordSent />} />
                   <Route path="/change-password" element={<ChangePw />} />
                   <Route path="/interviewer-result/:groupId/:interviewerId" element={<AiResult />} />
+                  <Route path="/terms-of-service" element={<TermsOfService />} />
+                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 </Route>
                 {/*헤더가 필요 없는 페이지*/}
                 <Route path="/pretest" element={<PreTest />} />
