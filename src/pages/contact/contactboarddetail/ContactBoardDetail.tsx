@@ -15,45 +15,44 @@ function ContactBoardDetail() {
     answer: ''
   });
   const [answer, setAnswer] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false); // 초기값을 null로 설정하여 초기 상태를 구분
 
   useEffect(() => {
-    // 관리자 여부 확인
-    const checkAdmin = async () => {
+    const fetchDataAndCheckAdmin = async () => {
       try {
         const token = sessionStorage.getItem('isLogin');
-        console.log('Token:', token); // 토큰이 올바르게 저장되었는지 확인
-        const response = await axios.get('/check', {
+        //console.log('Token:', token); // 토큰이 올바르게 저장되었는지 확인
+
+        // 관리자 여부 확인
+        const checkResponse = await axios.get('/check', {
           headers: {
-            Authorization: sessionStorage.getItem('isLogin')
+            Authorization: token // 토큰이 없을 때를 대비해 기본값 설정
           }
         });
-        console.log('Admin Check Response:', response.data); // 응답 데이터를 확인
-        setIsAdmin(response.data.isAdmin);
-      } catch (error) {
-        console.error('Failed to check admin status:', error);
-      }
-    };
+        //console.log('Admin Check Response:', checkResponse.data); // 응답 데이터를 확인
+        setIsAdmin(checkResponse.data);
 
-    checkAdmin();
-
-    // 데이터 불러오기
-    const fetchData = async () => {
-      try {
+        // 데이터 불러오기
         const response = await axios.get(`/question/${id}`, {
           headers: {
-            Authorization: sessionStorage.getItem('isLogin')
+            Authorization: token // 토큰이 없을 때를 대비해 기본값 설정
           }
         });
+        //console.log('Question Data:', response.data); // 응답 데이터를 확인
         setDetailBoardData(response.data);
-        setAnswer(response.data.answer || '');
+        setAnswer(response.data.answer);
       } catch (error) {
-        console.error('Failed to fetch data:', error);
+        console.error('Failed to fetch data or check admin status:', error);
+        setIsAdmin(false); // 에러 발생 시 관리자가 아니라고 설정
       }
     };
 
-    fetchData();
-  }, [id]);
+    fetchDataAndCheckAdmin();
+  }, [id, isAdmin]);
+
+  // useEffect(() => {
+  //   console.log('isAdmin:', isAdmin); // isAdmin 상태가 제대로 업데이트되었는지 확인
+  // }, [isAdmin]);
 
   const handleDelete = async () => {
     if (window.confirm('삭제하겠습니까?')) {
@@ -77,6 +76,7 @@ function ContactBoardDetail() {
   };
 
   const handleAnswerSubmit = async () => {
+    console.log('Submitting answer:', answer); // 제출될 답변 확인
     if (answer.trim() === '') {
       alert('답변을 입력해주세요.');
       return;
@@ -93,6 +93,23 @@ function ContactBoardDetail() {
     } catch (error) {
       console.error('Failed to submit answer:', error);
       alert('답변 제출에 실패했습니다. 다시 시도해 주세요.');
+    }
+  };
+
+  const renderAnswerSection = () => {
+    if (isAdmin === null) {
+      return <C.NoAnswerText>관리자 확인 중...</C.NoAnswerText>;
+    } else if (isAdmin) {
+      return (
+        <>
+          <C.AnswerTextArea value={answer} onChange={handleAnswerChange} placeholder="답변을 입력해주세요." />
+          <C.SubmitButton onClick={handleAnswerSubmit}>제출</C.SubmitButton>
+        </>
+      );
+    } else if (detailBoardData.answer) {
+      return detailBoardData.answer;
+    } else {
+      return <C.NoAnswerText>답변을 달고 있는 중이에요</C.NoAnswerText>;
     }
   };
 
@@ -121,25 +138,17 @@ function ContactBoardDetail() {
             </C.ContentTableRow>
           </tbody>
         </C.DetailTable>
+        {isAdmin ? (
         <C.AnswerTable>
           <tbody>
             <C.TableRow>
               <C.AnswerTitle>AIT 답변</C.AnswerTitle>
               <C.AnswerTableCell colSpan={1}>
-                {isAdmin ? (
-                  <>
-                    <C.AnswerTextArea value={answer} onChange={handleAnswerChange} placeholder="답변을 입력해주세요." />
-                    <C.SubmitButton onClick={handleAnswerSubmit}>제출</C.SubmitButton>
-                  </>
-                ) : detailBoardData.answer ? (
-                  detailBoardData.answer
-                ) : (
-                  <C.NoAnswerText>답변을 달고 있는 중이에요</C.NoAnswerText>
-                )}
+                {renderAnswerSection()}
               </C.AnswerTableCell>
             </C.TableRow>
           </tbody>
-        </C.AnswerTable>
+        </C.AnswerTable>):(<div>{isAdmin ? "true" : "false"}</div>)}
       </C.SearchContainer>
     </C.PageContainer>
   );

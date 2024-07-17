@@ -60,6 +60,7 @@ function ContactBoardList() {
 
   const handleClick = (pageNumber: number) => {
     setCurrentPage(pageNumber);
+    console.log(currentPosts);
   };
 
   const handleRowClick = (id: number) => {
