@@ -35,13 +35,35 @@ export const Email = styled.div`
     color: gray;
 `;
 
+// 합불 여부 박스
+export const PassBox = styled.div`
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+// 합불 여부 아이콘
+export const PassIcon = styled.div<{ isPass: boolean }>`
+    border-radius: 50px;
+    width: 9px;
+    height: 9px;
+    background-color: ${({ isPass }) => (isPass ? '#84C507' : '#FF4A4A')};
+    margin-right: 10px;
+`;
+
+export const PassText = styled.div<{ isPass: boolean }>`
+    font-size: 17px;
+    color: ${({ isPass }) => (isPass ? '#84C507' : '#FF4A4A')};
+`;
+
 // 목록 이동 버튼
 export const BackBtn = styled.div`
     border: 2px solid #404146;
     padding: 10px;
     border-radius: 20px;
     text-align: center;
-    margin-top: 250px;
+    margin-top: 200px;
     cursor: pointer;
 `;
 
@@ -108,4 +130,11 @@ export const AnswerBox = styled.div`
     margin-right: 10px;
     margin-top: 20px;
     line-height: 1.7;
+`;
+
+// 지원자 사진
+export const Image = styled.img`
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
 `;

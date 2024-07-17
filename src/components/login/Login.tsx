@@ -130,7 +130,7 @@ function Login() {
                   required: '비밀번호는 필수 입력입니다.',
                   pattern: {
                     value: /^[a-zA-Z0-9]{8,20}$/i,
-                    message: '비밀번호는 8~20자 영문, 숫자를 포함해야 합니다.',
+                    message: '비밀번호는 8~20자 영문, 숫자 조합.',
                   },
                 })}
               />

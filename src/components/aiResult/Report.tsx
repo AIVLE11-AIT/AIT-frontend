@@ -23,6 +23,7 @@ interface ReportData {
     total_emotion_score: string;
 
     total_report: string;
+    total_score: number;
   }
   
   function Report() {
@@ -38,7 +39,7 @@ interface ReportData {
           },
         })
           .then((response) => {
-            console.log(response.data);
+            //console.log(response.data);
             setReport(response.data);
           })
           .catch((error) => {
@@ -58,31 +59,31 @@ interface ReportData {
                             <R.BarContainer width="50px">
                                 <R.Bar score={parseInt(report.total_eyetrack_gesture_score)} total={30} color="#696CEA"/>
                             </R.BarContainer>
-                            <R.BarLabel>{report.total_eyetrack_gesture_score}/30<br/>voice_level</R.BarLabel>    
+                            <R.BarLabel>{report.total_eyetrack_gesture_score}/30<br/>시선처리</R.BarLabel>    
                         </R.BarBox>   
                         <R.BarBox margin="7px">
                             <R.BarContainer width="50px">
                                 <R.Bar score={parseInt(report.total_face_gesture_score)} total={30} color="#696CEA"/>
                             </R.BarContainer>
-                            <R.BarLabel>{report.total_face_gesture_score}/30<br/>속도</R.BarLabel>    
+                            <R.BarLabel>{report.total_face_gesture_score}/30<br/>얼굴움직임</R.BarLabel>    
                         </R.BarBox> 
                         <R.BarBox margin="7px">
                             <R.BarContainer width="50px">
                                 <R.Bar score={parseInt(report.total_face_emotion_score)} total={20} color="#696CEA"/>
                             </R.BarContainer>
-                            <R.BarLabel>{report.total_face_emotion_score}/20<br/>voice_intj</R.BarLabel>    
+                            <R.BarLabel>{report.total_face_emotion_score}/20<br/>표정분석</R.BarLabel>    
                         </R.BarBox>  
                         <R.BarBox margin="7px">
                             <R.BarContainer width="50px">
                                 <R.Bar score={parseInt(report.total_body_gesture_score)} total={10} color="#696CEA"/>
                             </R.BarContainer>
-                            <R.BarLabel>{report.total_body_gesture_score}/10<br/>voice_intj</R.BarLabel>    
+                            <R.BarLabel>{report.total_body_gesture_score}/10<br/>몸움직임</R.BarLabel>    
                         </R.BarBox>  
                         <R.BarBox margin="7px">
                             <R.BarContainer width="50px">
                                 <R.Bar score={parseInt(report.total_hand_count_score)} total={10} color="#696CEA"/>
                             </R.BarContainer>
-                            <R.BarLabel>{report.total_hand_count_score}/10<br/>voice_intj</R.BarLabel>    
+                            <R.BarLabel>{report.total_hand_count_score}/10<br/>손움직임</R.BarLabel>    
                         </R.BarBox>     
                     </R.BarGraph>           
                 )}
@@ -95,21 +96,21 @@ interface ReportData {
                     <R.BarGraph>
                         <R.BarBox margin="25px">
                             <R.BarContainer width="65px">
-                                <R.Bar score={parseInt(report.total_voice_level)} total={30} color="#FFBC2A"/>
+                                <R.Bar score={parseInt(report.total_voice_level)} total={100} color="#FFBC2A"/> {/*30, 40, 30 */}
                             </R.BarContainer>
-                            <R.BarLabel>{report.total_voice_level}/30<br/>voice_level</R.BarLabel>    
+                            <R.BarLabel>{report.total_voice_level}/30<br/>목소리크기</R.BarLabel>    
                         </R.BarBox>   
                         <R.BarBox margin="25px">
                             <R.BarContainer width="65px">
-                                <R.Bar score={parseInt(report.total_voice_speed)} total={40} color="#FFBC2A"/>
+                                <R.Bar score={parseInt(report.total_voice_speed)} total={100} color="#FFBC2A"/>
                             </R.BarContainer>
-                            <R.BarLabel>{report.total_voice_speed}/40<br/>속도</R.BarLabel>    
+                            <R.BarLabel>{report.total_voice_speed}/40<br/>발화속도</R.BarLabel>    
                         </R.BarBox> 
                         <R.BarBox margin="25px">
                             <R.BarContainer width="65px">
-                                <R.Bar score={parseInt(report.total_voice_intj)} total={30} color="#FFBC2A"/>
+                                <R.Bar score={parseInt(report.total_voice_intj)} total={100} color="#FFBC2A"/>
                             </R.BarContainer>
-                            <R.BarLabel>{report.total_voice_intj}/30<br/>voice_intj</R.BarLabel>    
+                            <R.BarLabel>{report.total_voice_intj}/30<br/>습관어</R.BarLabel>    
                         </R.BarBox>   
                     </R.BarGraph>           
                 )}
@@ -124,31 +125,37 @@ interface ReportData {
                             <R.BarContainer width="55px">
                                 <R.Bar score={parseInt(report.total_lsa_score)} total={25} color="#FF6C40"/>
                             </R.BarContainer>
-                            <R.BarLabel>{report.total_lsa_score}/25<br/>voice_level</R.BarLabel>    
+                            <R.BarLabel>{report.total_lsa_score}/25<br/>LSA점수</R.BarLabel>    
                         </R.BarBox>   
                         <R.BarBox margin="15px">
                             <R.BarContainer width="55px">
                                 <R.Bar score={parseInt(report.total_similarity_score)} total={5} color="#FF6C40"/>
                             </R.BarContainer>
-                            <R.BarLabel>{report.total_similarity_score}/5<br/>속도</R.BarLabel>    
+                            <R.BarLabel>{report.total_similarity_score}/5<br/>유사도</R.BarLabel>    
                         </R.BarBox> 
                         <R.BarBox margin="15px">
                             <R.BarContainer width="55px">
-                                <R.Bar score={parseInt("30")} total={40} color="#FF6C40"/>
+                                <R.Bar score={parseInt(report.total_munmek_score)} total={40} color="#FF6C40"/>
                             </R.BarContainer>
-                            <R.BarLabel>{report.total_munmek_score}/40<br/>voice_intj</R.BarLabel>    
+                            <R.BarLabel>{report.total_munmek_score}/40<br/>문맥분석</R.BarLabel>    
                         </R.BarBox>   
                         <R.BarBox margin="15px">
                             <R.BarContainer width="55px">
-                                <R.Bar score={parseInt("10")} total={10} color="#FF6C40"/>
+                                <R.Bar score={parseInt(report.total_emotion_score)} total={10} color="#FF6C40"/>
                             </R.BarContainer>
-                            <R.BarLabel>{report.total_emotion_score}/10<br/>voice_intj</R.BarLabel>    
+                            <R.BarLabel>{report.total_emotion_score}/10<br/>문장감정</R.BarLabel>    
                         </R.BarBox>   
                     </R.BarGraph>           
                 )}
             </R.Container>
         </R.Main>
-        {report && <R.ReportBox><R.ReportTitle>최종 레포트</R.ReportTitle>{report.total_report}</R.ReportBox>}
+        {report && <R.ReportBox>
+            <R.ReportTitle>
+                최종 레포트
+                <R.ReportText>{report.total_score}점</R.ReportText>
+            </R.ReportTitle>
+            {report.total_report}
+        </R.ReportBox>}
     </div>
   )
 }

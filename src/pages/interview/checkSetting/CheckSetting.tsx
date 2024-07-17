@@ -6,9 +6,11 @@ import Step1 from '../../../components/interview/checkSetting/Step1';
 import Step2 from '../../../components/interview/checkSetting/Step2';
 import Step3 from '../../../components/interview/checkSetting/Step3';
 import Step4 from '../../../components/interview/checkSetting/Step4';
+import Step5 from '../../../components/interview/checkSetting/Step5';
+
 // recoil
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { Agree1Atom, CameraAtom, StepAtom } from '../../../recoil/settingAtomes';
+import { Agree1Atom, CameraAtom, PhotoAtom, StepAtom } from '../../../recoil/settingAtomes';
 
 function CheckSetting() {
 
@@ -35,7 +37,19 @@ function CheckSetting() {
       }
     };
 
-    // 카메라 테스트 (step3)페이지에서 다음 버튼 클릭 시
+    // 사진촬영 테스트 (step3)페이지에서 다음 버튼 클릭 시
+    const photoState = useRecoilValue(PhotoAtom);
+    // 다음 버튼 클릭 시
+    const onClickPhotoNextBtn = () => {
+      if(photoState){
+        setStep((prevStep) => prevStep + 1);
+      }
+      else{
+        alert("사진 촬영을 완료해 주세요.");
+      }
+    };
+
+    // 카메라 테스트 (step4)페이지에서 다음 버튼 클릭 시
     const testState = useRecoilValue(CameraAtom);
     // 다음 버튼 클릭 시
     const onClickTestNextBtn = () => {
@@ -78,9 +92,14 @@ function CheckSetting() {
               <C.NextArrow src={process.env.PUBLIC_URL + '/images/NextArrow.svg'}/>
             </C.BtnComponent>}
           {step === 3 &&
+            <C.BtnComponent onClick={onClickPhotoNextBtn} border="3px solid #D0D2D7">
+              <C.NextArrow src={process.env.PUBLIC_URL + '/images/NextArrow.svg'}/>
+            </C.BtnComponent>}
+          {step === 4 &&
             <C.BtnComponent onClick={onClickTestNextBtn} border="3px solid #D0D2D7">
               <C.NextArrow src={process.env.PUBLIC_URL + '/images/NextArrow.svg'}/>
             </C.BtnComponent>}
+            
         </C.BtnDiv>
       </C.ComponentDiv>
     </>

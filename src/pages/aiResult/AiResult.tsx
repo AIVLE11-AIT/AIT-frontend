@@ -7,12 +7,14 @@ import Report from '../../components/aiResult/Report';
 interface InterviewerInfo {
   name: string;
   email: string;
+  isPass: boolean;
 }
 
 interface Question {
   id: number;
   question: string;
   videoUrl: string | null;
+  answer: string;
 }
 
 function AiResult() {
@@ -25,16 +27,22 @@ function AiResult() {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [interviewerImage, setInterviewerImage] = useState<string | null>(null); // Interviewer 이미지 상태 추가
 
   // 질문 리스트별 선택 상태
   const [selectedCompanyQnaId, setSelectedCompanyQnaId] = useState<number | undefined>(undefined);
   const [selectedInterviewerQnaId, setSelectedInterviewerQnaId] = useState<number | undefined>(undefined);
+  const [showIntroMessage, setShowIntroMessage] = useState<boolean>(false);
 
   const fetchVideoData = async () => {
     try {
       const token = sessionStorage.getItem('isLogin') || '';
 
-      const [introduceResponse, interviewerInfoResponse, companyQnaResponse, interviewerQnaResponse, reportResponse] = await Promise.all([
+      const [imageResponse, introduceResponse, interviewerInfoResponse, companyQnaResponse, interviewerQnaResponse] = await Promise.all([
+        axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}/image/read`, {
+          headers: { Authorization: token },
+          responseType: 'blob',
+        }),
         axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}/introduce/read`, {
           headers: { Authorization: token },
           responseType: 'blob',
@@ -48,18 +56,20 @@ function AiResult() {
         axios.get(`/interviewGroup/${groupId}/${interviewerId}/interviewerQna/readAll`, {
           headers: { Authorization: token },
         }),
-        axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}/result/read`, {
-          headers: { Authorization: token },
-        }),
       ]);
 
+      // Interviewer 이미지 처리
+      const imageURL = URL.createObjectURL(imageResponse.data);
+      setInterviewerImage(imageURL);
+      
+      // 자기소개 영상 저장
       const videoBlob = new Blob([introduceResponse.data], { type: 'video/mp4' });
       const introVideoUrl = URL.createObjectURL(videoBlob);
       setIntroVideoUrl(introVideoUrl);
-
-      setInterviewerInfo(interviewerInfoResponse.data);
-      setCompanyQna(companyQnaResponse.data);
-      setInterviewerQna(interviewerQnaResponse.data);
+      
+      setInterviewerInfo(interviewerInfoResponse.data); // 지원자 정보 저장
+      setCompanyQna(companyQnaResponse.data); // 공통 질문 저장
+      setInterviewerQna(interviewerQnaResponse.data); // 자소서 기반 질문 저장
 
     } catch (error) {
       console.error('AxiosError:', error);
@@ -81,7 +91,7 @@ function AiResult() {
       const videoBlob = new Blob([videoResponse.data], { type: 'video/mp4' });
       const videoUrl = URL.createObjectURL(videoBlob);
       setVideoUrl(videoUrl);
-      console.log(`Video URL for ${type} ${questionId}:`, videoUrl);
+      //console.log(`Video URL for ${type} ${questionId}:`, videoUrl);
 
     } catch (error) {
       console.error('AxiosError:', error);
@@ -107,32 +117,54 @@ function AiResult() {
     }
   }, [videoUrl]);
 
+  // 목록 이동 버튼 클릭 시
   function onClickBackBtn() {
     navigate(`/interviewer-list/${groupId}`);
   }
 
   function handleCompanyQnaClick(questionId: number) {
     setSelectedCompanyQnaId(questionId);
+    setSelectedInterviewerQnaId(undefined); // Reset interviewer QnA selection
+    setShowIntroMessage(false); // Hide intro message
     fetchVideoUrl(questionId, 'companyQna');
   }
 
   function handleInterviewerQnaClick(questionId: number) {
     setSelectedInterviewerQnaId(questionId);
-    // 모든 companyQna 질문의 선택 상태 초기화
-    setSelectedCompanyQnaId(undefined);
+    setSelectedCompanyQnaId(undefined); // Reset company QnA selection
+    setShowIntroMessage(false); // Hide intro message
     fetchVideoUrl(questionId, 'interviewerQna');
   }
+
+  const getSelectedAnswer = () => {
+    if (showIntroMessage) {
+      return "지원자의 자기소개입니다";
+    } else if (selectedCompanyQnaId !== undefined) {
+      const selectedQuestion = companyQna.find(question => question.id === selectedCompanyQnaId);
+      return selectedQuestion ? selectedQuestion.answer : '';
+    } else if (selectedInterviewerQnaId !== undefined) {
+      const selectedQuestion = interviewerQna.find(question => question.id === selectedInterviewerQnaId);
+      return selectedQuestion ? selectedQuestion.answer : '';
+    }
+    return '';
+  };
 
   return (
     <A.MainContainer>
       <A.Container>
         <A.InterviewerImage>
-          <img src={process.env.PUBLIC_URL + '/images/Image.svg'} alt="Interviewer" />
+          {interviewerImage && (
+            <A.Image src={interviewerImage} alt="Interviewer" />
+          )}
         </A.InterviewerImage>
         {interviewerInfo ? (
           <A.InterviewerInfo>
             <div>{interviewerInfo.name}</div>
             <A.Email>{interviewerInfo.email}</A.Email>
+            <A.PassBox>
+              <A.PassIcon isPass={interviewerInfo.isPass}/>
+              <A.PassText isPass={interviewerInfo.isPass}>{interviewerInfo.isPass ? '합격' : '불합격'}</A.PassText>
+            </A.PassBox>
           </A.InterviewerInfo>
         ) : (
           <div>Loading interviewer info...</div>
@@ -164,6 +196,8 @@ function AiResult() {
               <A.QuestionDiv
                 onClick={() => {
                   setSelectedCompanyQnaId(undefined);
+                  setSelectedInterviewerQnaId(undefined);
+                  setShowIntroMessage(true);
                   setVideoUrl(introVideoUrl || '');
                 }}
               >
@@ -175,7 +209,7 @@ function AiResult() {
                     key={question.id}
                     onClick={() => handleCompanyQnaClick(question.id)}
                   >
-                    Q{index+1}. &nbsp; {question.question}
+                    Q{index + 1}. &nbsp; {question.question}
                   </A.QuestionDiv>
                 ))
               ) : (
@@ -187,7 +221,7 @@ function AiResult() {
                     key={question.id}
                     onClick={() => handleInterviewerQnaClick(question.id)}
                   >
-                    Q{index+4}. &nbsp;{question.question}
+                    Q{index + 4}. &nbsp;{question.question}
                   </A.QuestionDiv>
                 ))
               ) : (
@@ -196,10 +230,13 @@ function AiResult() {
             </A.QuestionListBox>
           </A.QuestionList>
         </A.InterviewVideo>
-        
-        <A.AnswerBox></A.AnswerBox>
 
-        <Report/>
+        {/* 답변 텍스트 변환 출력 */}
+        <A.AnswerBox>
+          {getSelectedAnswer()}
+        </A.AnswerBox>
+
+        <Report />
       </A.InterviewResultContainer>
     </A.MainContainer>
   );
