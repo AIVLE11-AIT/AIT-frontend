@@ -21,11 +21,14 @@ function ContactBoardDetail() {
     // 관리자 여부 확인
     const checkAdmin = async () => {
       try {
+        const token = sessionStorage.getItem('isLogin');
+        console.log('Token:', token); // 토큰이 올바르게 저장되었는지 확인
         const response = await axios.get('/check', {
           headers: {
             Authorization: sessionStorage.getItem('isLogin')
           }
         });
+        console.log('Admin Check Response:', response.data); // 응답 데이터를 확인
         setIsAdmin(response.data.isAdmin);
       } catch (error) {
         console.error('Failed to check admin status:', error);

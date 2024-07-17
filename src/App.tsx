@@ -3,6 +3,7 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { GlobalStyle } from './GlobalStyle';
 import { RecoilRoot } from 'recoil';
 import './App.css';
+// import Auth from '/auth';
 
 // pages
 import Home from './pages/home/Home'
@@ -34,6 +35,9 @@ import AiResult from './pages/aiResult/AiResult';
 //import Step2 from './components/interview/checkSetting/Step2';
 
 function App() {
+  // const AuthHome = Auth(Home, null);
+
+
   return (
     <>
       <RecoilRoot>
