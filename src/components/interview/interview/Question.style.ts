@@ -82,4 +82,5 @@ export const QBox = styled.div`
     border-radius: 10px;
     background: linear-gradient(272deg, #696CEA 30.19%, rgba(160, 119, 255, 0.85) 100%);
     color: white;
+    line-height: 1.5;
 `;

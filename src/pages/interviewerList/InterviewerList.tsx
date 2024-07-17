@@ -8,7 +8,7 @@ interface Interviewer {
     id: number;
     name: string;
     email: string;
-    // 다른 필요한 속성들
+    isPass: boolean;
 }
 
 function InterviewerList() {
@@ -24,7 +24,7 @@ function InterviewerList() {
             },
         })
         .then((response) => {
-            console.log(response.data);
+            //console.log(response.data);
             setData(response.data);
         })
         .catch((error) => {
@@ -51,6 +51,7 @@ function InterviewerList() {
                             <I.ListWrap key={item.id} onClick={() => onClickList(item.id)}>
                                 <I.IdBox>{index + 1}</I.IdBox>
                                 <I.ContentBox>{item.name} &nbsp; ({item.email})</I.ContentBox>
+                                <I.PassIcon isPass={item.isPass}/>
                             </I.ListWrap>
                         ))}
                     </I.ListBox>

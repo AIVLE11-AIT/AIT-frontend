@@ -2,7 +2,8 @@ import React, { useCallback, useEffect, useRef, forwardRef, useImperativeHandle 
 import * as S from './Camera.style';
 import axios from 'axios';
 import { useRecoilValue } from 'recoil';
-import { CompanyQuestionAtom, IntroduceAtom, QnaIdAtom } from '../../../recoil/interviewAtoms';
+import { CompanyQuestionAtom, IntroduceAtom, QnaIdAtom, QnaIndexAtom } from '../../../recoil/interviewAtoms';
+import { useParams } from 'react-router-dom';
 
 const Camera = forwardRef((props, ref) => {
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -10,8 +11,9 @@ const Camera = forwardRef((props, ref) => {
     const videoChunks = useRef<Blob[]>([]);
 
     const introduceState = useRecoilValue(IntroduceAtom); // 자기소개 영상 상태
-    const qnaId = useRecoilValue(QnaIdAtom);
     const qnaState = useRecoilValue(CompanyQuestionAtom);
+    const qnaId = useRecoilValue(QnaIdAtom);
+    let { groupId, interviewerId } = useParams(); // 주소에서 면접 id가져오는 변수
 
     useEffect(() => {
         const initializeMedia = async () => {
@@ -21,7 +23,6 @@ const Camera = forwardRef((props, ref) => {
 
                 if (videoRef.current) {
                     videoRef.current.srcObject = stream;
-                    //console.log("비디오 스트림 설정됨");
                 } else {
                     console.error("videoRef.current가 null입니다.");
                 }
@@ -47,87 +48,46 @@ const Camera = forwardRef((props, ref) => {
 
     const startRecording = useCallback(() => {
         if (mediaRecorder.current && mediaRecorder.current.state === 'inactive') {
+            videoChunks.current = []; // 새로운 녹화가 시작될 때 videoChunks를 초기화
             mediaRecorder.current.start();
+            console.log("재생");
         }
     }, []);
 
     const stopRecording = useCallback(() => {
         if (mediaRecorder.current && mediaRecorder.current.state === 'recording') {
             mediaRecorder.current.stop();
-            console.log(introduceState);
-            console.log(qnaId);
-
             mediaRecorder.current.onstop = async () => {
+                console.log("재생 멈춤");
                 const blob = new Blob(videoChunks.current, { type: 'video/webm' });
 
                 const formData = new FormData();
-                formData.append('file', blob, 'recorded-video.webm'); // Blob을 직접 FormData에 추가
-                // console.log(introduceState);
-                // console.log(qnaId);
+                formData.append('file', blob, 'recorded-video.webm');
 
-                if (introduceState) { // 자기소개 영상인 경우
-
-                    axios({
-                        url: `/interviewGroup/${1}/interviewer/${1}/introduce/create`,
-                        method: 'post',
-                        data: formData,
-                      })
-                      
-                      .then((response) => {
-                        console.log(response.data);
+                try {
+                    if (introduceState) { // 자기소개 영상인 경우
+                        await axios.post(`/interviewGroup/${groupId}/interviewer/${interviewerId}/introduce/create`, formData);
                         console.log("자기소개 영상 전송 성공");
+                    } else { // 질문 영상인 경우
+                        const url = qnaState
+                            ? `/interviewGroup/${groupId}/interviewer/${interviewerId}/file/companyQna/${qnaId}`
+                            : `/interviewGroup/${groupId}/interviewer/${interviewerId}/file/interviewerQna/${qnaId}`;
                         
-                      }) .catch((error) => {
-                        console.log('실패');
-                        console.error('AxiosError:', error);
-                      });
-                } else { // 질문 영상인 경우(완성)
-
-                    // 기업 질문인 경우
-                    if(qnaState){
-                        axios({
-                            url: `/interviewGroup/${1}/interviewer/${1}/file/companyQna/${qnaId}`,
-                            method: 'post',
-                            data: formData,
+                        await axios.post(url, formData, {
                             headers: {
                                 'Content-Type': 'multipart/form-data',
-                                Authorization: sessionStorage.getItem('isLogin'),
                             },
-                          })
-                          
-                          .then((response) => {
-                            console.log(response.data);
-                            console.log("기업 질문 영상 전송 성공");
-                            
-                          }) .catch((error) => {
-                            console.log('실패');
-                            console.error('AxiosError:', error);
                         });
-                    } else{
-                        axios({
-                            url: `/interviewGroup/${1}/interviewer/${1}/file/interviewerQna/${qnaId}`,
-                            method: 'post',
-                            data: formData,
-                            headers: {
-                                'Content-Type': 'multipart/form-data',
-                                Authorization: sessionStorage.getItem('isLogin'),
-                            },
-                          })
-                          
-                          .then((response) => {
-                            console.log(response.data);
-                            console.log("자소서 질문 영상 전송 성공");
-                            
-                          }) .catch((error) => {
-                            console.log('실패');
-                            console.error('AxiosError:', error);
-                        });
-                    } 
-                    
+                        console.log(qnaState ? "기업 질문 영상 전송 성공" : "자소서 질문 영상 전송 성공");
+                    }
+                } catch (error) {
+                    console.error('AxiosError:', error);
+                } finally {
+                    videoChunks.current = []; // 영상 전송 후 videoChunks 초기화
                 }
             };
         }
-    }, [introduceState, qnaId, qnaState]);
+    }, [introduceState, qnaId, qnaState, groupId, interviewerId]);
 
     useImperativeHandle(ref, () => ({
         startRecording,
