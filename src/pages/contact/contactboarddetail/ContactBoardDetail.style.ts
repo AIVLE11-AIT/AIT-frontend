@@ -82,6 +82,38 @@ export const DetailTable = styled.table`
   }
 `;
 
+export const Bottom = styled.th`
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+`;
+
+export const BottomStatus = styled.th`
+  padding: 10px 20px;
+  background-color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  color: black;
+  font-size: 15px;
+  font-weight: 500;
+`;
+
+export const BottomComments = styled.th`
+  padding: 10px 20px;
+  background-color: #696cea;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
 export const TableHeader = styled.th`
   padding: 10px;
   border: 1px solid #ddd;
@@ -92,7 +124,8 @@ export const TableHeader = styled.th`
 `;
 
 export const TableRow = styled.tr`
-  height: 30px;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const TableCell = styled.td`
@@ -117,6 +150,10 @@ export const AnswerTable = styled.table`
   margin-top: 20px;
 `;
 
+export const RowTable = styled.tr`
+  height: 30px;
+`;
+
 export const AnswerTitle = styled.th`
   padding: 10px;
   border: none;
@@ -131,35 +168,46 @@ export const AnswerTableCell = styled.td`
   padding: 10px;
   border: none;
   background-color: white;
-  height: 150px;
   display: flex;
+  justify-content: center;
+  position: relative;
 `;
 
 export const CenterTableCell = styled(TableCell)`
   text-align: center;
 `;
 
+export const AnswerSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export const AnswerTextArea = styled.textarea`
-  width: 80%;
-  height: 80px;
+  height: 100px;
+  width: 1050px;
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #d0d2d7;
   font-size: 14px;
   resize: none;
+  margin-bottom: 20px;
 `;
 
 export const SubmitButton = styled.button`
-  padding: 10px 20px;
-  margin-left: 20px;
+  padding: 10px;
   background-color: #696cea;
+  width: 60px;
+  height: 60px;
   border: none;
-  border-radius: 10px;
+  border-radius: 25px;
   cursor: pointer;
   color: #fff;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
   &:hover {
     background-color: #0056b3;
   }

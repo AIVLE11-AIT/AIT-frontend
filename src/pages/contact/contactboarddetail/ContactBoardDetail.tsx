@@ -15,51 +15,61 @@ function ContactBoardDetail() {
     answer: ''
   });
   const [answer, setAnswer] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false); // 초기값을 null로 설정하여 초기 상태를 구분
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
 
   useEffect(() => {
     const fetchDataAndCheckAdmin = async () => {
       try {
         const token = sessionStorage.getItem('isLogin');
-        //console.log('Token:', token); // 토큰이 올바르게 저장되었는지 확인
+        if (!token) {
+          console.error('No token found');
+          return;
+        }
 
         // 관리자 여부 확인
         const checkResponse = await axios.get('/check', {
           headers: {
-            Authorization: token // 토큰이 없을 때를 대비해 기본값 설정
+            Authorization: token
           }
         });
-        //console.log('Admin Check Response:', checkResponse.data); // 응답 데이터를 확인
         setIsAdmin(checkResponse.data);
 
         // 데이터 불러오기
         const response = await axios.get(`/question/${id}`, {
           headers: {
-            Authorization: token // 토큰이 없을 때를 대비해 기본값 설정
+            Authorization: token
           }
         });
-        //console.log('Question Data:', response.data); // 응답 데이터를 확인
         setDetailBoardData(response.data);
-        setAnswer(response.data.answer);
+
+        // 답변 데이터 불러오기
+        const answerResponse = await axios.get(`/question/${id}/answer/read`, {
+          headers: {
+            Authorization: token
+          }
+        });
+        setAnswer(answerResponse.data.answer);
       } catch (error) {
         console.error('Failed to fetch data or check admin status:', error);
-        setIsAdmin(false); // 에러 발생 시 관리자가 아니라고 설정
       }
     };
 
     fetchDataAndCheckAdmin();
-  }, [id, isAdmin]);
-
-  // useEffect(() => {
-  //   console.log('isAdmin:', isAdmin); // isAdmin 상태가 제대로 업데이트되었는지 확인
-  // }, [isAdmin]);
+  }, [id]);
 
   const handleDelete = async () => {
     if (window.confirm('삭제하겠습니까?')) {
       try {
+        const token = sessionStorage.getItem('isLogin');
+        if (!token) {
+          console.error('No token found');
+          return;
+        }
+
         await axios.delete(`/question/${id}/delete`, {
           headers: {
-            Authorization: sessionStorage.getItem('isLogin')
+            Authorization: token
           }
         });
         alert('삭제되었습니다.');
@@ -76,19 +86,33 @@ function ContactBoardDetail() {
   };
 
   const handleAnswerSubmit = async () => {
-    console.log('Submitting answer:', answer); // 제출될 답변 확인
+    console.log('Submitting answer:', answer);
     if (answer.trim() === '') {
       alert('답변을 입력해주세요.');
       return;
     }
     try {
-      await axios.post(`/answer/${id}`, { answer }, {
+      const token = sessionStorage.getItem('isLogin');
+      if (!token) {
+        console.error('No token found');
+        return;
+      }
+
+      await axios.post(`/question/${id}/answer/create`, { answer }, {
         headers: {
-          Authorization: sessionStorage.getItem('isLogin')
+          Authorization: token
         }
       });
       alert('답변이 제출되었습니다.');
-      setDetailBoardData((prevData: any) => ({ ...prevData, answer }));
+
+      // 답변 데이터 다시 불러오기
+      const answerResponse = await axios.get(`/question/${id}/answer/read`, {
+        headers: {
+          Authorization: token
+        }
+      });
+      setAnswer(answerResponse.data.answer);
+      setDetailBoardData((prevData: any) => ({ ...prevData, answer: answerResponse.data.answer }));
       setAnswer('');
     } catch (error) {
       console.error('Failed to submit answer:', error);
@@ -96,20 +120,24 @@ function ContactBoardDetail() {
     }
   };
 
+  const toggleAnswerSection = () => {
+    setShowAnswer(!showAnswer);
+  };
+
   const renderAnswerSection = () => {
-    if (isAdmin === null) {
-      return <C.NoAnswerText>관리자 확인 중...</C.NoAnswerText>;
-    } else if (isAdmin) {
+    if (isAdmin) {
       return (
-        <>
+        <C.AnswerSection>
           <C.AnswerTextArea value={answer} onChange={handleAnswerChange} placeholder="답변을 입력해주세요." />
           <C.SubmitButton onClick={handleAnswerSubmit}>제출</C.SubmitButton>
-        </>
+        </C.AnswerSection>
       );
-    } else if (detailBoardData.answer) {
-      return detailBoardData.answer;
     } else {
-      return <C.NoAnswerText>답변을 달고 있는 중이에요</C.NoAnswerText>;
+      return detailBoardData.answer ? (
+        detailBoardData.answer
+      ) : (
+        <C.NoAnswerText>답변을 달고 있는 중이에요</C.NoAnswerText>
+      );
     }
   };
 
@@ -138,17 +166,21 @@ function ContactBoardDetail() {
             </C.ContentTableRow>
           </tbody>
         </C.DetailTable>
-        {isAdmin ? (
-        <C.AnswerTable>
-          <tbody>
-            <C.TableRow>
-              <C.AnswerTitle>AIT 답변</C.AnswerTitle>
-              <C.AnswerTableCell colSpan={1}>
-                {renderAnswerSection()}
-              </C.AnswerTableCell>
-            </C.TableRow>
-          </tbody>
-        </C.AnswerTable>):(<div>{isAdmin ? "true" : "false"}</div>)}
+        <C.Bottom>
+          <C.BottomStatus>상태 : 처리중</C.BottomStatus>
+          <C.BottomComments onClick={toggleAnswerSection}>답변 ⬇</C.BottomComments>
+        </C.Bottom>
+        {showAnswer && (
+          <C.AnswerTable>
+            <tbody>
+              <C.RowTable>
+                <C.AnswerTableCell>
+                  {renderAnswerSection()}
+                </C.AnswerTableCell>
+              </C.RowTable>
+            </tbody>
+          </C.AnswerTable>
+        )}
       </C.SearchContainer>
     </C.PageContainer>
   );

@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 interface BoardData {
   id: number;
   title: string;
-  created_at: string;
+  date: string;
 }
 
 function ContactBoardList() {
@@ -27,7 +27,7 @@ function ContactBoardList() {
         return;
       }
 
-      const endpoint = keyword
+      var endpoint = keyword
         ? `/question/search/${keyword}`
         : '/question/readMyQuestion';
 
@@ -36,7 +36,7 @@ function ContactBoardList() {
 
       const response = await axios.get(endpoint, {
         headers: {
-          Authorization: sessionStorage.getItem('isLogin')
+          Authorization: token
         }
       });
 
@@ -141,7 +141,7 @@ function ContactBoardList() {
                     <C.TableRow key={board.id} onClick={() => handleRowClick(board.id)}>
                       <C.TableCell>{index + 1}</C.TableCell>
                       <C.TableCell>{board.title}</C.TableCell>
-                      <C.TableCell>{dayjs(board.created_at).format('YYYY.MM.DD')}</C.TableCell>
+                      <C.TableCell>{dayjs(board.date).format('YYYY.MM.DD')}</C.TableCell>
                     </C.TableRow>
                   ))
                 ) : (
