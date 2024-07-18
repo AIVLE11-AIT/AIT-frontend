@@ -3,7 +3,7 @@ import * as S from './Step4.style';
 import { useRecoilState } from 'recoil';
 import { CameraAtom } from '../../../recoil/settingAtomes';
 
-function Step3() {
+function Step4() {
     const [recordState, setRecordState] = useState(false); // 녹화 상태(녹화중/중지)
     const [recordBtn, setRecordBtn] = useState(false); // 녹화 버튼 상태
     const [recordedMediaUrl, setRecordedMediaUrl] = useState<string | null>(null); // 녹화된 비디오의 URL
@@ -156,4 +156,4 @@ function Step3() {
     );
 }
 
-export default Step3;
+export default Step4;

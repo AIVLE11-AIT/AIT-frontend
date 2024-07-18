@@ -79,6 +79,7 @@ function CheckSetting() {
           {step === 2 && <Step2 />}
           {step === 3 && <Step3 />}
           {step === 4 && <Step4 />}
+          {step === 5 && <Step5 />}
         </C.InterviewComponent>
         
         {/* 다음 버튼 */}

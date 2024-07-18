@@ -39,6 +39,7 @@ function Result({ index }: ResultProps) {
           setStartDate(formatDate(response.data.start_date));
           setEndDate(formatDate(response.data.end_date));
           setPeople(response.data.interviewers.length);
+          console.log(response.data);
         })
         .catch((error) => {
           console.log('실패');

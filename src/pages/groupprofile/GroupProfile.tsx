@@ -21,6 +21,7 @@ function GroupProfile() {
       })
       .then((response) => {
         setData(response.data);
+        console.log(response.data);
         }) .catch((error) => {
         console.log('실패');
         console.error('AxiosError:', error);
