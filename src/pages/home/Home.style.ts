@@ -156,28 +156,6 @@ export const SectionSubTitle2 = styled.h2`
   line-height: normal;
 `;
 
-export const SectionTitle3 = styled.h2`
-  margin-bottom: 40px;
-  text-align: center;
-  color: var(--Wireframe-Black, #000);
-  text-align: center;
-  font-family: "Abhaya Libre SemiBold";
-  font-size: 45px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-`;
-
-export const SectionSubTitle3 = styled.h2`
-  color: var(--Wireframe-Black, #000);
-  text-align: center;
-  font-family: "Abhaya Libre SemiBold";
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-`;
-
 // go profile 버튼
 export const Button1 = styled.button`
   border: none;
@@ -266,14 +244,36 @@ export const FeatureImage = styled.div`
   font-size: 70px;
 `;
 
+// 주요 기능
 export const MiniTitle = styled.footer`
   color: #696CEA;
   text-align: center;
-  font-size: 22px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 40px;
+`;
+
+// 자동으로 면접 타임테이블 생성하기
+export const SectionTitle3 = styled.h2`
+  margin-bottom: 40px;
+  text-align: center;
+  color: var(--Wireframe-Black, #000);
+  text-align: center;
+  font-size: 45px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin-bottom: 40px;
+`;
+
+// 면접 페이지를 만들고 지원자에게 링크를 공유하세요.
+// 지원자들이 가능한 시간을 모아 최적의 면접 타임테이블을 만들어 드립니다.
+export const SectionSubTitle3 = styled.h2`
+  color: var(--Wireframe-Black, #000);
+  text-align: center;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.7;
 `;
 
 export const Footer = styled.footer`
