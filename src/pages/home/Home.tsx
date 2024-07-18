@@ -215,7 +215,7 @@ function Home() {
                         <H.FooterSection>
                             <H.FooterSubTitle>공식 계정</H.FooterSubTitle>
                             <H.FooterText>Instagram | &nbsp;&nbsp;@AIT.official</H.FooterText>
-                            <H.FooterText>E-mai | &nbsp;&nbsp;AIT.operation@gmail.com</H.FooterText>
+                            <H.FooterText>E-mail | &nbsp;&nbsp;aitech0311@gmail.com</H.FooterText>
                         </H.FooterSection>
                         <H.FooterSection>
                             <H.FooterSubTitle onClick={onClickTermsOfService}>서비스 이용 약관</H.FooterSubTitle>
