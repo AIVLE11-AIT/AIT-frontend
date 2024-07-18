@@ -12,11 +12,13 @@ function ContactBoardDetail() {
     title: '',
     date: '',
     content: '',
-    answer: ''
+    answer: '',
+    answerId: null
   });
   const [answer, setAnswer] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     const fetchDataAndCheckAdmin = async () => {
@@ -49,7 +51,12 @@ function ContactBoardDetail() {
             Authorization: token
           }
         });
-        setAnswer(answerResponse.data.answer);
+        setAnswer(answerResponse.data.answer || '');
+        console.log(detailBoardData);
+        console.log(answerResponse);
+        setDetailBoardData((prevData: any) => ({ ...prevData, answerId: answerResponse.data.answerId }));
+        
+        console.log(detailBoardData);
       } catch (error) {
         console.error('Failed to fetch data or check admin status:', error);
       }
@@ -98,7 +105,11 @@ function ContactBoardDetail() {
         return;
       }
 
-      await axios.post(`/question/${id}/answer/create`, { answer }, {
+      const endpoint = isEditing
+        ? `/question/${id}/answer/update/${detailBoardData.answerId}`
+        : `/question/${id}/answer/create`;
+
+      await axios.post(endpoint, { content: answer }, {
         headers: {
           Authorization: token
         }
@@ -112,11 +123,40 @@ function ContactBoardDetail() {
         }
       });
       setAnswer(answerResponse.data.answer);
-      setDetailBoardData((prevData: any) => ({ ...prevData, answer: answerResponse.data.answer }));
-      setAnswer('');
+      setDetailBoardData((prevData: any) => ({ ...prevData, answer: answerResponse.data.answer, answerId: answerResponse.data.answerId }));
+      setIsEditing(false);
     } catch (error) {
       console.error('Failed to submit answer:', error);
       alert('답변 제출에 실패했습니다. 다시 시도해 주세요.');
+    }
+  };
+
+  const handleAnswerEdit = () => {
+    setIsEditing(true);
+    setShowAnswer(true);
+  };
+
+  const handleAnswerDelete = async () => {
+    if (window.confirm('답변을 삭제하겠습니까?')) {
+      try {
+        const token = sessionStorage.getItem('isLogin');
+        if (!token) {
+          console.error('No token found');
+          return;
+        }
+
+        await axios.delete(`/question/${id}/answer/delete/${detailBoardData.answerId}`, {
+          headers: {
+            Authorization: token
+          }
+        });
+        alert('답변이 삭제되었습니다.');
+        setAnswer('');
+        setDetailBoardData((prevData: any) => ({ ...prevData, answer: '', answerId: null }));
+      } catch (error) {
+        console.error('Failed to delete answer:', error);
+        alert('답변 삭제에 실패했습니다. 다시 시도해 주세요.');
+      }
     }
   };
 
@@ -126,15 +166,27 @@ function ContactBoardDetail() {
 
   const renderAnswerSection = () => {
     if (isAdmin) {
-      return (
-        <C.AnswerSection>
-          <C.AnswerTextArea value={answer} onChange={handleAnswerChange} placeholder="답변을 입력해주세요." />
-          <C.SubmitButton onClick={handleAnswerSubmit}>제출</C.SubmitButton>
-        </C.AnswerSection>
-      );
+      if (detailBoardData.answer && !isEditing) {
+        return (
+          <div>
+            {detailBoardData.answer}
+            <C.ButtonWrapper>
+              <C.ActionButton onClick={handleAnswerEdit}>수정</C.ActionButton>
+              <C.ActionButton onClick={handleAnswerDelete}>삭제</C.ActionButton>
+            </C.ButtonWrapper>
+          </div>
+        );
+      } else {
+        return (
+          <C.AnswerSection>
+            <C.AnswerTextArea value={answer} onChange={handleAnswerChange} placeholder="답변을 입력해주세요." />
+            <C.SubmitButton onClick={handleAnswerSubmit}>제출</C.SubmitButton>
+          </C.AnswerSection>
+        );
+      }
     } else {
       return detailBoardData.answer ? (
-        detailBoardData.answer
+        <div>{detailBoardData.answer}</div>
       ) : (
         <C.NoAnswerText>답변을 달고 있는 중이에요</C.NoAnswerText>
       );

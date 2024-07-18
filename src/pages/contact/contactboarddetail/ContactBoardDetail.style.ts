@@ -74,7 +74,7 @@ export const DetailTable = styled.table`
 
   th {
     background-color: #f5f5f5;
-    text-align: center; /* 가운데 정렬 */
+    text-align: center;
   }
 
   td[colspan="3"] {
@@ -119,7 +119,7 @@ export const TableHeader = styled.th`
   border: 1px solid #ddd;
   background-color: #f5f5f5;
   &:first-child {
-    text-align: center; /* 가운데 정렬 */
+    text-align: center;
   }
 `;
 
@@ -220,5 +220,5 @@ export const NoAnswerText = styled.div`
   padding: 10px 0;
   text-align: center;
   align-items: center;
-  width: 100%; /* 텍스트를 가운데로 정렬하기 위해 추가 */
+  width: 100%;
 `;
