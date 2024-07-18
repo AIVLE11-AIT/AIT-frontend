@@ -9,14 +9,14 @@
 }
 
 /* 제일 상단 제목*/
-h1 {
+.h1 {
   text-align: center;
   font-size: 2.5em;
   font-weight: 600;
   margin: 50px 0px;
 }
 
-h2 {
+.h2 {
   margin-top: 40px; /* 각 장 사이에 여백을 추가합니다 */
   margin-bottom: 10px; /* 제목과 내용 사이의 여백을 줄입니다 */
   font-size: 20px;

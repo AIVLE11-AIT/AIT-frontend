@@ -29,11 +29,11 @@ const TermsOfService: React.FC = () => {
 
   return (
     <div className="main">
-      <h1>{data.policy_title}</h1>
+      <h1 className='h1'>{data.policy_title}</h1>
       <div className='content'>
       {data.chapters.map((chapter, index) => (
         <div key={index}>
-          <h2>{chapter.title}</h2>
+          <h2 className='h2'>{chapter.title}</h2>
           {chapter.content.map((item, contentIndex) => {
             if (typeof item === 'string') {
               return <p key={contentIndex}>{item}</p>;
