@@ -27,7 +27,7 @@ function Result({ index }: ResultProps) {
 
     useEffect(() => {
       axios({
-        url: `/interviewGroup/${index + 1}`,
+        url: `/interviewGroup/${index}`,
         method: 'get',
         headers: {
           Authorization: sessionStorage.getItem('isLogin'),
@@ -39,11 +39,11 @@ function Result({ index }: ResultProps) {
           setStartDate(formatDate(response.data.start_date));
           setEndDate(formatDate(response.data.end_date));
           setPeople(response.data.interviewers.length);
-          console.log(response.data);
+          //console.log(response.data);
         })
         .catch((error) => {
           console.log('실패');
-          console.error('AxiosError:', error);
+          console.error('면접 그룹 개별 조회 실패: ', error);
         });
     }, [index]);
 
@@ -56,24 +56,24 @@ function Result({ index }: ResultProps) {
     // 메일 전송했는지 유무 api연결 해야 함
     function onClickBox() {
       axios({
-        url: `/interviewGroup/${index+1}/checkEmail`,
+        url: `/interviewGroup/${index}/checkEmail`,
         method: 'get',
         headers: {
           Authorization: sessionStorage.getItem('isLogin'),
         },
       })
         .then((response) => {
-          console.log(response.data);
+          //console.log(response.data);
           if(response.data === true){ // 메일전송 완료 했으면
-            navigate(`/interviewer-list/${index+1}`);
+            navigate(`/interviewer-list/${index}`);
           }
           else{
-            navigate(`/interview-mail-yet/${index+1}`);
+            navigate(`/interview-mail-yet/${index}`);
           }
         })
         .catch((error) => {
           console.log('실패');
-          console.error('AxiosError:', error);
+          console.error('이메일 전송 유무 조회 실패: ', error);
         });
     }
 
