@@ -15,7 +15,6 @@ import InterviewMailComplete from './pages/interviewmail/InterviewMailComplete';
 import InterviewMailYet from './components/interviewmail/InterviewMailYet';
 import InterviewMail from './components/interviewmail/InterviewMail';
 import InterviewMake from './pages/interviewMake/InterviewMake';
-import Contact from './components/contact/Contact';
 import ContactBoardCreate from './pages/contact/contactboardcreate/ContactBoardCreate';
 import ContactBoardDetail from './pages/contact/contactboarddetail/ContactBoardDetail';
 import ContactBoardList from './pages/contact/contactboardlist/ContactBoardList';
@@ -50,7 +49,6 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<Signup />} />
-                  <Route path="/contact" element={<Contact />} />
                   <Route path="/contact-board-create" element={<ContactBoardCreate />} />
                   <Route path="/contact-board-detail/:id" element={<ContactBoardDetail />} />
                   <Route path="/contact-board-list" element={<ContactBoardList />} />
