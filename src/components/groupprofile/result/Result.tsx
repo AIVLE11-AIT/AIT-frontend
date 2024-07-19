@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import * as S from './Result.style';
 import Modal from './Modal';
 import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { GroupIdAtom, GroupNameAtom } from '../../../recoil/groupProfileAtoms';
 
 type ResultProps = {
   index: number;
@@ -16,7 +18,14 @@ function Result({ index }: ResultProps) {
     const [endDate, setEndDate] = useState<string>('');
     const [people, setPeople] = useState<number>(0);
 
-    const openModal = () => setIsModalOpen(true);
+    // 삭제 버튼 클릭 시
+    const [groupId, setGroupId] = useRecoilState(GroupIdAtom);
+    const [groupName, setGroupName] = useRecoilState(GroupNameAtom);
+    const openModal = () => {
+      setIsModalOpen(true);
+      setGroupId(index);
+      setGroupName(title)
+    }
     const closeModal = () => setIsModalOpen(false);
     const navigate = useNavigate();
 
@@ -95,7 +104,7 @@ function Result({ index }: ResultProps) {
                   alt="Icon 1"
                 />
               </S.Icon>
-              {startDate} - {endDate}
+              {startDate} ~ {endDate}
             </S.DetailItem>
             <S.DetailItem>
               <S.Icon size={16}>

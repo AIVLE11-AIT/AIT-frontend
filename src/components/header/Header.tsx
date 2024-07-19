@@ -13,8 +13,13 @@ function Header() {
 
     // 로그아웃 버튼 클릭 시
     const onClickLogoutBtn = () => {
-        sessionStorage.removeItem('isLogin');
-        navigate('/');
+        if(window.confirm("로그아웃 하시겠습니까?")){
+            sessionStorage.removeItem('isLogin');
+            navigate('/');
+        }
+        else{
+            
+        }
     }
 
     // 로그인 버튼 클릭 시
