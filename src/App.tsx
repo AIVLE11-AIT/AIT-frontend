@@ -33,6 +33,7 @@ import Header from './components/header/Header';
 import Step1 from './components/interview/checkSetting/Step1';
 import ForgotPasswordSent from './components/forgotpassword/ForgotPasswordSent';
 import ForgotPassword from './components/forgotpassword/ForgotPassword';
+import InterviewUpdateForm from './pages/interviewMake/InterviewUpdateForm';
 
 function App() {
   // const AuthHome = Auth(Home, null);
