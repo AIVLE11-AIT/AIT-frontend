@@ -31,7 +31,7 @@ function Result({ index }: ResultProps) {
 
     // 수정 버튼 클릭 시
     function handleCreateButtonClick() {
-      navigate('/interview-make');
+      navigate(`/interview/update/${index}`);
     }
 
     useEffect(() => {
