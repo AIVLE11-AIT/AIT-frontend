@@ -14,7 +14,7 @@ function Home() {
     };
 
     const handleContactButtonClick = () => {
-        navigate('/contact');
+        navigate('/contact-board-list');
     };
 
     const animationProps = {

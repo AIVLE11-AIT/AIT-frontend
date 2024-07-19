@@ -18,22 +18,10 @@ function ContactBoardList() {
   const [boardData, setBoardData] = useState<BoardData[]>([]);
   const [totalPosts, setTotalPosts] = useState(0);
   const [keyword, setKeyword] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  const fetchData = async (keyword = '') => {
+  const fetchData = async (endpoint: string, token: string) => {
     try {
-      const token = sessionStorage.getItem('isLogin');
-      if (!token) {
-        console.error('No token found');
-        return;
-      }
-
-      var endpoint = keyword
-        ? `/question/search/${keyword}`
-        : '/question/readMyQuestion';
-
-      console.log(`Fetching data from ${endpoint}`);
-      console.log('Authorization token:', token);
-
       const response = await axios.get(endpoint, {
         headers: {
           Authorization: token
@@ -49,8 +37,31 @@ function ContactBoardList() {
     }
   };
 
+  const initialize = async () => {
+    try {
+      const token = sessionStorage.getItem('isLogin');
+      if (!token) {
+        console.error('No token found');
+        return;
+      }
+
+      // 관리자 여부 확인
+      const checkResponse = await axios.get('/check', {
+        headers: {
+          Authorization: token
+        }
+      });
+      setIsAdmin(checkResponse.data);
+
+      const endpoint = checkResponse.data ? '/question/readAll' : '/question/readMyQuestion';
+      fetchData(endpoint, token);
+    } catch (error) {
+      console.error('Failed to initialize data or check admin status:', error);
+    }
+  };
+
   useEffect(() => {
-    fetchData();
+    initialize();
   }, []);
 
   const indexOfLastPost = currentPage * postsPerPage;
@@ -76,7 +87,17 @@ function ContactBoardList() {
   };
 
   const handleSearchSubmit = () => {
-    fetchData(keyword);
+    const token = sessionStorage.getItem('isLogin');
+    if (!token) {
+      console.error('No token found');
+      return;
+    }
+
+    const endpoint = keyword
+      ? `/question/search/${keyword}`
+      : (isAdmin ? '/question/readAll' : '/question/readMyQuestion');
+
+    fetchData(endpoint, token);
   };
 
   return (

@@ -45,6 +45,14 @@ export const ButtonWrapper = styled.div`
   margin-left: auto;
 `;
 
+export const BottomButtonWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+`;
+
 export const ActionButton = styled.button`
   padding: 10px 20px;
   background-color: #696cea;
@@ -82,9 +90,48 @@ export const DetailTable = styled.table`
   }
 `;
 
+export const BottomTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0px;
+`;
+
+export const BottomRow = styled.tr`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+export const BottomStatusCell = styled.td`
+  padding: 10px 20px;
+  background-color: #fff;
+  border: none;
+  border-radius: 25px;
+  color: black;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+`;
+
+export const BottomCommentsCell = styled.td`
+  padding: 10px 20px;
+  background-color: #696cea;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
 export const Bottom = styled.th`
   display: flex;
-  gap: 10px;
+  gap: 0px;
   margin-left: auto;
 `;
 
@@ -93,7 +140,6 @@ export const BottomStatus = styled.th`
   background-color: #fff;
   border: none;
   border-radius: 25px;
-  cursor: pointer;
   color: black;
   font-size: 15px;
   font-weight: 500;
@@ -132,12 +178,14 @@ export const TableCell = styled.td`
   padding: 10px;
   border: 1px solid #ddd;
   background-color: white;
-  &:first-child {
-    width: 70%;
-  }
-  &:last-child {
-    width: 30%;
-  }
+`;
+
+export const TitleTableCell = styled(TableCell)`
+  width: 65%;
+`;
+
+export const DateTableCell = styled(TableCell)`
+  width: 20%;
 `;
 
 export const ContentTableRow = styled.tr`
@@ -169,7 +217,9 @@ export const AnswerTableCell = styled.td`
   border: none;
   background-color: white;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   position: relative;
 `;
 
@@ -206,8 +256,8 @@ export const SubmitButton = styled.button`
   font-size: 13px;
   font-weight: 500;
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  bottom: 50px;
+  right: 70px;
   &:hover {
     background-color: #0056b3;
   }
@@ -221,4 +271,16 @@ export const NoAnswerText = styled.div`
   text-align: center;
   align-items: center;
   width: 100%;
+`;
+
+export const AnswerContainer = styled.div`
+  height: 100px;
+  width: 1050px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #d0d2d7;
+  font-size: 14px;
+  text-align: left;
+  margin-bottom: 20px;
+  position: relative;
 `;
