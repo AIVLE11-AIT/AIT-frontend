@@ -26,16 +26,20 @@ function Header() {
     const onClickLoginBtn = () => {
         navigate('/login');
     }
-    
+
     const handleContactButtonClick = () => {
-        navigate('/contact');
+        if (sessionStorage.getItem('isLogin')) {
+            navigate('/contact-board-list');
+        } else {
+            navigate('/login');
+        }
     };
 
-	return (
-		<>
-			<H.HeaderDiv>
+    return (
+        <>
+            <H.HeaderDiv>
                 <H.LogoDiv onClick={onClickLogoBtn}>
-                    <img src={process.env.PUBLIC_URL + '/images/Logo.svg'}></img>
+                    <img src={process.env.PUBLIC_URL + '/images/Logo.svg'} alt="Logo"></img>
                 </H.LogoDiv>
                 <H.HeaderWrap>
                     <H.HeaderContent>서비스 소개</H.HeaderContent>
@@ -43,15 +47,17 @@ function Header() {
                     {sessionStorage.getItem('isLogin') === null ? (
                     <H.LoginBtn onClick={onClickLoginBtn}>
                         <H.LoginBtnText>Login</H.LoginBtnText>
-                    </H.LoginBtn>):(<H.LoginBtn onClick={onClickLogoutBtn}>
+                    </H.LoginBtn>) : (
+                    <H.LoginBtn onClick={onClickLogoutBtn}>
                         <H.LoginBtnText>Logout</H.LoginBtnText>
-                    </H.LoginBtn>)}
+                    </H.LoginBtn>
+                    )}
                 </H.HeaderWrap>
             </H.HeaderDiv>
 
-			<Outlet></Outlet>
-		</>
-	);
+            <Outlet />
+        </>
+    );
 }
 
 export default Header;

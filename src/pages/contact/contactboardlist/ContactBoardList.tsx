@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 interface BoardData {
   id: number;
   title: string;
-  created_at: string;
+  date: string;
 }
 
 function ContactBoardList() {
@@ -18,25 +18,13 @@ function ContactBoardList() {
   const [boardData, setBoardData] = useState<BoardData[]>([]);
   const [totalPosts, setTotalPosts] = useState(0);
   const [keyword, setKeyword] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  const fetchData = async (keyword = '') => {
+  const fetchData = async (endpoint: string, token: string) => {
     try {
-      const token = sessionStorage.getItem('isLogin');
-      if (!token) {
-        console.error('No token found');
-        return;
-      }
-
-      const endpoint = keyword
-        ? `/question/search/${keyword}`
-        : '/question/readMyQuestion';
-
-      console.log(`Fetching data from ${endpoint}`);
-      console.log('Authorization token:', token);
-
       const response = await axios.get(endpoint, {
         headers: {
-          Authorization: sessionStorage.getItem('isLogin')
+          Authorization: token
         }
       });
 
@@ -49,8 +37,31 @@ function ContactBoardList() {
     }
   };
 
+  const initialize = async () => {
+    try {
+      const token = sessionStorage.getItem('isLogin');
+      if (!token) {
+        console.error('No token found');
+        return;
+      }
+
+      // 관리자 여부 확인
+      const checkResponse = await axios.get('/check', {
+        headers: {
+          Authorization: token
+        }
+      });
+      setIsAdmin(checkResponse.data);
+
+      const endpoint = checkResponse.data ? '/question/readAll' : '/question/readMyQuestion';
+      fetchData(endpoint, token);
+    } catch (error) {
+      console.error('Failed to initialize data or check admin status:', error);
+    }
+  };
+
   useEffect(() => {
-    fetchData();
+    initialize();
   }, []);
 
   const indexOfLastPost = currentPage * postsPerPage;
@@ -76,7 +87,17 @@ function ContactBoardList() {
   };
 
   const handleSearchSubmit = () => {
-    fetchData(keyword);
+    const token = sessionStorage.getItem('isLogin');
+    if (!token) {
+      console.error('No token found');
+      return;
+    }
+
+    const endpoint = keyword
+      ? `/question/search/${keyword}`
+      : (isAdmin ? '/question/readAll' : '/question/readMyQuestion');
+
+    fetchData(endpoint, token);
   };
 
   return (
@@ -97,7 +118,7 @@ function ContactBoardList() {
             + 문의 생성하기
           </C.CreateButton>
         </C.SearchInputWrapper>
-        {totalPosts === 0 ? (
+        {totalPosts === null ? (
           <C.NoDataWrapper>
             <C.Icon size={7}>
               <img src={process.env.PUBLIC_URL + '/images/GroupProfileIcon1.svg'} alt="Icon 1" />
@@ -141,7 +162,7 @@ function ContactBoardList() {
                     <C.TableRow key={board.id} onClick={() => handleRowClick(board.id)}>
                       <C.TableCell>{index + 1}</C.TableCell>
                       <C.TableCell>{board.title}</C.TableCell>
-                      <C.TableCell>{dayjs(board.created_at).format('YYYY.MM.DD')}</C.TableCell>
+                      <C.TableCell>{dayjs(board.date).format('YYYY.MM.DD')}</C.TableCell>
                     </C.TableRow>
                   ))
                 ) : (
