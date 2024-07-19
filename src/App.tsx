@@ -68,6 +68,7 @@ function App() {
                   <Route path="/interviewer-result/:groupId/:interviewerId" element={<AiResult />} />
                   <Route path="/terms-of-service" element={<TermsOfService />} />
                   <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="/interview/update/:groupId" element={<InterviewUpdateForm />} />
                 </Route>
                 {/*헤더가 필요 없는 페이지*/}
                 <Route path="/pretest/:groupId/:interviewerId" element={<PreTest />} />
