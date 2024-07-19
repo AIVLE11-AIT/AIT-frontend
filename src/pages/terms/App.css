@@ -1,0 +1,89 @@
+.App {
+  text-align: center;
+}
+
+.App main {
+  text-align: left;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+/* 제일 상단 제목*/
+.h1 {
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: 600;
+  margin: 50px 0px;
+}
+
+.h2 {
+  margin-top: 40px; /* 각 장 사이에 여백을 추가합니다 */
+  margin-bottom: 10px; /* 제목과 내용 사이의 여백을 줄입니다 */
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.chapter p {
+  margin-top: 0; /* 단락 위쪽의 여백을 제거합니다 */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.main{
+  padding: 0px 100px 100px 100px;
+  line-height: 1.7;
+}
+
+.content{
+  background-color: white;
+  padding: 30px 50px;
+}

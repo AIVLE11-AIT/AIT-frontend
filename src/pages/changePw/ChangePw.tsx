@@ -82,7 +82,7 @@ function ChangePw() {
       <F.FormWrapper>
         <F.Title>
           <F.BackBtn onClick={onClickBack}><F.BackBtnArrow src={process.env.PUBLIC_URL + '/images/BackBtn.svg'}/></F.BackBtn>
-          비밀번호 찾기
+          비밀번호 변경
         </F.Title>
         <F.SubTitle>
           변경할 비밀번호를 입력해 주세요.

@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './Modal.style';
 import axios from 'axios';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { GroupIdAtom, GroupNameAtom } from '../../../recoil/groupProfileAtoms';
 
 interface ModalProps {
   closeModal: () => void;
@@ -9,10 +11,13 @@ interface ModalProps {
 
 function Modal({ closeModal }: ModalProps) {
 
+  const groupId = useRecoilValue(GroupIdAtom);
+  const groupName = useRecoilValue(GroupNameAtom);
+
   // 삭제 버튼 클릭 시
   function handleCreateButtonClick() {
     axios({
-      url: `/interviewGroup/${2}/delete`,
+      url: `/interviewGroup/${groupId}/delete`,
       method: 'delete',
       headers: {
         Authorization: sessionStorage.getItem('isLogin'),
@@ -29,7 +34,7 @@ function Modal({ closeModal }: ModalProps) {
     <S.Overlay>
       <S.ModalContainer>
         <S.ModalTitle>
-          [케이티 24년 하반기 공채 1차 AI면접]
+          {groupName}
           <br />
           페이지를 삭제하시겠습니까?</S.ModalTitle>
         <S.ModalContent>

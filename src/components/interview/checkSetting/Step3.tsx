@@ -13,8 +13,8 @@ function Step3() {
   const [cameraState, setCameraState] = useState('');
 
   let { groupId, interviewerId } = useParams<{ groupId: string; interviewerId: string }>();
-    // 카메라 테스트 유무 상태
-    const [photoState, setPhotoState] = useRecoilState(PhotoAtom);
+  // 카메라 테스트 유무 상태
+  const [photoState, setPhotoState] = useRecoilState(PhotoAtom);
 
   useEffect(() => {
     getWebcam((stream: MediaStream) => {
@@ -50,6 +50,7 @@ function Step3() {
   const sreenShot = () => {
     setCanvasState('');
     setCameraState('none');
+    setPhotoState(true);
     const video = videoRef.current;
     const canvas = canvasRef.current;
     if (video && canvas) {
@@ -67,12 +68,11 @@ function Step3() {
             // API 호출
             axios.post(`/interviewGroup/${groupId}/interviewer/${interviewerId}/image`, formData)
               .then((response) => {
-                //console.log(response.data);
-                setPhotoState(true);
+                console.log("지원자 사진 전송 성공");
                 // 성공 시 추가 로직 작성
               })
               .catch((error) => {
-                console.error('AxiosError:', error);
+                console.error('지원자 사진 전송 실패:', error);
                 // 실패 시 추가 로직 작성
               });
           }
@@ -154,7 +154,7 @@ function Step3() {
             display: "flex", 
             justifyContent: "center",
             alignItems: "center",
-            width: "70px",
+            width: "90px",
             height: "70px",
             margin: "10px", 
             borderRadius: "10px",
@@ -163,10 +163,11 @@ function Step3() {
             bottom: '5%', 
             left: "46%", 
             cursor: "pointer", 
-            backgroundColor: "white"
+            backgroundColor: "white",
+            border: "2px solid black"
           }}
         >
-          <p>다시 촬영</p>
+          <p>재촬영</p>
         </div>
       )}
     </div>

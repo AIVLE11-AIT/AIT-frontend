@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './App.css';
 
 interface Chapter {
   title: string;
@@ -27,11 +28,12 @@ const PrivacyPolicy: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>{data.policy_title}</h1>
+    <div className='main'>
+      <h1 className='h1'>{data.policy_title}</h1>
+      <div className='content'>
       {data.chapters.map((chapter, index) => (
         <div key={index} className="chapter">
-          <h2>{chapter.title}</h2>
+          <h2 className='h2'>{chapter.title}</h2>
           {chapter.content.map((item, contentIndex) => {
             if (typeof item === 'string') {
               return <p key={contentIndex}>{item}</p>;
@@ -62,6 +64,7 @@ const PrivacyPolicy: React.FC = () => {
           })}
         </div>
       ))}
+      </div>
     </div>
   );
 };

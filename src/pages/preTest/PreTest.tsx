@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import PreTestMain from '../../components/preTest/preTestMain/PreTestMain'
 import Usage from '../../components/preTest/usage/Usage';
 import * as U from './PreTest.syle';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function PreTest() {
 
@@ -30,9 +30,10 @@ function PreTest() {
   };
 
   // 면접실 버튼 클릭 시
+  let {groupId, interviewerId} = useParams();
   const navigate = useNavigate();
   const onClickStartBtn = () => {
-    navigate('/interview-setting');
+    navigate(`/interview-setting/${groupId}/${interviewerId}`);
   }
 
   return (

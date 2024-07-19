@@ -2,7 +2,7 @@ import React from 'react'
 import * as S from  './Step5.style';
 import { useNavigate } from 'react-router-dom';
 
-function Step4() {
+function Step5() {
 
   const navigate = useNavigate();
   const onClickStartBtn = () => {
@@ -32,4 +32,4 @@ function Step4() {
   )
 }
 
-export default Step4
+export default Step5;

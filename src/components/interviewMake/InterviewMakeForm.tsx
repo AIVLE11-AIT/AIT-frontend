@@ -51,6 +51,7 @@ function InterviewMakeForm() {
 		question2: string;
 		question3: string;
 		jobGroup: string;
+		passingScore: string;
 	};
 
 	type InterviewerDTO = {
@@ -121,6 +122,7 @@ function InterviewMakeForm() {
 					if (!isValidData) {
 						alert('CSV 파일의 형식이 유효하지 않거나 이메일 형식이 올바르지 않습니다.');
 						reject(new Error('CSV 유효성 에러'));
+
 						return;
 					}
 
@@ -212,6 +214,7 @@ function InterviewMakeForm() {
 	const [question1, setQuestion1] = useState('#D0D2D7');
 	const [question2, setQuestion2] = useState('#D0D2D7');
 	const [question3, setQuestion3] = useState('#D0D2D7');
+	const [passScoreColor, setPassScoreColor] = useState('#D0D2D7');
 
 	// select form 구현(완료)
 	const jobGroup = [
@@ -499,6 +502,33 @@ function InterviewMakeForm() {
 					<I.ConfirmText onClick={() => setIsModalOpen(true)}>평가 비율에 대해 궁금해요!</I.ConfirmText>
 				</I.MakeInputWrap>
 			</I.MakeWrapBox>
+
+			{/*면접 이름 입력*/}
+			<I.MakeInputWrap>
+				<I.LabelContainer>
+					<I.LabelIcon/>
+					<I.Label>합격 기준 점수*</I.Label>
+					<I.LabelText>합격 기준 점수를 입력해 주세요.</I.LabelText>
+				</I.LabelContainer>
+				<I.InputBox
+					id="passingScore"
+					type="text"
+					placeholder="합격 기준 점수를 입력해 주세요."
+					{...register("passingScore", {
+						required: "합격 기준 점수는 필수 입력입니다.",
+						pattern: {
+							value: /^(0?[1-9]|[1-9][0-9])$/i,
+							message: "면접 기준 점수 형식에 맞지 않습니다.",
+						},
+					})}
+					inputColor={passScoreColor === '#D0D2D7' ? '#0D0D0D' : passScoreColor}
+					borderColor={passScoreColor === '#D0D2D7' ? '#D0D2D7' : '#404146'}
+					onChange={(e) => {
+						setPassScoreColor(e.target.value ? '#0D0D0D' : '#D0D2D7');
+					}}
+				/>
+				<I.Error>{errors.passingScore && <small role="alert">{errors.passingScore.message}</small>}</I.Error>
+			</I.MakeInputWrap>
 
 			<I.Title>STEP2. 면접 질문 입력</I.Title>
 			{/* 질문 입력 */}

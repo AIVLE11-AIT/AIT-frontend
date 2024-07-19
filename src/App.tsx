@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { GlobalStyle } from './GlobalStyle';
 import { RecoilRoot } from 'recoil';
-import './App.css';
 // import Auth from '/auth';
 
 // pages
@@ -33,6 +32,7 @@ import Header from './components/header/Header';
 import Step1 from './components/interview/checkSetting/Step1';
 import ForgotPasswordSent from './components/forgotpassword/ForgotPasswordSent';
 import ForgotPassword from './components/forgotpassword/ForgotPassword';
+import InterviewUpdateForm from './pages/interviewMake/InterviewUpdateForm';
 
 function App() {
   // const AuthHome = Auth(Home, null);
@@ -68,7 +68,7 @@ function App() {
                   <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 </Route>
                 {/*헤더가 필요 없는 페이지*/}
-                <Route path="/pretest" element={<PreTest />} />
+                <Route path="/pretest/:groupId/:interviewerId" element={<PreTest />} />
                 <Route path="/interview/:groupId/:interviewerId" element={<Interview />} />
                 <Route path="/interview-exit/:groupId/:interviewerId" element={<InterviewExit />} />
                 {/*면접 페이지*/}

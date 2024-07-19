@@ -58,8 +58,7 @@ function Home() {
                         <br />
                         맞춤형으로 지원자의 면접 평가 결과를 제공합니다.
                     </H.SubTitle2>
-                    <H.Button1 onClick={handleButtonClick}>Go Profile</H.Button1>
-                    <H.Button2 onClick={handleContactButtonClick}>Contact Us</H.Button2>
+                    <H.Button1 onClick={handleButtonClick}>Get Start</H.Button1>
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -143,7 +142,7 @@ function Home() {
                 </H.Section2>
                 <H.Section3>
                     <H.MiniTitle>주요기능</H.MiniTitle>
-                    <H.SectionTitle3>자동으로 면접 타임테이블 생성하기</H.SectionTitle3>
+                    <H.SectionTitle3>우리 회사 맞춤형으로 면접 만들고 AI분석 결과 받아보기</H.SectionTitle3>
                     <H.SectionSubTitle3>
                         면접 페이지를 만들고 지원자에게 링크를 공유하세요.
                         <br />
@@ -216,7 +215,7 @@ function Home() {
                         <H.FooterSection>
                             <H.FooterSubTitle>공식 계정</H.FooterSubTitle>
                             <H.FooterText>Instagram | &nbsp;&nbsp;@AIT.official</H.FooterText>
-                            <H.FooterText>E-mai | &nbsp;&nbsp;AIT.operation@gmail.com</H.FooterText>
+                            <H.FooterText>E-mail | &nbsp;&nbsp;aitech0311@gmail.com</H.FooterText>
                         </H.FooterSection>
                         <H.FooterSection>
                             <H.FooterSubTitle onClick={onClickTermsOfService}>서비스 이용 약관</H.FooterSubTitle>
