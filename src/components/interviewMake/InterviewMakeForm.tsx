@@ -122,6 +122,7 @@ function InterviewMakeForm() {
 					if (!isValidData) {
 						alert('CSV 파일의 형식이 유효하지 않거나 이메일 형식이 올바르지 않습니다.');
 						reject(new Error('CSV 유효성 에러'));
+
 						return;
 					}
 
