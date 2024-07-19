@@ -11,9 +11,9 @@ function Step3() {
 
   const [canvasState, setCanvasState] = useState('none');
   const [cameraState, setCameraState] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   let { groupId, interviewerId } = useParams<{ groupId: string; interviewerId: string }>();
-  // 카메라 테스트 유무 상태
   const [photoState, setPhotoState] = useRecoilState(PhotoAtom);
 
   useEffect(() => {
@@ -24,15 +24,18 @@ function Step3() {
     });
   }, []);
 
-  const getWebcam = (callback: (stream: MediaStream) => void) => {
+  const getWebcam = async (callback: (stream: MediaStream) => void) => {
     try {
       const constraints = {
         video: true,
         audio: false,
       };
-      navigator.mediaDevices.getUserMedia(constraints).then(callback);
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      callback(stream);
     } catch (err) {
-      console.log(err);
+      console.error('카메라 접근 에러:', err);
+      setErrorMessage('카메라 접근에 실패했습니다. 카메라 권한을 허용해 주세요.');
+      alert('카메라 접근에 실패했습니다. 카메라 권한을 허용해 주세요.');
     }
   };
 
@@ -46,7 +49,6 @@ function Step3() {
     });
   };
 
-  // 사진 촬영 버튼 클릭 시
   const sreenShot = () => {
     setCanvasState('');
     setCameraState('none');
@@ -65,15 +67,12 @@ function Step3() {
             const formData = new FormData();
             formData.append('file', file);
 
-            // API 호출
             axios.post(`/interviewGroup/${groupId}/interviewer/${interviewerId}/image`, formData)
               .then((response) => {
                 console.log("지원자 사진 전송 성공");
-                // 성공 시 추가 로직 작성
               })
               .catch((error) => {
                 console.error('지원자 사진 전송 실패:', error);
-                // 실패 시 추가 로직 작성
               });
           }
         }, 'image/jpeg');
