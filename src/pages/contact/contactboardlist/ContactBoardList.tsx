@@ -118,7 +118,7 @@ function ContactBoardList() {
             + 문의 생성하기
           </C.CreateButton>
         </C.SearchInputWrapper>
-        {totalPosts === 0 ? (
+        {totalPosts === null ? (
           <C.NoDataWrapper>
             <C.Icon size={7}>
               <img src={process.env.PUBLIC_URL + '/images/GroupProfileIcon1.svg'} alt="Icon 1" />

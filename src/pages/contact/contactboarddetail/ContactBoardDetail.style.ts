@@ -266,7 +266,7 @@ export const SubmitButton = styled.button`
 export const NoAnswerText = styled.div`
   color: #404146;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   padding: 10px 0;
   text-align: center;
   align-items: center;
