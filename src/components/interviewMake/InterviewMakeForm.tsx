@@ -8,6 +8,11 @@ import ExplainRatio from './ExplainRatio'; // ExplainRatio 컴포넌트 임포�
 import Papa from 'papaparse';
 import moment from 'moment';
 import * as XLSX from 'xlsx';
+// 달력
+import styles from './Calender.module.scss';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { getMonth, getYear } from 'date-fns';
 
 const customStyles = {
    control: (provided: any) => ({// 닫혀 있을 때 select box
@@ -42,8 +47,8 @@ function InterviewMakeForm() {
    type FormValue = {
       interviewTitle: string;
       interviewType: string;
-      start: string;
-      end: string;
+      startTime: string;
+      endTime: string;
       fileUpload: FileList;
       answer: string;
       voice: string;
@@ -77,7 +82,6 @@ function InterviewMakeForm() {
    const [fileName, setFileName] = useState<string>("");
    // const [selectedFile, setSelectedFile] = useState<File | null>(null);
    const [jsonFile, setJsonFile] = useState<any[]>([]);
-
    const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
       const file = event.target.files?.[0];
       console.log("file", file);
@@ -96,8 +100,6 @@ function InterviewMakeForm() {
         setValue("fileUpload", null as any); // 파일 업로드 필드 초기화
       }
    };
-   // 이메일 형식 검사를 위한 정규 표현식
-   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
    
    const convertExcelToJSON = async (file: File): Promise<InterviewerDTO[]> => {
 		return new Promise((resolve, reject) => {
@@ -174,8 +176,8 @@ function InterviewMakeForm() {
 		// Prepare JSON data
 		const value = {
 			name: data.interviewTitle,
-			start_date: data.start,
-			end_date: data.end,
+			start_date: data.startTime,
+			end_date: data.endTime,
 			context_per: parseInt(data.answer),
 			voice_per: parseInt(data.voice),
 			action_per: parseInt(data.action),
@@ -258,6 +260,24 @@ function InterviewMakeForm() {
     };
 
    const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 변수
+
+   const [selectedDate1, setSelectedDate1] = useState<Date | null>(new Date()); // 시작날짜 선택 변수
+   const [selectedDate2, setSelectedDate2] = useState<Date | null>(new Date()); // 종료날짜 선택 변수
+   const YEARS = Array.from({ length: getYear(new Date()) + 1 - 2000 }, (_, i) => getYear(new Date()) + i);
+   const MONTHS = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+   ];
 
    return (
       <div>
@@ -375,16 +395,76 @@ function InterviewMakeForm() {
                   <I.LabelText>면접 가능한 날짜, 시간 범위를 설정해 주세요.</I.LabelText>
                </I.LabelContainer>
                <I.MaskBoxContainer>
+                  <I.DateContainer>
+                  <div className={styles.datePickerWrapper}>
+                     <DatePicker
+                        dateFormat='yyyy-MM-dd'
+                        formatWeekDay={(nameOfDay) => nameOfDay.substring(0, 1)}
+                        showYearDropdown
+                        scrollableYearDropdown
+                        shouldCloseOnSelect
+                        yearDropdownItemNumber={100}
+                        minDate={new Date()} // 오늘날짜 이후로만 선택 가능
+                        selected={selectedDate1}
+                        calendarClassName={styles.calenderWrapper}
+                        dayClassName={(d) => (d.getDate() === selectedDate1!.getDate() ? styles.selectedDay : styles.unselectedDay)}
+                        onChange={(date) => setSelectedDate1(date)}
+                        className={styles.datePicker}
+                        renderCustomHeader={({
+                           date,
+                           changeYear,
+                           decreaseMonth,
+                           increaseMonth,
+                           prevMonthButtonDisabled,
+                           nextMonthButtonDisabled,
+                        }) => (
+                           <div className={styles.customHeaderContainer}>
+                              <div>
+                              <span className={styles.month}>{MONTHS[getMonth(date)]}</span>
+                              <select
+                                 value={getYear(date)}
+                                 className={styles.year}
+                                 onChange={({ target: { value } }) => changeYear(+value)}
+                                 >
+                                 {YEARS.map((option) => (
+                                    <option key={option} value={option}>
+                                    {option}
+                                    </option>
+                                 ))}
+                              </select>
+                           </div>
+                           <div>
+                           <button
+                              type='button'
+                              onClick={decreaseMonth}
+                              className={styles.monthButton}
+                              disabled={prevMonthButtonDisabled}
+                           >
+                              &lt;
+                           </button>
+                           <button
+                              type='button'
+                              onClick={increaseMonth}
+                              className={styles.monthButton}
+                              disabled={nextMonthButtonDisabled}
+                           >
+                              &gt;
+                           </button>
+                           </div>
+                        </div>
+                     )}
+                     />
+                  </div>
                   <Controller
-                     name="start"
+                     name="startTime"
                      control={control}
                      rules={{
                         required: "면접 기간 입력은 필수 입력입니다.",
                      }}
                      render={({ field }) => (
                         <I.InputMaskBox
-                           id="start"
-                           mask="9999-99-99T99:99:99"
+                           id="startTime"
+                           mask="99:99:99"
                            alwaysShowMask={true}
                            {...field}
                            onChange={(e) => {
@@ -395,17 +475,78 @@ function InterviewMakeForm() {
                         />
                      )}
                   />
+                  </I.DateContainer>
                   <I.PeriodLine />
+                  <I.DateContainer>
+                  <div className={styles.datePickerWrapper}>
+                     <DatePicker
+                        dateFormat='yyyy-MM-dd'
+                        formatWeekDay={(nameOfDay) => nameOfDay.substring(0, 1)}
+                        showYearDropdown
+                        scrollableYearDropdown
+                        shouldCloseOnSelect
+                        yearDropdownItemNumber={100}
+                        minDate={new Date()} // 오늘날짜 이후로만 선택 가능
+                        selected={selectedDate2}
+                        calendarClassName={styles.calenderWrapper}
+                        dayClassName={(d) => (d.getDate() === selectedDate2!.getDate() ? styles.selectedDay : styles.unselectedDay)}
+                        onChange={(date) => setSelectedDate2(date)}
+                        className={styles.datePicker}
+                        renderCustomHeader={({
+                           date,
+                           changeYear,
+                           decreaseMonth,
+                           increaseMonth,
+                           prevMonthButtonDisabled,
+                           nextMonthButtonDisabled,
+                        }) => (
+                           <div className={styles.customHeaderContainer}>
+                              <div>
+                              <span className={styles.month}>{MONTHS[getMonth(date)]}</span>
+                              <select
+                                 value={getYear(date)}
+                                 className={styles.year}
+                                 onChange={({ target: { value } }) => changeYear(+value)}
+                                 >
+                                 {YEARS.map((option) => (
+                                    <option key={option} value={option}>
+                                    {option}
+                                    </option>
+                                 ))}
+                              </select>
+                           </div>
+                           <div>
+                           <button
+                              type='button'
+                              onClick={decreaseMonth}
+                              className={styles.monthButton}
+                              disabled={prevMonthButtonDisabled}
+                           >
+                              &lt;
+                           </button>
+                           <button
+                              type='button'
+                              onClick={increaseMonth}
+                              className={styles.monthButton}
+                              disabled={nextMonthButtonDisabled}
+                           >
+                              &gt;
+                           </button>
+                           </div>
+                        </div>
+                     )}
+                     />
+                  </div>
                   <Controller
-                     name="end"
+                     name="endTime"
                      control={control}
                      rules={{
                         required: "면접 기간 입력은 필수 입력입니다.",
                      }}
                      render={({ field }) => (
                         <I.InputMaskBox
-                           id="end"
-                           mask="9999-99-99T99:99:99"
+                           id="endTime"
+                           mask="99:99:99"
                            alwaysShowMask={true}
                            {...field}
                            onChange={(e) => {
@@ -416,10 +557,11 @@ function InterviewMakeForm() {
                         />
                      )}
                   />
+                  </I.DateContainer>
                   <I.PeriodError>
-                     {(errors.start || errors.end) && (
+                     {(errors.startTime || errors.endTime) && (
                         <small role="alert">
-                           {errors.start?.message || errors.end?.message}
+                           {errors.startTime?.message || errors.endTime?.message}
                         </small>
                      )}
                   </I.PeriodError>
