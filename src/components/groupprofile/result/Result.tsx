@@ -62,7 +62,7 @@ function Result({ index }: ResultProps) {
       return `${datePart} ${timePart}`;
     };
 
-    // 메일 전송했는지 유무 api연결 해야 함
+    // 메일 전송했는지 유무 api연결(완료)
     function onClickBox() {
       axios({
         url: `/interviewGroup/${index}/checkEmail`,
@@ -72,9 +72,15 @@ function Result({ index }: ResultProps) {
         },
       })
         .then((response) => {
-          //console.log(response.data);
+          const endDateObj = new Date(endDate.split(' ')[0]); // 'YYYY-MM-DD' to Date object
+          const today = new Date();
+          today.setHours(0, 0, 0, 0); // Set time to 00:00:00 for comparison
           if(response.data === true){ // 메일전송 완료 했으면
-            navigate(`/interviewer-list/${index}`);
+            if (today > endDateObj) {
+              navigate(`/interviewer-list/${index}`);
+            } else {
+              alert("면접 날짜 종료 후 열람 가능합니다.");
+            }
           }
           else{
             navigate(`/interview-mail-yet/${index}`);
