@@ -174,23 +174,29 @@ export const PeriodLine = styled.div`
     margin-top: 15px;
 `;
 
+export const DateContainer = styled.div`
+    display: flex;
+    margin-top: 15px;
+    justify-content: center;
+`;
+
 interface InputMaskProps {
     inputColor?: string;
     borderColor?:string;
 }
 
-// 면접 기간 입력 박스
+// 면접 시간 입력 박스
 export const InputMaskBox = styled(InputMask)<InputMaskProps>`
     margin-left: 15px;
-    width: 350px;
+    width: 120px;
     height: 45px;
     border-radius: 11px;
     border: 2px solid ${({ borderColor }) => borderColor || '#D0D2D7'};
     background: #FFF;
     font-size: 14px;
     font-weight: 500;
+    text-align: center;
     padding: 15px 18px;
-    margin-top: 15px;
     color: ${({ inputColor }) => inputColor || '#D0D2D7'};
 `;
 
@@ -287,7 +293,7 @@ export const FileName = styled.div<{hasFile:string}>`
     font-size: 14px;
 `;
 
-// csv파일 다운로드, 면접 비율 정보 text
+// 엑셀파일 다운로드, 면접 비율 정보 text
 export const ConfirmText = styled.div`
 	text-align: right;
 	font-size: 12px;
@@ -322,3 +328,4 @@ export const SignUpBtn = styled.button`
         background: #8A8DEB; /* 연한 색으로 변경 */
     }
 `;
+

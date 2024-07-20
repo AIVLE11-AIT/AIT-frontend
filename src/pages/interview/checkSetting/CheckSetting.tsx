@@ -60,7 +60,7 @@ function CheckSetting() {
         alert("카메라 테스트를 완료해 주세요.");
       }
     };
-
+    
   return (
     <>
       <InterviewHeader/>
