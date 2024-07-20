@@ -1,12 +1,13 @@
 import React from 'react'
 import * as S from  './Step5.style';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function Step5() {
 
+  let {groupId, interviewerId} = useParams();
   const navigate = useNavigate();
   const onClickStartBtn = () => {
-    navigate('/interview');
+    navigate(`/interview/${groupId}/${interviewerId}`);
   }
   return (
     <div>
