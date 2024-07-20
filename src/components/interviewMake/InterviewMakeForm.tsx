@@ -176,8 +176,9 @@ function InterviewMakeForm() {
 		// Prepare JSON data
 		const value = {
 			name: data.interviewTitle,
-			start_date: data.startTime,
-			end_date: data.endTime,
+			//start_date: data.startTime,
+         start_date: `${formattedDate1}` + "T" + data.startTime,
+			end_date: `${formattedDate2}` + "T" + data.endTime,
 			context_per: parseInt(data.answer),
 			voice_per: parseInt(data.voice),
 			action_per: parseInt(data.action),
@@ -190,6 +191,8 @@ function InterviewMakeForm() {
 			],
 			interviewers: []
 		};
+
+      console.log(value);
          
          const formData = new FormData();
             const interviewersBlob = new Blob([JSON.stringify(jsonFile)], { type: "application/json" });
@@ -263,20 +266,26 @@ function InterviewMakeForm() {
 
    const [selectedDate1, setSelectedDate1] = useState<Date | null>(new Date()); // 시작날짜 선택 변수
    const [selectedDate2, setSelectedDate2] = useState<Date | null>(new Date()); // 종료날짜 선택 변수
+   function formatDate(date:any) {
+      // toISOString()은 'YYYY-MM-DDTHH:mm:ss.sssZ' 형식으로 반환되므로, 날짜 부분만 추출
+      return date.toISOString().split('T')[0];
+   }
+   const formattedDate1 = formatDate(selectedDate1);
+   const formattedDate2 = formatDate(selectedDate2);
    const YEARS = Array.from({ length: getYear(new Date()) + 1 - 2000 }, (_, i) => getYear(new Date()) + i);
    const MONTHS = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
+      '01',
+      '02',
+      '03',
+      '04',
+      '05',
+      '06',
+      '07',
+      '08',
+      '09',
+      '10',
+      '11',
+      '12',
    ];
 
    return (
