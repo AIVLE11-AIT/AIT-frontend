@@ -123,15 +123,15 @@ interface ReportData {
                     <R.BarGraph>
                         <R.BarBox margin="15px">
                             <R.BarContainer width="55px">
-                                <R.Bar score={parseInt(report.total_lsa_score)} total={25} color="#FF6C40"/>
+                                <R.Bar score={parseInt(report.total_lsa_score)} total={20} color="#FF6C40"/>
                             </R.BarContainer>
-                            <R.BarLabel>{report.total_lsa_score}/25<br/>LSA점수</R.BarLabel>    
+                            <R.BarLabel>{report.total_lsa_score}/20<br/>LSA점수</R.BarLabel>    
                         </R.BarBox>   
                         <R.BarBox margin="15px">
                             <R.BarContainer width="55px">
-                                <R.Bar score={parseInt(report.total_similarity_score)} total={5} color="#FF6C40"/>
+                                <R.Bar score={parseInt(report.total_similarity_score)} total={20} color="#FF6C40"/>
                             </R.BarContainer>
-                            <R.BarLabel>{report.total_similarity_score}/5<br/>유사도</R.BarLabel>    
+                            <R.BarLabel>{report.total_similarity_score}/20<br/>유사도</R.BarLabel>    
                         </R.BarBox> 
                         <R.BarBox margin="15px">
                             <R.BarContainer width="55px">
@@ -141,9 +141,9 @@ interface ReportData {
                         </R.BarBox>   
                         <R.BarBox margin="15px">
                             <R.BarContainer width="55px">
-                                <R.Bar score={parseInt(report.total_emotion_score)} total={10} color="#FF6C40"/>
+                                <R.Bar score={parseInt(report.total_emotion_score)} total={20} color="#FF6C40"/>
                             </R.BarContainer>
-                            <R.BarLabel>{report.total_emotion_score}/10<br/>문장감정</R.BarLabel>    
+                            <R.BarLabel>{report.total_emotion_score}/20<br/>문장감정</R.BarLabel>    
                         </R.BarBox>   
                     </R.BarGraph>           
                 )}

@@ -3,55 +3,93 @@ import * as P from './PreTestMain.style';
 import Timer from './Timer';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { interviewEndAtom, interviewStartAtom } from '../../../recoil/groupProfileAtoms';
 
-function PreTestMain() {
-
-    let {groupId, interviewerId} = useParams();
-
-    const [title, setTitle] = useState('');
-
-    useEffect(() => {
-        axios({
-          url: `/interviewGroup/${groupId}/interviewer/${interviewerId}`,
-          method: 'get',
-          headers: {
-            Authorization: sessionStorage.getItem('isLogin'),
-          },
-        })
-          .then((response) => {
-            setTitle(response.data.name);
-            // Format start date and end date here
-            // setStartDate(formatDate(response.data.start_date));
-            // setEndDate(formatDate(response.data.end_date));
-            // setPeople(response.data.interviewers.length);
-            //console.log(response.data);
-          })
-          .catch((error) => {
-            console.log('실패');
-            console.error('면접 그룹 개별 조회 실패: ', error);
-          });
-    }, []);
-  return (
-    
-    <div>
-        <P.HeaderDiv>
-            <P.Logo src={process.env.PUBLIC_URL + '/images/Logo.svg'}></P.Logo>
-        </P.HeaderDiv>
-
-        <P.PreTestMainContainer>
-            <P.PreTestName>[KT] AI 면접 평가</P.PreTestName>
-            <P.PreTestTitle>이미지(dlalwl723@naver.com) 님,<br/> 안내 유의사항을 꼭 확인하세요.</P.PreTestTitle>
-            <P.DateText>면접 가능 일시<br/>2024년 07월 22일 10:00:00 ~ 2024년 07월 24일 17:00:00</P.DateText>
-            <P.DateContainer>
-                <Timer/>
-            </P.DateContainer>
-        </P.PreTestMainContainer>
-        <P.DownContainer>
-            <P.DownIconBox><P.DownIcon src={process.env.PUBLIC_URL + '/images/DownArrow.svg'}/></P.DownIconBox>
-            <P.DownIconBox><P.DownIcon src={process.env.PUBLIC_URL + '/images/DownArrow.svg'}/></P.DownIconBox>
-        </P.DownContainer>
-    </div>
-  )
+interface GroupInfo {
+  company: string;
+  name: string;
+  start_date: string;
+  end_date: string;
 }
 
-export default PreTestMain
+interface InterviewerInfo {
+  name: string;
+  email: string;
+}
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+
+    // 년, 월, 일, 시, 분, 초를 추출
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1 필요
+    const day = String(date.getDate()).padStart(2, '0');
+    const hour = String(date.getHours()).padStart(2, '0');
+    const minute = String(date.getMinutes()).padStart(2, '0');
+    const second = String(date.getSeconds()).padStart(2, '0');
+
+    return `${year}년 ${month}월 ${day}일 ${hour}:${minute}:${second}`;
+  };
+
+function PreTestMain() {
+  let { groupId, interviewerId } = useParams();
+
+  const [groupInfo, setGroupInfo] = useState<GroupInfo | undefined>(undefined);
+  const [interviewerInfo, setInterviewerInfo] = useState<InterviewerInfo | undefined>(undefined);
+
+  const [startDate, setStartDate] = useRecoilState(interviewStartAtom);
+  const [endDate, setEndDate] = useRecoilState(interviewEndAtom);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [groupInfoResponse, interviewerResponse] = await Promise.all([
+          // 면접 정보
+          axios.get(`/interviewGroup/readOne/${groupId}`),
+          // 지원자 정보
+          axios.get(`/interviewGroup/${groupId}/interviewer/readOne/${interviewerId}`),
+        ]);
+
+        setGroupInfo(groupInfoResponse.data);
+        setInterviewerInfo(interviewerResponse.data);
+        setStartDate(groupInfoResponse.data.start_date);
+        setEndDate(groupInfoResponse.data.end_date);
+      } catch (error) {
+        console.error('AxiosError:', error);
+      }
+    };
+
+    fetchData();
+  }, [groupId, interviewerId]);
+
+  return (
+    <div>
+      <P.HeaderDiv>
+        <P.Logo src={process.env.PUBLIC_URL + '/images/Logo.svg'}></P.Logo>
+      </P.HeaderDiv>
+
+      <P.PreTestMainContainer>
+        <P.PreTestName>
+          {groupInfo ? `[${groupInfo.company}] ${groupInfo.name}` : ''}
+        </P.PreTestName>
+        <P.PreTestTitle>
+          {interviewerInfo ? `${interviewerInfo.name}(${interviewerInfo.email})` : ''} 님,<br /> 안내 유의사항을 꼭 확인하세요.
+        </P.PreTestTitle>
+        <P.DateText>
+          면접 가능 일시<br />
+          {groupInfo ? `${formatDate(groupInfo.start_date)} ~ ${formatDate(groupInfo.end_date)}` : ''}
+        </P.DateText>
+        <P.DateContainer>
+          <Timer />
+        </P.DateContainer>
+      </P.PreTestMainContainer>
+      <P.DownContainer>
+        <P.DownIconBox><P.DownIcon src={process.env.PUBLIC_URL + '/images/DownArrow.svg'} /></P.DownIconBox>
+        <P.DownIconBox><P.DownIcon src={process.env.PUBLIC_URL + '/images/DownArrow.svg'} /></P.DownIconBox>
+      </P.DownContainer>
+    </div>
+  );
+}
+
+export default PreTestMain;

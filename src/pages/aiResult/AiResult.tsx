@@ -21,33 +21,34 @@ function AiResult() {
   let { groupId, interviewerId } = useParams();
   const [interviewerInfo, setInterviewerInfo] = useState<InterviewerInfo | null>(null);
   const [videoUrl, setVideoUrl] = useState<string | undefined>(undefined);
-  const [introVideoUrl, setIntroVideoUrl] = useState<string | null>(null);
+  const [introVideoUrl, setIntroVideoUrl] = useState<string | null>(null); // 자기소개 영상 저장 변수
   const [companyQna, setCompanyQna] = useState<Question[]>([]);
   const [interviewerQna, setInterviewerQna] = useState<Question[]>([]);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [interviewerImage, setInterviewerImage] = useState<string | null>(null); // Interviewer 이미지 상태 추가
+  const [answer, setAnswer] = useState<string | undefined>("영상을 가져오는 중입니다! 잠시만 기다려주세요."); //답변 text저장 변수
 
   // 질문 리스트별 선택 상태
   const [selectedCompanyQnaId, setSelectedCompanyQnaId] = useState<number | undefined>(undefined);
   const [selectedInterviewerQnaId, setSelectedInterviewerQnaId] = useState<number | undefined>(undefined);
-  const [showIntroMessage, setShowIntroMessage] = useState<boolean>(false);
+  const [showIntroMessage, setShowIntroMessage] = useState<boolean>(false); // 자기소개 영상 유무
 
   const fetchVideoData = async () => {
     try {
       const token = sessionStorage.getItem('isLogin') || '';
 
       const [imageResponse, introduceResponse, interviewerInfoResponse, companyQnaResponse, interviewerQnaResponse] = await Promise.all([
-        axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}/image/read`, {
+        axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}/image/read`, { // 지원자 사진 요청
           headers: { Authorization: token },
           responseType: 'blob',
         }),
-        axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}/introduce/read`, {
+        axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}/introduce/read`, { // 자기소개 영상 요청
           headers: { Authorization: token },
           responseType: 'blob',
         }),
-        axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}`, {
+        axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}`, { // 지원자 정보 요청
           headers: { Authorization: token },
         }),
         axios.get(`/interviewGroup/${groupId}/companyQna/readAll`, {
@@ -58,18 +59,16 @@ function AiResult() {
         }),
       ]);
 
-      // Interviewer 이미지 처리
       const imageURL = URL.createObjectURL(imageResponse.data);
       setInterviewerImage(imageURL);
       
-      // 자기소개 영상 저장
       const videoBlob = new Blob([introduceResponse.data], { type: 'video/mp4' });
       const introVideoUrl = URL.createObjectURL(videoBlob);
       setIntroVideoUrl(introVideoUrl);
       
-      setInterviewerInfo(interviewerInfoResponse.data); // 지원자 정보 저장
-      setCompanyQna(companyQnaResponse.data); // 공통 질문 저장
-      setInterviewerQna(interviewerQnaResponse.data); // 자소서 기반 질문 저장
+      setInterviewerInfo(interviewerInfoResponse.data);
+      setCompanyQna(companyQnaResponse.data);
+      setInterviewerQna(interviewerQnaResponse.data);
 
     } catch (error) {
       console.error('AxiosError:', error);
@@ -77,21 +76,28 @@ function AiResult() {
     }
   };
 
+  // 클릭한 질문에 맞는 답변 text와 영상 가져오기
   const fetchVideoUrl = async (questionId: number, type: 'companyQna' | 'interviewerQna') => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      setAnswer("영상을 가져오는 중입니다! 잠시만 기다려주세요.");
+    }
     try {
       const token = sessionStorage.getItem('isLogin') || '';
-      const videoResponse = await axios.get(
-        `/interviewGroup/${groupId}/interviewer/${interviewerId}/file/${type}/${questionId}/read`,
-        {
+      const [videoResponse, answerResponse] = await Promise.all([
+        axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}/file/${type}/${questionId}/read`, {
           headers: { Authorization: token },
           responseType: 'blob',
-        }
-      );
+        }),
+        axios.get(`/interviewGroup/${groupId}/interviewer/${interviewerId}/file/${type}/${questionId}/answer`, {
+          headers: { Authorization: token },
+        }),]);
 
       const videoBlob = new Blob([videoResponse.data], { type: 'video/mp4' });
       const videoUrl = URL.createObjectURL(videoBlob);
       setVideoUrl(videoUrl);
-      //console.log(`Video URL for ${type} ${questionId}:`, videoUrl);
+      //console.log(answerResponse);
+      setAnswer(answerResponse.data.answer);
 
     } catch (error) {
       console.error('AxiosError:', error);
@@ -111,43 +117,35 @@ function AiResult() {
 
   useEffect(() => {
     if (videoRef.current && videoUrl) {
-      videoRef.current.src = videoUrl || '';
-      videoRef.current.load();
-      videoRef.current.play();
+      const videoElement = videoRef.current;
+      videoElement.src = videoUrl;
+      videoElement.load();
+
+      videoElement.onloadeddata = () => {
+        videoElement.play().catch(err => {
+          console.error('Error playing video:', err);
+        });
+      };
     }
   }, [videoUrl]);
 
-  // 목록 이동 버튼 클릭 시
   function onClickBackBtn() {
     navigate(`/interviewer-list/${groupId}`);
   }
 
   function handleCompanyQnaClick(questionId: number) {
     setSelectedCompanyQnaId(questionId);
-    setSelectedInterviewerQnaId(undefined); // Reset interviewer QnA selection
-    setShowIntroMessage(false); // Hide intro message
+    setSelectedInterviewerQnaId(undefined);
+    setShowIntroMessage(false);
     fetchVideoUrl(questionId, 'companyQna');
   }
 
   function handleInterviewerQnaClick(questionId: number) {
     setSelectedInterviewerQnaId(questionId);
-    setSelectedCompanyQnaId(undefined); // Reset company QnA selection
-    setShowIntroMessage(false); // Hide intro message
+    setSelectedCompanyQnaId(undefined);
+    setShowIntroMessage(false);
     fetchVideoUrl(questionId, 'interviewerQna');
   }
-
-  const getSelectedAnswer = () => {
-    if (showIntroMessage) {
-      return "지원자의 자기소개입니다";
-    } else if (selectedCompanyQnaId !== undefined) {
-      const selectedQuestion = companyQna.find(question => question.id === selectedCompanyQnaId);
-      return selectedQuestion ? selectedQuestion.answer : '';
-    } else if (selectedInterviewerQnaId !== undefined) {
-      const selectedQuestion = interviewerQna.find(question => question.id === selectedInterviewerQnaId);
-      return selectedQuestion ? selectedQuestion.answer : '';
-    }
-    return '';
-  };
 
   return (
     <A.MainContainer>
@@ -233,7 +231,7 @@ function AiResult() {
 
         {/* 답변 텍스트 변환 출력 */}
         <A.AnswerBox>
-          {getSelectedAnswer()}
+          {showIntroMessage ? "지원자의 자기소개입니다" : `${answer}`}
         </A.AnswerBox>
 
         <Report />

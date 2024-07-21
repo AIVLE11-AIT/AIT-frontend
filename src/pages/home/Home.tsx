@@ -140,63 +140,6 @@ function Home() {
                         </motion.div>
                     </H.Features>
                 </H.Section2>
-                <H.Section3>
-                    <H.MiniTitle>주요기능</H.MiniTitle>
-                    <H.SectionTitle3>우리 회사 맞춤형으로 면접 만들고 AI분석 결과 받아보기</H.SectionTitle3>
-                    <H.SectionSubTitle3>
-                        면접 페이지를 만들고 지원자에게 링크를 공유하세요.
-                        <br />
-                        지원자들이 가능한 시간을 모아 최적의 면접 타임테이블을 만들어 드립니다.
-                    </H.SectionSubTitle3>
-                    <motion.div {...animationProps}>
-                        <H.FeatureBox>
-                            <H.FeatureBoxNumber1>1</H.FeatureBoxNumber1>
-                            <H.FeatureBoxContent>
-                                <H.FeatureBoxTitle>면접 페이지 만들기</H.FeatureBoxTitle>
-                                <H.FeatureBoxDescription>
-                                    • 구글 혹은 이메일로 그룹 계정을 생성해 주세요.
-                                    <br />
-                                    <br />• 그룹 프로필에서 ‘+ 만들기’ 버튼을 눌러<br />면접 페이지를 개설할 수 있습니다.
-                                    <br />
-                                    <br />• 면접 정보와 면접을 진행할 시간대를 입력하면<br />페이지 개설이 완료됩니다.
-                                </H.FeatureBoxDescription>
-                            </H.FeatureBoxContent>
-                            <H.FeatureBoxImage src="/images/HomeIntroFunction1.svg" alt="면접 페이지" />
-                        </H.FeatureBox>
-                    </motion.div>
-                    <motion.div {...animationProps}>
-                        <H.FeatureBox>
-                            <H.FeatureBoxNumber2>2</H.FeatureBoxNumber2>
-                            <H.FeatureBoxContent>
-                                <H.FeatureBoxTitle>지원자에게 링크 공유하기</H.FeatureBoxTitle>
-                                <H.FeatureBoxDescription>
-                                    • 그룹 프로필에서 ‘공유' 버튼을 누르면<br />면접 페이지 링크가 복사됩니다.
-                                    <br />
-                                    <br />• 면접 전형 지원자에게 링크를 공유하여<br />가능한 시간 입력을 요청하세요.
-                                    <br />
-                                    <br />• 면접 페이지에서 지원자 입력 현황을<br />확인할 수 있습니다.
-                                </H.FeatureBoxDescription>
-                            </H.FeatureBoxContent>
-                            <H.FeatureBoxImage src="/images/HomeIntroFunction2.svg" alt="링크 공유" />
-                        </H.FeatureBox>
-                    </motion.div>
-                    <motion.div {...animationProps}>
-                        <H.FeatureBox>
-                            <H.FeatureBoxNumber3>3</H.FeatureBoxNumber3>
-                            <H.FeatureBoxContent>
-                                <H.FeatureBoxTitle>면접 타임테이블 확정하기</H.FeatureBoxTitle>
-                                <H.FeatureBoxDescription>
-                                    • 모든 면접 전형 지원자가 시간 입력을 완료하면<br />면접 페이지에서 ‘타임테이블 확정하기’ 버튼을 눌러<br />면접 타임테이블을 확정합니다.
-                                    <br />
-                                    <br />• 타임테이블 확정 시 모든 지원자가 열람 가능하며<br />수정이 불가합니다.
-                                    <br />
-                                    <br />• 타임테이블 이미지는 PNG 혹은 PDF 파일로<br />다운 가능합니다. 이미지 혹은 링크로 지원자에게<br />공유하세요.
-                                </H.FeatureBoxDescription>
-                            </H.FeatureBoxContent>
-                            <H.FeatureBoxImage src="/images/HomeIntroFunction3.svg" alt="타임테이블 확정" />
-                        </H.FeatureBox>
-                    </motion.div>
-                </H.Section3>
             </H.Container>
             <H.Container2>
                 <H.Footer>
