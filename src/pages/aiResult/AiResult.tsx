@@ -72,7 +72,9 @@ function AiResult() {
 
     } catch (error) {
       console.error('AxiosError:', error);
-      setError('Failed to fetch data');
+      //setError('Failed to fetch data');
+      alert('지원자의 면접 응시가 완료되지 않았습니다.');
+      onClickBackBtn();
     }
   };
 
@@ -165,7 +167,7 @@ function AiResult() {
             </A.PassBox>
           </A.InterviewerInfo>
         ) : (
-          <div>Loading interviewer info...</div>
+          <div>지원자 정보를 가져오는 중입니다.</div>
         )}
         <A.BackBtn onClick={onClickBackBtn}>목록으로 이동</A.BackBtn>
       </A.Container>
@@ -211,7 +213,7 @@ function AiResult() {
                   </A.QuestionDiv>
                 ))
               ) : (
-                <div>Loading questions...</div>
+                <A.QuestionDiv>질문을 가져오는 중입니다.</A.QuestionDiv>
               )}
               {interviewerQna.length > 0 ? (
                 interviewerQna.map((question, index) => (
@@ -223,7 +225,7 @@ function AiResult() {
                   </A.QuestionDiv>
                 ))
               ) : (
-                <div>Loading questions...</div>
+                <div></div>
               )}
             </A.QuestionListBox>
           </A.QuestionList>
