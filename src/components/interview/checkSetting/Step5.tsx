@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import * as S from  './Step5.style';
 import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function Step5() {
 
@@ -9,9 +10,28 @@ function Step5() {
   const onClickStartBtn = () => {
     navigate(`/interview/${groupId}/${interviewerId}`);
   }
+
+  const [name, setName] = useState();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [interviewerResponse] = await Promise.all([
+          // 지원자 정보
+          axios.get(`/interviewGroup/${groupId}/interviewer/readOne/${interviewerId}`),
+        ]);
+
+        setName(interviewerResponse.data.name);
+        
+      } catch (error) {
+        console.error('AxiosError:', error);
+      }
+    };
+
+    fetchData();
+  }, [groupId, interviewerId]);
   return (
     <div>
-        <S.StepHeader>이미지님!<br/>면접을 위한 환경 설정이 완료되었습니다.</S.StepHeader>
+        <S.StepHeader>{name}님!<br/>면접을 위한 환경 설정이 완료되었습니다.</S.StepHeader>
         <S.HeaderText>아래 내용을 확인한 후 시작 버튼을 눌러 면접을 진행해 주세요.</S.HeaderText>
         <S.StepMain>
           <S.ContentContainer>
