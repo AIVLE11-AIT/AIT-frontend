@@ -10,7 +10,7 @@ export const Section1 = styled.section`
   justify-content: space-between;
   align-items: flex-start;
   flex-direction: row;
-  margin-top: 70px;
+  margin-top: 150px;
   margin-bottom: 100px;
 `;
 
@@ -104,7 +104,6 @@ export const SectionSubTitle2Part2 = styled.span`
 `;
 
 export const SectionTitle1 = styled.h2`
-  margin-bottom: 60px;
   font-size: 45px;
   font-style: normal;
   font-weight: 600;
@@ -195,7 +194,7 @@ export const Button2 = styled.button`
 
 // 분석 결과 사진
 export const ResultContainer = styled.div`
-  margin-top: 50px;
+  margin-top: 5px;
 `;
 
 export const Features = styled.div`

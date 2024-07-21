@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import * as H from './Home.style';
 import { useNavigate } from 'react-router-dom';
+import Typewriter from 'typewriter-effect';
 
 function Home() {
     const navigate = useNavigate();
@@ -41,25 +42,38 @@ function Home() {
         <H.MainDiv>
             <H.Container>
                 <H.Header>
-                    <motion.div {...animationProps}>
                         <H.SubTitle1>기업 맞춤형 인재를 뽑기 위한 단 하나의 솔루션</H.SubTitle1>
                         <H.Title>
-                            <H.TitlePart1>스마트한 </H.TitlePart1>
-                            <H.TitlePart2>AI면접</H.TitlePart2>
-                            <H.TitlePart1>의 시작</H.TitlePart1>
+                        <Typewriter
+                                options={{
+                                    autoStart: true,
+                                    loop: true,
+                                    delay: 100,
+                                    wrapperClassName: 'typewriter-wrapper',
+                                    cursorClassName: 'typewriter-cursor'
+                                }}
+                                onInit={(typewriter) => {
+                                    typewriter
+                                        .typeString('<span>스마트한 </span>')
+                                        .pauseFor(300)
+                                        .typeString('<span style="color: #696CEA;">AI면접</span>')
+                                        .pauseFor(100)
+                                        .typeString('<span>의 </span>')
+                                        .pauseFor(500)
+                                        .typeString('<span>시작</span>')
+                                        .start();
+                                }}
+                            />
                         </H.Title>
-                    </motion.div>
                     <H.SubTitle2>
                         각 기업이 원하는 평가 비율을 직접 선택하여
                         <br />
                         맞춤형으로 지원자의 면접 평가 결과를 제공합니다.
                     </H.SubTitle2>
                     <H.Button1 onClick={handleButtonClick}>Get Start</H.Button1>
-                    <motion.div {...animationProps}>
-                        <H.ResultContainer>
-                            <img src={process.env.PUBLIC_URL + '/images/MainImage.svg'}></img>
-                        </H.ResultContainer>
-                    </motion.div>
+                    <H.ResultContainer>
+                        <img src={process.env.PUBLIC_URL + '/images/MainImage.svg'}></img>
+                    </H.ResultContainer>
                 </H.Header>
                 <H.Section1>
                     <H.InnerContainer>
