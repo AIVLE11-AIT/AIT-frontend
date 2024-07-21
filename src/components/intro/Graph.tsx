@@ -12,10 +12,10 @@ function Graph() {
                 <th style={{ color: '#696CEA', fontSize: '20px', textAlign: 'center', padding: '10px', verticalAlign: 'middle' }}>
                 AIT
                 </th>
-                <th style={{ color: 'gray', fontSize: '20px', textAlign: 'center', padding: '10px', verticalAlign: 'middle' }}>
+                <th style={{ color: 'gray', fontSize: '20px', textAlign: 'center', padding: '10px 45px', verticalAlign: 'middle' }}>
                 A사
                 </th>
-                <th style={{ color: 'gray', fontSize: '20px', textAlign: 'center', padding: '10px', verticalAlign: 'middle' }}>
+                <th style={{ color: 'gray', fontSize: '20px', textAlign: 'center', padding: '10px 45px', verticalAlign: 'middle' }}>
                 B사
                 </th>
             </tr>
@@ -83,7 +83,7 @@ function Graph() {
                 </td>
                 <td style={{ color: '#696CEA', fontSize: '18px', textAlign: 'center', padding: '20px 10px', verticalAlign: 'middle' }}>
                     <img src={process.env.PUBLIC_URL + '/images/IntroCheck1.svg'} alt="Logo"></img>
-                    <div style={{ fontWeight: '400', marginTop: '10px', fontSize:'15px' }}>98.4%의 정확도</div>
+                    <div style={{ fontWeight: '400', marginTop: '10px', fontSize:'15px' }}>96.9%의 정확도</div>
                 </td>
                 <td style={{ color: '#D0D2D7', fontSize: '18px', textAlign: 'center', padding: '20px 10px', verticalAlign: 'middle' }}>
                     <img src={process.env.PUBLIC_URL + '/images/IntroCheck2.svg'} alt="Logo"></img>
@@ -127,6 +127,7 @@ function Graph() {
                 <td style={{ color: '#D0D2D7', fontSize: '18px', textAlign: 'center', padding: '20px 10px', verticalAlign: 'middle' }}>
                 </td>
                 <td style={{ color: '#D0D2D7', fontSize: '18px', textAlign: 'center', padding: '20px 10px', verticalAlign: 'middle' }}>
+                    <img src={process.env.PUBLIC_URL + '/images/IntroCheck2.svg'} alt="Logo"></img>
                 </td>
             </tr>
         </tbody>

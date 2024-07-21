@@ -28,7 +28,7 @@ function AiResult() {
   const navigate = useNavigate();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [interviewerImage, setInterviewerImage] = useState<string | null>(null); // Interviewer 이미지 상태 추가
-  const [answer, setAnswer] = useState<string | undefined>("영상을 가져오는 중입니다! 잠시만 기다려주세요."); //답변 text저장 변수
+  const [answer, setAnswer] = useState<string | undefined>("질문을 클릭하면 지원자의 영상이 출력됩니다."); //답변 text저장 변수
 
   // 질문 리스트별 선택 상태
   const [selectedCompanyQnaId, setSelectedCompanyQnaId] = useState<number | undefined>(undefined);

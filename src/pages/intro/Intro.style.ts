@@ -15,7 +15,12 @@ export const HeaderContentContainer = styled.div`
     font-size: 35px;
     text-align: center;
     color: black;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+`;
+
+export const HeaderText = styled.div`
+    text-align: center;
+    color: #404146;
 `;
 
 // 헤더 박스

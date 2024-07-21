@@ -41,11 +41,7 @@ function Home() {
         <H.MainDiv>
             <H.Container>
                 <H.Header>
-                    <motion.div
-                        initial={{ opacity: 0, x: -100 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ ease: 'easeInOut', duration: 2 }}
-                    >
+                    <motion.div {...animationProps}>
                         <H.SubTitle1>기업 맞춤형 인재를 뽑기 위한 단 하나의 솔루션</H.SubTitle1>
                         <H.Title>
                             <H.TitlePart1>스마트한 </H.TitlePart1>
@@ -59,11 +55,7 @@ function Home() {
                         맞춤형으로 지원자의 면접 평가 결과를 제공합니다.
                     </H.SubTitle2>
                     <H.Button1 onClick={handleButtonClick}>Get Start</H.Button1>
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ ease: 'easeInOut', duration: 2 }}
-                    >
+                    <motion.div {...animationProps}>
                         <H.ResultContainer>
                             <img src={process.env.PUBLIC_URL + '/images/MainImage.svg'}></img>
                         </H.ResultContainer>
@@ -71,11 +63,6 @@ function Home() {
                 </H.Header>
                 <H.Section1>
                     <H.InnerContainer>
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ ease: 'easeInOut', duration: 2 }}
-                        >
                             <H.SectionTitle1>
                                 <H.SectionTitlePart1>이런 고민을 하고 있다면,<br /></H.SectionTitlePart1>
                                 <H.SectionTitlePart2>AIT</H.SectionTitlePart2>
@@ -87,27 +74,27 @@ function Home() {
                                 <br />이미 고정된 평가 비율과 다른 평가 비율로 결과를 보고 싶다.
                                 <br />잘 정리된 시각화 자료로 지원자의 면접 결과를 확인하고 싶다.
                             </H.Description>
-                        </motion.div>
                     </H.InnerContainer>
                     <H.BoxContainer>
                         <motion.div {...animationProps}>
                             <H.Box>
                                 <H.BoxComment1>
                                     <H.CommentIcon>😕</H.CommentIcon>
-                                    <H.CommentText>인공지능 면접 도입에 대해 신뢰도가 부족해 도입이 망설여져요.</H.CommentText>
+                                    <H.CommentText>인공지능 면접 도입에 대해 신뢰도가<br/>부족해 도입이 망설여져요.</H.CommentText>
                                 </H.BoxComment1>
                                 <H.BoxComment2>
                                     <H.CommentIcon>😟</H.CommentIcon>
-                                    <H.CommentText>면접 과정에서 발생하는 시간, 비용이 너무 많이 소모돼요.</H.CommentText>
+                                    <H.CommentText>면접 과정에서 발생하는 시간, 비용이<br/>너무 많이 소모돼요.</H.CommentText>
                                 </H.BoxComment2>
                                 <H.BoxComment3>
                                     <H.CommentIcon>😊</H.CommentIcon>
-                                    <H.CommentText>우리 회사 맞춤형 인재를 채용하고 싶어요.</H.CommentText>
+                                    <H.CommentText>우리 회사 맞춤형 인재를 채용하고<br/>싶어요.</H.CommentText>
                                 </H.BoxComment3>
                             </H.Box>
                         </motion.div>
                     </H.BoxContainer>
                 </H.Section1>
+
                 <H.Section2>
                     <H.SectionTitle2>평가 비율을 직접 선택해 면접 분석 결과를 받아보세요.</H.SectionTitle2>
                     <H.SectionSubTitle2>

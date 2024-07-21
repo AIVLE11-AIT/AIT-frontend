@@ -96,19 +96,19 @@ interface ReportData {
                     <R.BarGraph>
                         <R.BarBox margin="25px">
                             <R.BarContainer width="65px">
-                                <R.Bar score={parseInt(report.total_voice_level)} total={100} color="#FFBC2A"/> {/*30, 40, 30 */}
+                                <R.Bar score={parseInt(report.total_voice_level)} total={30} color="#FFBC2A"/> {/*30, 40, 30 */}
                             </R.BarContainer>
                             <R.BarLabel>{report.total_voice_level}/30<br/>목소리크기</R.BarLabel>    
                         </R.BarBox>   
                         <R.BarBox margin="25px">
                             <R.BarContainer width="65px">
-                                <R.Bar score={parseInt(report.total_voice_speed)} total={100} color="#FFBC2A"/>
+                                <R.Bar score={parseInt(report.total_voice_speed)} total={40} color="#FFBC2A"/>
                             </R.BarContainer>
                             <R.BarLabel>{report.total_voice_speed}/40<br/>발화속도</R.BarLabel>    
                         </R.BarBox> 
                         <R.BarBox margin="25px">
                             <R.BarContainer width="65px">
-                                <R.Bar score={parseInt(report.total_voice_intj)} total={100} color="#FFBC2A"/>
+                                <R.Bar score={parseInt(report.total_voice_intj)} total={30} color="#FFBC2A"/>
                             </R.BarContainer>
                             <R.BarLabel>{report.total_voice_intj}/30<br/>습관어</R.BarLabel>    
                         </R.BarBox>   
