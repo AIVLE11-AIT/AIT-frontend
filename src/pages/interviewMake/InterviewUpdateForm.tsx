@@ -7,8 +7,6 @@ import axios from 'axios';
 import ExplainRatio from '../../components/interviewMake/ExplainRatio';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
-
-// 달력
 import styles from '../../components/interviewMake/Calender.module.scss';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -56,10 +54,45 @@ const jobGroup: OptionType[] = [
 	{ value: "ProductionManufacturing", label: "생산제조" }
 ];
 
-function InterviewUpdateForm() {
-	let { groupId } = useParams();
+type FormValue = {
+	interviewTitle: string;
+	interviewType: string;
+	startTime: string;
+	endTime: string;
+	answer: string;
+	voice: string;
+	action: string;
+	question1: string;
+	question2: string;
+	question3: string;
+	jobGroup: string;
+	passingScore: string;
+};
 
-	// 상태 변수
+type QnaType = {
+	id: number;
+	question: string;
+	answer: string | null;
+	interview_group_id: number;
+	interview_group: string;
+};
+
+type InterviewDataType = {
+	name: string;
+	language: string;
+	start_date: string;
+	end_date: string;
+	context_per: number;
+	voice_per: number;
+	action_per: number;
+	companyQnas: QnaType[];
+	passingScore: number;
+	occupation: string;
+};
+
+function InterviewUpdateForm() {
+	let { groupId } = useParams<{ groupId: string }>();
+
 	const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [interviewTitleColor, setInterviewTitleColor] = useState('#D0D2D7');
@@ -69,23 +102,9 @@ function InterviewUpdateForm() {
 	const [passScoreColor, setPassScoreColor] = useState('#D0D2D7');
 	const [selectedDate1, setSelectedDate1] = useState<Date | null>(null);
 	const [selectedDate2, setSelectedDate2] = useState<Date | null>(null);
+	const [questionIds, setQuestionIds] = useState<number[]>([]);
 
 	const navigate = useNavigate();
-
-	type FormValue = {
-		interviewTitle: string;
-		interviewType: string;
-		startTime: string;
-		endTime: string;
-		answer: string;
-		voice: string;
-		action: string;
-		question1: string;
-		question2: string;
-		question3: string;
-		jobGroup: string;
-		passingScore: string;
-	};
 
 	const {
 		register,
@@ -113,10 +132,8 @@ function InterviewUpdateForm() {
 		}
 	});
 
-	// 인터뷰 타입 관찰
 	const interviewType = watch('interviewType');
 
-	// 기존 데이터 불러오기
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -125,7 +142,7 @@ function InterviewUpdateForm() {
 						Authorization: sessionStorage.getItem('isLogin'),
 					},
 				});
-				const data = response.data;
+				const data: InterviewDataType = response.data;
 				setValue('interviewTitle', data.name || '');
 				setValue('interviewType', data.language || '');
 				setValue('startTime', moment(data.start_date).format('HH:mm:ss') || '');
@@ -142,15 +159,18 @@ function InterviewUpdateForm() {
 
 				const selectedJobGroup = jobGroup.find(group => group.label === data.occupation);
 				setSelectedOption(selectedJobGroup || null);
+
+				setQuestionIds(data.companyQnas.map((qna: QnaType) => qna.id));
+
 				console.log("기존 데이터: ", data);
 			} catch (error) {
 				console.error('Failed to fetch data:', error);
 			}
 		};
+
 		fetchData();
 	}, [groupId, setValue]);
 
-	// 유효성 검사 규칙 설정
 	const getQuestionValidationRules = (type: string) => {
 		if (type === 'eng') {
 			return {
@@ -178,14 +198,11 @@ function InterviewUpdateForm() {
 			};
 		}
 	};
-	
 
-	// 직군 선택 select 함수
 	const handleSelectChange = (newValue: OptionType | null) => {
 		setSelectedOption(newValue);
 	};
 
-	// 평가 비율 유효성 검사 함수
 	const validateTotalPercentage = () => {
 		const answer = parseInt(getValues("answer") || "0", 10);
 		const voice = parseInt(getValues("voice") || "0", 10);
@@ -196,13 +213,12 @@ function InterviewUpdateForm() {
 		}
 	};
 
-	// 날짜 포맷 함수
 	function formatDate(date: Date | null): string {
 		return date ? date.toISOString().split('T')[0] : '';
 	}
 	const formattedDate1 = formatDate(selectedDate1);
 	const formattedDate2 = formatDate(selectedDate2);
-	const YEARS = Array.from({ length: getYear(new Date()) + 1 - 2000 }, (_, i) => getYear(new Date()) + i);
+	const YEARS = Array.from({ length: getYear(new Date()) + 1 - 2000 }, (_, i) => getYear(new Date()) - i);
 	const MONTHS = [
 		'01',
 		'02',
@@ -222,8 +238,8 @@ function InterviewUpdateForm() {
 		try {
 			const value = {
 				name: data.interviewTitle,
-				start_date: `${formattedDate1}` + "T" + data.startTime,
-				end_date: `${formattedDate2}` + "T" + data.endTime,
+				start_date: `${formattedDate1}T${data.startTime}`,
+				end_date: `${formattedDate2}T${data.endTime}`,
 				passingScore: data.passingScore,
 				context_per: parseInt(data.answer),
 				voice_per: parseInt(data.voice),
@@ -231,14 +247,14 @@ function InterviewUpdateForm() {
 				language: data.interviewType,
 				occupation: selectedOption ? selectedOption.label : '',				
 				companyQnas: [
-					{ question: data.question1 },
-					{ question: data.question2 },
-					{ question: data.question3 },
+					{ id: questionIds[0], question: data.question1 },
+					{ id: questionIds[1], question: data.question2 },
+					{ id: questionIds[2], question: data.question3 },
 				],
 				interviewers: []
 			};
 
-			console.log(value);
+			console.log('value', value);
 
 			await axios.put(`/interviewGroup/${groupId}/update`, value, {
 				headers: {
@@ -350,10 +366,10 @@ function InterviewUpdateForm() {
 										scrollableYearDropdown
 										shouldCloseOnSelect
 										yearDropdownItemNumber={100}
-										minDate={new Date()} // 오늘날짜 이후로만 선택 가능
+										minDate={new Date()}
 										selected={selectedDate1}
 										calendarClassName={styles.calenderWrapper}
-										dayClassName={(d) => (d.getDate() === selectedDate1!.getDate() ? styles.selectedDay : styles.unselectedDay)}
+										dayClassName={(d) => (d.getDate() === selectedDate1?.getDate() ? styles.selectedDay : styles.unselectedDay)}
 										onChange={(date) => setSelectedDate1(date)}
 										className={styles.datePicker}
 										renderCustomHeader={({
@@ -432,10 +448,10 @@ function InterviewUpdateForm() {
 										scrollableYearDropdown
 										shouldCloseOnSelect
 										yearDropdownItemNumber={100}
-										minDate={new Date()} // 오늘날짜 이후로만 선택 가능
+										minDate={new Date()}
 										selected={selectedDate2}
 										calendarClassName={styles.calenderWrapper}
-										dayClassName={(d) => (d.getDate() === selectedDate2!.getDate() ? styles.selectedDay : styles.unselectedDay)}
+										dayClassName={(d) => (d.getDate() === selectedDate2?.getDate() ? styles.selectedDay : styles.unselectedDay)}
 										onChange={(date) => setSelectedDate2(date)}
 										className={styles.datePicker}
 										renderCustomHeader={({
@@ -602,8 +618,9 @@ function InterviewUpdateForm() {
 							</div>
 						</I.RatioContainer>
 						<I.Error>
-							{(errors.answer || errors.voice || errors.action) &&
-								(<small role="alert">{errors.answer?.message || errors.voice?.message || errors.action?.message}</small>)}
+							{(errors.answer || errors.voice || errors.action) && (
+								<small role="alert">{errors.answer?.message || errors.voice?.message || errors.action?.message}</small>
+							)}
 						</I.Error>
 						<I.ConfirmText onClick={() => setIsModalOpen(true)}>평가 비율에 대해 궁금해요!</I.ConfirmText>
 					</I.MakeInputWrap>
