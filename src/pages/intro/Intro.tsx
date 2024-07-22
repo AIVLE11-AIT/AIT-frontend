@@ -4,6 +4,7 @@ import Graph from '../../components/intro/Graph';
 import Process from '../../components/intro/Process';
 import People from '../../components/intro/People';
 import { motion } from 'framer-motion';
+import Footer from '../../components/footer/Footer';
 
 function Intro() {
     const animationProps = {
@@ -81,6 +82,7 @@ function Intro() {
                 <People/>
             </I.IntroHeader>
         </motion.div>
+        <Footer/>
     </div>
   )
 }
