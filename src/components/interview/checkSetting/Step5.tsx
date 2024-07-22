@@ -6,13 +6,12 @@ import axios from 'axios';
 function Step5() {
   let { groupId, interviewerId } = useParams();
   const navigate = useNavigate();
-  const [interviewType, setInterviewType] = useState<string | null>(null);
+  const [interviewType, setInterviewType] = useState<string>('kor'); // 기본값을 'kor'으로 설정
   const [interviewerName, setInterviewerName] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    
-    const fetchData = async() => {
+    const fetchData = async () => {
       try {
         const [groupInfoResponse, interviewerResponse] = await Promise.all([
           // 면접 정보
@@ -23,7 +22,7 @@ function Step5() {
 
         console.log('데이터1', groupInfoResponse);
         console.log('데이터2', interviewerResponse);
-        setInterviewType(groupInfoResponse.data.language);
+        setInterviewType(groupInfoResponse.data.language); // 데이터가 'eng'일 경우 업데이트
         setInterviewerName(interviewerResponse.data.name);
       } catch (error) {
         console.error('AxiosError:', error);
