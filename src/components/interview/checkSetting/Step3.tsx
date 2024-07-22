@@ -1,4 +1,3 @@
-// Step3.tsx
 import React, { useEffect, useRef, useState } from 'react';
 import * as S from './Step3.style';
 import { useParams } from 'react-router-dom';
@@ -23,7 +22,7 @@ function Step3() {
       try {
         const response = await axios.get(`/interviewGroup/readOne/${groupId}`);
         const data = response.data;
-        setInterviewType(data.interviewType);
+        setInterviewType(data.language);
       } catch (error) {
         console.error('Error fetching interview data:', error);
       }
@@ -33,12 +32,14 @@ function Step3() {
   }, [groupId]);
 
   useEffect(() => {
-    getWebcam((stream: MediaStream) => {
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-      }
-    });
-  }, []);
+    if (interviewType) {
+      getWebcam((stream: MediaStream) => {
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+      });
+    }
+  }, [interviewType]);
 
   const getWebcam = async (callback: (stream: MediaStream) => void) => {
     try {
