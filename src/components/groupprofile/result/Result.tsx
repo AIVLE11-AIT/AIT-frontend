@@ -72,11 +72,10 @@ function Result({ index }: ResultProps) {
         },
       })
         .then((response) => {
-          const endDateObj = new Date(endDate.split(' ')[0]); // 'YYYY-MM-DD' to Date object
+          const endDateObj = new Date(endDate); // 'YYYY-MM-DD' to Date object
           const today = new Date();
-          today.setHours(0, 0, 0, 0); // Set time to 00:00:00 for comparison
           if(response.data === true){ // 메일전송 완료 했으면
-            if (today > endDateObj) {
+            if (today >= endDateObj) {
               navigate(`/interviewer-list/${index}`);
             } else {
               alert("면접 날짜 종료 후 열람 가능합니다.");

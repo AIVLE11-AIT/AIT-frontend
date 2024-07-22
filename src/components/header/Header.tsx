@@ -11,6 +11,12 @@ function Header() {
         navigate('/');
     }
 
+    // 서비스 소개 클릭 시
+    const handleContactIntroClick = () => {
+        navigate('/intro');
+    }
+    
+
     // 로그아웃 버튼 클릭 시
     const onClickLogoutBtn = () => {
         if(window.confirm("로그아웃 하시겠습니까?")){
@@ -42,7 +48,7 @@ function Header() {
                     <img src={process.env.PUBLIC_URL + '/images/Logo.svg'} alt="Logo"></img>
                 </H.LogoDiv>
                 <H.HeaderWrap>
-                    <H.HeaderContent>서비스 소개</H.HeaderContent>
+                    <H.HeaderContent onClick={handleContactIntroClick}>서비스 소개</H.HeaderContent>
                     <H.HeaderContent onClick={handleContactButtonClick}>문의하기</H.HeaderContent>
                     {sessionStorage.getItem('isLogin') === null ? (
                     <H.LoginBtn onClick={onClickLoginBtn}>

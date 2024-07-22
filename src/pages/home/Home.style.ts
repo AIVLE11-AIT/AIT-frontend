@@ -10,7 +10,7 @@ export const Section1 = styled.section`
   justify-content: space-between;
   align-items: flex-start;
   flex-direction: row;
-  margin-top: 70px;
+  margin-top: 150px;
   margin-bottom: 100px;
 `;
 
@@ -56,11 +56,11 @@ export const SubTitle1 = styled.div`
 `;
 
 // 스마트한 AI면접의 시작
-export const Title = styled.h1`
+export const Title = styled.div`
   margin-top: 20px;
   margin-bottom: 30px;
   color: #0D0D0D;
-  font-size: 65px;
+  font-size: 60px;
   font-weight: 600;
 `;
 
@@ -70,7 +70,7 @@ export const SubTitle2 = styled.div`
   margin-bottom: 30px;
   color: black;
   text-align: center;
-  font-size: 20px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 1.7; 
@@ -89,8 +89,8 @@ export const TitlePart2 = styled.span`
 export const SectionSubTitle2Part1 = styled.span`
   color: #606060;
   text-align: center;
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 600;
   color: #606060;
 `;
 
@@ -104,7 +104,6 @@ export const SectionSubTitle2Part2 = styled.span`
 `;
 
 export const SectionTitle1 = styled.h2`
-  margin-bottom: 60px;
   font-size: 45px;
   font-style: normal;
   font-weight: 600;
@@ -115,14 +114,14 @@ export const SectionTitle1 = styled.h2`
 `;
 
 export const SectionTitlePart1 = styled.span`
-  font-size: 45px;
+  font-size: 40px;
   font-weight: 700;
   display: inline;
 `;
 
 export const SectionTitlePart2 = styled.span`
   color: #333;
-  font-size: 45px;
+  font-size: 50px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -137,7 +136,7 @@ export const SectionTitle2 = styled.div`
   margin-bottom: 50px;
   color: #333;
   text-align: center;
-  font-size: 45px;
+  font-size: 42px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -195,7 +194,7 @@ export const Button2 = styled.button`
 
 // 분석 결과 사진
 export const ResultContainer = styled.div`
-  margin-top: 50px;
+  margin-top: 5px;
 `;
 
 export const Features = styled.div`
@@ -208,7 +207,7 @@ export const Features = styled.div`
 export const Feature = styled.div`
   width: 360px;
   height: 400px;
-  padding: 30px;
+  padding: 40px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: left;
   margin: 10px 30px;
@@ -219,7 +218,7 @@ export const Feature = styled.div`
 export const FeatureTitle = styled.h3`
   margin-bottom: 20px;
   color: black;
-  font-size: 35px;
+  font-size: 32px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -332,6 +331,7 @@ export const Container = styled.div`
 
 export const Container2 = styled.div`
   background: linear-gradient(180deg, #e0e7ff 0%, #d0e0ff 100%);
+  margin-top: 150px;
 `;
 
 export const BoxContainer = styled.div`
@@ -404,7 +404,7 @@ export const BoxHighlighted = styled.span`
 export const Description = styled.p`
   margin-top: 60px;
   color: #6D6D6D;
-  font-size: 22px;
+  font-size: 21px;
   font-style: normal;
   font-weight: 500;
   line-height: 2;
@@ -418,7 +418,7 @@ export const CommentIcon = styled.div`
 
 export const CommentText = styled.p`
   color: #404146;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
   line-height: 1.5;
   margin-left: 10px;
