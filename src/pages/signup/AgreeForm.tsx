@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as A from './AgreeForm.style';
 import { useNavigate } from 'react-router-dom';
 
 function AgreeForm() {
 
+  const [isActive, setIsActive] = useState(false);
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   const [check3, setCheck3] = useState(false);
@@ -15,6 +16,9 @@ function AgreeForm() {
       setCheck1(true);
       setCheck2(true);
       setCheck3(true);
+      
+      if(check4 === true)
+        setIsActive(true);
     }
     else{
       setCheck1(false);
@@ -45,6 +49,17 @@ function AgreeForm() {
     }
   }
 
+  // 다음 버튼 클릭 시
+  const onClickNextBtn = () => {
+    if(check1 === true && check4 === true){
+      navigate('/signup');
+    }
+    else{
+      alert("약관에 모두 동의해 주세요.");
+    }
+  }
+
+  // 만 14세 이상 확인 클릭 시
   const onClickCheck4 = () => {
     setCheck4(!check4);
   }
@@ -54,6 +69,7 @@ function AgreeForm() {
   const onClickLink1 = () => {
     navigate('/terms-of-service');
   }
+  // 개인정보 동의 전문 보기 클릭 시
   const onClickLink2 = () => {
     navigate('/privacy-policy');
   }
@@ -116,7 +132,7 @@ function AgreeForm() {
       <A.AgreeBox>
         <A.CheckBox checked={check4} onClick={onClickCheck4}/>본인은 만 14세 이상입니다.
     </A.AgreeBox>
-    {/* <A.SignUpBtn type="submit" toggle={isActive}>완료</A.SignUpBtn> */}
+    <A.NextBtn onClick={onClickNextBtn}>다음</A.NextBtn>
     </A.SignUpForm>
   )
 }

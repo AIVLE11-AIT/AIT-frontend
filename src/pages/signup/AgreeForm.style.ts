@@ -137,3 +137,24 @@ export const TableText = styled.div`
     margin-left: 50px;
     margin-top: 20px;
 `;
+
+// 완료 버튼
+export const NextBtn = styled.div`
+    display: flex;
+    height: 45px;
+    width: 300px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background: #696CEA;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 30px auto 50px auto;
+    cursor: pointer;
+        
+    &:hover {
+        background: #8285F3; /* 연한 색상으로 변경 */
+    }
+`;
