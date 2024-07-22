@@ -3,7 +3,7 @@ import styled from "styled-components";
 // 회원가입 div
 export const SignUpForm = styled.div`
     width: 530px;
-    height: 850px;
+    height: 900px;
     flex-shrink: 0;
     border-radius: 30px;
     border: 1px solid #D0D2D7;
@@ -21,18 +21,24 @@ export const PageNumberBox = styled.div`
 `;
 
 interface PageNumberTextProps {
-    position: string;
     color: string;
   }
 
 // 회원가입 페이지 번호 text
 export const PageNumberText = styled.span<PageNumberTextProps>`
-    position: absolute;
-    top: 48%;
-    left: ${(props) => props.position};
-    transform: translate(-50%, -50%);
-    font-size: 17px;
+    font-size: 15px;
     color: ${(props) => props.color};
+`;
+
+export const PageNumberIcon = styled.div<{bg:string}>`
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;  // 요소들을 수평으로 정렬
+    align-items: center;
+    background-color: ${(props) => props.bg};
+    border-radius: 50px;
+    border: 2px solid #606060;
 `;
 
 
@@ -144,7 +150,7 @@ export const SubmitWrap = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 40px;
+    margin-top: 50px;
 `;
 
 // 이전 버튼
