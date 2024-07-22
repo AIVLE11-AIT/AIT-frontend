@@ -11,6 +11,7 @@ interface GroupInfo {
   name: string;
   start_date: string;
   end_date: string;
+  language: string;
 }
 
 interface InterviewerInfo {
@@ -18,19 +19,31 @@ interface InterviewerInfo {
   email: string;
 }
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
 
-    // 년, 월, 일, 시, 분, 초를 추출
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1 필요
-    const day = String(date.getDate()).padStart(2, '0');
-    const hour = String(date.getHours()).padStart(2, '0');
-    const minute = String(date.getMinutes()).padStart(2, '0');
-    const second = String(date.getSeconds()).padStart(2, '0');
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hour = String(date.getHours()).padStart(2, '0');
+  const minute = String(date.getMinutes()).padStart(2, '0');
+  const second = String(date.getSeconds()).padStart(2, '0');
 
-    return `${year}년 ${month}월 ${day}일 ${hour}:${minute}:${second}`;
-  };
+  return `${year}년 ${month}월 ${day}일 ${hour}:${minute}:${second}`;
+};
+
+const formatDateEnglish = (dateString: string) => {
+  const date = new Date(dateString);
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hour = String(date.getHours()).padStart(2, '0');
+  const minute = String(date.getMinutes()).padStart(2, '0');
+  const second = String(date.getSeconds()).padStart(2, '0');
+
+  return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+};
 
 function PreTestMain() {
   let { groupId, interviewerId } = useParams();
@@ -45,9 +58,7 @@ function PreTestMain() {
     const fetchData = async () => {
       try {
         const [groupInfoResponse, interviewerResponse] = await Promise.all([
-          // 면접 정보
           axios.get(`/interviewGroup/readOne/${groupId}`),
-          // 지원자 정보
           axios.get(`/interviewGroup/${groupId}/interviewer/readOne/${interviewerId}`),
         ]);
 
@@ -74,14 +85,17 @@ function PreTestMain() {
           {groupInfo ? `[${groupInfo.company}] ${groupInfo.name}` : ''}
         </P.PreTestName>
         <P.PreTestTitle>
-          {interviewerInfo ? `${interviewerInfo.name}(${interviewerInfo.email})` : ''} 님,<br /> 안내 유의사항을 꼭 확인하세요.
+          {groupInfo?.language === 'eng' ?
+            `${interviewerInfo ? `${interviewerInfo.name} (${interviewerInfo.email})` : ''}, please make sure to check the instructions.` :
+            `${interviewerInfo ? `${interviewerInfo.name} (${interviewerInfo.email})` : ''} 님, 안내 유의사항을 꼭 확인하세요.`}
         </P.PreTestTitle>
         <P.DateText>
-          면접 가능 일시<br />
-          {groupInfo ? `${formatDate(groupInfo.start_date)} ~ ${formatDate(groupInfo.end_date)}` : ''}
+          {groupInfo?.language === 'eng' ?
+            `Interview Availability\n${groupInfo ? `${formatDateEnglish(groupInfo.start_date)} ~ ${formatDateEnglish(groupInfo.end_date)}` : ''}` :
+            `면접 가능 일시\n${groupInfo ? `${formatDate(groupInfo.start_date)} ~ ${formatDate(groupInfo.end_date)}` : ''}`}
         </P.DateText>
         <P.DateContainer>
-          <Timer />
+          <Timer language={groupInfo?.language} />
         </P.DateContainer>
       </P.PreTestMainContainer>
       <P.DownContainer>
