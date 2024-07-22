@@ -61,7 +61,7 @@ function Login() {
   // 회원가입 버튼 클릭 시
   const onClickSignupBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    navigate('/signup');
+    navigate('/agree');
   };
 
   // 비밀번호 찾기 버튼 클릭 시

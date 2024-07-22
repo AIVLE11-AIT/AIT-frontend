@@ -34,6 +34,7 @@ import ForgotPasswordSent from './components/forgotpassword/ForgotPasswordSent';
 import ForgotPassword from './components/forgotpassword/ForgotPassword';
 import InterviewUpdateForm from './pages/interviewMake/InterviewUpdateForm';
 import Intro from './pages/intro/Intro';
+import AgreeForm from './pages/signup/AgreeForm';
 
 function App() {
   // const AuthHome = Auth(Home, null);
@@ -69,6 +70,7 @@ function App() {
                   <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                   <Route path="/interview/update/:groupId" element={<InterviewUpdateForm />} />
                   <Route path="/intro" element={<Intro />} />
+                  <Route path="/agree" element={<AgreeForm/>} />
                 </Route>
                 {/*헤더가 필요 없는 페이지*/}
                 <Route path="/pretest/:groupId/:interviewerId" element={<PreTest />} />
