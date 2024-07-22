@@ -68,7 +68,7 @@ export const CloseButton = styled.button`
   cursor: pointer;
   color: gray;
   text-align: right;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
 `;
 
@@ -103,7 +103,10 @@ export const FeatureTitle = styled.div`
 `;
 
 export const FeatureDescription = styled.div`
-  color: #606060;
-  font-size: 15px;
+  color: #5C5C5C;
+  font-size: 17px;
   font-weight: 500;
+  line-height: 1.7;
+  margin-left: 5px;
+  height: 180px;
 `;
