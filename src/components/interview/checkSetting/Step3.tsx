@@ -12,7 +12,7 @@ function Step3() {
   const [canvasState, setCanvasState] = useState('none');
   const [cameraState, setCameraState] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [interviewType, setInterviewType] = useState<string | null>(null);
+  const [interviewType, setInterviewType] = useState<string>('kor'); // 기본값을 'kor'으로 설정
 
   let { groupId, interviewerId } = useParams<{ groupId: string; interviewerId: string }>();
   const [photoState, setPhotoState] = useRecoilState(PhotoAtom);
@@ -22,7 +22,8 @@ function Step3() {
       try {
         const response = await axios.get(`/interviewGroup/readOne/${groupId}`);
         const data = response.data;
-        setInterviewType(data.language);
+        //setInterviewType(data.interviewType);
+        setInterviewType(data.language); // 데이터가 'eng'일 경우 업데이트
       } catch (error) {
         console.error('Error fetching interview data:', error);
       }

@@ -1,4 +1,3 @@
-// Step4.tsx
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as S from './Step4.style';
 import { useRecoilState } from 'recoil';
@@ -17,7 +16,7 @@ function Step4() {
 
     // 카메라 테스트 유무 상태
     const [cameraState, setCameraState] = useRecoilState(CameraAtom);
-    const [interviewType, setInterviewType] = useState<string | null>(null);
+    const [interviewType, setInterviewType] = useState<string>('kor'); // 기본값을 'kor'으로 설정
 
     let { groupId } = useParams<{ groupId: string }>();
 
@@ -26,7 +25,8 @@ function Step4() {
             try {
                 const response = await axios.get(`/interviewGroup/readOne/${groupId}`);
                 const data = response.data;
-                setInterviewType(data.language);
+                //setInterviewType(data.interviewType);
+                setInterviewType(data.language); // 데이터가 'eng'일 경우 업데이트
             } catch (error) {
                 console.error('Error fetching interview data:', error);
             }
