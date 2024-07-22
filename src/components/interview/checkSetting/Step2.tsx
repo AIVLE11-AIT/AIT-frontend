@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 
 function Step2() {
   const { groupId } = useParams();
-  const [interviewType, setInterviewType] = useState<string | null>(null);
+  const [interviewType, setInterviewType] = useState<string>('kor'); // 기본값을 'kor'으로 설정
 
   const [check1, setCheck1] = useRecoilState(Agree1Atom);
   const [check2, setCheck2] = useRecoilState(Agree2Atom);
@@ -19,7 +19,8 @@ function Step2() {
       try {
         const response = await axios.get(`/interviewGroup/readOne/${groupId}`);
         const data = response.data;
-        setInterviewType(data.language);
+        //setInterviewType(data.interviewType);
+        setInterviewType(data.language); // 데이터가 'eng'일 경우 업데이트
       } catch (error) {
         console.error('Error fetching interview data:', error);
       }
@@ -39,7 +40,7 @@ function Step2() {
       setCheck2(false);
       setCheck3(false);
     }
-  }
+  };
 
   const onClickCheck2 = () => {
     setCheck2(!check2);
@@ -48,7 +49,7 @@ function Step2() {
     } else {
       setCheck1(false);
     }
-  }
+  };
 
   const onClickCheck3 = () => {
     setCheck3(!check3);
@@ -57,7 +58,7 @@ function Step2() {
     } else {
       setCheck1(false);
     }
-  }
+  };
 
   return (
     <div>
@@ -143,7 +144,7 @@ function Step2() {
         </div>
       )}
     </div>
-  )
+  );
 }
 
 export default Step2;
