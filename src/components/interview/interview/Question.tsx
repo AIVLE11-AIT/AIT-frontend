@@ -7,24 +7,30 @@ import { useRecoilState } from 'recoil';
 import { CompanyQuestionAtom, IntroduceAtom, QnaIdAtom, QnaIndexAtom } from '../../../recoil/interviewAtoms';
 
 function Question() {
-    const [questions, setQuestions] = useState<string[]>([
-        '안녕하세요? 만나서 반갑습니다.',
-        '먼저, 자기소개를 말해주세요.'
-    ]); // 면접 질문 리스트
+    const [questions, setQuestions] = useState<string[]>(['안녕하세요? 만나서 반갑습니다.', '먼저, 자기소개를 말해주세요.']); // 기본 한국어 질문 리스트
     const [questionsId, setQuestionsId] = useState<number[]>([]); // 질문 id 리스트
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [timeLeft, setTimeLeft] = useState(0); // 타이머 시간
     const [timerLabel, setTimerLabel] = useState('대기 중'); // 타이머 레이블
     const [timerStage, setTimerStage] = useState(''); // 타이머 단계
+    const [interviewType, setInterviewType] = useState<string>('kor'); // 인터뷰 타입 기본값 설정
     const navigate = useNavigate();
     const cameraRef = useRef<{ startRecording: () => void; stopRecording: () => void } | null>(null); // 카메라 ref 추가
-    
+
     let { groupId, interviewerId } = useParams(); // 주소에서 면접 id가져오는 변수
 
     // 공통질문 가져오는 API
     useEffect(() => {
-        const fetchQuestions = async () => {
+        const fetchInterviewData = async () => {
             try {
+                const response = await axios.get(`/interviewGroup/${groupId}`);
+                setInterviewType(response.data.language);
+
+                // 인터뷰 타입에 따라 기본 질문 설정
+                if (response.data.language === 'eng') {
+                    setQuestions(['Hello, nice to meet you.', 'Please introduce yourself.']);
+                }
+
                 const [companyQnaResponse, interviewerQnaResponse] = await Promise.all([
                     axios.get(`/interviewGroup/${groupId}/companyQna/readAll`),
                     axios.get(`/interviewGroup/${groupId}/${interviewerId}/interviewerQna/readAll`),
@@ -34,7 +40,6 @@ function Question() {
                 const interviewerQnaQuestions = interviewerQnaResponse.data.map((item: any) => item.question);
                 const companyQnaQuestionsId = companyQnaResponse.data.map((item: any) => item.id);
                 const interviewerQnaQuestionsId = interviewerQnaResponse.data.map((item: any) => item.id);
-                //console.log(companyQnaResponse);
 
                 setQuestions(prevQuestions => [
                     ...prevQuestions,
@@ -54,8 +59,8 @@ function Question() {
             }
         };
 
-        fetchQuestions();
-    }, []);
+        fetchInterviewData();
+    }, [groupId, interviewerId]);
 
     const [qnaIndex, setQnaIndex] = useRecoilState(QnaIndexAtom); // 질문 인덱스
     const [introduceState, setIntroduceState] = useRecoilState(IntroduceAtom); // 질문 인덱스
@@ -69,7 +74,7 @@ function Question() {
             // 첫 번째 질문에서 4초 후에 다음 질문으로 넘어감
             timeout = setTimeout(() => {
                 setCurrentQuestionIndex(1);
-                setTimerLabel('준비 시간');
+                setTimerLabel(interviewType === 'eng' ? 'Preparation Time' : '준비 시간');
                 setTimeLeft(20); // 20초 타이머
                 setTimerStage('thinking');
             }, 4000);
@@ -78,7 +83,7 @@ function Question() {
             if (timerStage === 'thinking') {
                 // 생각 시간 20초 타이머
                 timeout = setTimeout(() => {
-                    setTimerLabel('답변 시간');
+                    setTimerLabel(interviewType === 'eng' ? 'Answer Time' : '답변 시간');
                     setTimeLeft(60); // 60초 타이머
                     setTimerStage('answering');
                     // 녹화 시작
@@ -112,13 +117,13 @@ function Question() {
                     //console.log(qnaId);
                     if (currentQuestionIndex === questions.length - 1) {
                         console.log("면접 종료");
-                        setTimerLabel('대기 중');
+                        setTimerLabel(interviewType === 'eng' ? 'Waiting' : '대기 중');
                         setTimerStage('');
                         setTimeout(() => {
                             navigate(`/interview-exit/${groupId}/${interviewerId}`); // 면접 종료시 종료 페이지로 이동
                         }, 1000);
                     } else {
-                        setTimerLabel('준비 시간');
+                        setTimerLabel(interviewType === 'eng' ? 'Preparation Time' : '준비 시간');
                         setTimeLeft(20); // 다음 질문에 대한 초기 타이머 설정 (20초)
                         setTimerStage('thinking');
                     }
@@ -137,7 +142,7 @@ function Question() {
             clearInterval(timer);
         };
 
-    }, [currentQuestionIndex, timerStage, questions.length, navigate]);
+    }, [currentQuestionIndex, timerStage, questions.length, navigate, interviewType]);
 
     // Format the timeLeft for display as "00"
     const formattedTimeLeft = timeLeft.toLocaleString('en-US', {
@@ -152,10 +157,10 @@ function Question() {
                 <Q.TimerTitle>{timerLabel}</Q.TimerTitle>
                 <Q.Timer>00 : {formattedTimeLeft}</Q.Timer>
                 <Q.TimerBar>
-                    {timerLabel === '준비 시간' && (
+                    {timerLabel === (interviewType === 'eng' ? 'Preparation Time' : '준비 시간') && (
                         <Q.Timer20Bar style={{ animationDuration: '20s' }} />
                     )}
-                    {timerLabel === '답변 시간' && (
+                    {timerLabel === (interviewType === 'eng' ? 'Answer Time' : '답변 시간') && (
                         <Q.Timer60Bar style={{ animationDuration: '60s' }} />
                     )}
                 </Q.TimerBar>
