@@ -8,6 +8,12 @@ import ExplainRatio from '../../components/interviewMake/ExplainRatio';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
 
+// 달력
+import styles from '../../components/interviewMake/Calender.module.scss';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { getMonth, getYear } from 'date-fns';
+
 const customStyles = {
 	control: (provided: any) => ({
 		...provided,
@@ -61,14 +67,16 @@ function InterviewUpdateForm() {
 	const [question2Color, setQuestion2Color] = useState('#D0D2D7');
 	const [question3Color, setQuestion3Color] = useState('#D0D2D7');
 	const [passScoreColor, setPassScoreColor] = useState('#D0D2D7');
+	const [selectedDate1, setSelectedDate1] = useState<Date | null>(null);
+	const [selectedDate2, setSelectedDate2] = useState<Date | null>(null);
 
 	const navigate = useNavigate();
 
 	type FormValue = {
 		interviewTitle: string;
 		interviewType: string;
-		start: string;
-		end: string;
+		startTime: string;
+		endTime: string;
 		answer: string;
 		voice: string;
 		action: string;
@@ -86,13 +94,14 @@ function InterviewUpdateForm() {
 		getValues,
 		control,
 		formState: { errors },
+		watch,
 	} = useForm<FormValue>({
 		mode: 'onSubmit',
 		defaultValues: {
 			interviewTitle: '',
 			interviewType: '',
-			start: '',
-			end: '',
+			startTime: '',
+			endTime: '',
 			answer: '',
 			voice: '',
 			action: '',
@@ -104,6 +113,9 @@ function InterviewUpdateForm() {
 		}
 	});
 
+	// 인터뷰 타입 관찰
+	const interviewType = watch('interviewType');
+
 	// 기존 데이터 불러오기
 	useEffect(() => {
 		const fetchData = async () => {
@@ -114,11 +126,10 @@ function InterviewUpdateForm() {
 					},
 				});
 				const data = response.data;
-				//console.log(data);
 				setValue('interviewTitle', data.name || '');
 				setValue('interviewType', data.language || '');
-				setValue('start', moment(data.start_date).format('YYYY-MM-DDTHH:mm:ss') || '');
-				setValue('end', moment(data.end_date).format('YYYY-MM-DDTHH:mm:ss') || '');
+				setValue('startTime', moment(data.start_date).format('HH:mm:ss') || '');
+				setValue('endTime', moment(data.end_date).format('HH:mm:ss') || '');
 				setValue('answer', data.context_per.toString() || '');
 				setValue('voice', data.voice_per.toString() || '');
 				setValue('action', data.action_per.toString() || '');
@@ -126,16 +137,48 @@ function InterviewUpdateForm() {
 				setValue('question2', data.companyQnas[1]?.question || '');
 				setValue('question3', data.companyQnas[2]?.question || '');
 				setValue('passingScore', data.passingScore.toString() || '');
+				setSelectedDate1(moment(data.start_date).toDate());
+				setSelectedDate2(moment(data.end_date).toDate());
 
 				const selectedJobGroup = jobGroup.find(group => group.label === data.occupation);
 				setSelectedOption(selectedJobGroup || null);
-        console.log("기존 데이터: ", data);
+				console.log("기존 데이터: ", data);
 			} catch (error) {
 				console.error('Failed to fetch data:', error);
 			}
 		};
 		fetchData();
 	}, [groupId, setValue]);
+
+	// 유효성 검사 규칙 설정
+	const getQuestionValidationRules = (type: string) => {
+		if (type === 'eng') {
+			return {
+				required: "질문은 필수 입력입니다.",
+				maxLength: {
+					value: 100,
+					message: "100자 이내로 입력해 주세요.",
+				},
+				pattern: {
+					value: /^[a-zA-Z0-9\s?!,.]*$/,
+					message: "영어로 질문 입력을 해주세요.",
+				},
+			};
+		} else {
+			return {
+				required: "질문은 필수 입력입니다.",
+				maxLength: {
+					value: 100,
+					message: "100자 이내로 입력해 주세요.",
+				},
+				pattern: {
+					value: /^[가-힣ㄱ-ㅎㅏ-ㅣ0-9\s?!,.]*$/,
+					message: "한글로 질문 입력을 해주세요.",
+				},
+			};
+		}
+	};
+	
 
 	// 직군 선택 select 함수
 	const handleSelectChange = (newValue: OptionType | null) => {
@@ -153,27 +196,49 @@ function InterviewUpdateForm() {
 		}
 	};
 
+	// 날짜 포맷 함수
+	function formatDate(date: Date | null): string {
+		return date ? date.toISOString().split('T')[0] : '';
+	}
+	const formattedDate1 = formatDate(selectedDate1);
+	const formattedDate2 = formatDate(selectedDate2);
+	const YEARS = Array.from({ length: getYear(new Date()) + 1 - 2000 }, (_, i) => getYear(new Date()) + i);
+	const MONTHS = [
+		'01',
+		'02',
+		'03',
+		'04',
+		'05',
+		'06',
+		'07',
+		'08',
+		'09',
+		'10',
+		'11',
+		'12',
+	];
+
 	const onValid = async (data: FormValue) => {
 		try {
 			const value = {
 				name: data.interviewTitle,
-				start_date: data.start,
-				end_date: data.end,
-        passingScore: data.passingScore,
+				start_date: `${formattedDate1}` + "T" + data.startTime,
+				end_date: `${formattedDate2}` + "T" + data.endTime,
+				passingScore: data.passingScore,
 				context_per: parseInt(data.answer),
 				voice_per: parseInt(data.voice),
 				action_per: parseInt(data.action),
 				language: data.interviewType,
 				occupation: selectedOption ? selectedOption.label : '',				
-        companyQnas: [
-					{ question: "ㅇㅇㅇㅇ" },
+				companyQnas: [
+					{ question: data.question1 },
 					{ question: data.question2 },
 					{ question: data.question3 },
 				],
 				interviewers: []
 			};
 
-      console.log(value);
+			console.log(value);
 
 			await axios.put(`/interviewGroup/${groupId}/update`, value, {
 				headers: {
@@ -276,51 +341,173 @@ function InterviewUpdateForm() {
 							<I.LabelText>면접 가능한 날짜, 시간 범위를 설정해 주세요.</I.LabelText>
 						</I.LabelContainer>
 						<I.MaskBoxContainer>
-							<Controller
-								name="start"
-								control={control}
-								rules={{
-									required: "면접 기간 입력은 필수 입력입니다.",
-								}}
-								render={({ field }) => (
-									<I.InputMaskBox
-										id="start"
-										mask="9999-99-99T99:99:99"
-										alwaysShowMask={true}
-										{...field}
-										onChange={(e) => {
-											field.onChange(e);
-										}}
-										inputColor={field.value ? '#404146' : '#D0D2D7'}
-										borderColor={field.value ? '#404146' : '#D0D2D7'}
+							<I.DateContainer>
+								<div className={styles.datePickerWrapper}>
+									<DatePicker
+										dateFormat='yyyy-MM-dd'
+										formatWeekDay={(nameOfDay) => nameOfDay.substring(0, 1)}
+										showYearDropdown
+										scrollableYearDropdown
+										shouldCloseOnSelect
+										yearDropdownItemNumber={100}
+										minDate={new Date()} // 오늘날짜 이후로만 선택 가능
+										selected={selectedDate1}
+										calendarClassName={styles.calenderWrapper}
+										dayClassName={(d) => (d.getDate() === selectedDate1!.getDate() ? styles.selectedDay : styles.unselectedDay)}
+										onChange={(date) => setSelectedDate1(date)}
+										className={styles.datePicker}
+										renderCustomHeader={({
+											date,
+											changeYear,
+											decreaseMonth,
+											increaseMonth,
+											prevMonthButtonDisabled,
+											nextMonthButtonDisabled,
+										}) => (
+											<div className={styles.customHeaderContainer}>
+												<div>
+													<span className={styles.month}>{MONTHS[getMonth(date)]}</span>
+													<select
+														value={getYear(date)}
+														className={styles.year}
+														onChange={({ target: { value } }) => changeYear(+value)}
+													>
+														{YEARS.map((option) => (
+															<option key={option} value={option}>
+																{option}
+															</option>
+														))}
+													</select>
+												</div>
+												<div>
+													<button
+														type='button'
+														onClick={decreaseMonth}
+														className={styles.monthButton}
+														disabled={prevMonthButtonDisabled}
+													>
+														&lt;
+													</button>
+													<button
+														type='button'
+														onClick={increaseMonth}
+														className={styles.monthButton}
+														disabled={nextMonthButtonDisabled}
+													>
+														&gt;
+													</button>
+												</div>
+											</div>
+										)}
 									/>
-								)}
-							/>
+								</div>
+								<Controller
+									name="startTime"
+									control={control}
+									rules={{
+										required: "면접 기간 입력은 필수 입력입니다.",
+									}}
+									render={({ field }) => (
+										<I.InputMaskBox
+											id="startTime"
+											mask="99:99:99"
+											alwaysShowMask={true}
+											{...field}
+											onChange={(e) => {
+												field.onChange(e);
+											}}
+											inputColor={field.value ? '#404146' : '#D0D2D7'}
+											borderColor={field.value ? '#404146' : '#D0D2D7'}
+										/>
+									)}
+								/>
+							</I.DateContainer>
 							<I.PeriodLine />
-							<Controller
-								name="end"
-								control={control}
-								rules={{
-									required: "면접 기간 입력은 필수 입력입니다.",
-								}}
-								render={({ field }) => (
-									<I.InputMaskBox
-										id="end"
-										mask="9999-99-99T99:99:99"
-										alwaysShowMask={true}
-										{...field}
-										onChange={(e) => {
-											field.onChange(e);
-										}}
-										inputColor={field.value ? '#404146' : '#D0D2D7'}
-										borderColor={field.value ? '#404146' : '#D0D2D7'}
+							<I.DateContainer>
+								<div className={styles.datePickerWrapper}>
+									<DatePicker
+										dateFormat='yyyy-MM-dd'
+										formatWeekDay={(nameOfDay) => nameOfDay.substring(0, 1)}
+										showYearDropdown
+										scrollableYearDropdown
+										shouldCloseOnSelect
+										yearDropdownItemNumber={100}
+										minDate={new Date()} // 오늘날짜 이후로만 선택 가능
+										selected={selectedDate2}
+										calendarClassName={styles.calenderWrapper}
+										dayClassName={(d) => (d.getDate() === selectedDate2!.getDate() ? styles.selectedDay : styles.unselectedDay)}
+										onChange={(date) => setSelectedDate2(date)}
+										className={styles.datePicker}
+										renderCustomHeader={({
+											date,
+											changeYear,
+											decreaseMonth,
+											increaseMonth,
+											prevMonthButtonDisabled,
+											nextMonthButtonDisabled,
+										}) => (
+											<div className={styles.customHeaderContainer}>
+												<div>
+													<span className={styles.month}>{MONTHS[getMonth(date)]}</span>
+													<select
+														value={getYear(date)}
+														className={styles.year}
+														onChange={({ target: { value } }) => changeYear(+value)}
+													>
+														{YEARS.map((option) => (
+															<option key={option} value={option}>
+																{option}
+															</option>
+														))}
+													</select>
+												</div>
+												<div>
+													<button
+														type='button'
+														onClick={decreaseMonth}
+														className={styles.monthButton}
+														disabled={prevMonthButtonDisabled}
+													>
+														&lt;
+													</button>
+													<button
+														type='button'
+														onClick={increaseMonth}
+														className={styles.monthButton}
+														disabled={nextMonthButtonDisabled}
+													>
+														&gt;
+													</button>
+												</div>
+											</div>
+										)}
 									/>
-								)}
-							/>
+								</div>
+								<Controller
+									name="endTime"
+									control={control}
+									rules={{
+										required: "면접 기간 입력은 필수 입력입니다.",
+									}}
+									render={({ field }) => (
+										<I.InputMaskBox
+											id="endTime"
+											mask="99:99:99"
+											alwaysShowMask={true}
+											{...field}
+											onChange={(e) => {
+												field.onChange(e);
+											}}
+											inputColor={field.value ? '#404146' : '#D0D2D7'}
+											borderColor={field.value ? '#404146' : '#D0D2D7'}
+										/>
+									)}
+								/>
+							</I.DateContainer>
 							<I.PeriodError>
-								{(errors.start || errors.end) && (
+								{(errors.startTime || errors.endTime) && (
 									<small role="alert">
-										{errors.start?.message || errors.end?.message}
+										{errors.startTime?.message || errors.endTime?.message}
 									</small>
 								)}
 							</I.PeriodError>
@@ -460,13 +647,7 @@ function InterviewUpdateForm() {
 					<I.QInputBox
 						id="question1"
 						placeholder="100자 이내로 입력해 주세요."
-						{...register("question1", {
-							required: "질문1은 필수 입력입니다.",
-							maxLength: {
-								value: 100,
-								message: "100자 이내로 입력해 주세요.",
-							},
-						})}
+						{...register("question1", getQuestionValidationRules(interviewType))}
 						inputColor={question1Color === '#D0D2D7' ? '#0D0D0D' : question1Color}
 						borderColor={question1Color === '#D0D2D7' ? '#D0D2D7' : '#404146'}
 						onChange={(e) => {
@@ -485,13 +666,7 @@ function InterviewUpdateForm() {
 					<I.QInputBox
 						id="question2"
 						placeholder="100자 이내로 입력해 주세요."
-						{...register("question2", {
-							required: "질문2은 필수 입력입니다.",
-							maxLength: {
-								value: 100,
-								message: "100자 이내로 입력해 주세요.",
-							},
-						})}
+						{...register("question2", getQuestionValidationRules(interviewType))}
 						inputColor={question2Color === '#D0D2D7' ? '#0D0D0D' : question2Color}
 						borderColor={question2Color === '#D0D2D7' ? '#D0D2D7' : '#404146'}
 						onChange={(e) => {
@@ -510,13 +685,7 @@ function InterviewUpdateForm() {
 					<I.QInputBox
 						id="question3"
 						placeholder="100자 이내로 입력해 주세요."
-						{...register("question3", {
-							required: "질문3은 필수 입력입니다.",
-							maxLength: {
-								value: 100,
-								message: "100자 이내로 입력해 주세요.",
-							},
-						})}
+						{...register("question3", getQuestionValidationRules(interviewType))}
 						inputColor={question3Color === '#D0D2D7' ? '#0D0D0D' : question3Color}
 						borderColor={question3Color === '#D0D2D7' ? '#D0D2D7' : '#404146'}
 						onChange={(e) => {

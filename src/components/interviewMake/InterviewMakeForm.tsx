@@ -179,6 +179,7 @@ function InterviewMakeForm() {
 			//start_date: data.startTime,
          start_date: `${formattedDate1}` + "T" + data.startTime,
 			end_date: `${formattedDate2}` + "T" + data.endTime,
+         passingScore: data.passingScore,
 			context_per: parseInt(data.answer),
 			voice_per: parseInt(data.voice),
 			action_per: parseInt(data.action),
@@ -287,6 +288,35 @@ function InterviewMakeForm() {
       '11',
       '12',
    ];
+
+   // 유효성 검사 규칙 설정
+   const getQuestionValidationRules = (type: string) => {
+      if (type === 'eng') {
+         return {
+            required: "질문은 필수 입력입니다.",
+            maxLength: {
+               value: 100,
+               message: "100자 이내로 입력해 주세요.",
+            },
+            pattern: {
+               value: /^[a-zA-Z0-9\s?!,.]*$/,
+               message: "영어로 질문 입력을 해주세요.",
+            },
+         };
+      } else {
+         return {
+            required: "질문은 필수 입력입니다.",
+            maxLength: {
+               value: 100,
+               message: "100자 이내로 입력해 주세요.",
+            },
+            pattern: {
+               value: /^[가-힣ㄱ-ㅎㅏ-ㅣ0-9\s?!,.]*$/,
+               message: "한글로 질문 입력을 해주세요.",
+            },
+         };
+      }
+   };
 
    return (
       <div>
@@ -710,13 +740,7 @@ function InterviewMakeForm() {
             <I.QInputBox
                id="question1"
                placeholder="100자 이내로 입력해 주세요."
-               {...register("question1", {
-                  required: "질문1은 필수 입력입니다.",
-                  maxLength: {
-                     value: 100,
-                     message: "100자 이내로 입력해 주세요.",
-                  },
-               })}
+               {...register("question1", getQuestionValidationRules(watch("interviewType")))}
                inputColor={question1 === '#D0D2D7' ? '#0D0D0D' : question1}
                borderColor={question1 === '#D0D2D7' ? '#D0D2D7' : '#404146'}
                onChange={(e) => {
@@ -735,13 +759,7 @@ function InterviewMakeForm() {
             <I.QInputBox
                id="question2"
                placeholder="100자 이내로 입력해 주세요."
-               {...register("question2", {
-                  required: "질문2은 필수 입력입니다.",
-                  maxLength: {
-                     value: 100,
-                     message: "100자 이내로 입력해 주세요.",
-                  },
-               })}
+               {...register("question2", getQuestionValidationRules(watch("interviewType")))}
                inputColor={question2 === '#D0D2D7' ? '#0D0D0D' : question2}
                borderColor={question2 === '#D0D2D7' ? '#D0D2D7' : '#404146'}
                onChange={(e) => {
@@ -760,13 +778,7 @@ function InterviewMakeForm() {
             <I.QInputBox
                id="question3"
                placeholder="100자 이내로 입력해 주세요."
-               {...register("question3", {
-                  required: "질문3은 필수 입력입니다.",
-                  maxLength: {
-                     value: 100,
-                     message: "100자 이내로 입력해 주세요.",
-                  },
-               })}
+               {...register("question3", getQuestionValidationRules(watch("interviewType")))}
                inputColor={question3 === '#D0D2D7' ? '#0D0D0D' : question3}
                borderColor={question3 === '#D0D2D7' ? '#D0D2D7' : '#404146'}
                onChange={(e) => {
