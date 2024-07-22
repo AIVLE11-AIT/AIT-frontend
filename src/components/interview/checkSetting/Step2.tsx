@@ -134,37 +134,68 @@ function Step2() {
         </div>
       ) : (
         <div>
-          <S.StepHeader>Agreement</S.StepHeader>
+          <S.StepHeader>Consent to Use</S.StepHeader>
           <S.StepMain>
             <S.AgreeBox>
-              <S.CheckBox checked={check1} onChange={onClickCheck1} />I agree to all the required terms.
+              <S.CheckBox checked={check1} onChange={onClickCheck1} />I agree to all mandatory terms.
             </S.AgreeBox>
 
-            <S.Step2Info>Applicant Pledge</S.Step2Info>
+            <S.Step2Info>Consent to Collection and Use of Personal Information</S.Step2Info>
             <S.AgreeContentBox>
-              <S.Content size="15px" weight="600">[Agreement on Protection and Non-disclosure of Interview Copyright]</S.Content>
               <S.Content size="14px" weight="500">
-                This interview question is protected by copyright, and the company prohibits the reproduction, public transmission,<br />
-                distribution, or creation of secondary works without consent. Disclosing or transmitting interview information to others<br />
-                without the company's consent constitutes an infringement of the company's property, and those who infringe the company's<br />
-                property may be subject to imprisonment for up to 5 years or a fine of up to 50 million won under the Copyright Act.
+                AIT (hereinafter referred to as "the Company") collects personal information to the minimum extent necessary for the use of the AIT site.<br/>
+                Depending on the type of services provided by the Company, personal information is collected, used, retained, and destroyed as follows:
               </S.Content>
-              <S.Content size="15px" weight="600">[Agreement on Cheating Handling]</S.Content>
+              <S.Content size="15px" weight="600">[Items]</S.Content>
               <S.Content size="14px" weight="500">
-                If clear cheating as defined by the company is confirmed during the interview, measures such as disqualification<br />
-                or denial of interview may be taken, and I agree to this.
+                Name, Date of Birth, Email, Cover Letter, Photo, Interview Video, Answer Contents
+              </S.Content>
+              <S.Content size="15px" weight="600">[Purpose of Collection]</S.Content>
+              <S.Content size="14px" weight="500">
+                Verification of identity during the use of AIT services and provision to evaluation companies
+              </S.Content>
+              <S.Content size="15px" weight="600">[Retention and Use Period]</S.Content>
+              <S.Content size="14px" weight="500">
+                1) The Company processes personal information within the period of retention and use agreed upon at the time of collection or as required by law. Once the purpose of processing is achieved, the information will be promptly destroyed.
+                2) The retention and use period of personal information is as follows, and if the user explicitly requests destruction of the information, it will be promptly destroyed:
+                - Immediately destroyed 30 days after the end of the interview service<br/>
+                - If the interviewee requests withdrawal of consent or deletion of personal information
+              </S.Content>
+              <S.Content size="15px" weight="600">[Right to Refuse Consent and Consequences of Refusal]</S.Content>
+              <S.Content size="14px" weight="500">
+                Users have the right to refuse consent to the collection and use of personal information. However, if consent to the mandatory items is not given, AIT services cannot be used.
               </S.Content>
             </S.AgreeContentBox>
             <S.AgreeBox>
               <S.CheckBox checked={check2} onChange={onClickCheck2} />I agree.
             </S.AgreeBox>
 
-            <S.Step2Info>Consent to Collection and Use of Personal Information</S.Step2Info>
+            <S.Step2Info>Consent to Provision of Personal Information to Third Parties</S.Step2Info>
             <S.AgreeContentBox>
-              <S.Content size="15px" weight="600">[Applicant Monitoring for Fair Interview]</S.Content>
               <S.Content size="14px" weight="500">
-                To ensure a fair interview and AI analysis of the interviewee, we may retain and use computer screen recordings and<br />
-                webcam videos for 30 days after the interview ends.
+                AIT (hereinafter referred to as "the Company") provides personal information to third parties as follows.
+              </S.Content>
+              <S.Content size="15px" weight="600">[Recipient of Personal Information]</S.Content>
+              <S.Content size="14px" weight="500">
+                OpenAI (ChatGPT-4o)
+              </S.Content>
+              <S.Content size="15px" weight="600">[Purpose of Provision]</S.Content>
+              <S.Content size="14px" weight="500">
+                1) Generation of interview questions based on the cover letter
+                2) Evaluation of interview answers
+              </S.Content>
+              <S.Content size="15px" weight="600">[Items Provided]</S.Content>
+              <S.Content size="14px" weight="500">
+                Job role, Cover Letter, Answer Contents
+              </S.Content>
+              <S.Content size="15px" weight="600">[Retention and Use Period of Personal Information]</S.Content>
+              <S.Content size="14px" weight="500">
+                According to OpenAI’s policy, API input and output data are retained for up to 30 days, after which they are deleted.<br/>
+                Zero Data Retention (ZDR) policy may be applied as needed.
+              </S.Content>
+              <S.Content size="15px" weight="600">[Users Have the Right to Refuse Consent to Provision to Third Parties]</S.Content>
+              <S.Content size="14px" weight="500">
+                However, if the consent to provision of personal information to third parties is refused, AIT services cannot be used.
               </S.Content>
             </S.AgreeContentBox>
             <S.AgreeBox>
