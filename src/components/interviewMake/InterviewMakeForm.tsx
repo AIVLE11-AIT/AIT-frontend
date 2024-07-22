@@ -294,11 +294,11 @@ function InterviewMakeForm() {
          return {
             required: "질문은 필수 입력입니다.",
             maxLength: {
-               value: 100,
-               message: "100자 이내로 입력해 주세요.",
+               value: 200,
+               message: "200자 이내로 입력해 주세요.",
             },
             pattern: {
-               value: /^[a-zA-Z0-9\s?!,.]*$/,
+               value: /^[a-zA-Z0-9\s?!,.@#$%^&*()_+\-=\[\]{}|\\:;"'<>,./]*$/,
                message: "영어로 질문 입력을 해주세요.",
             },
          };
@@ -306,11 +306,11 @@ function InterviewMakeForm() {
          return {
             required: "질문은 필수 입력입니다.",
             maxLength: {
-               value: 100,
-               message: "100자 이내로 입력해 주세요.",
+               value: 200,
+               message: "200자 이내로 입력해 주세요.",
             },
             pattern: {
-               value: /^[가-힣ㄱ-ㅎㅏ-ㅣ0-9\s?!,.]*$/,
+               value: /^[가-힣ㄱ-ㅎㅏ-ㅣ0-9\s?!,.@#$%^&*()_+\-=\[\]{}|\\:;"'<>,./]*$/,
                message: "한글로 질문 입력을 해주세요.",
             },
          };
@@ -336,7 +336,7 @@ function InterviewMakeForm() {
                   {...register("interviewTitle", {
                      required: "면접 이름은 필수 입력입니다.",
                      pattern: {
-                        value: /^(?=.*[가-힣])|(?=.*[a-zA-Z])(?=.*\d)|(?=.*[가-힣])(?=.*\d).{1,20}$/i,
+                        value: watch("interviewType") === "eng" ? /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&*()_+\-=\[\]{}|\\:;"'<>,./]).{1,20}$/ : /^(?=.*[가-힣])|(?=.*[a-zA-Z])(?=.*\d)|(?=.*[가-힣])(?=.*\d).{1,20}$/i,
                         message: "면접 이름 형식에 맞지 않습니다.",
                      },
                   })}
