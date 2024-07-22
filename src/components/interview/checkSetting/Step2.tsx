@@ -19,7 +19,7 @@ function Step2() {
       try {
         const response = await axios.get(`/interviewGroup/readOne/${groupId}`);
         const data = response.data;
-        setInterviewType(data.interviewType);
+        setInterviewType(data.language);
       } catch (error) {
         console.error('Error fetching interview data:', error);
       }

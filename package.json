@@ -41,7 +41,7 @@
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5"
   },
-  "proxy": "https://54.187.193.93:8080/",
+  "proxy": "https://dlgksdudserver.iptime.org:8080/",
   "scripts": {
     "start": "set HTTPS=true&&set SSL_CRT_FILE=./mkcert/cert.pem&&set SSL_KEY_FILE=./mkcert/key.pem&&react-scripts start",
     "build": "react-scripts build",

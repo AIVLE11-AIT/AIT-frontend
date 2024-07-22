@@ -6,17 +6,13 @@ import { useParams } from 'react-router-dom';
 function Step1() {
   const { groupId } = useParams();
   const [interviewType, setInterviewType] = useState<string | null>(null);
-  const [startTime, setStartTime] = useState<string | null>(null);
-  const [endTime, setEndTime] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchInterviewData = async () => {
       try {
         const response = await axios.get(`/interviewGroup/readOne/${groupId}`);
         const data = response.data;
-        setInterviewType(response.data.interviewType);
-        setStartTime(response.data.start_date);
-        setEndTime(response.data.end_date);
+        setInterviewType(response.data.language);
       } catch (error) {
         console.error('Error fetching interview data:', error);
       }
@@ -48,8 +44,8 @@ function Step1() {
             <S.Step1Container border="#696CEA">
               <S.NoticeText position='30px'>아래 안내를 확인해 주세요.</S.NoticeText>
               <S.Step1Info3>• 면접에 응시하기 위해서는 웹캠, 마이크, 원활한 인터넷 환경이 필요합니다.</S.Step1Info3>
-              <S.Step1Info3>• 본 면접은 {startTime}부터 {endTime}까지 총 60분간 진행됩니다.</S.Step1Info3>
-              <S.Step1Info3>• 면접 질문이 주어지고 30초 후 답변하시면 됩니다.</S.Step1Info3>
+              <S.Step1Info3>• 본 면접은 총 10분간 진행됩니다.</S.Step1Info3>
+              <S.Step1Info3>• 면접 질문이 주어지고 20초 후 답변하시면 됩니다.</S.Step1Info3>
               <S.Step1Info3>• 한 질문에 대한 답변은 1분 동안 가능합니다.</S.Step1Info3>
               <S.Step1Info3>• 맨 마지막 [면접 종료하기] 버튼까지 눌러야 면접이 정상적으로 완료됩니다.</S.Step1Info3>
             </S.Step1Container>
@@ -76,8 +72,8 @@ function Step1() {
               <S.Step1Container border="#696CEA">
                 <S.NoticeText position='30px'>Please check the instructions below.</S.NoticeText>
                 <S.Step1Info3>• You need a webcam, microphone, and a stable internet connection to take the interview.</S.Step1Info3>
-                <S.Step1Info3>• The interview will be held from {startTime} to {endTime} for a total of 60 minutes.</S.Step1Info3>
-                <S.Step1Info3>• You will be given a question and you should answer it after 30 seconds.</S.Step1Info3>
+                <S.Step1Info3>• This interview will last for a total of 10 minutes.</S.Step1Info3>
+                <S.Step1Info3>• You will be given a question and you should answer it after 20 seconds.</S.Step1Info3>
                 <S.Step1Info3>• You have 1 minute to answer each question.</S.Step1Info3>
                 <S.Step1Info3>• The interview will be completed only after you press the [End Interview] button at the end.</S.Step1Info3>
               </S.Step1Container>
