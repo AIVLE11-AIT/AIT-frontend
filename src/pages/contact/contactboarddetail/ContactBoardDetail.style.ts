@@ -5,6 +5,7 @@ export const PageContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  margin-bottom: 100px;
 `;
 
 export const SearchContainer = styled.div`

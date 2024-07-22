@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import * as C from './ContactBoardDetail.style';
+import Footer from '../../../components/footer/Footer';
 
 function ContactBoardDetail() {
   const { id } = useParams<{ id: string }>();
@@ -234,51 +235,54 @@ function ContactBoardDetail() {
   };
 
   return (
-    <C.PageContainer>
-      <C.SearchContainer>
-        <C.Header>
-          <C.Title>문의하기</C.Title>
-          <C.ButtonWrapper>
-            <C.ActionButton onClick={() => navigate(`/contact-board-modify/${id}`)}>수정</C.ActionButton>
-            <C.ActionButton onClick={handleDelete}>삭제</C.ActionButton>
-            <C.ActionButton onClick={() => navigate('/contact-board-list')}>목록</C.ActionButton>
-          </C.ButtonWrapper>
-        </C.Header>
-        <C.DetailTable>
-          <tbody>
-            <C.TableRow>
-              <C.TableHeader>제목</C.TableHeader>
-              <C.TitleTableCell>{detailBoardData.title}</C.TitleTableCell>
-              <C.TableHeader>등록일</C.TableHeader>
-              <C.DateTableCell>{dayjs(detailBoardData.date).format('YYYY-MM-DD HH:mm')}</C.DateTableCell>
-            </C.TableRow>
-            <C.ContentTableRow>
-              <C.TableHeader>내용</C.TableHeader>
-              <C.TableCell colSpan={3}>{detailBoardData.content}</C.TableCell>
-            </C.ContentTableRow>
-          </tbody>
-        </C.DetailTable>
-        <C.BottomTable>
-          <tbody>
-            <C.BottomRow>
-              <C.BottomStatusCell>{detailBoardData.answer ? '완료' : '처리중'}</C.BottomStatusCell>
-              <C.BottomCommentsCell onClick={toggleAnswerSection}>답변</C.BottomCommentsCell>
-            </C.BottomRow>
-          </tbody>
-        </C.BottomTable>
-        {showAnswer && (
-          <C.AnswerTable>
+    <>
+      <C.PageContainer>
+        <C.SearchContainer>
+          <C.Header>
+            <C.Title>문의하기</C.Title>
+            <C.ButtonWrapper>
+              <C.ActionButton onClick={() => navigate(`/contact-board-modify/${id}`)}>수정</C.ActionButton>
+              <C.ActionButton onClick={handleDelete}>삭제</C.ActionButton>
+              <C.ActionButton onClick={() => navigate('/contact-board-list')}>목록</C.ActionButton>
+            </C.ButtonWrapper>
+          </C.Header>
+          <C.DetailTable>
             <tbody>
-              <C.RowTable>
-                <C.AnswerTableCell>
-                  {renderAnswerSection()}
-                </C.AnswerTableCell>
-              </C.RowTable>
+              <C.TableRow>
+                <C.TableHeader>제목</C.TableHeader>
+                <C.TitleTableCell>{detailBoardData.title}</C.TitleTableCell>
+                <C.TableHeader>등록일</C.TableHeader>
+                <C.DateTableCell>{dayjs(detailBoardData.date).format('YYYY-MM-DD HH:mm')}</C.DateTableCell>
+              </C.TableRow>
+              <C.ContentTableRow>
+                <C.TableHeader>내용</C.TableHeader>
+                <C.TableCell colSpan={3}>{detailBoardData.content}</C.TableCell>
+              </C.ContentTableRow>
             </tbody>
-          </C.AnswerTable>
-        )}
-      </C.SearchContainer>
-    </C.PageContainer>
+          </C.DetailTable>
+          <C.BottomTable>
+            <tbody>
+              <C.BottomRow>
+                <C.BottomStatusCell>{detailBoardData.answer ? '완료' : '처리중'}</C.BottomStatusCell>
+                <C.BottomCommentsCell onClick={toggleAnswerSection}>답변</C.BottomCommentsCell>
+              </C.BottomRow>
+            </tbody>
+          </C.BottomTable>
+          {showAnswer && (
+            <C.AnswerTable>
+              <tbody>
+                <C.RowTable>
+                  <C.AnswerTableCell>
+                    {renderAnswerSection()}
+                  </C.AnswerTableCell>
+                </C.RowTable>
+              </tbody>
+            </C.AnswerTable>
+          )}
+        </C.SearchContainer>
+      </C.PageContainer>
+      <Footer/>
+    </>
   );
 }
 

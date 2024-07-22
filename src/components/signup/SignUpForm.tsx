@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import * as S from './SignUpForm.style'
+import * as S from '../../components/signup/SignUpForm.style'
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -167,17 +167,23 @@ function SignUpForm() {
     };
   
 
+  // 이전 버튼 클릭 시
+  const onClickBackBtn = () =>{
+    navigate('/agree');
+  }
+
   return (
     <S.SignUpForm>
-      {/*
       <S.PageNumberBox>
-        <img src={process.env.PUBLIC_URL + '/images/PageNumberIcon1.svg'}></img>
-        <S.PageNumberText position="44.3%" color="#606060">1</S.PageNumberText>
+        <S.PageNumberIcon bg="white">
+          <S.PageNumberText color="#606060">1</S.PageNumberText>
+        </S.PageNumberIcon>
         <S.PageNumberLine />
-        <img src={process.env.PUBLIC_URL + '/images/PageNumberIcon2.svg'}></img>
-        <S.PageNumberText position="55.6%" color="white">2</S.PageNumberText>
+        <S.PageNumberIcon bg="#606060">
+          <S.PageNumberText color="white">2</S.PageNumberText>
+        </S.PageNumberIcon>
       </S.PageNumberBox>
-      */}
+     
       <S.SignUpTitle>Sign Up</S.SignUpTitle>
 
       <S.SignUpInputForm onSubmit={handleSubmit(onValid, onError)}>
@@ -294,7 +300,7 @@ function SignUpForm() {
         </S.SignUpWrap>
 
         <S.SubmitWrap>
-          <S.BackBtn>이전</S.BackBtn>
+          <S.BackBtn onClick={onClickBackBtn}>이전</S.BackBtn>
           <S.SignUpBtn type="submit" toggle={isActive}>완료</S.SignUpBtn>
         </S.SubmitWrap>
       </S.SignUpInputForm>

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import * as H from './Home.style';
 import { useNavigate } from 'react-router-dom';
 import Typewriter from 'typewriter-effect';
+import Footer from '../../components/footer/Footer';
 
 function Home() {
     const navigate = useNavigate();
@@ -12,10 +13,6 @@ function Home() {
             navigate('/group-profile');
         else
             navigate('./login');
-    };
-
-    const handleContactButtonClick = () => {
-        navigate('/contact-board-list');
     };
 
     const animationProps = {
@@ -28,15 +25,6 @@ function Home() {
             y: { duration: 1 },
         }
     };
-
-    // 서비스 이용약관 클릭 시
-    function onClickTermsOfService(){
-        navigate('/terms-of-service');
-    }
-    // 서비스 이용약관 클릭 시
-    function onClickPrivacyPolicy(){
-        navigate('/privacy-policy');
-    }
 
     return (
         <H.MainDiv>
@@ -143,32 +131,7 @@ function Home() {
                 </H.Section2>
             </H.Container>
             <H.Container2>
-                <H.Footer>
-                    <H.FooterTitle>
-                        기업 맞춤형 인재를 뽑기 위한
-                        <br />
-                        단 하나의 솔루션
-                    </H.FooterTitle>
-                    <H.FooterSectionsWrapper>
-                        <H.FooterSection>
-                            <H.FooterSubTitle>도입 문의</H.FooterSubTitle>
-                            <H.FooterText>Lead | &nbsp;&nbsp;이미지</H.FooterText>
-                            <H.FooterText>Tel | &nbsp;&nbsp;010-1234-5678</H.FooterText>
-                            <H.FooterText>E-mail | &nbsp;&nbsp;jpg@naver.com</H.FooterText>
-                        </H.FooterSection>
-                        <H.FooterSection>
-                            <H.FooterSubTitle>공식 계정</H.FooterSubTitle>
-                            <H.FooterText>Instagram | &nbsp;&nbsp;@AIT.official</H.FooterText>
-                            <H.FooterText>E-mail | &nbsp;&nbsp;aitech0311@gmail.com</H.FooterText>
-                        </H.FooterSection>
-                        <H.FooterSection>
-                            <H.FooterSubTitle onClick={onClickTermsOfService}>서비스 이용 약관</H.FooterSubTitle>
-                        </H.FooterSection>
-                        <H.FooterSection>
-                            <H.FooterSubTitle onClick={onClickPrivacyPolicy}>개인정보처리방침</H.FooterSubTitle>
-                        </H.FooterSection>
-                    </H.FooterSectionsWrapper>
-                </H.Footer>
+                <Footer/>
             </H.Container2>
         </H.MainDiv>
     );
