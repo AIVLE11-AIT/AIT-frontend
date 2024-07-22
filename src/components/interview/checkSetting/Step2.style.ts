@@ -66,6 +66,6 @@ export const Content = styled.div<ContentText>`
     font-weight: ${(props) => props.weight};
     font-size: ${(props) => props.size};
     color: #35393e;
-    line-height: 1.3;
+    line-height: 1.5;
     margin-bottom: 10px;
 `;

@@ -2,10 +2,9 @@
   text-align: center;
 }
 
-.App main {
+.main {
   text-align: left;
   margin: 0 auto;
-  max-width: 800px;
 }
 
 /* 제일 상단 제목*/

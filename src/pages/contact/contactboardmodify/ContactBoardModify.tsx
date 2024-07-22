@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as C from './ContactBoardModify.style'; // 스타일 파일을 새로 만듭니다.
 import axios from 'axios';
+import { Footer } from '../../../components/footer/Footer.style';
 
 function ContactBoardModify() {
   const { id } = useParams<{ id: string }>();
@@ -46,36 +47,39 @@ function ContactBoardModify() {
   };
 
   return (
-    <C.PageContainer>
-      <C.FormContainer>
-        <C.Title>문의하기 수정</C.Title>
-        <C.Form>
-          <C.FormRow>
-            <C.Label>제목</C.Label>
-            <C.Input
-              type="text"
-              placeholder="제목을 입력해주세요."
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </C.FormRow>
-          <C.FormRow>
-            <C.Label>내용</C.Label>
-            <C.TextArea
-              placeholder="내용을 입력해주세요."
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            />
-          </C.FormRow>
-          <C.ButtonWrapper>
-            <C.ActionButton onClick={handleSave}>저장</C.ActionButton>
-            <C.ActionButton onClick={() => navigate('/contact-board-list')}>
-              취소
-            </C.ActionButton>
-          </C.ButtonWrapper>
-        </C.Form>
-      </C.FormContainer>
-    </C.PageContainer>
+    <>
+      <C.PageContainer>
+        <C.FormContainer>
+          <C.Title>문의하기 수정</C.Title>
+          <C.Form>
+            <C.FormRow>
+              <C.Label>제목</C.Label>
+              <C.Input
+                type="text"
+                placeholder="제목을 입력해주세요."
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </C.FormRow>
+            <C.FormRow>
+              <C.Label>내용</C.Label>
+              <C.TextArea
+                placeholder="내용을 입력해주세요."
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
+            </C.FormRow>
+            <C.ButtonWrapper>
+              <C.ActionButton onClick={handleSave}>저장</C.ActionButton>
+              <C.ActionButton onClick={() => navigate('/contact-board-list')}>
+                취소
+              </C.ActionButton>
+            </C.ButtonWrapper>
+          </C.Form>
+        </C.FormContainer>
+      </C.PageContainer>
+      <Footer/>
+    </>
   );
 }
 

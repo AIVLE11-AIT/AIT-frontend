@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import * as C from './ContactBoardCreate.style';
 import axios from 'axios';
 import { useForm, Controller } from 'react-hook-form';
+import Footer from '../../../components/footer/Footer';
 
 function ContactBoardCreate() {
   const navigate = useNavigate();
@@ -43,50 +44,53 @@ function ContactBoardCreate() {
   };
 
   return (
-    <C.PageContainer>
-      <C.FormContainer>
-        <C.Title>문의하기 생성</C.Title>
-        <C.Form onSubmit={handleSubmit(onValid)}>
-          <C.FormRow>
-            <C.Label>제목</C.Label>
-            <Controller
-              name="title"
-              control={control}
-              rules={{ required: '제목을 입력해주세요.' }}
-              render={({ field }) => (
-                <C.Input
-                  type="text"
-                  placeholder="제목을 입력해주세요."
-                  {...field}
-                />
-              )}
-            />
-            {errors.title && <C.ErrorMessage>{errors.title.message}</C.ErrorMessage>}
-          </C.FormRow>
-          <C.FormRow>
-            <C.Label>내용</C.Label>
-            <Controller
-              name="content"
-              control={control}
-              rules={{ required: '내용을 입력해주세요.' }}
-              render={({ field }) => (
-                <C.TextArea
-                  placeholder="내용을 입력해주세요."
-                  {...field}
-                />
-              )}
-            />
-            {errors.content && <C.ErrorMessage>{errors.content.message}</C.ErrorMessage>}
-          </C.FormRow>
-          <C.ButtonWrapper>
-            <C.ActionButton type="submit">저장</C.ActionButton>
-            <C.ActionButton type="button" onClick={() => navigate('/contact-board-list')}>
-              취소
-            </C.ActionButton>
-          </C.ButtonWrapper>
-        </C.Form>
-      </C.FormContainer>
-    </C.PageContainer>
+    <>
+      <C.PageContainer>
+        <C.FormContainer>
+          <C.Title>문의하기 생성</C.Title>
+          <C.Form onSubmit={handleSubmit(onValid)}>
+            <C.FormRow>
+              <C.Label>제목</C.Label>
+              <Controller
+                name="title"
+                control={control}
+                rules={{ required: '제목을 입력해주세요.' }}
+                render={({ field }) => (
+                  <C.Input
+                    type="text"
+                    placeholder="제목을 입력해주세요."
+                    {...field}
+                  />
+                )}
+              />
+              {errors.title && <C.ErrorMessage>{errors.title.message}</C.ErrorMessage>}
+            </C.FormRow>
+            <C.FormRow>
+              <C.Label>내용</C.Label>
+              <Controller
+                name="content"
+                control={control}
+                rules={{ required: '내용을 입력해주세요.' }}
+                render={({ field }) => (
+                  <C.TextArea
+                    placeholder="내용을 입력해주세요."
+                    {...field}
+                  />
+                )}
+              />
+              {errors.content && <C.ErrorMessage>{errors.content.message}</C.ErrorMessage>}
+            </C.FormRow>
+            <C.ButtonWrapper>
+              <C.ActionButton type="submit">저장</C.ActionButton>
+              <C.ActionButton type="button" onClick={() => navigate('/contact-board-list')}>
+                취소
+              </C.ActionButton>
+            </C.ButtonWrapper>
+          </C.Form>
+        </C.FormContainer>
+      </C.PageContainer>
+      <Footer/>
+    </>
   );
 }
 
