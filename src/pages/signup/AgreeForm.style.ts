@@ -3,7 +3,7 @@ import styled from "styled-components";
 // 회원가입 div
 export const SignUpForm = styled.div`
     width: 700px;
-    height: 850px;
+    //height: 850px;
     flex-shrink: 0;
     border-radius: 30px;
     border: 1px solid #D0D2D7;
@@ -54,7 +54,7 @@ export const PageNumberLine = styled.div`
 // Sign Up 제목
 export const SignUpTitle = styled.div`
     margin-top: 70px;
-    margin-left: 60px;
+    margin-left: 50px;
     color: #404146;
     font-size: 35px;
     font-weight: 600;
@@ -71,7 +71,7 @@ export const AgreeBox = styled.div`
     padding: 10px;
     border-radius: 5px;
     font-size: 15px;
-    width: 580px;
+    width: 600px;
     margin: 20px auto;
 `;
 
@@ -90,9 +90,50 @@ export const CheckBox = styled.input.attrs({ type: 'checkbox' })`
     }
 `;
 
+// 서비스 약관, 개인정보 동의 링크
 export const Link = styled.div`
     font-weight: 400;
     font-size: 12px;
     margin-left: 20px;
     cursor: pointer;
+`;
+
+export const Table = styled.div`
+    width: 600px;
+    margin: 0px auto;
+    border: 1px solid #D0D2D7;
+`;
+
+export const Col = styled.div`
+    display: flex;
+    margin: 0 auto;
+    border-bottom: 1px solid #D0D2D7;
+`;
+
+export const Row1 = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    padding: 30px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    border-right: 1px solid #D0D2D7;
+`;
+
+export const Row2 = styled.div`
+    font-size: 14px;
+    line-height: 1.7;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    width: 550px;
+`;
+
+export const TableText = styled.div`
+    line-height: 1.6;
+    font-size: 12px;
+    color: #FF4A4A;
+    margin-left: 50px;
+    margin-top: 20px;
 `;
