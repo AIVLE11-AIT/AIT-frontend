@@ -289,8 +289,8 @@ function InterviewMakeForm() {
    ];
 
    // 유효성 검사 규칙 설정
-   const getQuestionValidationRules = (type: string) => {
-      if (type === 'eng') {
+   const getQuestionValidationRules = (interviewType: string) => {
+      if (interviewType === 'eng') {
          return {
             required: "질문은 필수 입력입니다.",
             maxLength: {
@@ -317,6 +317,17 @@ function InterviewMakeForm() {
       }
    };
 
+   useEffect(() => {
+      // 인터뷰 타입이 변경될 때 유효성 검사 업데이트
+      const interviewType = watch("interviewType");
+      if (interviewType === "eng") {
+         setValue("interviewTitle", getValues("interviewTitle"), {
+            shouldValidate: true,
+            shouldDirty: true,
+         });
+      }
+   }, [watch("interviewType")]);
+
    return (
       <div>
       <I.MakeInputForm onSubmit={handleSubmit(onValid)}>
@@ -336,8 +347,8 @@ function InterviewMakeForm() {
                   {...register("interviewTitle", {
                      required: "면접 이름은 필수 입력입니다.",
                      pattern: {
-                        value: watch("interviewType") === "eng" ? /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&*()_+\-=\[\]{}|\\:;"'<>,./]).{1,20}$/ : /^(?=.*[가-힣])|(?=.*[a-zA-Z])(?=.*\d)|(?=.*[가-힣])(?=.*\d).{1,20}$/i,
-                        message: "면접 이름 형식에 맞지 않습니다.",
+                        value: watch("interviewType") === "eng" ? /^(?=.*[a-zA-Z]).{1,20}$/ : /^(?=.*[가-힣a-zA-Z]).{1,20}$/,
+                        message: watch("interviewType") === "eng" ? "면접 이름을 영어로 적어주세요." : "면접 이름을 한글로 적어주세요.",
                      },
                   })}
                   inputColor={interviewTitleColor === '#D0D2D7' ? '#0D0D0D' : interviewTitleColor}
@@ -363,7 +374,7 @@ function InterviewMakeForm() {
                         id="interviewType-domestic"
                         type="radio"
                         value="kor"
-                        checked
+                        defaultChecked
                         {...register("interviewType", { required: true })}
                      />
                   </I.InputRadioBox>
@@ -729,7 +740,7 @@ function InterviewMakeForm() {
             </I.LabelContainer>
             <I.QInputBox
                id="question1"
-               placeholder="100자 이내로 입력해 주세요."
+               placeholder="200자 이내로 입력해 주세요."
                {...register("question1", getQuestionValidationRules(watch("interviewType")))}
                inputColor={question1 === '#D0D2D7' ? '#0D0D0D' : question1}
                borderColor={question1 === '#D0D2D7' ? '#D0D2D7' : '#404146'}
@@ -748,7 +759,7 @@ function InterviewMakeForm() {
             </I.LabelContainer>
             <I.QInputBox
                id="question2"
-               placeholder="100자 이내로 입력해 주세요."
+               placeholder="200자 이내로 입력해 주세요."
                {...register("question2", getQuestionValidationRules(watch("interviewType")))}
                inputColor={question2 === '#D0D2D7' ? '#0D0D0D' : question2}
                borderColor={question2 === '#D0D2D7' ? '#D0D2D7' : '#404146'}
@@ -767,7 +778,7 @@ function InterviewMakeForm() {
             </I.LabelContainer>
             <I.QInputBox
                id="question3"
-               placeholder="100자 이내로 입력해 주세요."
+               placeholder="200자 이내로 입력해 주세요."
                {...register("question3", getQuestionValidationRules(watch("interviewType")))}
                inputColor={question3 === '#D0D2D7' ? '#0D0D0D' : question3}
                borderColor={question3 === '#D0D2D7' ? '#D0D2D7' : '#404146'}

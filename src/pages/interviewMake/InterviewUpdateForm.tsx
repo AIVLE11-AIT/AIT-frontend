@@ -290,8 +290,8 @@ function InterviewUpdateForm() {
 							{...register("interviewTitle", {
 								required: "면접 이름은 필수 입력입니다.",
 								pattern: {
-									value: watch("interviewType") === "eng" ? /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&*()_+\-=\[\]{}|\\:;"'<>,./]).{1,20}$/ : /^(?=.*[가-힣])|(?=.*[a-zA-Z])(?=.*\d)|(?=.*[가-힣])(?=.*\d).{1,20}$/i,
-									message: "면접 이름 형식에 맞지 않습니다.",
+									value: watch("interviewType") === "eng" ? /^(?=.*[a-zA-Z]).{1,20}$/ : /^(?=.*[가-힣a-zA-Z]).{1,20}$/,
+									message: watch("interviewType") === "eng" ? "면접 이름을 영어로 적어주세요." : "면접 이름을 한글로 적어주세요.",
 								},
 							})}
 							inputColor={interviewTitleColor === '#D0D2D7' ? '#0D0D0D' : interviewTitleColor}
@@ -664,7 +664,7 @@ function InterviewUpdateForm() {
 					</I.LabelContainer>
 					<I.QInputBox
 						id="question1"
-						placeholder="100자 이내로 입력해 주세요."
+						placeholder="200자 이내로 입력해 주세요."
 						{...register("question1", getQuestionValidationRules(interviewType))}
 						inputColor={question1Color === '#D0D2D7' ? '#0D0D0D' : question1Color}
 						borderColor={question1Color === '#D0D2D7' ? '#D0D2D7' : '#404146'}
@@ -683,7 +683,7 @@ function InterviewUpdateForm() {
 					</I.LabelContainer>
 					<I.QInputBox
 						id="question2"
-						placeholder="100자 이내로 입력해 주세요."
+						placeholder="200자 이내로 입력해 주세요."
 						{...register("question2", getQuestionValidationRules(interviewType))}
 						inputColor={question2Color === '#D0D2D7' ? '#0D0D0D' : question2Color}
 						borderColor={question2Color === '#D0D2D7' ? '#D0D2D7' : '#404146'}
@@ -702,7 +702,7 @@ function InterviewUpdateForm() {
 					</I.LabelContainer>
 					<I.QInputBox
 						id="question3"
-						placeholder="100자 이내로 입력해 주세요."
+						placeholder="200자 이내로 입력해 주세요."
 						{...register("question3", getQuestionValidationRules(interviewType))}
 						inputColor={question3Color === '#D0D2D7' ? '#0D0D0D' : question3Color}
 						borderColor={question3Color === '#D0D2D7' ? '#D0D2D7' : '#404146'}
