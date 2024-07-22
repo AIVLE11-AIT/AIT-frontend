@@ -168,7 +168,7 @@ function InterviewMakeForm() {
       //console.log(jsonFile);
 
         try {
-		if (!jsonFile) {
+		   if (!jsonFile) {
 			setError("fileUpload", { type: "manual", message: "파일을 선택하세요." });
 			return;
 		}
@@ -180,9 +180,9 @@ function InterviewMakeForm() {
          start_date: `${formattedDate1}` + "T" + data.startTime,
 			end_date: `${formattedDate2}` + "T" + data.endTime,
          passingScore: data.passingScore,
-			context_per: parseInt(data.answer),
-			voice_per: parseInt(data.voice),
-			action_per: parseInt(data.action),
+			context_per: parseInt(data.answer.split(' ')[0]),
+			voice_per: parseInt(data.voice.split(' ')[0]),
+			action_per: parseInt(data.action.split(' ')[0]),
 			language: data.interviewType,
 			occupation: selectedOption ? selectedOption.label : '',
 			companyQnas: [
@@ -197,8 +197,7 @@ function InterviewMakeForm() {
          
          const formData = new FormData();
             const interviewersBlob = new Blob([JSON.stringify(jsonFile)], { type: "application/json" });
-            formData.append("InterviewerDTO", interviewersBlob);
-         
+            formData.append("InterviewerDTO", interviewersBlob);       
 
             const jsonBlob = new Blob([JSON.stringify(value)], { type: "application/json" });
             formData.append("InterviewGroupDTO", jsonBlob);
@@ -620,20 +619,17 @@ function InterviewMakeForm() {
                      <Controller
                         name="answer"
                         control={control}
-                        rules={{
-                           required: "평가 비율 입력은 필수 입력입니다.",
-                           validate: validateTotalPercentage,
-                        }}
                         render={({ field }) => (
                            <I.RatioInputBox
                               id="answer"
                               mask="99 / 100"
                               alwaysShowMask={true}
-                              {...field}
+                              {...register("answer", {
+                                 required: "평가 비율 입력은 필수 입력입니다.",
+                                 validate: validateTotalPercentage,
+                              })}
                               onChange={(e) => {
-                                 const value = e.target.value;
-                                 const numericValue = value.split(' ')[0]; // '99 / 100'에서 '99'만 추출
-                                 field.onChange(numericValue);
+                                 field.onChange(e);
                               }}
                               inputColor={field.value ? '#404146' : '#D0D2D7'}
                               borderColor={field.value ? '#404146' : '#D0D2D7'}
@@ -646,20 +642,17 @@ function InterviewMakeForm() {
                      <Controller
                         name="voice"
                         control={control}
-                        rules={{
-                           required: "평가 비율 입력은 필수 입력입니다.",
-                           validate: validateTotalPercentage,
-                        }}
                         render={({ field }) => (
                            <I.RatioInputBox
                               id="voice"
                               mask="99 / 100"
                               alwaysShowMask={true}
-                              {...field}
+                              {...register("voice", {
+                                 required: "평가 비율 입력은 필수 입력입니다.",
+                                 validate: validateTotalPercentage,
+                              })}
                               onChange={(e) => {
-                                 const value = e.target.value;
-                                 const numericValue = value.split(' ')[0]; // '99 / 100'에서 '99'만 추출
-                                 field.onChange(numericValue);
+                                 field.onChange(e);
                               }}
                               inputColor={field.value ? '#404146' : '#D0D2D7'}
                               borderColor={field.value ? '#404146' : '#D0D2D7'}
@@ -672,20 +665,17 @@ function InterviewMakeForm() {
                      <Controller
                         name="action"
                         control={control}
-                        rules={{
-                           required: "평가 비율 입력은 필수 입력입니다.",
-                           validate: validateTotalPercentage,
-                        }}
                         render={({ field }) => (
                            <I.RatioInputBox
                               id="action"
                               mask="99 / 100"
                               alwaysShowMask={true}
-                              {...field}
+                              {...register("action", {
+                                 required: "평가 비율 입력은 필수 입력입니다.",
+                                 validate: validateTotalPercentage,
+                              })}
                               onChange={(e) => {
-                                 const value = e.target.value;
-                                 const numericValue = value.split(' ')[0]; // '99 / 100'에서 '99'만 추출
-                                 field.onChange(numericValue);
+                                 field.onChange(e);
                               }}
                               inputColor={field.value ? '#404146' : '#D0D2D7'}
                               borderColor={field.value ? '#404146' : '#D0D2D7'}
