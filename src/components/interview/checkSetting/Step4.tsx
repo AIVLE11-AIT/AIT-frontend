@@ -26,7 +26,7 @@ function Step4() {
             try {
                 const response = await axios.get(`/interviewGroup/readOne/${groupId}`);
                 const data = response.data;
-                setInterviewType(data.interviewType);
+                setInterviewType(data.language);
             } catch (error) {
                 console.error('Error fetching interview data:', error);
             }
@@ -156,7 +156,7 @@ function Step4() {
                     {!recordedMediaUrl && (
                         <S.Step3Text>
                             Click the camera and microphone access button in the permission request window, <br />
-                            then please read aloud <S.Step3Txt>"Dreaming of soaring into the wide sky"</S.Step3Txt>.
+                            then please read aloud <S.Step3Txt>"Life is full of ups and downs"</S.Step3Txt>.
                         </S.Step3Text>
                     )}
                     {recordedMediaUrl && (
@@ -170,7 +170,10 @@ function Step4() {
             <S.StepMain>
                 {!recordedMediaUrl ? (
                     <S.CameraComponent>
-                        <S.Record><S.RecordTxt recordState={recordState}>●</S.RecordTxt>{recordState ? '녹화 중' : 'Record'}</S.Record>
+                        <S.Record>
+                            <S.RecordTxt recordState={recordState}>●</S.RecordTxt>
+                            {interviewType === 'kor' ? (recordState ? '녹화 중' : '녹화') : (recordState ? 'Recording' : 'Record')}
+                        </S.Record>
                         <S.Camera ref={videoRef} autoPlay border={recordBtn ? '#75A812' : '#D0D2D7'} />
                         <S.RecordBtnBox>
                             <S.RecordBtn
