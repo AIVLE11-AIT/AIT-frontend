@@ -19,7 +19,6 @@ function Step2() {
       try {
         const response = await axios.get(`/interviewGroup/readOne/${groupId}`);
         const data = response.data;
-        //setInterviewType(data.interviewType);
         setInterviewType(data.language); // 데이터가 'eng'일 경우 업데이트
       } catch (error) {
         console.error('Error fetching interview data:', error);

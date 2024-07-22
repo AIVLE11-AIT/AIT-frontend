@@ -5,9 +5,6 @@ import { useParams } from 'react-router-dom';
 
 function Step1() {
   const { groupId } = useParams();
-  //const [interviewType, setInterviewType] = useState<string | null>(null);
-  const [startTime, setStartTime] = useState<string | null>(null);
-  const [endTime, setEndTime] = useState<string | null>(null);
   const [interviewType, setInterviewType] = useState<string>('kor'); // 기본값을 'kor'으로 설정
 
   useEffect(() => {
@@ -15,11 +12,6 @@ function Step1() {
       try {
         const response = await axios.get(`/interviewGroup/readOne/${groupId}`);
         const data = response.data;
-        //setInterviewType(response.data.language);
-
-        //setInterviewType(response.data.interviewType);
-        setStartTime(response.data.start_date);
-        setEndTime(response.data.end_date);
         setInterviewType(data.language); // 데이터가 'eng'일 경우 업데이트
       } catch (error) {
         console.error('Error fetching interview data:', error);
@@ -66,6 +58,7 @@ function Step1() {
             <S.Step1Container border="#FF4A4A">
               <S.NoticeText position="none">This interview cannot be paused and resumed.</S.NoticeText>
             </S.Step1Container>
+
             <S.WrapContainer>
               <S.Step1Wrap border="#868f9d">
                 <S.Step1Info1>Interview Time</S.Step1Info1>
