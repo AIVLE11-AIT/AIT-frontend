@@ -155,7 +155,7 @@ function Step4() {
                     {!recordedMediaUrl && (
                         <S.Step3Text>
                             Click the camera and microphone access button in the permission request window, <br />
-                            then please read aloud <S.Step3Txt>"Life is full of ups and downs"</S.Step3Txt>.
+                            then please read aloud <S.Step3Txt>"And hope my dreams will take me there"</S.Step3Txt>.
                         </S.Step3Text>
                     )}
                     {recordedMediaUrl && (
