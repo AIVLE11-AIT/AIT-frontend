@@ -188,6 +188,7 @@ function Question() {
 
                 <Q.QBox>{questions[currentQuestionIndex]}</Q.QBox>
             </Q.QContainer>
+            {loading && <LoadingModal />}
         </div>
     );
 }
