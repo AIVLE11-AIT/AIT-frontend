@@ -19,7 +19,11 @@ export const TimerBox = styled.div`
     border: 2px solid #696CEA;
     color: #696CEA;
     border-radius: 100px;
-    padding: 40px 33px;
+    width: 170px;
+    height: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const TimeText = styled.div`
