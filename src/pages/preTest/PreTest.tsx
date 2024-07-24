@@ -158,7 +158,7 @@ function PreTest() {
                       • Please start your answer after the 20-second preparation timer ends.<br/><br/>
                       • During the interview, please avoid clicking the refresh button, etc.
             `}
-            imgUrl={process.env.PUBLIC_URL + '/images/Pretest1.svg'}
+            imgUrl={process.env.PUBLIC_URL + '/images/Pretest2_eng.svg'}
           />
 
           <Usage
