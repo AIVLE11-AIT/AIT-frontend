@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 import * as S from './Camera.style';
 import axios from 'axios';
-import { useRecoilValue } from 'recoil';
-import { CompanyQuestionAtom, IntroduceAtom, QnaIdAtom, QnaIndexAtom } from '../../../recoil/interviewAtoms';
-import { useParams } from 'react-router-dom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { CompanyQuestionAtom, IntroduceAtom, QnaIdAtom } from '../../../recoil/interviewAtoms';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Camera = forwardRef((props, ref) => {
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -50,7 +50,7 @@ const Camera = forwardRef((props, ref) => {
         if (mediaRecorder.current && mediaRecorder.current.state === 'inactive') {
             videoChunks.current = []; // 새로운 녹화가 시작될 때 videoChunks를 초기화
             mediaRecorder.current.start();
-            console.log("재생");
+            //console.log("재생");
         }
     }, []);
 
@@ -58,7 +58,7 @@ const Camera = forwardRef((props, ref) => {
         if (mediaRecorder.current && mediaRecorder.current.state === 'recording') {
             mediaRecorder.current.stop();
             mediaRecorder.current.onstop = async () => {
-                console.log("재생 멈춤");
+                //console.log("재생 멈춤");
                 const blob = new Blob(videoChunks.current, { type: 'video/webm' });
 
                 const formData = new FormData();
@@ -67,7 +67,7 @@ const Camera = forwardRef((props, ref) => {
                 try {
                     if (introduceState) { // 자기소개 영상인 경우
                         await axios.post(`/interviewGroup/${groupId}/interviewer/${interviewerId}/introduce/create`, formData);
-                        console.log("자기소개 영상 전송 성공");
+
                     } else { // 질문 영상인 경우
                         const url = qnaState
                             ? `/interviewGroup/${groupId}/interviewer/${interviewerId}/file/companyQna/${qnaId}`
@@ -78,7 +78,6 @@ const Camera = forwardRef((props, ref) => {
                                 'Content-Type': 'multipart/form-data',
                             },
                         });
-                        console.log(qnaState ? "기업 질문 영상 전송 성공" : "자소서 질문 영상 전송 성공");
                     }
                 } catch (error) {
                     console.error('AxiosError:', error);

@@ -54,24 +54,24 @@ function Timer({ language }: TimerProps) {
     <T.TimerContainer>
       {status === 'loading' && <T.StatusText>{language === 'eng' ? 'Loading...' : '로딩 중...'}</T.StatusText>}
       {status === 'end' && <T.StatusText>{language === 'eng' ? 'The interview has ended.' : '면접이 종료되었습니다.'}</T.StatusText>}
-      {status === 'started' && <T.StatusText>{language === 'eng' ? 'The interview has started. Please begin your interview!' : '면접이 시작되었습니다:) 면접 응시를 시작해 주세요!'}</T.StatusText>}
+      {status === 'started' && <T.StatusText>{language === 'eng' ? 'The interview has started. Please begin your interview!' : '면접이 시작되었습니다. 면접 응시를 시작해 주세요!'}</T.StatusText>}
       {status === '' && (
         <>
           <T.TimerWrap>
             <T.TimerBox>{days}</T.TimerBox>
-            <T.TimeText>{language === 'eng' ? 'DAYS' : '일'}</T.TimeText>
+            <T.TimeText>DAYS</T.TimeText>
           </T.TimerWrap>
           <T.TimerWrap>
             <T.TimerBox>{hours}</T.TimerBox>
-            <T.TimeText>{language === 'eng' ? 'HOURS' : '시간'}</T.TimeText>
+            <T.TimeText>HOURS</T.TimeText>
           </T.TimerWrap>
           <T.TimerWrap>
             <T.TimerBox>{minutes}</T.TimerBox>
-            <T.TimeText>{language === 'eng' ? 'MINUTES' : '분'}</T.TimeText>
+            <T.TimeText>MINUTES</T.TimeText>
           </T.TimerWrap>
           <T.TimerWrap>
             <T.TimerBox>{seconds}</T.TimerBox>
-            <T.TimeText>{language === 'eng' ? 'SECONDS' : '초'}</T.TimeText>
+            <T.TimeText>SECONDS</T.TimeText>
           </T.TimerWrap>
         </>
       )}

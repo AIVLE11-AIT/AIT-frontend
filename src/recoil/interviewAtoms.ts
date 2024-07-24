@@ -23,3 +23,8 @@ export const QnaIdAtom = atom<number>({
     key: 'QnaIdAtom',
     default: 0,
 });
+
+export const LastQna = atom<boolean>({
+    key: 'LastQna',
+    default: false,
+});
