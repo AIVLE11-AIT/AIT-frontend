@@ -85,9 +85,18 @@ function PreTestMain() {
           {groupInfo ? `[${groupInfo.company}] ${groupInfo.name}` : ''}
         </P.PreTestName>
         <P.PreTestTitle>
-          {groupInfo?.language === 'eng' ?
-            `${interviewerInfo ? `${interviewerInfo.name} (${interviewerInfo.email})` : ''}, please make sure to check the instructions.` :
-            `${interviewerInfo ? `${interviewerInfo.name} (${interviewerInfo.email})` : ''} 님, 안내 유의사항을 꼭 확인하세요.`}
+              {groupInfo?.language === 'eng' ? (
+          <>
+            {interviewerInfo ? `${interviewerInfo.name} (${interviewerInfo.email})` : ''}
+            <br/>
+            please make sure to check the instructions.
+          </>) : (
+          <>
+            {interviewerInfo ? `${interviewerInfo.name} (${interviewerInfo.email})` : ''} 님,
+            <br/>
+            안내 유의사항을 꼭 확인하세요.
+          </>
+        )}
         </P.PreTestTitle>
         <P.DateText>
           {groupInfo?.language === 'eng' ?
