@@ -98,7 +98,7 @@ function PreTest() {
                       • <4. 카메라, 마이크 테스트 활성화 화면>에서 기기 활성화를 위한 팝업이 뜨면 허용을 상태를 변경 후, 카메라 마이크 테스트를 완료 해야 다음 단계로 넘어갈 수 있습니다.<br/><br/>
                       • <5. 점검 완료 화면>에서 시작 버튼을 클릭하면 바로 면접 시작 화면으로 넘어갑니다.
             `}
-            imgUrl={process.env.PUBLIC_URL + '/images/Pretest1.svg'}
+            imgUrl={process.env.PUBLIC_URL + '/images/Pretest1_kor.svg'}
           />
 
           <Usage
@@ -110,7 +110,7 @@ function PreTest() {
                       • 20초의 준비시간 타이머가 끝난 후 답변을 시작해 주세요.<br/><br/>
                       • 면접이 진행되는 동안 새로고침 버튼 등의 클릭을 주의해 주세요.
             `}
-            imgUrl={process.env.PUBLIC_URL + '/images/Pretest1.svg'}
+            imgUrl={process.env.PUBLIC_URL + '/images/Pretest2_kor.svg'}
           />
 
           <Usage
@@ -122,7 +122,7 @@ function PreTest() {
                       • 면접 시스템과 관련된 문의는 aitech0311@gmail.com로 문의해 주세요.<br/><br/>
                       • 지원자의 불찰로 인한 면접 종료에 대한 불이익에 대해서는 책임지지 않습니다.<br/><br/>
             `}
-            imgUrl={process.env.PUBLIC_URL + '/images/Pretest3.svg'}
+            imgUrl={process.env.PUBLIC_URL + '/images/Pretest3_kor.svg'}
           />
         </>
       ) : (
@@ -146,7 +146,7 @@ function PreTest() {
                       • In the <4. Camera and Microphone Test Activation Screen>, if a popup appears for device activation, change the status to allow, and complete the camera and microphone test before proceeding to the next step.<br/><br/>
                       • On the <5. Completion Screen>, click the Start button to go directly to the interview start screen.
             `}
-            imgUrl={process.env.PUBLIC_URL + '/images/Pretest1.svg'}
+            imgUrl={process.env.PUBLIC_URL + '/images/Pretest1_eng.svg'}
           />
 
           <Usage
@@ -158,7 +158,7 @@ function PreTest() {
                       • Please start your answer after the 20-second preparation timer ends.<br/><br/>
                       • During the interview, please avoid clicking the refresh button, etc.
             `}
-            imgUrl={process.env.PUBLIC_URL + '/images/Pretest1.svg'}
+            imgUrl={process.env.PUBLIC_URL + '/images/Pretest2_eng.svg'}
           />
 
           <Usage
@@ -170,7 +170,7 @@ function PreTest() {
                       • For any inquiries related to the interview system, please contact aitech0311@gmail.com.<br/><br/>
                       • We are not responsible for any disadvantages caused by the applicant's negligence in ending the interview.<br/><br/>
             `}
-            imgUrl={process.env.PUBLIC_URL + '/images/Pretest3.svg'}
+            imgUrl={process.env.PUBLIC_URL + '/images/Pretest3_eng.svg'}
           />
         </>
       )}
