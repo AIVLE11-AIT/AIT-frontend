@@ -118,6 +118,10 @@ export const QuestionDiv = styled.div`
     padding: 20px 30px;
     cursor: pointer;
     line-height: 1.5;
+    
+    &:hover {
+        background-color: #E2E2FA;
+    }
 `;
 
 // 답변 텍스트 박스
