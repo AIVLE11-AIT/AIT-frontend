@@ -170,7 +170,7 @@ function PreTest() {
                       • For any inquiries related to the interview system, please contact aitech0311@gmail.com.<br/><br/>
                       • We are not responsible for any disadvantages caused by the applicant's negligence in ending the interview.<br/><br/>
             `}
-            imgUrl={process.env.PUBLIC_URL + '/images/Pretest3.svg'}
+            imgUrl={process.env.PUBLIC_URL + '/images/Pretest3_eng.svg'}
           />
         </>
       )}
