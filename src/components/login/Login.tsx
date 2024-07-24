@@ -28,21 +28,43 @@ function Login() {
       formData.append('username', data.email);
       formData.append('password', data.password);
 
-      // 로그인 api
+      // 권한 확인 api
       axios({
-        url: `/login`,
+        url: `/isPossible`,
         method: 'post',
-        data: formData,
+        data:{
+          username: data.email,
+          password: data.password
+        }
       })
       
       .then((response) => {
-        console.log(response.data);
-        setEmail(data.email);
-        sessionStorage.setItem('isLogin', response.headers.authorization);
-        navigate('/group-profile');
+        if(response.data){
+          // 로그인 api
+          axios({
+            url: `/login`,
+            method: 'post',
+            data: formData,
+          })
+          
+          .then((response) => {
+            //console.log(response.data);
+            setEmail(data.email);
+            sessionStorage.setItem('isLogin', response.headers.authorization);
+            navigate('/group-profile');
+            
+          }) .catch((error) => {
+            alert("이메일 또는 비밀번호를 확인해 주세요.");
+            console.log('실패');
+            console.error('AxiosError:', error);
+          });
+        }
+        else{
+          alert("aitech0311@gmail.com로 메일로 권한 요청 바랍니다.")
+        }
         
       }) .catch((error) => {
-        alert("이메일 또는 비밀번호를 확인해 주세요.");
+        alert("회원 정보가 없습니다. 회원가입을 먼저 진행해 주세요.");
         console.log('실패');
         console.error('AxiosError:', error);
       });
