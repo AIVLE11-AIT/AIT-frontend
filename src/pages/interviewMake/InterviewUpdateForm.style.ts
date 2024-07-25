@@ -93,9 +93,10 @@ export const InputBox = styled.input<InputProps>`
 
 // 질문 입력 박스
 export const QInputBox = styled.textarea<InputProps>`
+    resize: none;
     margin-left: 15px;
     width: 1000px;
-    height: 70px;
+    height: 100px;
     border-radius: 11px;
     border: 2px solid ${({ borderColor }) => borderColor || '#D0D2D7'};
     background: #FFF;
