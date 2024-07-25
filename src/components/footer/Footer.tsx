@@ -13,6 +13,10 @@ function Footer() {
     function onClickPrivacyPolicy(){
         navigate('/privacy-policy');
     }
+
+    function onClickLink(){
+        window.location.href = 'https://www.instagram.com/ait.official_?igsh=enloZ2YzMHVreGR4&utm_source=qr';
+    }
   return (
     <div>
         <H.Footer>
@@ -30,7 +34,7 @@ function Footer() {
                 </H.FooterSection>
                 <H.FooterSection>
                     <H.FooterSubTitle>공식 계정</H.FooterSubTitle>
-                    <H.FooterText>Instagram | &nbsp;&nbsp;@AIT.official</H.FooterText>
+                    <H.FooterText onClick={onClickLink}>Instagram | &nbsp;&nbsp;@ait.official_</H.FooterText>
                     <H.FooterText>E-mail | &nbsp;&nbsp;aitech0311@gmail.com</H.FooterText>
                 </H.FooterSection>
                 <H.FooterSection>

@@ -2,6 +2,10 @@ import React from 'react'
 import * as P from './People.style';
 
 function People() {
+
+  function onClickSite(){
+      window.location.href = 'https://www.instagram.com/ait.official_?igsh=enloZ2YzMHVreGR4&utm_source=qr';
+  }
   return (
     <div>
       <P.PeopleContainer>
@@ -48,6 +52,11 @@ function People() {
             <P.Name>노태규</P.Name>
           </P.PeopleBox>
       </P.PeopleContainer>
+      <P.Frame>
+        <P.PartText>KT AIVLE SCHOOL 5기 AI트랙 3반 11조</P.PartText>
+        <P.Frame_image><P.Frame_image_file src={process.env.PUBLIC_URL + '/images/intro_frame.png'}/></P.Frame_image>
+        <P.Frame_text onClick={onClickSite}>팀원들 비하인드 사진 더 보러가기</P.Frame_text>
+      </P.Frame>
     </div>
   )
 }
