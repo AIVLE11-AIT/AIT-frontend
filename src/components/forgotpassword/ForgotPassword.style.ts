@@ -122,3 +122,31 @@ export const Error = styled.div`
   margin-left: 90px;
   height: 5px;
 `;
+
+export const HeaderContainer = styled.div`
+  display: flex;
+`;
+
+// 뒤로가기 버튼
+export const BackBtn = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  border: 2px solid #696CEA;
+  box-shadow: 0px 0px 3.13px 0px #696CEA;
+  display: flex;
+  justify-content: center;
+  align-item: center;
+  padding: 6px 0px;
+  cursor: pointer;
+  margin-top: 40px;
+  margin-left: 40px;
+  margin-right: 150px;
+`;
+
+export const BackBtnArrow = styled.img`
+  width: 12px;
+  height: 12px;
+  margin-top: 1.5px;
+  margin-right: 1px;
+`;

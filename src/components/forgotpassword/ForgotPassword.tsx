@@ -28,7 +28,7 @@ function ForgotPassword() {
   // 이메일 전송 버튼 클릭 시
   const onClickBtn = (data: FormValue) => {
     const email = data.email;
-    console.log(email);
+    //console.log(email);
 
     // 로그인 api
     axios({
@@ -58,10 +58,17 @@ function ForgotPassword() {
     }
   }, [emailValue, errors.email]);
 
+  function onClickBack(){
+    navigate('/login');
+  }
+
   return (
     <F.Container>
       <F.FormWrapper>
-        <F.Title> 비밀번호 찾기</F.Title>
+        <F.HeaderContainer>
+          <F.BackBtn onClick={onClickBack}><F.BackBtnArrow src={process.env.PUBLIC_URL + '/images/BackBtn.svg'}/></F.BackBtn>
+          <F.Title> 비밀번호 찾기</F.Title>
+        </F.HeaderContainer>
         <F.SubTitle>
           가입한 이메일로 임시 비밀번호가 포함된 메일은 전송해 드립니다.
         </F.SubTitle>

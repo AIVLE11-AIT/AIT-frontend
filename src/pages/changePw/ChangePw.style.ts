@@ -143,6 +143,8 @@ export const BackBtn = styled.div`
 `;
 
 export const BackBtnArrow = styled.img`
-  width: 15px;
-  height: 15px;
+  width: 12px;
+  height: 12px;
+  margin-top: 1.5px;
+  margin-right: 1px;
 `;
