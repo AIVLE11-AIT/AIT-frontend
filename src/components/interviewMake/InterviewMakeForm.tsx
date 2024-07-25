@@ -351,7 +351,7 @@ function InterviewMakeForm() {
 								const lengthValid = value.length <= 100;
 								const patternValid = isEnglish
 									? /^[a-zA-Z0-9\s?!,.@#$%^&*()_+\-=\[\]{}|\\:;"'<>,./]*$/.test(value)
-									: /^[가-힣a-zA-Z\s?!,.@#$%^&*()_+\-=\[\]{}|\\:;"'<>,./]*$/.test(value);
+									: /^[가-힣a-zA-Z0-9\s?!,.@#$%^&*()_+\-=\[\]{}|\\:;"'<>,./]*$/.test(value);
 
 								if (!lengthValid) {
 									return "글자 수를 줄여주세요.";
