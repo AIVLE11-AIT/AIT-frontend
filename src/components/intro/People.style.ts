@@ -14,7 +14,7 @@ export const PeopleBox = styled.div`
     font-size: 20px;
     font-weight: 500;
     box-shadow: 1px 4px 10px 3px #E2E2FA;
-    width: 300px;
+    width: 280px;
 `;
 
 export const PartText = styled.div`
@@ -25,15 +25,29 @@ export const PartText = styled.div`
 `;
 
 export const Image = styled.div`
+    margin: 20px auto;
     width: 200px;
     height: 200px;
-    border: 1px solid black;
-    margin: 20px auto;
+`;
+
+export const Img = styled.img<{margin: string, width: string}>`
+    width: ${(props) => props.width};
+    height: 230px;
+    margin-left: ${(props) => props.margin};
+    position: absolute;
+    index: 0;
 `;
 
 export const Name = styled.div`
-    font-size: 20px;
+    font-size: 17px;
     text-align: center;
-    font-weight: 600;
-    margin-top: 20px;
+    font-weight: 500;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 30px auto 0px auto;
+    width: 170px;
+    background-color: #696CEA;
+    color: white;
+    position: relative;
+    index: 1;
 `;
