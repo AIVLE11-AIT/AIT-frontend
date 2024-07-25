@@ -292,9 +292,8 @@ function SignUpForm() {
             {...register("companyName", {
               required: "기업 이름은 필수 입력입니다.",
               pattern: {
-                value:
-                  /^[가-힣a-zA-Z0-9]{2,12}$/i,
-                message: "2~12자 한글, 영문, 숫자",
+                value: /^[가-힣a-zA-Z0-9\s]{2,50}$/i,
+                message: "2~12자 한글, 영문, 숫자, 공백만 허용됩니다.",
               },
             })}
           />
