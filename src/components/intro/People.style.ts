@@ -25,6 +25,7 @@ export const PeopleBox = styled.div`
         margin: 20px 0; /* 상하 마진 조정 */
         padding: 20px;  /* 패딩 조정 */
     }
+    width: 280px;
 `;
 
 export const PartText = styled.div`
@@ -39,6 +40,7 @@ export const PartText = styled.div`
 `;
 
 export const Image = styled.div`
+    margin: 20px auto;
     width: 200px;
     height: 200px;
     margin: 20px auto;
@@ -53,7 +55,7 @@ export const Img = styled.img<{ margin: string, width: string }>`
 `;
 
 export const Name = styled.div`
-    font-size: 20px;
+    font-size: 17px;
     text-align: center;
     font-weight: 600;
     margin-top: 20px;
