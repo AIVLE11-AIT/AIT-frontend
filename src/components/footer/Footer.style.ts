@@ -57,6 +57,7 @@ export const FooterText = styled.p`
   margin: 7px 0;
   color: #FFF;
   font-size: 13px;
+  cursor: pointer;
 
   @media (max-width: 768px) {
     font-size: 12px;
