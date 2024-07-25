@@ -10,19 +10,19 @@ export const HeaderDiv = styled.div`
 // 로고 박스
 export const LogoDiv = styled.div`
     padding: 24px 0px;
-    margin-left: 93px;
+    margin-left: calc(10px + 5vw);
     cursor: pointer;
 `;
 
 // 헤더 wrap
 export const HeaderWrap = styled.div`
-    margin: auto 131px auto auto;
+    margin: auto calc(10px + 5vw) auto auto;
     display: flex;
 `;
 
 // 헤더 content
 export const HeaderContent = styled.div`
-    padding: 30px 32px;
+    padding: calc(10px + 1vw) calc(15px + 1vw);
     color: #0D0D0D;
     font-weight: 500;
     cursor: pointer;
@@ -31,11 +31,11 @@ export const HeaderContent = styled.div`
 // 로그인 버튼
 export const LoginBtn = styled.div`
     display: flex;
-    margin-top: 24px;
-    margin-left: 31px;
+    margin-top: calc(5px + 1vw);
+    margin-left: calc(10px + 1vw);
     border-radius: 5px;
-    width: 83px;
-    height: 32px;
+    width: calc(60px + 2vw);
+    height: calc(20px + 1vw);
     background: #0D0D0D;
     cursor: pointer;
 `;
@@ -45,5 +45,5 @@ export const LoginBtnText = styled.div`
     display: flex;
     color: white;
     margin: auto;
-    font-size: 15px;
+    font-size: calc(10px + 0.5vw);
 `;

@@ -12,6 +12,12 @@ export const Section1 = styled.section`
   flex-direction: row;
   margin-top: 150px;
   margin-bottom: 100px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin-top: 100px;
+    margin-bottom: 50px;
+  }
 `;
 
 export const InnerContainer = styled.div`
@@ -23,6 +29,12 @@ export const InnerContainer = styled.div`
   width: 50%;
   margin-left: 50px;
   margin-top: 50px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 20px;
+  }
 `;
 
 export const Section2 = styled.section`
@@ -43,8 +55,6 @@ export const Header = styled.header`
   padding: 20px 0;
 `;
 
-
-// 각 기업이 원하는 평가 비율을 직접 선택하여 맞춤형으로 지원자의 면접 평가 결과를 제공합니다.
 export const SubTitle1 = styled.div`
   margin-top: 20px;
   color: #404146;
@@ -52,19 +62,25 @@ export const SubTitle1 = styled.div`
   font-size: 17px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal; 
+  line-height: normal;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
-// 스마트한 AI면접의 시작
 export const Title = styled.div`
   margin-top: 20px;
   margin-bottom: 30px;
   color: #0D0D0D;
   font-size: 60px;
   font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-size: 40px;
+  }
 `;
 
-// 각 기업이 원하는 평가 비율을 직접 선택하여 맞춤형으로 지원자의 면접 평가 결과를 제공합니다.
 export const SubTitle2 = styled.div`
   margin-top: 30px;
   margin-bottom: 30px;
@@ -73,7 +89,11 @@ export const SubTitle2 = styled.div`
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.7; 
+  line-height: 1.7;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export const TitlePart1 = styled.span`
@@ -92,6 +112,10 @@ export const SectionSubTitle2Part1 = styled.span`
   font-size: 22px;
   font-weight: 600;
   color: #606060;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 export const SectionSubTitle2Part2 = styled.span`
@@ -101,6 +125,10 @@ export const SectionSubTitle2Part2 = styled.span`
   font-weight: 600;
   line-height: normal;
   color: #000;
+
+  @media (max-width: 768px) {
+    font-size: 22px;
+  }
 `;
 
 export const SectionTitle1 = styled.h2`
@@ -111,12 +139,20 @@ export const SectionTitle1 = styled.h2`
   color: var(--Wireframe-Black, #000);
   display: inline;
   text-align: left;
+
+  @media (max-width: 768px) {
+    font-size: 35px;
+  }
 `;
 
 export const SectionTitlePart1 = styled.span`
   font-size: 40px;
   font-weight: 700;
   display: inline;
+
+  @media (max-width: 768px) {
+    font-size: 30px;
+  }
 `;
 
 export const SectionTitlePart2 = styled.span`
@@ -130,6 +166,10 @@ export const SectionTitlePart2 = styled.span`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline;
+
+  @media (max-width: 768px) {
+    font-size: 40px;
+  }
 `;
 
 export const SectionTitle2 = styled.div`
@@ -144,6 +184,10 @@ export const SectionTitle2 = styled.div`
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
 `;
 
 export const SectionSubTitle2 = styled.h2`
@@ -153,9 +197,12 @@ export const SectionSubTitle2 = styled.h2`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
-// go profile 버튼
 export const Button1 = styled.button`
   border: none;
   cursor: pointer;
@@ -172,9 +219,14 @@ export const Button1 = styled.button`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  @media (max-width: 768px) {
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+  }
 `;
 
-// contact 버튼
 export const Button2 = styled.button`
   width: 200px;
   height: 50px;
@@ -190,11 +242,27 @@ export const Button2 = styled.button`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  @media (max-width: 768px) {
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+  }
 `;
 
-// 분석 결과 사진
 export const ResultContainer = styled.div`
   margin-top: 5px;
+  width: 100%;
+  height: auto;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 90%;
+  }
 `;
 
 export const Features = styled.div`
@@ -202,6 +270,12 @@ export const Features = styled.div`
   justify-content: center;
   padding: 40px 0;
   margin-top: 40px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 20px 0;
+    margin-top: 20px;
+  }
 `;
 
 export const Feature = styled.div`
@@ -214,7 +288,15 @@ export const Feature = styled.div`
   border-radius: 30px;
   border: 1px solid #D0D2D7;
   background: #FFF;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    margin: 10px 0;
+  }
 `;
+
 export const FeatureTitle = styled.h3`
   margin-bottom: 20px;
   color: black;
@@ -222,9 +304,12 @@ export const FeatureTitle = styled.h3`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
 `;
 
-// 음성, 행동, 답변 분석 설명
 export const FeatureDescription = styled.p`
   color: #5C5C5C;
   font-size: 18px;
@@ -232,9 +317,13 @@ export const FeatureDescription = styled.p`
   line-height: 1.7;
   margin-left: 5px;
   height: 180px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    height: auto;
+  }
 `;
 
-// 음성, 행동, 답변 분석 아이콘
 export const FeatureImage = styled.div`
   text-align: right;
   margin-right: 0px;
@@ -243,16 +332,18 @@ export const FeatureImage = styled.div`
   font-size: 70px;
 `;
 
-// 주요 기능
 export const MiniTitle = styled.footer`
   color: #696CEA;
   text-align: center;
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 40px;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
-// 자동으로 면접 타임테이블 생성하기
 export const SectionTitle3 = styled.h2`
   margin-bottom: 40px;
   text-align: center;
@@ -262,10 +353,12 @@ export const SectionTitle3 = styled.h2`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+
+  @media (max-width: 768px) {
+    font-size: 35px;
+  }
 `;
 
-// 면접 페이지를 만들고 지원자에게 링크를 공유하세요.
-// 지원자들이 가능한 시간을 모아 최적의 면접 타임테이블을 만들어 드립니다.
 export const SectionSubTitle3 = styled.h2`
   color: var(--Wireframe-Black, #000);
   text-align: center;
@@ -273,6 +366,10 @@ export const SectionSubTitle3 = styled.h2`
   font-style: normal;
   font-weight: 500;
   line-height: 1.7;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 export const Container = styled.div`
@@ -282,12 +379,21 @@ export const Container = styled.div`
 export const Container2 = styled.div`
   background: linear-gradient(180deg, #e0e7ff 0%, #d0e0ff 100%);
   margin-top: 150px;
+
+  @media (max-width: 768px) {
+    margin-top: 100px;
+  }
 `;
 
 export const BoxContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 50%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: center;
+  }
 `;
 
 export const Box = styled.div`
@@ -310,6 +416,12 @@ export const BoxComment1 = styled.div`
   flex-shrink: 0;
   margin-bottom: 80px;
   margin-left: 80px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
 `;
 
 export const BoxComment2 = styled.div`
@@ -324,6 +436,11 @@ export const BoxComment2 = styled.div`
   height: 132px;
   flex-shrink: 0;
   margin-bottom: 80px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-bottom: 20px;
+  }
 `;
 
 export const BoxComment3 = styled.div`
@@ -338,12 +455,21 @@ export const BoxComment3 = styled.div`
   height: 132px;
   flex-shrink: 0;
   margin-left: 80px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-left: 0;
+  }
 `;
 
 export const BoxTitle = styled.h3`
   font-size: 1.5rem;
   color: #0D0D0D;
   margin-bottom: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const BoxHighlighted = styled.span`
@@ -359,11 +485,20 @@ export const Description = styled.p`
   font-weight: 500;
   line-height: 2;
   text-align: left;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+    margin-top: 30px;
+  }
 `;
 
 export const CommentIcon = styled.div`
   font-size: 1.5rem;
   margin-right: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const CommentText = styled.p`
@@ -372,6 +507,10 @@ export const CommentText = styled.p`
   font-weight: 600;
   line-height: 1.5;
   margin-left: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export const FeatureBox = styled.div`
@@ -386,7 +525,14 @@ export const FeatureBox = styled.div`
   width: 1160px;
   height: 496px;
   flex-shrink: 0;
-  position: relative; // 추가: 절대값 위치 조정을 위한 상대값 설정
+  position: relative;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+  }
 `;
 
 export const FeatureBoxNumber1 = styled.div`
@@ -403,39 +549,18 @@ export const FeatureBoxNumber1 = styled.div`
   color: #FFF;
   font-size: 26px;
   font-weight: 600;
+
+  @media (max-width: 768px) {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    top: 20px; 
+    left: -20px; 
+  }
 `;
 
-export const FeatureBoxNumber2 = styled.div`
-  display: flex;
-  position: absolute;
-  width: 64px;
-  height: 64px;
-  top: 50px; 
-  left: -30px; 
-  justify-content: center;
-  align-items: center;
-  background-color: #696CEA;
-  border-radius: 50px;
-  color: #FFF;
-  font-size: 26px;
-  font-weight: 600;
-`;
-
-export const FeatureBoxNumber3 = styled.div`
-  display: flex;
-  position: absolute;
-  width: 64px;
-  height: 64px;
-  top: 50px; 
-  left: -30px; 
-  justify-content: center;
-  align-items: center;
-  background-color: #696CEA;
-  border-radius: 50px;
-  color: #FFF;
-  font-size: 26px;
-  font-weight: 600;
-`;
+export const FeatureBoxNumber2 = styled(FeatureBoxNumber1)``;
+export const FeatureBoxNumber3 = styled(FeatureBoxNumber1)``;
 
 export const FeatureBoxContent = styled.div`
   display: flex;
@@ -443,7 +568,12 @@ export const FeatureBoxContent = styled.div`
   padding: 10px;
   align-items: flex-start;
   margin-left: 20px;
-  position: relative; // 추가: 절대값 위치 조정을 위한 상대값 설정
+  position: relative;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    padding: 5px;
+  }
 `;
 
 export const FeatureBoxTitle = styled.h3`
@@ -454,6 +584,11 @@ export const FeatureBoxTitle = styled.h3`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
 `;
 
 export const FeatureBoxDescription = styled.p`
@@ -462,12 +597,22 @@ export const FeatureBoxDescription = styled.p`
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
-  line-height: 26px; /* 130% */
+  line-height: 26px;
   text-align: left;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    line-height: 20px;
+  }
 `;
 
 export const FeatureBoxImage = styled.img`
   width: 520px;
   height: auto;
-  margin-right: 20px; /* 수정: 이미지의 위치 조정 */
+  margin-right: 20px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-right: 0;
+  }
 `;
