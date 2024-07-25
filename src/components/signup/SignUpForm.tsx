@@ -73,10 +73,12 @@ function SignUpForm() {
         })
         
         .then((response) => {
-          console.log(response.data);
+          //console.log(response.data);
+          alert("회원가입이 완료되었습니다.");
           navigate('/login');
           }) .catch((error) => {
           console.log('실패');
+          alert("이미 ID가 존재합니다.")
           console.error('AxiosError:', error);
         });
       }

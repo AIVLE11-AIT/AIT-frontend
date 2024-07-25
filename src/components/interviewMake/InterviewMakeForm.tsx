@@ -341,22 +341,32 @@ function InterviewMakeForm() {
                   <I.LabelText>면접 이름을 입력해 주세요.</I.LabelText>
                </I.LabelContainer>
                <I.InputBox
-                  id="interviewTitle"
-                  type="text"
-                  placeholder="20자 이내로 입력해 주세요."
-                  {...register("interviewTitle", {
-                     required: "면접 이름은 필수 입력입니다.",
-                     pattern: {
-                        value: watch("interviewType") === "eng" ? /^(?=.*[a-zA-Z]).{1,20}$/ : /^(?=.*[가-힣a-zA-Z]).{1,20}$/,
-                        message: watch("interviewType") === "eng" ? "면접 이름을 영어로 적어주세요." : "면접 이름을 한글로 적어주세요.",
-                     },
-                  })}
-                  inputColor={interviewTitleColor === '#D0D2D7' ? '#0D0D0D' : interviewTitleColor}
-                  borderColor={interviewTitleColor === '#D0D2D7' ? '#D0D2D7' : '#404146'}
-                  onChange={(e) => {
-                     setInterviewTitleColor(e.target.value ? '#0D0D0D' : '#D0D2D7');
-                  }}
-               />
+							id="interviewTitle"
+							type="text"
+							placeholder="100자 이내로 입력해 주세요."
+							{...register("interviewTitle", {
+								required: "면접 이름은 필수 입력입니다.",
+								validate: (value) => {
+								const isEnglish = watch("interviewType") === "eng";
+								const lengthValid = value.length <= 100;
+								const patternValid = isEnglish
+									? /^[a-zA-Z0-9\s?!,.@#$%^&*()_+\-=\[\]{}|\\:;"'<>,./]*$/.test(value)
+									: /^[가-힣a-zA-Z\s?!,.@#$%^&*()_+\-=\[\]{}|\\:;"'<>,./]*$/.test(value);
+
+								if (!lengthValid) {
+									return "글자 수를 줄여주세요.";
+								} else if (!patternValid) {
+									return isEnglish ? "면접 이름을 영어로 적어주세요." : "면접 이름을 한글로 적어주세요.";
+								}
+								return true;
+								}
+							})}
+							inputColor={interviewTitleColor === '#D0D2D7' ? '#0D0D0D' : interviewTitleColor}
+							borderColor={interviewTitleColor === '#D0D2D7' ? '#D0D2D7' : '#404146'}
+							onChange={(e) => {
+								setInterviewTitleColor(e.target.value ? '#0D0D0D' : '#D0D2D7');
+							}}
+							/>
                <I.Error>{errors.interviewTitle && <small role="alert">{errors.interviewTitle.message}</small>}</I.Error>
             </I.MakeInputWrap>
             
