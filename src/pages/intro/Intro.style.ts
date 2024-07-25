@@ -20,7 +20,6 @@ export const HeaderContentContainer = styled.div`
     text-align: center;
     color: black;
     margin-bottom: 20px;
-    flex-wrap: wrap;
 
     @media (max-width: 768px) {
         font-size: 25px;
