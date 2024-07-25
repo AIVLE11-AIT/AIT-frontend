@@ -253,8 +253,6 @@ export const Button2 = styled.button`
 export const ResultContainer = styled.div`
   margin-top: 5px;
   width: 100%;
-  max-width: 1000px;
-  min-width: 300px;
   height: auto;
 
   img {
