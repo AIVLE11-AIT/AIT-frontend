@@ -224,6 +224,7 @@ export const Button1 = styled.button`
     width: 150px;
     height: 40px;
     font-size: 16px;
+    padding: 5px 10px; /* 적절한 패딩 조정 */
   }
 `;
 
