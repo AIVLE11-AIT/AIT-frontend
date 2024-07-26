@@ -38,6 +38,11 @@ export const Title = styled.h1`
   text-align: left;
   align-self: flex-start;
   margin-left: 20px;
+  margin-top: 30px;
+
+  @media (max-width: 700px) {
+    font-size: 25px;
+  }
 `;
 
 export const SearchInputWrapper = styled.div`
@@ -58,6 +63,13 @@ export const SearchInput = styled.input`
   outline: none;
   box-sizing: border-box;
   margin-right: 10px;
+
+  @media (max-width: 700px) {
+    width: 100px;
+    font-size: 12px;
+    padding: 0 20px 0 20px;
+    height: 32px;
+  }
 `;
 
 export const SearchButton = styled.button`
@@ -78,6 +90,15 @@ export const SearchButton = styled.button`
   &:hover {
     background-color: #fff;
   }
+
+  @media (max-width: 700px) {
+    height: 30px;
+    font-size: 8px;
+    padding: 10px 0px;
+    width: 30px;
+    right: 120px;
+    border-radius: 20px;
+  }
 `;
 
 export const CreateButton = styled.button`
@@ -89,14 +110,16 @@ export const CreateButton = styled.button`
   cursor: pointer;
   margin-left: 20px;
   color: #fff;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 500;
+  width: 100px;
   
-  @media (max-width: 768px) {
+  @media (max-width: 700px) {
     font-size: 10px;
     flex-direction: column;
     align-items: stretch;
-    width: 50%;
+    width: 70px;
+    height: 32px;
   }
 `;
 
@@ -115,6 +138,10 @@ export const TotalPost = styled.div`
   text-align: left;
   align-self: flex-start;
   margin-left: 20px;
+
+  @media (max-width: 700px) {
+    margin-left: 10px;
+  }
 `;
 
 export const Table = styled.table`
@@ -146,6 +173,11 @@ export const TableHeader = styled.th`
   font-size: 16px;
   color: #333;
   border-bottom: 1px solid #d0d2d7;
+
+  @media (max-width: 700px) {
+    font-size: 13px;
+    padding: 15px 10px;
+  }
 `;
 
 export const TableBody = styled.tbody`
@@ -158,6 +190,10 @@ export const TableCell = styled.td`
   color: #666;
   border-bottom: 1px solid #eaeaea;
   cursor: pointer;
+
+  @media (max-width: 700px) {
+    font-size: 10px;
+  }
 `;
 
 export const PaginationWrapper = styled.div`
@@ -191,6 +227,12 @@ export const PageNumber = styled.div<{ active?: boolean }>`
   &:hover {
     background-color: #5757d1;
     color: #fff;
+  }
+
+  @media (max-width: 700px) {
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
   }
 `;
 

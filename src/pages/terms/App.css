@@ -20,10 +20,16 @@
   margin-bottom: 10px; /* 제목과 내용 사이의 여백을 줄입니다 */
   font-size: 20px;
   font-weight: 600;
+  word-wrap: break-word; /* Long words will be broken and wrap onto the next line */
+  word-break: break-all; /* Words will break at any character to wrap onto the next line */
+  white-space: normal; 
 }
 
 .chapter p {
   margin-top: 0; /* 단락 위쪽의 여백을 제거합니다 */
+  word-wrap: break-word; /* Long words will be broken and wrap onto the next line */
+  word-break: break-all; /* Words will break at any character to wrap onto the next line */
+  white-space: normal; 
 }
 
 table {
@@ -45,6 +51,43 @@ th {
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  table, thead, th, td, tr {
+    display: block;
+  }
+  
+  th {
+    display: none; /* Hide table headers on small screens */
+  }
+
+  tr {
+    margin-bottom: 10px;
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    padding-left: 50%;
+    word-wrap: break-word; /* Long words will be broken and wrap onto the next line */
+    word-break: break-all; /* Words will break at any character to wrap onto the next line */
+    white-space: normal; 
+  }
+
+  td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    font-weight: bold;
+    word-wrap: break-word; /* Long words will be broken and wrap onto the next line */
+    word-break: break-all; /* Words will break at any character to wrap onto the next line */
+    white-space: normal; 
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -80,9 +123,17 @@ th {
 .main{
   padding: 0px 100px 100px 100px;
   line-height: 1.7;
+
+  @media (max-width: 700px) {
+    padding: 0px 10px 100px 10px;
+  }
 }
 
 .content{
   background-color: white;
   padding: 30px 50px;
+
+  @media (max-width: 700px) {
+    padding: 20px 30px;
+  }
 }

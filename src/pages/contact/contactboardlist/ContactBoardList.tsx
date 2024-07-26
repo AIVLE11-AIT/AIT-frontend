@@ -117,7 +117,7 @@ function ContactBoardList() {
               검색
             </C.SearchButton>
             <C.CreateButton onClick={handleCreateClick}>
-              + 문의 생성하기
+              글쓰기
             </C.CreateButton>
           </C.SearchInputWrapper>
           {totalPosts === null ? (
@@ -144,7 +144,7 @@ function ContactBoardList() {
             </C.NoDataWrapper>
           ) : (
             <>
-              <C.TotalPost>total post : {totalPosts}개</C.TotalPost>
+              <C.TotalPost>{totalPosts}개</C.TotalPost>
               <C.Table>
                 <C.ColGroup>
                   <col width="15%" />
