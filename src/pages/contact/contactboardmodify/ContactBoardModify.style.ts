@@ -6,6 +6,10 @@ export const PageContainer = styled.div`
   align-items: center;
   height: 100vh;
   margin-bottom: 100px;
+
+  @media (max-width: 700px) {
+    margin-top: -100px;
+  }
 `;
 
 export const FormContainer = styled.div`
@@ -21,10 +25,6 @@ export const FormContainer = styled.div`
   border: 1px solid #d0d2d7;
   background: #fff;
   position: relative;
-
-  @media (max-width: 768px) {
-    padding: 20px;
-  }
 `;
 
 export const Title = styled.h1`
@@ -36,9 +36,10 @@ export const Title = styled.h1`
   align-self: flex-start;
   margin-left: 20px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 700px) {
     font-size: 24px;
     margin-bottom: 30px;
+    margin-left: 0px;
   }
 `;
 
@@ -63,8 +64,7 @@ export const Label = styled.label`
   margin-right: 20px;
 
   @media (max-width: 768px) {
-    width: 100%;
-    margin-bottom: 10px;
+    display: none;
   }
 `;
 

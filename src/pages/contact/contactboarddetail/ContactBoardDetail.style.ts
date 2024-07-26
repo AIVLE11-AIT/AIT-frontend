@@ -6,6 +6,12 @@ export const PageContainer = styled.div`
   align-items: center;
   height: 100vh;
   margin-bottom: 100px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 50px;
+    height: auto;
+    padding: 20px;
+  }
 `;
 
 export const SearchContainer = styled.div`
@@ -28,6 +34,11 @@ export const Header = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const Title = styled.h1`
@@ -38,6 +49,10 @@ export const Title = styled.h1`
   text-align: left;
   align-self: flex-start;
   margin-left: 20px;
+
+  @media (max-width: 768px) {
+     margin-left: 0px;
+  }
 `;
 
 export const ButtonWrapper = styled.div`
@@ -67,6 +82,12 @@ export const ActionButton = styled.button`
   &:hover {
     background-color: #0056b3;
   }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    padding: 10px 13px;
+  }
+  
 `;
 
 export const DetailTable = styled.table`
@@ -89,6 +110,8 @@ export const DetailTable = styled.table`
   td[colspan="3"] {
     text-align: left;
   }
+
+  
 `;
 
 export const BottomTable = styled.table`
@@ -179,6 +202,11 @@ export const TableCell = styled.td`
   padding: 10px;
   border: 1px solid #ddd;
   background-color: white;
+
+  
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 export const TitleTableCell = styled(TableCell)`
@@ -262,6 +290,8 @@ export const SubmitButton = styled.button`
   &:hover {
     background-color: #0056b3;
   }
+
+
 `;
 
 export const NoAnswerText = styled.div`

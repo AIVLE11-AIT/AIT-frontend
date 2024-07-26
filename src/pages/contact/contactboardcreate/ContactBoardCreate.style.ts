@@ -40,9 +40,10 @@ export const Title = styled.h1`
   text-align: left;
   align-self: flex-start;
   margin-left: 20px;
+  margin-top: 30px;
 
-  @media (max-width: 768px) {
-    font-size: 24px;
+  @media (max-width: 700px) {
+    font-size: 25px;
     margin-bottom: 30px;
   }
 `;
@@ -67,9 +68,8 @@ export const Label = styled.label`
   width: 20%;
   margin-right: 20px;
 
-  @media (max-width: 768px) {
-    width: 100%;
-    margin-bottom: 10px;
+  @media (max-width: 700px) {
+    display: none;
   }
 `;
 
@@ -86,6 +86,7 @@ export const Input = styled.input`
 
   @media (max-width: 768px) {
     width: 100%;
+    font-size: 13px;
   }
 `;
 
@@ -105,6 +106,7 @@ export const TextArea = styled.textarea`
   @media (max-width: 768px) {
     height: 200px;
     width: 100%;
+    font-size: 13px;
   }
 `;
 
@@ -134,17 +136,21 @@ export const ActionButton = styled.button`
   }
 
   @media (max-width: 768px) {
-    padding: 8px 16px;
-    font-size: 12px;
+    padding: 8px 16px 9px 16px;
+    font-size: 10px;
   }
 `;
 
 export const ErrorMessage = styled.div`
   color: red;
-  font-size: 14px;
-  margin-top: 5px;
+  font-size: 12px;
+  margin-left: -540px;
+  margin-bottom: 20px;
+  margin-top: -10px;
 
-  @media (max-width: 768px) {
-    font-size: 12px;
+  @media (max-width: 700px) {
+    font-size: 10px;
+    margin-top: -10px;
+    margin-left: -170px;
   }
 `;

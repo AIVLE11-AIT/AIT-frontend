@@ -47,7 +47,7 @@ function ContactBoardCreate() {
     <>
       <C.PageContainer>
         <C.FormContainer>
-          <C.Title>문의하기 생성</C.Title>
+          <C.Title>글쓰기</C.Title>
           <C.Form onSubmit={handleSubmit(onValid)}>
             <C.FormRow>
               <C.Label>제목</C.Label>
@@ -62,9 +62,9 @@ function ContactBoardCreate() {
                     {...field}
                   />
                 )}
-              />
-              {errors.title && <C.ErrorMessage>{errors.title.message}</C.ErrorMessage>}
+                />
             </C.FormRow>
+            {errors.title && <C.ErrorMessage>{errors.title.message}</C.ErrorMessage>}
             <C.FormRow>
               <C.Label>내용</C.Label>
               <Controller
@@ -78,8 +78,8 @@ function ContactBoardCreate() {
                   />
                 )}
               />
-              {errors.content && <C.ErrorMessage>{errors.content.message}</C.ErrorMessage>}
             </C.FormRow>
+            {errors.content && <C.ErrorMessage>{errors.content.message}</C.ErrorMessage>}
             <C.ButtonWrapper>
               <C.ActionButton type="submit">저장</C.ActionButton>
               <C.ActionButton type="button" onClick={() => navigate('/contact-board-list')}>
