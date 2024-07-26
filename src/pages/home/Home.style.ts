@@ -77,7 +77,7 @@ export const Title = styled.div`
   font-weight: 600;
 
   @media (max-width: 768px) {
-    font-size: 40px;
+    font-size: 30px;
   }
 `;
 
@@ -92,7 +92,7 @@ export const SubTitle2 = styled.div`
   line-height: 1.7;
 
   @media (max-width: 768px) {
-    font-size: 16px;
+    font-size: 15px;
   }
 `;
 
@@ -114,7 +114,7 @@ export const SectionSubTitle2Part1 = styled.span`
   color: #606060;
 
   @media (max-width: 768px) {
-    font-size: 20px;
+    font-size: 15px;
   }
 `;
 
@@ -151,7 +151,7 @@ export const SectionTitlePart1 = styled.span`
   display: inline;
 
   @media (max-width: 768px) {
-    font-size: 30px;
+    font-size: 25px;
   }
 `;
 
@@ -186,7 +186,7 @@ export const SectionTitle2 = styled.div`
   -webkit-text-fill-color: transparent;
 
   @media (max-width: 768px) {
-    font-size: 32px;
+    font-size: 26px;
   }
 `;
 
@@ -307,7 +307,7 @@ export const FeatureTitle = styled.h3`
   line-height: normal;
 
   @media (max-width: 768px) {
-    font-size: 24px;
+    font-size: 20px;
   }
 `;
 
@@ -320,7 +320,7 @@ export const FeatureDescription = styled.p`
   height: 180px;
 
   @media (max-width: 768px) {
-    font-size: 16px;
+    font-size: 12px;
     height: auto;
   }
 `;
