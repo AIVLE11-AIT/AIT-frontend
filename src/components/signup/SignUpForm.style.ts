@@ -52,7 +52,6 @@ export const PageNumberLine = styled.div`
 
 // Sign Up 제목
 export const SignUpTitle = styled.div`
-    //margin-top: 40px;
     margin-top: 70px;
     margin-left: 60px;
     color: #404146;
