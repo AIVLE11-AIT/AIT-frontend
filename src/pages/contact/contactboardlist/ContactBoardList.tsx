@@ -144,7 +144,7 @@ function ContactBoardList() {
             </C.NoDataWrapper>
           ) : (
             <>
-              <C.TotalPost>{totalPosts}개</C.TotalPost>
+              <C.TotalPost>total post : {totalPosts}개</C.TotalPost>
               <C.Table>
                 <C.ColGroup>
                   <col width="15%" />
@@ -162,7 +162,7 @@ function ContactBoardList() {
                   {currentPosts.length > 0 ? (
                     currentPosts.map((board, index) => (
                       <C.TableRow key={board.id} onClick={() => handleRowClick(board.id)}>
-                        <C.TableCell>{index + 1}</C.TableCell>
+                        <C.TableCell>{indexOfFirstPost + index + 1}</C.TableCell>
                         <C.TableCell>{board.title}</C.TableCell>
                         <C.TableCell>{dayjs(board.date).format('YYYY.MM.DD')}</C.TableCell>
                       </C.TableRow>
@@ -191,7 +191,7 @@ function ContactBoardList() {
           )}
         </C.SearchContainer>
       </C.PageContainer>
-      <Footer/>
+      <Footer />
     </>
   );
 }
