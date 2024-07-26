@@ -18,9 +18,9 @@ export const FormWrapper = styled.div`
     border-radius: 30px;
     text-align: center;
 
-    @media (max-width: 600px) {
-        width: 420px;
-        height: 550px;
+    @media screen and (max-width: 600px){
+        width: 330px;
+        height: 540px;
     }
 `;
 
@@ -35,6 +35,8 @@ export const Title = styled.div`
 
     @media (max-width: 600px) {
         margin-left: 3px;
+        font-size: 27px;
+        margin-top: 15px;
     }
 `;  
 
@@ -77,6 +79,10 @@ export const Label = styled.div`
     font-size: 15px;
     font-weight: 600;
     margin-left: 8px;
+
+    @media (max-width: 600px) {
+        font-size: 14px;
+    }
 `;
 
 export const InputWrap = styled.div`
@@ -104,6 +110,10 @@ export const InputBox = styled.input`
     &::placeholder {
       color: #D0D2D7; /* placeholder 색상 설정 */
     }
+      
+    @media (max-width: 600px) {
+        font-size: 12px;
+    }
 `;
 
 // 에러 메시지
@@ -114,6 +124,11 @@ export const Error = styled.div`
     margin-top: 10px;
     margin-left: 25px;
     height: 5px;
+
+    @media (max-width: 600px) {
+        margin-left:px;
+        font-size: 9px;
+    }
 `;
 
 // 버튼 컨테이너
@@ -140,6 +155,11 @@ export const Button = styled.button<{ secondary?: boolean, disabled?: boolean}>`
       background: ${({ secondary, disabled }) => 
         disabled ? '#ccc' : (secondary ? '#555' : '#5757CE')};
     }
+
+    @media (max-width: 600px) {
+        font-size: 14px;
+        height: 40px;
+    }    
 `;
 
 // 비밀번호 찾기 컨테이너
@@ -149,6 +169,10 @@ export const FindPwContainer = styled.div`
     align-items: center;
     cursor: pointer;
     margin-right: 18px;
+
+    @media (max-width: 600px) {
+        margin-right: 5px;
+    }
 `;
 
 // 비밀번호 찾기
@@ -159,6 +183,10 @@ export const Link = styled.div`
     font-size: 14px;
     font-weight: 500;
     margin-left: auto;
+
+    @media (max-width: 600px) {
+        font-size: 12px;
+    }
 `;
 
 // 비밀번호 찾기 화살표 아이콘
