@@ -10,7 +10,6 @@ export const Container = styled.div`
 
 export const Box = styled.div`
   width: 400px;
-  height: 205px;
   flex-shrink: 0;
   padding: 25px 30px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);

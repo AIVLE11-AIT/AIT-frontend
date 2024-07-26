@@ -34,8 +34,8 @@ export const LoginBtn = styled.div`
     margin-top: calc(3px + 1vw);
     margin-left: calc(10px + 1vw);
     border-radius: 5px;
-    width: calc(57px + 2vw);
-    height: calc(17px + 1vw);
+    width: 80px;
+    height: 30px;
     background: #0D0D0D;
     cursor: pointer;
 `;
@@ -45,5 +45,5 @@ export const LoginBtnText = styled.div`
     display: flex;
     color: white;
     margin: auto;
-    font-size: calc(8px + 0.5vw);
+    font-size: 15px;
 `;
