@@ -20,10 +20,11 @@ export const HeaderContentContainer = styled.div`
     text-align: center;
     color: black;
     margin-bottom: 20px;
-
+    
     @media (max-width: 768px) {
         font-size: 25px;
         margin-bottom: 10px;
+        flex-direction: column;
     }
 `;
 
