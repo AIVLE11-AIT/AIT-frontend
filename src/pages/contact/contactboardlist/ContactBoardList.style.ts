@@ -6,6 +6,10 @@ export const PageContainer = styled.div`
   align-items: center;
   height: 100vh;
   margin-bottom: 100px;
+  
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 export const SearchContainer = styled.div`
@@ -20,6 +24,10 @@ export const SearchContainer = styled.div`
   border: 1px solid #d0d2d7;
   background: #fff;
   position: relative;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 export const Title = styled.h1`
@@ -83,6 +91,13 @@ export const CreateButton = styled.button`
   color: #fff;
   font-size: 17px;
   font-weight: 500;
+  
+  @media (max-width: 768px) {
+    font-size: 10px;
+    flex-direction: column;
+    align-items: stretch;
+    width: 50%;
+  }
 `;
 
 export const SearchInputIcon = styled.img`

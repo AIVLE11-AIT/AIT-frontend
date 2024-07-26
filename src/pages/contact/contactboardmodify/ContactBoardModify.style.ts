@@ -14,12 +14,17 @@ export const FormContainer = styled.div`
   align-items: flex-start;
   text-align: center;
   padding: 40px;
-  width: 1260px;
-  height: 630px;
+  width: 90%;
+  max-width: 1260px;
+  height: auto;
   border-radius: 30px;
   border: 1px solid #d0d2d7;
   background: #fff;
   position: relative;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 export const Title = styled.h1`
@@ -30,6 +35,11 @@ export const Title = styled.h1`
   text-align: left;
   align-self: flex-start;
   margin-left: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
 `;
 
 export const Form = styled.div`
@@ -43,6 +53,7 @@ export const FormRow = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 `;
 
 export const Label = styled.label`
@@ -50,6 +61,11 @@ export const Label = styled.label`
   color: #333;
   width: 20%;
   margin-right: 20px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 `;
 
 export const Input = styled.input`
@@ -76,6 +92,10 @@ export const TextArea = styled.textarea`
   ::placeholder {
     color: #999;
   }
+
+  @media (max-width: 768px) {
+    height: 200px;
+  }
 `;
 
 export const ButtonWrapper = styled.div`
@@ -83,6 +103,10 @@ export const ButtonWrapper = styled.div`
   gap: 10px;
   justify-content: flex-end;
   width: 100%;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
 export const ActionButton = styled.button`
