@@ -127,7 +127,7 @@ export const HeaderContainer = styled.div`
   display: flex;
 `;
 
-// 뒤로가기 버튼
+// 뒤로가기 버튼.
 export const BackBtn = styled.div`
   width: 30px;
   height: 30px;
