@@ -6,16 +6,32 @@ export const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const LeftContainer = styled.div`
   display: flex;
   align-items: center;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    justify-content: space-between;
+  }
 `;
 
 export const RightContainer = styled.div`
   display: flex;
   align-items: center;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
 `;
 
 export const KTTitle = styled.div`
@@ -24,6 +40,12 @@ export const KTTitle = styled.div`
   color: var(--black, #000);
   font-weight: 600;
   margin-left: 80px;
+
+  @media (max-width: 600px) {
+    text-align: left;
+    font-size: 14px;
+    margin-left: 0;
+  }
 `;
 
 // 만들기 버튼
@@ -42,6 +64,13 @@ export const CreateButton = styled.div`
   font-size: 16px;
   font-weight: 600;
   margin-right: 85px;
+
+  @media (max-width: 600px) {
+    margin-right: 0;
+    margin-top: 10px;
+    width: 100%;
+    font-size: 14px;
+  }
 `;
 
 export const LineContainer = styled.div`
@@ -50,6 +79,11 @@ export const LineContainer = styled.div`
   justify-content: flex-start;
   margin-top: 10px;
   margin-bottom: 10px;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const Line = styled.div`
@@ -58,6 +92,10 @@ export const Line = styled.div`
   flex-shrink: 0;
   border-radius: 21px;
   background: var(--gray-06, #DFDFDF);
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 export const Icon = styled.div<{ size: number }>`
@@ -86,6 +124,14 @@ export const FloatingButton = styled.button`
   font-size: 24px;
   cursor: pointer;
   box-shadow: 10px 10px 50px 0px #9092F0;
+
+  @media (max-width: 600px) {
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
 `;
 
 export const TopIcon = styled.img`

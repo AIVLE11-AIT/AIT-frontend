@@ -6,6 +6,12 @@ export const Container = styled.div`
   justify-content: center;
   align-items: flex-start;
   padding: 20px 30px;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 0px;
+  }
 `;
 
 export const Box = styled.div`
@@ -18,6 +24,12 @@ export const Box = styled.div`
   border: 2px solid var(--gray-08, #F1F1F2);
   background: var(--white, #FFF);
   cursor: pointer;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+  }
 `;
 
 export const Title = styled.h2`
@@ -27,6 +39,11 @@ export const Title = styled.h2`
   font-weight: 600;
   line-height: normal;
   margin-bottom: 20px;
+
+  @media (max-width: 600px) {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
 `;
 
 export const Details = styled.div`
@@ -48,12 +65,22 @@ export const DetailItem = styled.div`
   &:last-child {
     margin-right: 0;
   }
+
+  @media (max-width: 600px) {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
 `;
 
 export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+
+  @media (max-width: 600px) {
+    justify-content: center;
+    gap: 8px;
+  }
 `;
 
 export const Button = styled.button`
@@ -72,6 +99,11 @@ export const DeleteButton = styled(Button)`
   font-weight: 500;
   padding: 5px 12px 6px 13px;
   border: 2px solid #D0D2D7;
+
+  @media (max-width: 600px) {
+    font-size: 12px;
+    padding: 4px 10px 5px 11px;
+  }
 `;
 
 // 수정 버튼
@@ -82,6 +114,11 @@ export const EditButton = styled(Button)`
   font-size: 13px;
   font-weight: 500;
   padding: 5px 12px 6px 13px;
+
+  @media (max-width: 600px) {
+    font-size: 12px;
+    padding: 4px 10px 5px 11px;
+  }
 `;
 
 export const Icon = styled.div<{ size: number }>`
@@ -92,5 +129,9 @@ export const Icon = styled.div<{ size: number }>`
   img {
     width: 100%;
     height: 100%;
+  }
+
+  @media (max-width: 600px) {
+    margin-right: 10px;
   }
 `;
