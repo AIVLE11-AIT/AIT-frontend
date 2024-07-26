@@ -9,6 +9,10 @@ export const SignUpForm = styled.div`
     border: 1px solid #D0D2D7;
     background: #FFF;
     margin: 49px auto;
+
+    @media (max-width: 750px) {
+        width: 350px;
+    }
 `;
 
 
@@ -29,6 +33,10 @@ interface PageNumberTextProps {
 export const PageNumberText = styled.span<PageNumberTextProps>`
     font-size: 15px;
     color: ${(props) => props.color};
+
+    @media (max-width: 750px) {
+        font-size: 12px;
+    }
 `;
 
 export const PageNumberIcon = styled.div<{bg:string}>`
@@ -40,6 +48,11 @@ export const PageNumberIcon = styled.div<{bg:string}>`
     background-color: ${(props) => props.bg};
     border-radius: 50px;
     border: 2px solid #606060;
+
+    @media (max-width: 750px) {
+        width: 25px;
+        height: 25px;
+    }
 `;
 
 
@@ -59,6 +72,11 @@ export const SignUpTitle = styled.div`
     font-size: 35px;
     font-weight: 600;
     margin-bottom: 30px;
+
+    @media (max-width: 750px) {
+        font-size: 25px;
+        margin-left: 45px;
+    }
 `;
 
 // 전체 약관 동의 박스
@@ -73,6 +91,11 @@ export const AgreeBox = styled.div`
     font-size: 15px;
     width: 600px;
     margin: 20px auto;
+
+    @media (max-width: 750px) {
+        font-size: 13px;
+        width: 300px;
+    }
 `;
 
 // 체크박스
@@ -88,6 +111,11 @@ export const CheckBox = styled.input.attrs({ type: 'checkbox' })`
     &:checked {
         background-color: #35393e; /* 체크된 상태의 배경 색상 */
     }
+
+    @media (max-width: 750px) {
+        width: 15px;
+        height: 15px;
+    }
 `;
 
 // 서비스 약관, 개인정보 동의 링크
@@ -96,12 +124,20 @@ export const Link = styled.div`
     font-size: 12px;
     margin-left: 20px;
     cursor: pointer;
+
+    @media (max-width: 750px) {
+        font-size: 10px;
+    }
 `;
 
 export const Table = styled.div`
     width: 600px;
     margin: 0px auto;
     border: 1px solid #D0D2D7;
+
+    @media (max-width: 750px) {
+        width: 300px;
+    }
 `;
 
 export const Col = styled.div`
@@ -119,6 +155,10 @@ export const Row1 = styled.div`
     font-size: 14px;
     font-weight: 600;
     border-right: 1px solid #D0D2D7;
+
+    @media (max-width: 750px) {
+        font-size: 11px;
+    }
 `;
 
 export const Row2 = styled.div`
@@ -128,6 +168,11 @@ export const Row2 = styled.div`
     align-items: center;
     padding: 10px 20px;
     width: 550px;
+
+    @media (max-width: 750px) {
+        font-size: 10px;
+        padding: 10px 10px;
+    }
 `;
 
 export const TableText = styled.div`
@@ -136,6 +181,12 @@ export const TableText = styled.div`
     color: #FF4A4A;
     margin-left: 50px;
     margin-top: 20px;
+
+    @media (max-width: 750px) {
+        font-size: 11px;
+        margin-left: 30px;
+        width: 300px;
+    }
 `;
 
 // 완료 버튼

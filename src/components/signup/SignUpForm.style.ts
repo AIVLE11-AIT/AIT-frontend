@@ -9,6 +9,10 @@ export const SignUpForm = styled.div`
     border: 1px solid #D0D2D7;
     background: #FFF;
     margin: 49px auto;
+
+    @media (max-width: 750px) {
+        width: 350px;
+    }
 `;
 
 // 회원가입 페이지 번호 div
@@ -28,6 +32,10 @@ interface PageNumberTextProps {
 export const PageNumberText = styled.span<PageNumberTextProps>`
     font-size: 15px;
     color: ${(props) => props.color};
+
+    @media (max-width: 750px) {
+        font-size: 12px;
+    }
 `;
 
 export const PageNumberIcon = styled.div<{bg:string}>`
@@ -39,6 +47,11 @@ export const PageNumberIcon = styled.div<{bg:string}>`
     background-color: ${(props) => props.bg};
     border-radius: 50px;
     border: 2px solid #606060;
+
+    @media (max-width: 750px) {
+        width: 25px;
+        height: 25px;
+    }
 `;
 
 
@@ -52,12 +65,17 @@ export const PageNumberLine = styled.div`
 
 // Sign Up 제목
 export const SignUpTitle = styled.div`
-    //margin-top: 40px;
     margin-top: 70px;
     margin-left: 60px;
     color: #404146;
     font-size: 35px;
     font-weight: 600;
+
+    @media (max-width: 750px) {
+        font-size: 25px;
+        margin-left: 45px;
+        margin-top: 50px;
+    }
 `;
 
 // 회원가입 input form
@@ -69,6 +87,11 @@ export const SignUpInputForm = styled.form`
 export const SignUpWrap = styled.div`
     margin-left: 60px;
     margin-top: 20px;
+
+    @media (max-width: 600px) {
+        margin-left: 40px;
+        margin-left: 30px;
+    }
 `;
 
 // 회원가입 label
@@ -78,8 +101,8 @@ export const SignUpLabel = styled.div`
 
 // 회원가입 라벨 아이콘
 export const SignUpLabelIcon = styled.div`
-    width: 9px;
-    height: 9px;
+    width: 8px;
+    height: 8px;
     background-color: #696CEA;
     border-radius: 30px;
     margin: auto 0;
@@ -90,12 +113,20 @@ export const Label = styled.div`
     color: #404146;
     font-size: 15px;
     font-weight: 600;
-    margin-left: 6px;
+    margin-left: 10px;
+
+    @media (max-width: 700px) {
+        font-size: 14px;
+    }
 `;
 
 // input wrap
 export const InputWrap = styled.div`
     display: flex;
+
+    @media (max-width: 750px) {
+        width: 290px;
+    }
 `;
 
 // 입력 박스
@@ -106,13 +137,17 @@ export const InputBox = styled.input`
     border: 1px solid #D0D2D7;
     background: #FFF;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
     padding: 15px 18px;
     margin-top: 12px;
     color: #0D0D0D;
 
     &::placeholder {
         color: #D0D2D7;/* placeholder 색상 설정 */
+
+    @media (max-width: 750px) {
+        font-size: 11px;
+        height: 40px;
     }
 `;
 
@@ -135,6 +170,10 @@ export const CheckNumBtn = styled.div<{ toggle: boolean }>`
     &:hover{
         background: ${(props) => (props.toggle ? `#696CEA` : `gray`)};
     }
+
+    @media (max-width: 750px) {
+        font-size: 9px;
+    }
 `;
 
 // 에러 메시지
@@ -143,6 +182,10 @@ export const Error = styled.div`
     font-size: 12px;
     margin-top: 8px;
     height: 10px;
+    
+    @media (max-width: 600px) {
+        font-size: 8px;
+    }
 `;
 
 // 버튼 wrap
@@ -167,6 +210,12 @@ export const BackBtn = styled.button`
     font-size: 15px;
     font-weight: 600;
     margin-right: 12px;
+
+    @media (max-width: 600px) {
+        width: 90px;
+        height: 35px;
+        font-size: 13px;
+    }
 `;
 
 // 완료 버튼
@@ -182,4 +231,10 @@ export const SignUpBtn = styled.button<{ toggle: boolean }>`
     color: white;
     font-size: 15px;
     font-weight: 600;
+
+    @media (max-width: 600px) {
+        width: 90px;
+        height: 35px;
+        font-size: 13px;
+    }
 `;

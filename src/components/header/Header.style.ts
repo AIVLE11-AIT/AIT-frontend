@@ -12,6 +12,10 @@ export const LogoDiv = styled.div`
     padding: 24px 0px;
     margin-left: calc(10px + 5vw);
     cursor: pointer;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
 `;
 
 // 헤더 wrap
@@ -31,11 +35,11 @@ export const HeaderContent = styled.div`
 // 로그인 버튼
 export const LoginBtn = styled.div`
     display: flex;
-    margin-top: calc(5px + 1vw);
+    margin-top: calc(3px + 1vw);
     margin-left: calc(10px + 1vw);
     border-radius: 5px;
-    width: calc(60px + 2vw);
-    height: calc(20px + 1vw);
+    width: 80px;
+    height: 30px;
     background: #0D0D0D;
     cursor: pointer;
 `;
@@ -45,5 +49,5 @@ export const LoginBtnText = styled.div`
     display: flex;
     color: white;
     margin: auto;
-    font-size: calc(10px + 0.5vw);
+    font-size: 15px;
 `;
