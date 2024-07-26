@@ -9,7 +9,7 @@ export const Container = styled.div`
 
 // 로그인 box
 export const FormWrapper = styled.div`
-    width: 490px;
+    width: 460px;
     height: 550px;
     flex-shrink: 0;
     padding: 40px;
@@ -17,6 +17,11 @@ export const FormWrapper = styled.div`
     background: #FFF;
     border-radius: 30px;
     text-align: center;
+
+    @media (max-width: 600px) {
+        width: 420px;
+        height: 550px;
+    }
 `;
 
 
@@ -26,7 +31,11 @@ export const Title = styled.div`
     font-size: 35px;
     font-weight: 600;
     text-align: left;
-    margin: 20px 0px 0px 20px;
+    margin: 20px 0px 0px 15px;
+
+    @media (max-width: 600px) {
+        margin-left: 3px;
+    }
 `;  
 
 // 로그인 폼
@@ -44,15 +53,19 @@ export const LoginWrap = styled.div`
 export const LoginLabel = styled.div`
     display: flex;
     align-items: center;
-    margin-left: 25px;
+    margin-left: 17px;
     margin-bottom: 15px;
     margin-top: 25px;
+
+    @media (max-width: 600px) {
+        margin-left: 0px;
+    }
 `;
 
 // 입력 내용 제목 아이콘
 export const LoginLabelIcon = styled.div`
-  width: 9px;
-  height: 9px;
+  width: 7px;
+  height: 7px;
   background-color: #696CEA;
   border-radius: 30px;
   margin: auto 0;
@@ -60,27 +73,31 @@ export const LoginLabelIcon = styled.div`
 
 // 입력 내용 제목 text
 export const Label = styled.div`
-  color: #404146;
-  font-size: 16px;
-  font-weight: 600;
-  margin-left: 6px;
+    color: #404146;
+    font-size: 15px;
+    font-weight: 600;
+    margin-left: 8px;
 `;
 
 export const InputWrap = styled.div`
     width: 100%;
     display: flex;
-    margin-left: 22px;
+    margin-left: 16px;
+
+    @media (max-width: 600px) {
+        margin-left: 0px;
+    }
 `;
 
 // 입력 박스
 export const InputBox = styled.input`
-    width: 370px;
+    width: 350px;
     height: 45px;
     border-radius: 11px;
     border: 1px solid #D0D2D7;
     background: #FFF;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 13.5px;
+    font-weight: 400;
     padding: 15px 18px;
     color: #0D0D0D;
 
@@ -105,7 +122,7 @@ export const BtnContainer = styled.div`
 `;
 
 export const Button = styled.button<{ secondary?: boolean, disabled?: boolean}>`
-    width: 370px;
+    width: 350px;
     height: 45px;
     padding: 10px;
     margin: 10px 0;
@@ -140,7 +157,7 @@ export const Link = styled.div`
     align-items: center;
     color: #404146;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     margin-left: auto;
 `;
 

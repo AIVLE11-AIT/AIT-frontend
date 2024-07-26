@@ -34,7 +34,7 @@ export const LoginBtn = styled.div`
     margin-top: calc(3px + 1vw);
     margin-left: calc(10px + 1vw);
     border-radius: 5px;
-    width: calc(60px + 2vw);
+    width: calc(57px + 2vw);
     height: calc(17px + 1vw);
     background: #0D0D0D;
     cursor: pointer;
