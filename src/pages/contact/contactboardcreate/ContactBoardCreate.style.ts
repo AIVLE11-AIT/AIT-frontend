@@ -6,7 +6,7 @@ export const PageContainer = styled.div`
   align-items: center;
   height: 100vh;
   margin-bottom: 100px;
-  @media (max-width: 768px) {
+  @media (max-width: 700px) {
     margin-bottom: 50px;
     height: auto;
     padding: 20px;
