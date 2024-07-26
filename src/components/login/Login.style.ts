@@ -126,7 +126,7 @@ export const Error = styled.div`
     height: 5px;
 
     @media (max-width: 600px) {
-        margin-left:px;
+        margin-left: 7px;
         font-size: 9px;
     }
 `;

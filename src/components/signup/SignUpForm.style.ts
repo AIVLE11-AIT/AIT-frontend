@@ -10,8 +10,8 @@ export const SignUpForm = styled.div`
     background: #FFF;
     margin: 49px auto;
 
-    @media (max-width: 700px) {
-        width: 420px;
+    @media (max-width: 750px) {
+        width: 350px;
     }
 `;
 
@@ -32,6 +32,10 @@ interface PageNumberTextProps {
 export const PageNumberText = styled.span<PageNumberTextProps>`
     font-size: 15px;
     color: ${(props) => props.color};
+
+    @media (max-width: 750px) {
+        font-size: 12px;
+    }
 `;
 
 export const PageNumberIcon = styled.div<{bg:string}>`
@@ -43,6 +47,11 @@ export const PageNumberIcon = styled.div<{bg:string}>`
     background-color: ${(props) => props.bg};
     border-radius: 50px;
     border: 2px solid #606060;
+
+    @media (max-width: 750px) {
+        width: 25px;
+        height: 25px;
+    }
 `;
 
 
@@ -62,9 +71,10 @@ export const SignUpTitle = styled.div`
     font-size: 35px;
     font-weight: 600;
 
-    @media (max-width: 700px) {
-        font-size: 28px;
+    @media (max-width: 750px) {
+        font-size: 25px;
         margin-left: 45px;
+        margin-top: 50px;
     }
 `;
 
@@ -78,8 +88,9 @@ export const SignUpWrap = styled.div`
     margin-left: 60px;
     margin-top: 20px;
 
-    @media (max-width: 700px) {
-        margin-left: 50px;
+    @media (max-width: 600px) {
+        margin-left: 40px;
+        margin-left: 30px;
     }
 `;
 
@@ -113,8 +124,8 @@ export const Label = styled.div`
 export const InputWrap = styled.div`
     display: flex;
 
-    @media (max-width: 700px) {
-        width: 350px;
+    @media (max-width: 750px) {
+        width: 290px;
     }
 `;
 
@@ -134,8 +145,9 @@ export const InputBox = styled.input`
     &::placeholder {
         color: #D0D2D7;/* placeholder 색상 설정 */
 
-    @media (max-width: 700px) {
-        font-size: 12px;
+    @media (max-width: 750px) {
+        font-size: 11px;
+        height: 40px;
     }
 `;
 
@@ -158,6 +170,10 @@ export const CheckNumBtn = styled.div<{ toggle: boolean }>`
     &:hover{
         background: ${(props) => (props.toggle ? `#696CEA` : `gray`)};
     }
+
+    @media (max-width: 750px) {
+        font-size: 9px;
+    }
 `;
 
 // 에러 메시지
@@ -166,6 +182,10 @@ export const Error = styled.div`
     font-size: 12px;
     margin-top: 8px;
     height: 10px;
+    
+    @media (max-width: 600px) {
+        font-size: 8px;
+    }
 `;
 
 // 버튼 wrap
@@ -190,6 +210,12 @@ export const BackBtn = styled.button`
     font-size: 15px;
     font-weight: 600;
     margin-right: 12px;
+
+    @media (max-width: 600px) {
+        width: 90px;
+        height: 35px;
+        font-size: 13px;
+    }
 `;
 
 // 완료 버튼
@@ -205,4 +231,10 @@ export const SignUpBtn = styled.button<{ toggle: boolean }>`
     color: white;
     font-size: 15px;
     font-weight: 600;
+
+    @media (max-width: 600px) {
+        width: 90px;
+        height: 35px;
+        font-size: 13px;
+    }
 `;

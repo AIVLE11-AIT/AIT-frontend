@@ -10,8 +10,8 @@ export const SignUpForm = styled.div`
     background: #FFF;
     margin: 49px auto;
 
-    @media (max-width: 700px) {
-        width: 420px;
+    @media (max-width: 750px) {
+        width: 350px;
     }
 `;
 
@@ -33,6 +33,10 @@ interface PageNumberTextProps {
 export const PageNumberText = styled.span<PageNumberTextProps>`
     font-size: 15px;
     color: ${(props) => props.color};
+
+    @media (max-width: 750px) {
+        font-size: 12px;
+    }
 `;
 
 export const PageNumberIcon = styled.div<{bg:string}>`
@@ -44,6 +48,11 @@ export const PageNumberIcon = styled.div<{bg:string}>`
     background-color: ${(props) => props.bg};
     border-radius: 50px;
     border: 2px solid #606060;
+
+    @media (max-width: 750px) {
+        width: 25px;
+        height: 25px;
+    }
 `;
 
 
@@ -64,8 +73,8 @@ export const SignUpTitle = styled.div`
     font-weight: 600;
     margin-bottom: 30px;
 
-    @media (max-width: 700px) {
-        font-size: 28px;
+    @media (max-width: 750px) {
+        font-size: 25px;
         margin-left: 45px;
     }
 `;
@@ -83,9 +92,9 @@ export const AgreeBox = styled.div`
     width: 600px;
     margin: 20px auto;
 
-    @media (max-width: 700px) {
+    @media (max-width: 750px) {
         font-size: 13px;
-        width: 370px;
+        width: 300px;
     }
 `;
 
@@ -103,7 +112,7 @@ export const CheckBox = styled.input.attrs({ type: 'checkbox' })`
         background-color: #35393e; /* 체크된 상태의 배경 색상 */
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 750px) {
         width: 15px;
         height: 15px;
     }
@@ -116,7 +125,7 @@ export const Link = styled.div`
     margin-left: 20px;
     cursor: pointer;
 
-    @media (max-width: 700px) {
+    @media (max-width: 750px) {
         font-size: 10px;
     }
 `;
@@ -126,8 +135,8 @@ export const Table = styled.div`
     margin: 0px auto;
     border: 1px solid #D0D2D7;
 
-    @media (max-width: 700px) {
-        width: 370px;
+    @media (max-width: 750px) {
+        width: 300px;
     }
 `;
 
@@ -147,8 +156,8 @@ export const Row1 = styled.div`
     font-weight: 600;
     border-right: 1px solid #D0D2D7;
 
-    @media (max-width: 700px) {
-        font-size: 12px;
+    @media (max-width: 750px) {
+        font-size: 11px;
     }
 `;
 
@@ -160,7 +169,7 @@ export const Row2 = styled.div`
     padding: 10px 20px;
     width: 550px;
 
-    @media (max-width: 700px) {
+    @media (max-width: 750px) {
         font-size: 10px;
         padding: 10px 10px;
     }
@@ -173,10 +182,10 @@ export const TableText = styled.div`
     margin-left: 50px;
     margin-top: 20px;
 
-    @media (max-width: 700px) {
+    @media (max-width: 750px) {
         font-size: 11px;
         margin-left: 30px;
-        width: 350px;
+        width: 300px;
     }
 `;
 
