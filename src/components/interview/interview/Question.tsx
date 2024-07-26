@@ -139,7 +139,7 @@ function Question() {
                         setTimeout(() => {
                             setLoading(false);
                             navigate(`/interview-exit/${groupId}/${interviewerId}`);
-                        }, 10000);
+                        }, 60000);
                     } else {
                         setTimerLabel(interviewType === 'eng' ? 'Preparation Time' : '준비 시간');
                         setTimeLeft(20); // 다음 질문에 대한 초기 타이머 설정 (20초)
