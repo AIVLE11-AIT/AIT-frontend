@@ -13,31 +13,47 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { getMonth, getYear } from 'date-fns';
 
 const customStyles = {
-	control: (provided: any) => ({
-		...provided,
-		margin: '15px auto 0px 15px',
-		width: '350px',
-		height: '45px',
-		border: '2px solid #D0D2D7',
-		borderRadius: '11px',
-		padding: '0px 0px 0px 5px',
-		boxShadow: 'none',
-		'&:hover': {
-			borderColor: '#0D0D0D',
-			cursor: 'pointer'
-		},
+	control: (provided: any, state: any) => ({
+	  ...provided,
+	  margin: '15px auto 0px 15px',
+	  width: '350px',
+	  height: '45px',
+	  border: '2px solid #D0D2D7',
+	  borderRadius: '11px',
+	  padding: '0px 0px 0px 5px',
+	  boxShadow: 'none',
+	  '&:hover': {
+	   borderColor: '#0D0D0D',
+	   cursor: 'pointer'
+	  },
+	  '@media (max-width: 600px)': {
+		width: '100%',
+		margin: '10px auto',
+	  }
 	}),
 	option: (provided: any, state: any) => ({
-		...provided,
-		backgroundColor: state.isSelected ? '#696CEA' : 'white',
-		color: state.isSelected ? 'white' : '#D0D2D7',
-		'&:hover': {
-			backgroundColor: '#696CEA',
-			color: 'white',
-			cursor: 'pointer'
-		},
+	  ...provided,
+	  backgroundColor: state.isSelected ? '#696CEA' : 'white',
+	  color: state.isSelected ? 'white' : '#D0D2D7',
+	  '&:hover': {
+	   backgroundColor: '#696CEA',
+	   color: 'white',
+	   cursor: 'pointer'
+	  },
 	}),
-};
+	menu: (provided: any) => ({
+	  ...provided,
+	  '@media (max-width: 600px)': {
+		width: '100%',
+	  }
+	}),
+	singleValue: (provided: any) => ({
+	  ...provided,
+	  '@media (max-width: 600px)': {
+		fontSize: '14px',
+	  }
+	}),
+ };
 
 type OptionType = {
 	value: string;
@@ -271,8 +287,15 @@ function InterviewUpdateForm() {
 		}
 	};
 
+	const handleBackClick = () => {
+		navigate('/group-profile');
+	 };
+
 	return (
 		<div>
+			<I.BackButtonContainer>
+            	<I.BackButton onClick={handleBackClick}>뒤로가기</I.BackButton>
+         	</I.BackButtonContainer>
 			<I.MakeInputForm onSubmit={handleSubmit(onValid)}>
 				<I.Title>STEP1. 면접 정보 입력</I.Title>
 				<I.MakeWrapBox>

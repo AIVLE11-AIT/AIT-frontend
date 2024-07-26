@@ -25,6 +25,12 @@ export const ModalContainer = styled.div`
   width: 568px;
   height: 246px;
   flex-shrink: 0;
+
+  @media (max-width: 600px) {
+    padding: 20px;
+    width: 90%;
+    height: auto;
+  }
 `;
 
 export const ModalTitle = styled.h2`
@@ -34,6 +40,10 @@ export const ModalTitle = styled.h2`
   font-size: 22px;
   font-weight: 600;
   line-height: 1.4;
+
+  @media (max-width: 600px) {
+    font-size: 18px;
+  }
 `;
 
 export const ModalContent = styled.p`
@@ -44,6 +54,12 @@ export const ModalContent = styled.p`
   font-weight: 600;
   text-align: left;
   line-height: 1.4;
+
+  @media (max-width: 600px) {
+    font-size: 14px;
+    margin-top: 15px;
+    margin-bottom: 8px;
+  }
 `;
 
 export const ButtonWrapper = styled.div`
@@ -52,6 +68,13 @@ export const ButtonWrapper = styled.div`
   right: 30px; 
   display: flex;
   gap: 15px;
+
+  @media (max-width: 600px) {
+    position: static;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
 `;
 
 export const CancelButton = styled.button`
@@ -65,6 +88,11 @@ export const CancelButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 600px) {
+    font-size: 12px;
+    padding: 5px 15px;
+  }
 `;
 
 export const DeleteButton = styled.button`
@@ -78,4 +106,9 @@ export const DeleteButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 600px) {
+    font-size: 12px;
+    padding: 5px 15px;
+  }
 `;
