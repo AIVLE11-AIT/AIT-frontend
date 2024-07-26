@@ -9,6 +9,10 @@ export const SignUpForm = styled.div`
     border: 1px solid #D0D2D7;
     background: #FFF;
     margin: 49px auto;
+
+    @media (max-width: 700px) {
+        width: 420px;
+    }
 `;
 
 // 회원가입 페이지 번호 div
@@ -57,6 +61,11 @@ export const SignUpTitle = styled.div`
     color: #404146;
     font-size: 35px;
     font-weight: 600;
+
+    @media (max-width: 700px) {
+        font-size: 28px;
+        margin-left: 45px;
+    }
 `;
 
 // 회원가입 input form
@@ -68,6 +77,10 @@ export const SignUpInputForm = styled.form`
 export const SignUpWrap = styled.div`
     margin-left: 60px;
     margin-top: 20px;
+
+    @media (max-width: 700px) {
+        margin-left: 50px;
+    }
 `;
 
 // 회원가입 label
@@ -77,8 +90,8 @@ export const SignUpLabel = styled.div`
 
 // 회원가입 라벨 아이콘
 export const SignUpLabelIcon = styled.div`
-    width: 9px;
-    height: 9px;
+    width: 8px;
+    height: 8px;
     background-color: #696CEA;
     border-radius: 30px;
     margin: auto 0;
@@ -89,12 +102,20 @@ export const Label = styled.div`
     color: #404146;
     font-size: 15px;
     font-weight: 600;
-    margin-left: 6px;
+    margin-left: 10px;
+
+    @media (max-width: 700px) {
+        font-size: 14px;
+    }
 `;
 
 // input wrap
 export const InputWrap = styled.div`
     display: flex;
+
+    @media (max-width: 700px) {
+        width: 350px;
+    }
 `;
 
 // 입력 박스
@@ -105,13 +126,16 @@ export const InputBox = styled.input`
     border: 1px solid #D0D2D7;
     background: #FFF;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
     padding: 15px 18px;
     margin-top: 12px;
     color: #0D0D0D;
 
     &::placeholder {
         color: #D0D2D7;/* placeholder 색상 설정 */
+
+    @media (max-width: 700px) {
+        font-size: 12px;
     }
 `;
 
