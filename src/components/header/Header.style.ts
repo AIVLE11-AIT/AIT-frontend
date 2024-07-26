@@ -12,6 +12,10 @@ export const LogoDiv = styled.div`
     padding: 24px 0px;
     margin-left: calc(10px + 5vw);
     cursor: pointer;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
 `;
 
 // 헤더 wrap
