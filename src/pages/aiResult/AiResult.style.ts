@@ -117,9 +117,13 @@ export const QuestionDiv = styled.div`
     border-top: 1px solid #D0D2D7;
     padding: 20px 30px;
     cursor: pointer;
-    line-height: 1.5;
+    line-height: 1.5;  
     
     &:hover {
+        background-color: #E2E2FA;
+    }
+
+    &.active {
         background-color: #E2E2FA;
     }
 `;

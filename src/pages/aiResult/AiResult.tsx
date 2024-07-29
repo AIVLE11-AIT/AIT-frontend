@@ -30,11 +30,17 @@ function AiResult() {
   const [interviewerImage, setInterviewerImage] = useState<string | null>(null); // Interviewer 이미지 상태 추가
   const [answer, setAnswer] = useState<string | undefined>("질문을 클릭하면 지원자의 영상이 출력됩니다."); //답변 text저장 변수
 
+  // 클릭된 질문 색 변경 함수
+  const [btnActive, setBtnActive] = useState("");
+  const toggleActive = (btnName:string) => {
+    setBtnActive((prev) => (prev === btnName ? "" : btnName));
+  };
+
   // 질문 리스트별 선택 상태
   const [selectedCompanyQnaId, setSelectedCompanyQnaId] = useState<number | undefined>(undefined);
   const [selectedInterviewerQnaId, setSelectedInterviewerQnaId] = useState<number | undefined>(undefined);
   const [showIntroMessage, setShowIntroMessage] = useState<boolean>(false); // 자기소개 영상 유무
-
+  
   const fetchVideoData = async () => {
     try {
       const token = sessionStorage.getItem('isLogin') || '';
@@ -194,11 +200,13 @@ function AiResult() {
 
             <A.QuestionListBox>
               <A.QuestionDiv
+                className={"btn" + ("자기소개" === btnActive ? " active" : "")}
                 onClick={() => {
                   setSelectedCompanyQnaId(undefined);
                   setSelectedInterviewerQnaId(undefined);
                   setShowIntroMessage(true);
                   setVideoUrl(introVideoUrl || '');
+                  toggleActive("자기소개");
                 }}
               >
                 자기소개
@@ -207,7 +215,8 @@ function AiResult() {
                 companyQna.map((question, index) => (
                   <A.QuestionDiv
                     key={question.id}
-                    onClick={() => handleCompanyQnaClick(question.id)}
+                    className={"btn" + (`기업질문${question.id}` === btnActive ? " active" : "")}
+                    onClick={() => {handleCompanyQnaClick(question.id); toggleActive(`기업질문${question.id}`);}}
                   >
                     Q{index + 1}. &nbsp; {question.question}
                   </A.QuestionDiv>
@@ -219,7 +228,8 @@ function AiResult() {
                 interviewerQna.map((question, index) => (
                   <A.QuestionDiv
                     key={question.id}
-                    onClick={() => handleInterviewerQnaClick(question.id)}
+                    className={"btn" + (`개인질문${question.id}` === btnActive ? " active" : "")}
+                    onClick={() => {handleInterviewerQnaClick(question.id); toggleActive(`개인질문${question.id}`);}}
                   >
                     Q{index + 4}. &nbsp;{question.question}
                   </A.QuestionDiv>
