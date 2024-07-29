@@ -12,7 +12,7 @@ function Home() {
         if(sessionStorage.getItem('isLogin') !== null)
             navigate('/group-profile');
         else
-            navigate('./login');
+            navigate('/login');
     };
 
     const animationProps = {

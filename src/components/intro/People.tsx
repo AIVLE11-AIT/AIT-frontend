@@ -4,7 +4,7 @@ import * as P from './People.style';
 function People() {
 
   function onClickSite(){
-      window.location.href = 'https://www.instagram.com/ait.official_?igsh=enloZ2YzMHVreGR4&utm_source=qr';
+      window.location.href = 'https://www.instagram.com/ait.official_/';
   }
   return (
     <div>
